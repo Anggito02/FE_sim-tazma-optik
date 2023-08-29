@@ -1,5 +1,7 @@
 <?php
 
+use App\Frontend\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(AuthController::class)->group(function(){
+    Route::post('/login', 'login');
+});
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/warna', function () {
+    return view('warna.index');
+});
+
+Route::get('/user', function () {
+    return view('user.index');
+});
+
+Route::get('/employee', function () {
+    return view('employee.index');
 });
