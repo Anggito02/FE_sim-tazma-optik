@@ -88,7 +88,7 @@
                                             <div class="modal-body">
                                                 <form method="post" action="">
                                                     @csrf
-                                                    @method('PUT')
+                                                    @method("put")
 
                                                     <div class="mb-3">
                                                         <label for="InputWarna" class="form-label">Warna</label>

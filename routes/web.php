@@ -30,15 +30,19 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::group([], function(){
     Route::get('/warna', function () {
-        return view('warna');
+        return view('master.warna');
     });
 
     Route::get('/user', function () {
-        return view('user');
+        return view('master.user');
     });
 
     Route::get('/employee', function () {
-        return view('employee');
+        return view('master.employee');
+    });
+
+    Route::get('/vendor', function () {
+        return view('master.vendor');
     });
 });
 
