@@ -69,11 +69,13 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom MASTER:</h6>
+                        <h6 class="collapse-header">Custom Master:</h6>
                         <a class="collapse-item" href="buttons.html">Users Information</a>
                         <a class="collapse-item" href="buttons.html">Employees Information</a>
-                        <a class="collapse-item" href="cards.html">Color Information</a>
-                        <a class="collapse-item" href="cards.html">Vendor Information</a>
+                        <a class="collapse-item" href="cards.html">Colors Information</a>
+                        <a class="collapse-item" href="cards.html">Vendors Information</a>
+                        <a class="collapse-item" href="cards.html">Brands Information</a>
+                        <a class="collapse-item" href="cards.html">Branches Information</a>
                     </div>
                 </div>
             </li>

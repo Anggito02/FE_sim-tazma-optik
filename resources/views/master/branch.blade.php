@@ -12,12 +12,12 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">VENDOR INFORMATION SHEET</h6>
+            <h6 class="m-0 font-weight-bold text-primary">BRANCH INFORMATION SHEET</h6>
 
             <!-- Button trigger modal Add New-->
             <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
                 data-target="#exampleModalCenter">
-                New Vendor
+                New Branch
             </button>
 
             <!-- Modal -->
@@ -26,7 +26,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Vendor</h5>
+                            <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Branch</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -56,8 +56,8 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="InputTelpVendor" class="form-label">No Telp Vendor</label>
-                                                    <div><input type="text" id="InputTelpVendor" name="TelpVendor"
+                                                    <label for="InputTelpCabang" class="form-label">No Telp Cabang</label>
+                                                    <div><input type="text" id="InputTelpCabang" name="TelpCabang"
                                                             class="form-control"></div>
                                                 </div>
 
@@ -77,21 +77,20 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="InputNPWP" class="form-label">NPWP</label>
-                                                    <div><input type="text" id="InputNPWP" name="NPWP"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-3">
                                                     <label for="InputInitSupply" class="form-label">Init Supply</label>
                                                     <div><input type="text" id="InputInitSupply" name="InitSupply"
                                                             class="form-control"></div>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="InputStatus" class="form-label">Status</label>
-                                                    <div><input type="text" id="InputStatus" name="Status"
+                                                    <label for="InputCheckInSupply" class="form-label">Checkin Supply</label>
+                                                    <div><input type="text" id="InputCheckInSupply" name="CheckInSupply"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputCheckOutSupply" class="form-label">Checkout Supply</label>
+                                                    <div><input type="text" id="InputCheckOutSupply" name="CheckOutSupply"
                                                             class="form-control"></div>
                                                 </div>
 
@@ -123,12 +122,12 @@
                             <th><span class="nowrap">Nama</span></th>
                             <th><span class="nowrap">Alamat</span></th>
                             <th><span class="nowrap">Kode</span></th>
-                            <th><span class="nowrap">No Telp Vendor</span></th>
+                            <th><span class="nowrap">No Telp Cabang</span></th>
                             <th><span class="nowrap">PIC</span></th>
                             <th><span class="nowrap">No Telp PIC</span></th>
-                            <th><span class="nowrap">NPWP</span></th>
                             <th><span class="nowrap">Init Supply</span></th>
-                            <th><span class="nowrap">Status</span></th>
+                            <th><span class="nowrap">Checkin Supply</span></th>
+                            <th><span class="nowrap">Checkout Supply</span></th>
                             <th><span class="nowrap">Detail</span></th>
                             <th><span class="nowrap">Delete</span></th>
                         </tr>
@@ -138,14 +137,14 @@
                         <tr>
                             <td>1</td>
                             <td>Anggito</td>
-                            <td>Jl. Dimana aja</td>
-                            <td>IF-15-20-45</td>
-                            <td>123456781234</td>
+                            <td>Jl. Disitu Boleh</td>
+                            <td>SI-155-25-40</td>
+                            <td>456778903578</td>
                             <td>Anandito</td>
                             <td>432187654321</td>
-                            <td>QWERTY123456</td>
                             <td>3500</td>
-                            <td>Active</td>
+                            <td>1500</td>
+                            <td>500</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
@@ -159,7 +158,7 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Vendor</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Branch</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -191,8 +190,8 @@
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputTelpVendor" class="form-label">No Telp Vendor</label>
-                                                                        <div><input type="text" id="InputTelpVendor" name="TelpVendor"
+                                                                        <label for="InputTelpCabang" class="form-label">No Telp Cabang</label>
+                                                                        <div><input type="text" id="InputTelpCabang" name="TelpCabang"
                                                                                 class="form-control"></div>
                                                                     </div>
 
@@ -212,21 +211,20 @@
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputNPWP" class="form-label">NPWP</label>
-                                                                        <div><input type="text" id="InputNPWP" name="NPWP"
-                                                                                class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
                                                                         <label for="InputInitSupply" class="form-label">Init Supply</label>
                                                                         <div><input type="text" id="InputInitSupply" name="InitSupply"
                                                                                 class="form-control"></div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputStatus" class="form-label">Status</label>
-                                                                        <div><input type="text" id="InputStatus" name="Status"
+                                                                        <label for="InputCheckInSupply" class="form-label">Checkin Supply</label>
+                                                                        <div><input type="text" id="InputCheckInSupply" name="CheckInSupply"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputCheckOutSupply" class="form-label">Checkout Supply</label>
+                                                                        <div><input type="text" id="InputCheckOutSupply" name="CheckOutSupply"
                                                                                 class="form-control"></div>
                                                                     </div>
 

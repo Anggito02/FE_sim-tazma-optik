@@ -41,8 +41,16 @@ Route::group([], function(){
         return view('master.employee');
     });
 
-    Route::get('/vendor', function () {
+    Route::get('/vendors', function () {
         return view('master.vendor');
+    });
+
+    Route::get('/brand', function () {
+        return view('master.brand');
+    });
+
+    Route::get('/branch', function () {
+        return view('master.branch');
     });
 });
 
