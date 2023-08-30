@@ -41,17 +41,18 @@
                                             <div class="col">
                                                 <div class="mb-3">
                                                     <label for="InputUsername" class="form-label">Username</label>
-                                                    <input type="text" id="InputNIK" name="Username" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputNIK" class="form-label">NIK</label>
-                                                    <input type="text" id="InputNIK" name="NIK"
+                                                    <input type="text" id="InputNIK" name="Username"
                                                         class="form-control">
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="InputEmployeeName" class="form-label">Employee Name</label>
+                                                    <label for="InputNIK" class="form-label">NIK</label>
+                                                    <input type="text" id="InputNIK" name="NIK" class="form-control">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputEmployeeName" class="form-label">Employee
+                                                        Name</label>
                                                     <div><input type="text" id="InputEmployeeName" name="EmployeeName"
                                                             class="form-control"></div>
                                                 </div>
@@ -59,20 +60,8 @@
                                                 <div class="mb-3">
                                                     <label for="InputDepartement" class="form-label">Departement</label>
                                                     <div><input type="text" id="InputDepartement" name="Departement"
-                                                            class="form-control" ></div>
-                                                </div>
-
-                                                {{-- <div class="mb-3">
-                                                    <label for="InputPosition" class="form-label">Position</label>
-                                                    <div><input type="text" id="InputPosition" name="Position"
                                                             class="form-control"></div>
                                                 </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputUserRole" class="form-label">User Role</label>
-                                                    <div><input type="text" id="InputUserRole" name="UserRole"
-                                                            class="form-control"></div>
-                                                </div> --}}
 
                                             </div>
                                             <div class="col">
@@ -101,18 +90,6 @@
                                                             class="form-control"></div>
                                                 </div>
 
-                                                {{-- <div class="mb-3">
-                                                    <label for="InputGroup" class="form-label">Group</label>
-                                                    <div><input type="text" id="InputGroup" name="Group"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputDomisili" class="form-label">Domisili Kerja</label>
-                                                    <div><input type="text" id="InputDomisili" name="Domisili Kerja"
-                                                            class="form-control"></div>
-                                                </div> --}}
-
                                                 <div class="mb-3 float-right">
                                                     <button type="button" class="btn btn-success">Submit</button>
                                                 </div>
@@ -124,7 +101,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            {{-- <button type="button" class="btn btn-success">Save</button> --}}
                         </div>
                     </div>
                 </div>
@@ -174,7 +150,8 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title black-text" id="exampleModalLongTitle">Edit Data User</h5>
+                                                <h5 class="modal-title black-text" id="exampleModalLongTitle">Edit Data
+                                                    User</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -189,81 +166,75 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="mb-3">
-                                                                        <label for="InputUsername" class="form-label">Username</label>
-                                                                        <input type="text" id="InputNIK" name="Username" class="form-control">
+                                                                        <label for="InputUsername"
+                                                                            class="form-label">Username</label>
+                                                                        <input type="text" id="InputNIK" name="Username"
+                                                                            class="form-control">
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputNIK" class="form-label">NIK</label>
+                                                                        <label for="InputNIK"
+                                                                            class="form-label">NIK</label>
                                                                         <input type="text" id="InputNIK" name="NIK"
                                                                             class="form-control">
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputEmployeeName" class="form-label">Employee Name</label>
-                                                                        <div><input type="text" id="InputEmployeeName" name="EmployeeName"
+                                                                        <label for="InputEmployeeName"
+                                                                            class="form-label">Employee Name</label>
+                                                                        <div><input type="text" id="InputEmployeeName"
+                                                                                name="EmployeeName"
                                                                                 class="form-control"></div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputDepartement" class="form-label">Departement</label>
-                                                                        <div><input type="text" id="InputDepartement" name="Departement"
-                                                                                class="form-control" ></div>
+                                                                        <label for="InputDepartement"
+                                                                            class="form-label">Departement</label>
+                                                                        <div><input type="text" id="InputDepartement"
+                                                                                name="Departement" class="form-control">
+                                                                        </div>
                                                                     </div>
 
-                                                                    {{-- <div class="mb-3">
-                                                                        <label for="InputPosition" class="form-label">Position</label>
-                                                                        <div><input type="text" id="InputPosition" name="Position"
-                                                                                class="form-control"></div>
-                                                                    </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputUserRole" class="form-label">User Role</label>
-                                                                        <div><input type="text" id="InputUserRole" name="UserRole"
-                                                                                class="form-control"></div>
-                                                                    </div> --}}
 
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="mb-3">
-                                                                        <label for="InputSection" class="form-label">Section</label>
-                                                                        <div><input type="text" id="InputSection" name="Section"
-                                                                                class="form-control">
+                                                                        <label for="InputSection"
+                                                                            class="form-label">Section</label>
+                                                                        <div><input type="text" id="InputSection"
+                                                                                name="Section" class="form-control">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputPosition" class="form-label">Position</label>
-                                                                        <div><input type="text" id="InputPosition" name="Position"
-                                                                                class="form-control"></div>
+                                                                        <label for="InputPosition"
+                                                                            class="form-label">Position</label>
+                                                                        <div><input type="text" id="InputPosition"
+                                                                                name="Position" class="form-control">
+                                                                        </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputUserRole" class="form-label">User Role</label>
-                                                                        <div><input type="text" id="InputUserRole" name="UserRole"
-                                                                                class="form-control"></div>
+                                                                        <label for="InputUserRole"
+                                                                            class="form-label">User Role</label>
+                                                                        <div><input type="text" id="InputUserRole"
+                                                                                name="UserRole" class="form-control">
+                                                                        </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputPlant" class="form-label">Plant</label>
-                                                                        <div><input type="text" id="InputPlant" name="Plant"
-                                                                                class="form-control"></div>
+                                                                        <label for="InputPlant"
+                                                                            class="form-label">Plant</label>
+                                                                        <div><input type="text" id="InputPlant"
+                                                                                name="Plant" class="form-control"></div>
                                                                     </div>
 
-                                                                    {{-- <div class="mb-3">
-                                                                        <label for="InputGroup" class="form-label">Group</label>
-                                                                        <div><input type="text" id="InputGroup" name="Group"
-                                                                                class="form-control"></div>
-                                                                    </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputDomisili" class="form-label">Domisili Kerja</label>
-                                                                        <div><input type="text" id="InputDomisili" name="Domisili Kerja"
-                                                                                class="form-control"></div>
-                                                                    </div> --}}
 
                                                                     <div class="mb-3 float-right">
-                                                                        <button type="button" class="btn btn-primary">Update</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-primary">Update</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
