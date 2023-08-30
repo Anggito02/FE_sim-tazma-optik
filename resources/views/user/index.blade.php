@@ -90,36 +90,20 @@
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Username</th>
-                            <th>NIK</th>
-                            <th>Employee Name</th>
-                            <th>Department</th>
-                            <th>Section</th>
-                            <th>Position</th>
-                            <th>User Role</th>
-                            <th>Plant</th>
-                            <th>Detail</th>
-                            <th>Delete</th>
-                            <th>Status Active</th>
+                            <th><span class="nowrap">No</span></th>
+                            <th><span class="nowrap">Username</span></th>
+                            <th><span class="nowrap">NIK</span></th>
+                            <th><span class="nowrap">Employee Name</span></th>
+                            <th><span class="nowrap">Department</span></th>
+                            <th><span class="nowrap">Section</span></th>
+                            <th><span class="nowrap">Position</span></th>
+                            <th><span class="nowrap">User Role</span></th>
+                            <th><span class="nowrap">Plant</span></th>
+                            <th><span class="nowrap">Detail</span></th>
+                            <th><span class="nowrap">Delete</span></th>
+                            <th><span class="nowrap">Status Active</span></th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Username</th>
-                            <th>NIK</th>
-                            <th>Employee Name</th>
-                            <th>Department</th>
-                            <th>Section</th>
-                            <th>Position</th>
-                            <th>User Role</th>
-                            <th>Plant</th>
-                            <th>Detail</th>
-                            <th>Delete</th>
-                            <th>Status Active</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         <tr>
                             <td>1</td>

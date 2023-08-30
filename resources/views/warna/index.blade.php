@@ -34,17 +34,12 @@
                         <div class="modal-body">
                             <form method="post" action="">
                                 @csrf
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Warna</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <input type="submit" class="btn btn-success" />
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div class="mb-3">
+                                    <label for="InputWarna" class="form-label">Warna</label>
+                                    <input type="text" id="InputWarna" name="Warna" class="form-control">
+                                </div>
+                                
+                                <button type="button" class="btn btn-success float-right">Submit</button>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -61,20 +56,13 @@
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th><strong>No</strong></th>
-                            <th><strong>Warna</strong></th>
-                            <th><strong>Detail</strong></th>
-                            <th><strong>Delete</strong></th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
                             <th>No</th>
                             <th>Warna</th>
                             <th>Detail</th>
                             <th>Delete</th>
                         </tr>
-                    </tfoot>
+                    </thead>
+
                     <tbody>
                         <tr>
                             <td>1</td>

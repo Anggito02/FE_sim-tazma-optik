@@ -35,132 +35,91 @@
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <form action="post">
+                                        @csrf
                                         <div class="row">
-                                            <label for="InputNIK" class="form-label">NIK</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputNIK" name="NIK" class="form-control"></div>
-                                            <label for="InputEmployee" class="form-label">Employee Name</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputEmployee" name="Employee Name" class="form-control"></div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="InputGender" class="form-label">Gender</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputGender" name="Gender" class="form-control"></div>
-                                            <label for="InputPhoto" class="form-label">Photo</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputPhoto" name="Photo" class="form-control"></div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="InputAddress" class="form-label">Address</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputAddress" name="Address" class="form-control"></div>
-                                            <label for="InputPhone" class="form-label">Phone</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputPhone" name="Phone" class="form-control"></div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="InputMail" class="form-label">Mail</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputMail" name="Mail" class="form-control"></div>
-                                            <label for="InputDepartement" class="form-label">Departement</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputDepartement" name="Departement" class="form-control"></div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="InputSection" class="form-label">Section</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputSection" name="Section" class="form-control"></div>
-                                            <label for="InputPosition" class="form-label">Position</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputPosition" name="Position" class="form-control"></div>
-                                        </div>
-                                        <div class="row">
-                                            <label for="InputGroup" class="form-label">Group</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputGroup" name="Group" class="form-control"></div>
-                                            <label for="InputDomisili" class="form-label">Domisili Kerja</label>
-                                            <div class="col-md-4 ms-auto"><input type="text" id="InputDomisili" name="Domisili Kerja" class="form-control"></div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="InputNIK" class="form-label">NIK</label>
+                                                    <input type="text" id="InputNIK" name="NIK" class="form-control">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputEmployee" class="form-label">Employee Name</label>
+                                                    <input type="text" id="InputEmployee" name="Employee Name"
+                                                        class="form-control">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputGender" class="form-label">Gender</label>
+                                                    <div><input type="text" id="InputGender" name="Gender"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputPhoto" class="form-label">Photo</label>
+                                                    <div><input type="file" id="InputPhoto" name="Photo"
+                                                            class="form-control" accept="image/png, image/jpg, image/jpeg"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputAddress" class="form-label">Address</label>
+                                                    <div><input type="text" id="InputAddress" name="Address"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputPhone" class="form-label">Phone</label>
+                                                    <div><input type="text" id="InputPhone" name="Phone"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="InputMail" class="form-label">Mail</label>
+                                                    <div><input type="text" id="InputMail" name="Mail"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputDepartement" class="form-label">Departement</label>
+                                                    <div><input type="text" id="InputDepartement" name="Departement"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputSection" class="form-label">Section</label>
+                                                    <div><input type="text" id="InputSection" name="Section"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputPosition" class="form-label">Position</label>
+                                                    <div><input type="text" id="InputPosition" name="Position"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputGroup" class="form-label">Group</label>
+                                                    <div><input type="text" id="InputGroup" name="Group"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputDomisili" class="form-label">Domisili Kerja</label>
+                                                    <div><input type="text" id="InputDomisili" name="Domisili Kerja"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3 float-right">
+                                                    <button type="button" class="btn btn-success">Submit</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <!-- <form method="post" action="">
-                                @csrf
-                                <div class="container text-center">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">Email
-                                                    address</label>
-                                                <input type="email" class="form-control" id="exampleFormControlInput1"
-                                                    placeholder="name@example.com">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            2 of 3 (wider)
-                                        </div>
-                                        <div class="col">
-                                            3 of 3
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            1 of 3
-                                        </div>
-                                        <div class="col-5">
-                                            2 of 3 (wider)
-                                        </div>
-                                        <div class="col">
-                                            3 of 3
-                                        </div>
-                                    </div>
-                                </div>
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>NIK</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Employee Name</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Gender</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Photo</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Phone</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Mail</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Departement</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Section</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Position</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Group</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Domisili Kerja</th>
-                                        <td><input type="text" name="title" value="" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <input type="submit" class="btn btn-success" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form> -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -176,42 +135,24 @@
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>NIK</th>
-                            <th>Employee Name</th>
-                            <th>Gender</th>
-                            <th>Photo</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Mail</th>
-                            <th>Departement</th>
-                            <th>Section</th>
-                            <th>Position</th>
-                            <th>Group</th>
-                            <th>Domisili Kerja</th>
-                            <th>Detail</th>
-                            <th>Delete</th>
+                            <th><span class="nowrap">No</span></th>
+                            <th><span class="nowrap">NIK</span></th>
+                            <th><span class="nowrap">Employee Name</span></th>
+                            <th><span class="nowrap">Gender</span></th>
+                            <th><span class="nowrap">Photo</span></th>
+                            <th><span class="nowrap">Address</span></th>
+                            <th><span class="nowrap">Phone</span></th>
+                            <th><span class="nowrap">Mail</span></th>
+                            <th><span class="nowrap">Departement</span></th>
+                            <th><span class="nowrap">Section</span></th>
+                            <th><span class="nowrap">Position</span></th>
+                            <th><span class="nowrap">Group</span></th>
+                            <th><span class="nowrap">Domisili Kerja</span></th>
+                            <th><span class="nowrap">Detail</span></th>
+                            <th><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>NIK</th>
-                            <th>Employee Name</th>
-                            <th>Gender</th>
-                            <th>Photo</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Mail</th>
-                            <th>Departement</th>
-                            <th>Section</th>
-                            <th>Position</th>
-                            <th>Group</th>
-                            <th>Domisili Kerja</th>
-                            <th>Detail</th>
-                            <th>Delete</th>
-                        </tr>
-                    </tfoot>
+                    
                     <tbody>
                         <tr>
                             <td>1</td>
