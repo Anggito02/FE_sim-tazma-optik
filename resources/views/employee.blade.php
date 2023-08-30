@@ -26,7 +26,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">New Data Employee</h5>
+                            <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Employee</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -34,9 +34,9 @@
                         <div class="modal-body">
                             <div class="modal-body">
                                 <div class="container-fluid">
-                                    <form action="post">
+                                    <form method="post">
                                         @csrf
-                                        <div class="row">
+                                        <div class="row black-text">
                                             <div class="col">
                                                 <div class="mb-3">
                                                     <label for="InputNIK" class="form-label">NIK</label>
@@ -113,7 +113,7 @@
                                                 </div>
 
                                                 <div class="mb-3 float-right">
-                                                    <button type="button" class="btn btn-success">Submit</button>
+                                                    <button type="sumbit" class="btn btn-success">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@
                             <th><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         <tr>
                             <td>1</td>
@@ -178,99 +178,105 @@
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Employee</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post" action="">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <table class="table table-bordered">
-                                                        <tr>
-                                                            <th>NIK</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Employee Name</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Gender</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Photo</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Address</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Phone</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Mail</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Departement</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Section</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Position</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Group</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Domisili Kerja</th>
-                                                            <td><input type="text" name="title" value=""
-                                                                    class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2">
-                                                                <input type="submit" class="btn btn-primary" />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </form>
+                                                <div class="modal-body">
+                                                    <div class="container-fluid">
+                                                        <form method="post">
+                                                            @csrf
+                                                            @method("put")
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="mb-3">
+                                                                        <label for="InputNIK" class="form-label">NIK</label>
+                                                                        <input type="text" id="InputNIK" name="NIK" class="form-control">
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputEmployee" class="form-label">Employee Name</label>
+                                                                        <input type="text" id="InputEmployee" name="Employee Name"
+                                                                            class="form-control">
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputGender" class="form-label">Gender</label>
+                                                                        <div><input type="text" id="InputGender" name="Gender"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputPhoto" class="form-label">Photo</label>
+                                                                        <div><input type="file" id="InputPhoto" name="Photo"
+                                                                                class="form-control" accept="image/png, image/jpg, image/jpeg"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputAddress" class="form-label">Address</label>
+                                                                        <div><input type="text" id="InputAddress" name="Address"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputPhone" class="form-label">Phone</label>
+                                                                        <div><input type="text" id="InputPhone" name="Phone"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="mb-3">
+                                                                        <label for="InputMail" class="form-label">Mail</label>
+                                                                        <div><input type="text" id="InputMail" name="Mail"
+                                                                                class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputDepartement" class="form-label">Departement</label>
+                                                                        <div><input type="text" id="InputDepartement" name="Departement"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputSection" class="form-label">Section</label>
+                                                                        <div><input type="text" id="InputSection" name="Section"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputPosition" class="form-label">Position</label>
+                                                                        <div><input type="text" id="InputPosition" name="Position"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputGroup" class="form-label">Group</label>
+                                                                        <div><input type="text" id="InputGroup" name="Group"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputDomisili" class="form-label">Domisili Kerja</label>
+                                                                        <div><input type="text" id="InputDomisili" name="Domisili Kerja"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3 float-right">
+                                                                        <button type="sumbit" class="btn btn-primary">Update</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"

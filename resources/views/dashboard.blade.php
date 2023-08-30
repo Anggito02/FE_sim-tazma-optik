@@ -13,10 +13,10 @@
             {{-- <p> {{dd(session('data'))}} </p> --}}
 
             @foreach ($data as $val)
-                    <p>
-                       {{$val}}
-                    </p>
-                @endforeach
+            <p>
+                {{$val}}
+            </p>
+            @endforeach
 
 
 

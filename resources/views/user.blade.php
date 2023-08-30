@@ -24,7 +24,7 @@
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">New Data User</h5>
@@ -33,48 +33,94 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="">
-                                @csrf
-                                <table class="table table-bordered ">
-                                    <tr>
-                                        <th>Username</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>NIK</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Employee Name</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    <tr>
-                                    <tr>
-                                        <th>Department</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    <tr>
-                                    <tr>
-                                        <th>Section</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Position</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>User Role</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Plant</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
-                                    </tr>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form method="post">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="InputUsername" class="form-label">Username</label>
+                                                    <input type="text" id="InputNIK" name="Username" class="form-control">
+                                                </div>
 
-                                        <td colspan="2">
-                                            <input type="submit" class="btn btn-success" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form>
+                                                <div class="mb-3">
+                                                    <label for="InputNIK" class="form-label">NIK</label>
+                                                    <input type="text" id="InputNIK" name="NIK"
+                                                        class="form-control">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputEmployeeName" class="form-label">Employee Name</label>
+                                                    <div><input type="text" id="InputEmployeeName" name="EmployeeName"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputDepartement" class="form-label">Departement</label>
+                                                    <div><input type="text" id="InputDepartement" name="Departement"
+                                                            class="form-control" ></div>
+                                                </div>
+
+                                                {{-- <div class="mb-3">
+                                                    <label for="InputPosition" class="form-label">Position</label>
+                                                    <div><input type="text" id="InputPosition" name="Position"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputUserRole" class="form-label">User Role</label>
+                                                    <div><input type="text" id="InputUserRole" name="UserRole"
+                                                            class="form-control"></div>
+                                                </div> --}}
+
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="InputSection" class="form-label">Section</label>
+                                                    <div><input type="text" id="InputSection" name="Section"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputPosition" class="form-label">Position</label>
+                                                    <div><input type="text" id="InputPosition" name="Position"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputUserRole" class="form-label">User Role</label>
+                                                    <div><input type="text" id="InputUserRole" name="UserRole"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputPlant" class="form-label">Plant</label>
+                                                    <div><input type="text" id="InputPlant" name="Plant"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                {{-- <div class="mb-3">
+                                                    <label for="InputGroup" class="form-label">Group</label>
+                                                    <div><input type="text" id="InputGroup" name="Group"
+                                                            class="form-control"></div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="InputDomisili" class="form-label">Domisili Kerja</label>
+                                                    <div><input type="text" id="InputDomisili" name="Domisili Kerja"
+                                                            class="form-control"></div>
+                                                </div> --}}
+
+                                                <div class="mb-3 float-right">
+                                                    <button type="button" class="btn btn-success">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -117,38 +163,117 @@
                             <td>KPS-IA|CENTRAL</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
-                                <button type="button" class="btn-sm btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">
+                                <button type="button" class="btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalCenterEdit">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
+                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                <h5 class="modal-title black-text" id="exampleModalLongTitle">Edit Data User</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post">
-                                                    <table class="table table-bordered">
-                                                        <tr>
-                                                            <th>Warna</th>
-                                                            <td><input type="text" name="warna" class="form-control">
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                <div class="modal-body">
+                                                    <div class="container-fluid">
+                                                        <form method="post">
+                                                            @csrf
+                                                            @method("put")
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="mb-3">
+                                                                        <label for="InputUsername" class="form-label">Username</label>
+                                                                        <input type="text" id="InputNIK" name="Username" class="form-control">
+                                                                    </div>
 
-                                                </form>
+                                                                    <div class="mb-3">
+                                                                        <label for="InputNIK" class="form-label">NIK</label>
+                                                                        <input type="text" id="InputNIK" name="NIK"
+                                                                            class="form-control">
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputEmployeeName" class="form-label">Employee Name</label>
+                                                                        <div><input type="text" id="InputEmployeeName" name="EmployeeName"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputDepartement" class="form-label">Departement</label>
+                                                                        <div><input type="text" id="InputDepartement" name="Departement"
+                                                                                class="form-control" ></div>
+                                                                    </div>
+
+                                                                    {{-- <div class="mb-3">
+                                                                        <label for="InputPosition" class="form-label">Position</label>
+                                                                        <div><input type="text" id="InputPosition" name="Position"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputUserRole" class="form-label">User Role</label>
+                                                                        <div><input type="text" id="InputUserRole" name="UserRole"
+                                                                                class="form-control"></div>
+                                                                    </div> --}}
+
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="mb-3">
+                                                                        <label for="InputSection" class="form-label">Section</label>
+                                                                        <div><input type="text" id="InputSection" name="Section"
+                                                                                class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputPosition" class="form-label">Position</label>
+                                                                        <div><input type="text" id="InputPosition" name="Position"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputUserRole" class="form-label">User Role</label>
+                                                                        <div><input type="text" id="InputUserRole" name="UserRole"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputPlant" class="form-label">Plant</label>
+                                                                        <div><input type="text" id="InputPlant" name="Plant"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    {{-- <div class="mb-3">
+                                                                        <label for="InputGroup" class="form-label">Group</label>
+                                                                        <div><input type="text" id="InputGroup" name="Group"
+                                                                                class="form-control"></div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputDomisili" class="form-label">Domisili Kerja</label>
+                                                                        <div><input type="text" id="InputDomisili" name="Domisili Kerja"
+                                                                                class="form-control"></div>
+                                                                    </div> --}}
+
+                                                                    <div class="mb-3 float-right">
+                                                                        <button type="button" class="btn btn-primary">Update</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-success">Update</button>
                                             </div>
                                         </div>
                                     </div>

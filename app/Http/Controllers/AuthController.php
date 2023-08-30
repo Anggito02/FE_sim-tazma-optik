@@ -24,12 +24,12 @@ class AuthController extends Controller{
         $response = Http::withHeaders($headers)->post('http://localhost:8001/api/login', $api_request);
         $data = $response->json();
 
-        setcookie('token', $data['data']['token'], 60, '/', '', FALSE, TRUE);
+        setcookie('token', $data['data']['token'], time()+60*60*24, '/', '', false, true);
         return redirect('/dashboard');
     }
 
     public function getUserInfo(){
-        $token = $_COOKIE['XSRF-TOKEN'];
+        $token = $_COOKIE['token'];
 
         $headers = [
             'Accept' => 'application/json',
@@ -38,7 +38,11 @@ class AuthController extends Controller{
 
         $response = Http::withHeaders($headers)->post('http://localhost:8001/api/user/info');
         $user = $response->json();
-        // dd($response);
-        return view('dashboard', ['data' => $user]);
+
+        return view('dashboard', ['data' => $user['data']]);
+    }
+
+    public function checkUserStatus(){
+
     }
 }

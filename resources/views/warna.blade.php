@@ -26,7 +26,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">New Data Warna</h5>
+                            <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Warna</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -34,17 +34,16 @@
                         <div class="modal-body">
                             <form method="post" action="">
                                 @csrf
-                                <div class="mb-3">
+                                <div class="mb-3 black-text">
                                     <label for="InputWarna" class="form-label">Warna</label>
                                     <input type="text" id="InputWarna" name="Warna" class="form-control">
                                 </div>
-                                
+
                                 <button type="button" class="btn btn-success float-right">Submit</button>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            {{-- <button type="button" class="btn btn-success">Save</button> --}}
                         </div>
                     </div>
                 </div>
@@ -80,7 +79,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit  User</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -90,24 +89,20 @@
                                                 <form method="post" action="">
                                                     @csrf
                                                     @method('PUT')
-                                                    <table class="table table-bordered">
-                                                        <tr>
-                                                            <th>Warna</th>
-                                                            <td><input type="text" name="title" value="" class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2">
-                                                                <input type="submit" class="btn btn-primary" />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+
+                                                    <div class="mb-3">
+                                                        <label for="InputWarna" class="form-label">Warna</label>
+                                                        <input type="text" id="InputNIK" name="Warna" class="form-control">
+                                                    </div>
+
+                                                    <div class="mb-3 float-right">
+                                                        <button type="sumbit" class="btn btn-primary">Update</button>
+                                                    </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Close</button>
-                                                {{-- <button type="button" class="btn btn-success">Save</button> --}}
                                             </div>
                                         </div>
                                     </div>
