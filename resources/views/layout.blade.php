@@ -36,8 +36,8 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    {{-- <i class="fas fa-laugh-wink"></i> --}}
+                <div class="sidebar-brand-icon">
+                    <i class="fa-solid fa-bars"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">TAZMA OPTIK</div>
             </a>
@@ -196,7 +196,7 @@
                             </div>
                         </li>
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        {{-- <div class="topbar-divider d-none d-sm-block"></div> --}}
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
