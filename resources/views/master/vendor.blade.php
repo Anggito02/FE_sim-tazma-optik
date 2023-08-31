@@ -4,15 +4,15 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    {{-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+    <h1 class="h3 mb-2 text-gray-800">VENDOR INFORMATION SHEET</h1>
+    {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
         For more information about DataTables, please visit the <a target="_blank"
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">VENDOR INFORMATION SHEET</h6>
+            <h4 class="m-0 font-weight-bold text-primary">VENDOR INFORMATION SHEET</h4>
 
             <!-- Button trigger modal Add New-->
             <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
