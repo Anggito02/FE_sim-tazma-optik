@@ -24,11 +24,14 @@ Route::get('/', function () {
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login');
 
-    // Route::get('/login', 'checkUserStatus');
     Route::get('/dashboard', 'getUserInfo');
 });
 
 Route::group([], function(){
+    Route::get('/login', function(){
+        return view('login');
+    });
+
     Route::get('/warna', function () {
         return view('master.warna');
     });

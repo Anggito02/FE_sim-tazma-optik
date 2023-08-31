@@ -11,101 +11,26 @@
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">USERS INFORMATION SHEET</h6>
 
-            <!-- Button trigger modal -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
             <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
                 data-target="#exampleModalCenter">
                 New User
             </button>
+        </div>
+    </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">New Data User</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form method="post">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="mb-3">
-                                                    <label for="InputUsername" class="form-label">Username</label>
-                                                    <input type="text" id="InputNIK" name="Username"
-                                                        class="form-control">
-                                                </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">USERS INFORMATION SHEET</h6>
 
-                                                <div class="mb-3">
-                                                    <label for="InputNIK" class="form-label">NIK</label>
-                                                    <input type="text" id="InputNIK" name="NIK" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputEmployeeName" class="form-label">Employee
-                                                        Name</label>
-                                                    <div><input type="text" id="InputEmployeeName" name="EmployeeName"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputDepartement" class="form-label">Departement</label>
-                                                    <div><input type="text" id="InputDepartement" name="Departement"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col">
-                                                <div class="mb-3">
-                                                    <label for="InputSection" class="form-label">Section</label>
-                                                    <div><input type="text" id="InputSection" name="Section"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputPosition" class="form-label">Position</label>
-                                                    <div><input type="text" id="InputPosition" name="Position"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputUserRole" class="form-label">User Role</label>
-                                                    <div><input type="text" id="InputUserRole" name="UserRole"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputPlant" class="form-label">Plant</label>
-                                                    <div><input type="text" id="InputPlant" name="Plant"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3 float-right">
-                                                    <button type="button" class="btn btn-success">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        </div>
+        <div class="card-body">
+            <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
+                data-target="#exampleModalCenter">
+                New User
+            </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -465,5 +390,86 @@
 </div>
 <!-- /.container-fluid -->
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">New Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form method="post">
+                            @csrf
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="InputUsername" class="form-label">Username</label>
+                                        <input type="text" id="InputNIK" name="Username" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputNIK" class="form-label">NIK</label>
+                                        <input type="text" id="InputNIK" name="NIK" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputEmployeeName" class="form-label">Employee
+                                            Name</label>
+                                        <div><input type="text" id="InputEmployeeName" name="EmployeeName"
+                                                class="form-control"></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputDepartement" class="form-label">Departement</label>
+                                        <div><input type="text" id="InputDepartement" name="Departement"
+                                                class="form-control"></div>
+                                    </div>
+
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="InputSection" class="form-label">Section</label>
+                                        <div><input type="text" id="InputSection" name="Section" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputPosition" class="form-label">Position</label>
+                                        <div><input type="text" id="InputPosition" name="Position" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputUserRole" class="form-label">User Role</label>
+                                        <div><input type="text" id="InputUserRole" name="UserRole" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputPlant" class="form-label">Plant</label>
+                                        <div><input type="text" id="InputPlant" name="Plant" class="form-control"></div>
+                                    </div>
+
+                                    <div class="mb-3 float-right">
+                                        <button type="button" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
