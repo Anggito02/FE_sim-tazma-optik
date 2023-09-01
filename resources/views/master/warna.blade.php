@@ -11,54 +11,28 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
-
-            <!-- Button trigger modal Add New-->
-            <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
+        <div class="card-body">
+            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
                 data-target="#exampleModalCenter">
                 New Warna
             </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Warna</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post" action="">
-                                @csrf
-                                <div class="mb-3 black-text">
-                                    <label for="InputWarna" class="form-label">Warna</label>
-                                    <input type="text" id="InputWarna" name="Warna" class="form-control">
-                                </div>
-
-                                <button type="button" class="btn btn-success float-right">Submit</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
+        </div>
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="thead-color">
                         <tr>
-                            <th>No</th>
-                            <th>Warna</th>
-                            <th>Detail</th>
-                            <th>Delete</th>
+                            <th class="thead-text">No</th>
+                            <th class="thead-text">Warna</th>
+                            <th class="thead-text">Detail</th>
+                            <th class="thead-text">Delete</th>
                         </tr>
                     </thead>
 
@@ -79,7 +53,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit  User</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit User</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -92,7 +66,8 @@
 
                                                     <div class="mb-3">
                                                         <label for="InputWarna" class="form-label">Warna</label>
-                                                        <input type="text" id="InputNIK" name="Warna" class="form-control">
+                                                        <input type="text" id="InputNIK" name="Warna"
+                                                            class="form-control">
                                                     </div>
 
                                                     <div class="mb-3 float-right">
@@ -149,5 +124,32 @@
     </div>
 
 </div>
-<!-- /.container-fluid -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Warna</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="">
+                    @csrf
+                    <div class="mb-3 black-text">
+                        <label for="InputWarna" class="form-label">Warna</label>
+                        <input type="text" id="InputWarna" name="Warna" class="form-control">
+                    </div>
+
+                    <button type="button" class="btn btn-success float-right">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

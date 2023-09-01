@@ -11,125 +11,36 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">BRANCH INFORMATION SHEET</h6>
-
-            <!-- Button trigger modal Add New-->
-            <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
+        <div class="card-body">
+            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
                 data-target="#exampleModalCenter">
                 New Branch
             </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Branch</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form method="post">
-                                        @csrf
-                                        <div class="row black-text">
-                                            <div class="col">
-                                                <div class="mb-3">
-                                                    <label for="InputNama" class="form-label">Nama</label>
-                                                    <input type="text" id="InputNama" name="Nama" class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputAlamatss="form-label">Alamat</label>
-                                                    <input type="text" id="InputAlamate="Alamat"
-                                                        class="form-control">
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputKode" class="form-label">Kode</label>
-                                                    <div><input type="text" id="InputKode" name="Kode"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputTelpCabang" class="form-label">No Telp Cabang</label>
-                                                    <div><input type="text" id="InputTelpCabang" name="TelpCabang"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputPIC" class="form-label">PIC</label>
-                                                    <div><input type="text" id="InputPIC" name="PIC"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col">
-                                                <div class="mb-3">
-                                                    <label for="InputTelpPIC" class="form-label">No Telp PIC</label>
-                                                    <div><input type="text" id="InputTelpPIC" name="TelpPIC"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputInitSupply" class="form-label">Init Supply</label>
-                                                    <div><input type="text" id="InputInitSupply" name="InitSupply"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputCheckInSupply" class="form-label">Checkin Supply</label>
-                                                    <div><input type="text" id="InputCheckInSupply" name="CheckInSupply"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="InputCheckOutSupply" class="form-label">Checkout Supply</label>
-                                                    <div><input type="text" id="InputCheckOutSupply" name="CheckOutSupply"
-                                                            class="form-control"></div>
-                                                </div>
-
-                                                <div class="mb-3 float-right">
-                                                    <button type="sumbit" class="btn btn-success">Submit</button>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">BRANCH INFORMATION SHEET</h6>
+        </div>
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="thead-color">
                         <tr>
-                            <th><span class="nowrap">No</span></th>
-                            <th><span class="nowrap">Nama</span></th>
-                            <th><span class="nowrap">Alamat</span></th>
-                            <th><span class="nowrap">Kode</span></th>
-                            <th><span class="nowrap">No Telp Cabang</span></th>
-                            <th><span class="nowrap">PIC</span></th>
-                            <th><span class="nowrap">No Telp PIC</span></th>
-                            <th><span class="nowrap">Init Supply</span></th>
-                            <th><span class="nowrap">Checkin Supply</span></th>
-                            <th><span class="nowrap">Checkout Supply</span></th>
-                            <th><span class="nowrap">Detail</span></th>
-                            <th><span class="nowrap">Delete</span></th>
+                            <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text"><span class="nowrap">Nama</span></th>
+                            <th class="thead-text"><span class="nowrap">Alamat</span></th>
+                            <th class="thead-text"><span class="nowrap">Kode</span></th>
+                            <th class="thead-text"><span class="nowrap">No Telp Cabang</span></th>
+                            <th class="thead-text"><span class="nowrap">PIC</span></th>
+                            <th class="thead-text"><span class="nowrap">No Telp PIC</span></th>
+                            <th class="thead-text"><span class="nowrap">Init Supply</span></th>
+                            <th class="thead-text"><span class="nowrap">Checkin Supply</span></th>
+                            <th class="thead-text"><span class="nowrap">Checkout Supply</span></th>
+                            <th class="thead-text"><span class="nowrap">Detail</span></th>
+                            <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
 
@@ -173,30 +84,37 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="mb-3">
-                                                                        <label for="InputNama" class="form-label">Nama</label>
-                                                                        <input type="text" id="InputNama" name="Nama" class="form-control">
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputAlamatss="form-label">Alamat</label>
-                                                                        <input type="text" id="InputAlamate="Alamat"
+                                                                        <label for="InputNama"
+                                                                            class="form-label">Nama</label>
+                                                                        <input type="text" id="InputNama" name="Nama"
                                                                             class="form-control">
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputKode" class="form-label">Kode</label>
-                                                                        <div><input type="text" id="InputKode" name="Kode"
-                                                                                class="form-control"></div>
+                                                                        <label for="InputAlamatss="
+                                                                            form-label">Alamat</label>
+                                                                        <input type="text" id="InputAlamate=" Alamat"
+                                                                            class="form-control">
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputTelpCabang" class="form-label">No Telp Cabang</label>
-                                                                        <div><input type="text" id="InputTelpCabang" name="TelpCabang"
-                                                                                class="form-control"></div>
+                                                                        <label for="InputKode"
+                                                                            class="form-label">Kode</label>
+                                                                        <div><input type="text" id="InputKode"
+                                                                                name="Kode" class="form-control"></div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputPIC" class="form-label">PIC</label>
+                                                                        <label for="InputTelpCabang"
+                                                                            class="form-label">No Telp Cabang</label>
+                                                                        <div><input type="text" id="InputTelpCabang"
+                                                                                name="TelpCabang" class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputPIC"
+                                                                            class="form-label">PIC</label>
                                                                         <div><input type="text" id="InputPIC" name="PIC"
                                                                                 class="form-control">
                                                                         </div>
@@ -205,31 +123,40 @@
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="mb-3">
-                                                                        <label for="InputTelpPIC" class="form-label">No Telp PIC</label>
-                                                                        <div><input type="text" id="InputTelpPIC" name="TelpPIC"
+                                                                        <label for="InputTelpPIC" class="form-label">No
+                                                                            Telp PIC</label>
+                                                                        <div><input type="text" id="InputTelpPIC"
+                                                                                name="TelpPIC" class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputInitSupply"
+                                                                            class="form-label">Init Supply</label>
+                                                                        <div><input type="text" id="InputInitSupply"
+                                                                                name="InitSupply" class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputCheckInSupply"
+                                                                            class="form-label">Checkin Supply</label>
+                                                                        <div><input type="text" id="InputCheckInSupply"
+                                                                                name="CheckInSupply"
                                                                                 class="form-control"></div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputInitSupply" class="form-label">Init Supply</label>
-                                                                        <div><input type="text" id="InputInitSupply" name="InitSupply"
-                                                                                class="form-control"></div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputCheckInSupply" class="form-label">Checkin Supply</label>
-                                                                        <div><input type="text" id="InputCheckInSupply" name="CheckInSupply"
-                                                                                class="form-control"></div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputCheckOutSupply" class="form-label">Checkout Supply</label>
-                                                                        <div><input type="text" id="InputCheckOutSupply" name="CheckOutSupply"
+                                                                        <label for="InputCheckOutSupply"
+                                                                            class="form-label">Checkout Supply</label>
+                                                                        <div><input type="text" id="InputCheckOutSupply"
+                                                                                name="CheckOutSupply"
                                                                                 class="form-control"></div>
                                                                     </div>
 
                                                                     <div class="mb-3 float-right">
-                                                                        <button type="sumbit" class="btn btn-primary">Update</button>
+                                                                        <button type="sumbit"
+                                                                            class="btn btn-primary">Update</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -286,5 +213,93 @@
     </div>
 
 </div>
-<!-- /.container-fluid -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Branch</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form method="post">
+                            @csrf
+                            <div class="row black-text">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="InputNama" class="form-label">Nama</label>
+                                        <input type="text" id="InputNama" name="Nama" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputAlamatss=" form-label">Alamat</label>
+                                        <input type="text" id="InputAlamate=" Alamat" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputKode" class="form-label">Kode</label>
+                                        <div><input type="text" id="InputKode" name="Kode" class="form-control"></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputTelpCabang" class="form-label">No Telp Cabang</label>
+                                        <div><input type="text" id="InputTelpCabang" name="TelpCabang"
+                                                class="form-control"></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputPIC" class="form-label">PIC</label>
+                                        <div><input type="text" id="InputPIC" name="PIC" class="form-control">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="InputTelpPIC" class="form-label">No Telp PIC</label>
+                                        <div><input type="text" id="InputTelpPIC" name="TelpPIC" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputInitSupply" class="form-label">Init Supply</label>
+                                        <div><input type="text" id="InputInitSupply" name="InitSupply"
+                                                class="form-control"></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputCheckInSupply" class="form-label">Checkin Supply</label>
+                                        <div><input type="text" id="InputCheckInSupply" name="CheckInSupply"
+                                                class="form-control"></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputCheckOutSupply" class="form-label">Checkout Supply</label>
+                                        <div><input type="text" id="InputCheckOutSupply" name="CheckOutSupply"
+                                                class="form-control"></div>
+                                    </div>
+
+                                    <div class="mb-3 float-right">
+                                        <button type="sumbit" class="btn btn-success">Submit</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

@@ -14,7 +14,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
+            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
                 data-target="#exampleModalCenter">
                 New User
             </button>
@@ -24,31 +24,25 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">USERS INFORMATION SHEET</h6>
+        </div>
 
-        </div>
-        <div class="card-body">
-            <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
-                data-target="#exampleModalCenter">
-                New User
-            </button>
-        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+                    <thead class="thead-color">
                         <tr>
-                            <th><span class="nowrap">No</span></th>
-                            <th><span class="nowrap">Username</span></th>
-                            <th><span class="nowrap">NIK</span></th>
-                            <th><span class="nowrap">Employee Name</span></th>
-                            <th><span class="nowrap">Department</span></th>
-                            <th><span class="nowrap">Section</span></th>
-                            <th><span class="nowrap">Position</span></th>
-                            <th><span class="nowrap">User Role</span></th>
-                            <th><span class="nowrap">Plant</span></th>
-                            <th><span class="nowrap">Detail</span></th>
-                            <th><span class="nowrap">Delete</span></th>
-                            <th><span class="nowrap">Status Active</span></th>
+                            <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text"><span class="nowrap">Username</span></th>
+                            <th class="thead-text"><span class="nowrap">NIK</span></th>
+                            <th class="thead-text"><span class="nowrap">Employee Name</span></th>
+                            <th class="thead-text"><span class="nowrap">Department</span></th>
+                            <th class="thead-text"><span class="nowrap">Section</span></th>
+                            <th class="thead-text"><span class="nowrap">Position</span></th>
+                            <th class="thead-text"><span class="nowrap">User Role</span></th>
+                            <th class="thead-text"><span class="nowrap">Plant</span></th>
+                            <th class="thead-text"><span class="nowrap">Detail</span></th>
+                            <th class="thead-text"><span class="nowrap">Delete</span></th>
+                            <th class="thead-text"><span class="nowrap">Status Active</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -388,7 +382,6 @@
     </div>
 
 </div>
-<!-- /.container-fluid -->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
