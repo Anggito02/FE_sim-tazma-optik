@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 class AuthController extends Controller{
     public function login(Request $request){
         $headers = [
-            'Content-Type' => 'application/json'
+            'Accept' => 'application/json'
         ];
 
         $email = $request->email;
