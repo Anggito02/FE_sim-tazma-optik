@@ -34,12 +34,10 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn-sm btn-primary bold-text mt-4" data-toggle="modal"
-                        data-target="#exampleModalCenter"><i class="fa-solid fa-magnifying-glass"></i>
+                    <button type="button" class="btn-sm btn-primary bold-text mt-4" ><i class="fa-solid fa-magnifying-glass"></i>
                         Search
                     </button>
-                    <button type="button" class="btn-sm btn-warning bold-text mt-4" data-toggle="modal"
-                        data-target="#exampleModalCenter"><i class="fa-solid fa-eye"></i>
+                    <button type="button" class="btn-sm btn-warning bold-text mt-4" ><i class="fa-solid fa-eye"></i>
                         Show All
                     </button>
                     <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
