@@ -1,0 +1,19 @@
+.nowrap {
+    white-space:nowrap;
+}
+
+.black-text{
+    color: black;
+}
+
+.thead-color{
+    background-color: #316be9;
+}
+
+.thead-text {
+    color: #ffffff!important;
+}
+
+.bold-text{
+    font-weight: 900;
+}
