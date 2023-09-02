@@ -70,12 +70,12 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Master:</h6>
-                        <a class="collapse-item" href="buttons.html">Users Information</a>
-                        <a class="collapse-item" href="buttons.html">Employees Information</a>
-                        <a class="collapse-item" href="cards.html">Colors Information</a>
-                        <a class="collapse-item" href="cards.html">Vendors Information</a>
-                        <a class="collapse-item" href="cards.html">Brands Information</a>
-                        <a class="collapse-item" href="cards.html">Branches Information</a>
+                        <a class="collapse-item" href="/user">Users Information</a>
+                        <a class="collapse-item" href="/employee">Employees Information</a>
+                        <a class="collapse-item" href="/warna">Colors Information</a>
+                        <a class="collapse-item" href="/vendors">Vendors Information</a>
+                        <a class="collapse-item" href="/brand">Brands Information</a>
+                        <a class="collapse-item" href="/branch">Branches Information</a>
                     </div>
                 </div>
             </li>

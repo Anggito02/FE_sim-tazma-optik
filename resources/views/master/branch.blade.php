@@ -35,15 +35,15 @@
                 </div>
                 <div class="col">
                     <button type="button" class="btn-sm btn-primary bold-text mt-4" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter"><i class="fa-solid fa-magnifying-glass"></i>
                         Search
                     </button>
                     <button type="button" class="btn-sm btn-warning bold-text mt-4" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter"><i class="fa-solid fa-eye"></i>
                         Show All
                     </button>
                     <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
                         Add New
                     </button>
                 </div>
@@ -52,9 +52,9 @@
     </div>
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <!-- <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">BRANCH INFORMATION SHEET</h6>
-        </div>
+        </div> -->
 
         <div class="card-body">
             <div class="table-responsive">
