@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ColorController;
 use Illuminate\Routing\ViewController;
 
 /*
@@ -23,8 +24,11 @@ Route::get('/', function () {
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login');
-
     Route::get('/dashboard', 'getUserInfo');
+});
+
+Route::controller(ColorController::class)->group(function(){
+    Route::get('/warna','getAllColor');
 });
 
 Route::group([], function(){
@@ -32,9 +36,9 @@ Route::group([], function(){
         return view('login');
     });
 
-    Route::get('/warna', function () {
-        return view('master.warna');
-    });
+    // Route::get('/warna', function () {
+    //     return view('master.warna');
+    // });
 
     Route::get('/user', function () {
         return view('master.user');

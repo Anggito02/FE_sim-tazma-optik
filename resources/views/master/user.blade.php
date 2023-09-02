@@ -14,17 +14,73 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter">
-                New User
-            </button>
+            <div class="row">
+                <div class="col mb-2">
+                    <div>
+                        <label for="InputEmployee" class="form-label">Employee Name</label>
+                        <input type="employee" class="form-control" id="InputEmployee">
+                    </div>
+                </div>
+                <div class="col mb-2">
+                    <div>
+                        <label for="InputDepartment" class="form-label">Department</label>
+                        <select type="department" class="form-select form-control" id="InputDepartment">
+                            <option>Sales</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col mb-2">
+                    <div>
+                        <label for="InputSection" class="form-label">Section</label>
+                        <select type="section" class="form-select form-control" id="InputSection">
+                            <option>Sales & Purchased</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <label for="InputSection" class="form-label">Position</label>
+                        <select type="section" class="form-select form-control" id="InputSection">
+                            <option>Sales Head</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <label for="InputRole" class="form-label">User Role</label>
+                        <select type="role" class="form-select form-control" id="InputRole">
+                            <option>Administrator</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <label for="InputPlant" class="form-label">Plant</label>
+                        <input type="plant" class="form-control" id="InputPlant">
+                    </div>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn-sm btn-primary bold-text mt-4" ><i class="fa-solid fa-magnifying-glass"></i>
+                        Search
+                    </button>
+                    <button type="button" class="btn-sm btn-warning bold-text mt-4" ><i class="fa-solid fa-eye"></i>
+                        Show All
+                    </button>
+                    <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
+                        data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
+                        Add New
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <!-- <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">USERS INFORMATION SHEET</h6>
-        </div>
+        </div> -->
 
         <div class="card-body">
             <div class="table-responsive">

@@ -11,17 +11,55 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter">
-                New Vendor
-            </button>
+            <div class="row">
+                <div class="col-4 mb-2">
+                    <div>
+                        <label for="InputName" class="form-label">Name</label>
+                        <input type="name" class="form-control" id="InputName">
+                    </div>
+                </div>
+                <div class="col-4 mb-2">
+                    <div>
+                        <label for="InputPIC" class="form-label">PIC</label>
+                        <input type="pic" class="form-control" id="InputPIC">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <label for="InputKode" class="form-label">Kode</label>
+                        <input type="kode" class="form-control" id="InputKode">
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <label for="InputStatus" class="form-label">Status</label>
+                        <select type="status" class="form-select form-control" id="InputStatus">
+                            <option>Active</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn-sm btn-primary bold-text mt-4" ><i class="fa-solid fa-magnifying-glass"></i>
+                        Search
+                    </button>
+                    <button type="button" class="btn-sm btn-warning bold-text mt-4" ><i class="fa-solid fa-eye"></i>
+                        Show All
+                    </button>
+                    <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
+                        data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
+                        Add New
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <!-- <div class="card-header py-3">
             <h4 class="m-0 font-weight-bold text-primary">VENDOR INFORMATION SHEET</h4>
-        </div>
+        </div> -->
 
         <div class="card-body">
             <div class="table-responsive">
