@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
+use App\Utils\GetUserInfo;
 use Exception;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
@@ -28,28 +29,39 @@ class AuthController extends Controller{
 
         if ($data['status'] == 'success'){
             setcookie('token', $data['data']['token'], time()+60*60*24, '/', '', false, true);
+
             toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
+
             return redirect('/dashboard');
         }else{
             return view('/login', ['data' => $data['message']]);
         }
     }
 
-    public function getUserInfo(){
+    public function logout(){
         $token = $_COOKIE['token'];
 
         $headers = [
-            'Accept' => 'application/json',
+            'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/user/info');
-        $user = $response->json();
+        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/logout');
 
-        return view('dashboard', ['data' => $user['data']]);
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            setcookie('token', '', time()-60*60*24, '/', '', false, true);
+            toastr()->info('Logout successfully!', 'Authentication', ['timeOut' => 3000]);
+            return redirect('/login');
+        }else{
+            return view('/dashboard', ['data' => $result['message']]);
+        }
     }
 
-    public function checkUserStatus(){
+    public function getUserInfo(){
+        $user = GetUserInfo::getUserInfo();
 
+        return view('dashboard', ['data' => $user['data']]);
     }
 }

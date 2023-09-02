@@ -35,88 +35,107 @@
                             <th class="thead-text">Delete</th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>BROWN</td>
-                            <td>
-                                <!-- Button trigger modal Edit -->
-                                <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
-                                    <i class="fa fa-edit"></i>
-                                </button>
+                        <div class="d-none">
+                            {{ $iterator = 1; }}
+                        </div>
+                        @foreach ($color as $val)
+                            <tr>
+                                <div class="d-none">
+                                    {{ $id = $val['id']; }}
+                                </div>
+                                <td>{{ $iterator }}</td>
+                                <td>{{ $val['color_name'] }}</td>
+                                <td>
+                                    <!-- Button trigger modal Edit -->
+                                    <button type="button" class="btn-sm btn-primary" data-toggle="modal"
+                                        data-target="#exampleModalCenterEdit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit User</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="post" action="">
-                                                    @csrf
-                                                    @method("put")
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit User</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post" action="/color/edit">
+                                                        @csrf
+                                                        @method("put")
 
-                                                    <div class="mb-3">
-                                                        <label for="InputWarna" class="form-label">Warna</label>
-                                                        <input type="text" id="InputNIK" name="Warna"
-                                                            class="form-control">
-                                                    </div>
+                                                        <div class="mb-3">
+                                                            <input type="hidden" id="id" name="id"
+                                                            class="form-control" value="{{ $id }}">
+                                                            <label for="InputWarna" class="form-label">Warna</label>
+                                                            <input type="text" id="id" name="color_name"
+                                                            class="form-control" value="{{ $val['color_name'] }}">
+                                                        </div>
 
-                                                    <div class="mb-3 float-right">
-                                                        <button type="sumbit" class="btn btn-primary">Update</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
+                                                        <div class="mb-3 float-right">
+                                                            <button type="sumbit" class="btn btn-primary">Update</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </td>
-                            <td>
-                                <!-- Button trigger modal Delete -->
-                                <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+                                </td>
+                                <td>
+                                    <!-- Button trigger modal Delete -->
+                                    <button type="button" class="btn-sm btn-danger" data-toggle="modal"
+                                        data-target="#exampleModalCenterDelete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Are you sure you want to delete?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">No</button>
-                                                <button type="button" class="btn btn-danger">Yes</button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">No</button>
+                                                    <form method="post" action="/color/delete">
+                                                        @csrf
+                                                        @method("DELETE")
+
+                                                        <input type="hidden" id="id" name="id"
+                                                            class="form-control" value="{{ $id }}">
+                                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                        </tr>
+                            </tr>
+                            <div class="d-none">
+                                {{ $iterator = $iterator + 1; }}
+                            </div>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -136,14 +155,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="">
+                <form method="post" action="/color/add">
                     @csrf
+                    @method("POST")
+
                     <div class="mb-3 black-text">
                         <label for="InputWarna" class="form-label">Warna</label>
-                        <input type="text" id="InputWarna" name="Warna" class="form-control">
+                        <input type="text" id="color_name" name="color_name" class="form-control">
                     </div>
 
-                    <button type="button" class="btn btn-success float-right">Submit</button>
+                    <button type="submit" class="btn btn-success float-right">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">
