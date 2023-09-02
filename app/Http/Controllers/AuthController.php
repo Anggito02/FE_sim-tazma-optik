@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
+use Exception;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -24,8 +26,13 @@ class AuthController extends Controller{
         $response = Http::withHeaders($headers)->post('http://localhost:8001/api/login', $api_request);
         $data = $response->json();
 
-        setcookie('token', $data['data']['token'], time()+60*60*24, '/', '', false, true);
-        return redirect('/dashboard');
+        if ($data['status'] == 'success'){
+            setcookie('token', $data['data']['token'], time()+60*60*24, '/', '', false, true);
+            toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
+            return redirect('/dashboard');
+        }else{
+            return view('/login', ['data' => $data['message']]);
+        }
     }
 
     public function getUserInfo(){
