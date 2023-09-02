@@ -24,7 +24,8 @@ Route::get('/', function () {
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login');
-    Route::get('/dashboard', 'getUserInfo');
+    Route::get('/dashboard', 'getUserInfo')->middleware('isTokenValid');
+    Route::get('/logout', 'logout')->middleware('isTokenValid');
 });
 
 Route::controller(ColorController::class)->group(function(){
@@ -34,7 +35,7 @@ Route::controller(ColorController::class)->group(function(){
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
-    });
+    })->middleware('isLoggedIn');;
 
     // Route::get('/warna', function () {
     //     return view('master.warna');

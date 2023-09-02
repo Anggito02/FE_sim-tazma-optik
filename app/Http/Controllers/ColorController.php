@@ -12,8 +12,8 @@ class ColorController extends Controller
     public function getAllColor(Request $request){
         $token = $_COOKIE['token'];
 
-        $email = $request->email;
-        $password = $request->password;
+        $page = 1;
+        $limit = 25;
 
         $headers = [
             'Accept' => 'application/json',
@@ -21,14 +21,16 @@ class ColorController extends Controller
         ];
 
         $api_request = [
-            'email' => $email,
-            'password' => $password
+            "page" => $page,
+            "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/color/all');
+        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/color/all', $api_request);
+
+        dd($response);
+
         $color = $response->json();
 
-        dd($color);
         if ($color['status'] == 'success'){
             return view('master.warna', ['data' => $color['data']]);;
         }else{

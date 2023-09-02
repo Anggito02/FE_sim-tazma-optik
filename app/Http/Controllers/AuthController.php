@@ -35,6 +35,27 @@ class AuthController extends Controller{
         }
     }
 
+    public function logout(){
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/logout');
+
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            setcookie('token', '', time()-60*60*24, '/', '', false, true);
+            toastr()->info('Logout successfully!', 'Authentication', ['timeOut' => 3000]);
+            return redirect('/login');
+        }else{
+            return view('/dashboard', ['data' => $result['message']]);
+        }
+    }
+
     public function getUserInfo(){
         $token = $_COOKIE['token'];
 
