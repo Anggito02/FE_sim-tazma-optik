@@ -28,8 +28,11 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/logout', 'logout')->middleware('isTokenValid');
 });
 
-Route::controller(ColorController::class)->group(function(){
+Route::controller(ColorController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/warna','getAllColor');
+    Route::post('/color/add', 'addColor');
+    Route::put('/color/edit', 'updateColor');
+    Route::delete('/color/delete', 'deleteColor');
 });
 
 Route::group([], function(){

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 
 class IsTokenValid
@@ -19,9 +20,22 @@ class IsTokenValid
         try {
             $token = $_COOKIE['token'];
 
-            return $next($request);
+            $headers = [
+                'Accept' => "application\json",
+                'Authorization' => 'Bearer '.$token
+            ];
+
+            $response = Http::withHeaders($headers)->post('http://localhost:8001/api/token-test');
+
+            $result = $response->json();
+
+            if($result['status'] == 'success'){
+                return $next($request);
+            }else{
+                throw new Exception('Token Not Registered');
+            }
         } catch(Exception $error) {
-            toastr()->error('Please login first!', 'Authentication', ['timeOut' => 3000]);
+            toastr()->error($error->getMessage(), 'Authentication', ['timeOut' => 3000]);
             return redirect('/login');
         }
     }
