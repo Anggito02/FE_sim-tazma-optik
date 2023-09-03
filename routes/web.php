@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\FrameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,14 +43,17 @@ Route::controller(BranchController::class)->middleware('isTokenValid')->group(fu
     Route::delete('/branch/delete', 'deleteBranch');
 });
 
+Route::controller(FrameController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/frame-category','getAllFrameCategory');
+    Route::post('/frame-category/add', 'addFrameCategory');
+    Route::put('/frame-category/edit', 'updateFrameCategory');
+    Route::delete('/frame-category/delete', 'deleteFrameCategory');
+});
+
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
     })->middleware('isLoggedIn');
-
-    Route::get('/user', function () {
-        return view('master.user');
-    });
 
     Route::get('/employee', function () {
         return view('master.employee');
@@ -69,10 +73,6 @@ Route::group([], function(){
 
     Route::get('/index', function () {
         return view('master.index');
-    });
-
-    Route::get('/frame', function () {
-        return view('master.frame');
     });
 
 });
