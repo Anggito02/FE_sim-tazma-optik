@@ -12,7 +12,7 @@ use App\Utils\GetUserInfo;
 
 class ColorController extends Controller
 {
-    public function getAllColor(Request $request){
+    public function getAllColor(){
         $token = $_COOKIE['token'];
 
         $page = 1;
@@ -58,7 +58,7 @@ class ColorController extends Controller
         $response = Http::withHeaders($headers)->post('http://localhost:8001/api/color/add', $api_request);
 
         $result = $response->json();
-
+        dd($result);
         if($result['status'] == 'success'){
             toastr()->info('Color added successfully!', 'Color', ['timeOut' => 3000]);
             return redirect('/warna');

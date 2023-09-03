@@ -29,111 +29,77 @@
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead class="thead-color">
                         <tr>
-                            <th class="thead-text">No</th>
-                            <th class="thead-text">Warna</th>
-                            <th class="thead-text">Detail</th>
-                            <th class="thead-text">Delete</th>
+                            <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text"><span class="nowrap">Warna</span></th>
+                            <th class="thead-text"><span class="nowrap">Detail</span></th>
+                            <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
                     <tbody>
                         <div class="d-none">
-                            {{ $iterator = 1; }}
+                            {{ $iterator = 1 }}
                         </div>
                         @foreach ($color as $val)
                             <tr>
-                                <div class="d-none">
-                                    {{ $id = $val['id']; }}
-                                </div>
-                                <td>{{ $iterator }}</td>
-                                <td>{{ $val['color_name'] }}</td>
-                                <td>
-                                    <!-- Button trigger modal Edit -->
-                                    <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#exampleModalCenterEdit">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
+                            <input type="hidden" id="id" name="color_name" class="form-control"
+                                value="{{ $val['id'] }}">
+                            <td>{{ $iterator }}</td>
+                            <td>{{ $val['color_name'] }}</td>
+                            <td>
+                                <!-- Button trigger modal Edit -->
+                                <button type="button" class="btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalCenterEdit">
+                                    <i class="fa fa-edit"></i>
+                                </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit User</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form method="post" action="/color/edit">
-                                                        @csrf
-                                                        @method("put")
+                                <!-- Modal Update Data -->
+                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit User</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" action="/color/edit">
+                                                    @csrf
+                                                    @method("put")
 
-                                                        <div class="mb-3">
-                                                            <input type="hidden" id="id" name="id"
-                                                            class="form-control" value="{{ $id }}">
-                                                            <label for="InputWarna" class="form-label">Warna</label>
-                                                            <input type="text" id="id" name="color_name"
+                                                    <div class="mb-3">
+                                                        <input type="hidden" id="id" name="color_name"
+                                                            class="form-control" value="{{ $val['id'] }}">
+                                                        <label for="InputWarna" class="form-label">Warna</label>
+                                                        <input type="text" id="id" name="color_name"
                                                             class="form-control" value="{{ $val['color_name'] }}">
-                                                        </div>
+                                                    </div>
 
-                                                        <div class="mb-3 float-right">
-                                                            <button type="sumbit" class="btn btn-primary">Update</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                </div>
+                                                    <div class="mb-3 float-right">
+                                                        <button type="sumbit" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
-
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal Delete -->
-                                    <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                        data-target="#exampleModalCenterDelete">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Are you sure you want to delete?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">No</button>
-                                                    <form method="post" action="/color/delete">
-                                                        @csrf
-                                                        @method("DELETE")
-
-                                                        <input type="hidden" id="id" name="id"
-                                                            class="form-control" value="{{ $id }}">
-                                                        <button type="submit" class="btn btn-danger">Yes</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-
+                                </div>
+                            </td>
+                            <td>
+                                <!-- Button trigger modal Delete -->
+                                <button type="button" class="btn-sm btn-danger" data-toggle="modal"
+                                    data-target="#exampleModalCenterDelete">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
                             </tr>
                             <div class="d-none">
-                                {{ $iterator = $iterator + 1; }}
+                                {{ $iterator = $iterator + 1 }}
                             </div>
                         @endforeach
                     </tbody>
@@ -143,7 +109,8 @@
     </div>
 
 </div>
-<!-- Modal -->
+
+<!-- Modal Add Data-->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -169,6 +136,36 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Delete Data -->
+<div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <form method="post" action="/color/delete">
+                    @csrf
+                    @method("DELETE")
+
+                    <input type="hidden" id="id" name="color_name" class="form-control" value="{{ $val['id'] }}">
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </form>
             </div>
         </div>
     </div>

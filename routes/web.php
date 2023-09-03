@@ -4,8 +4,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ColorController;
-use Illuminate\Routing\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,20 +29,23 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 Route::controller(ColorController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/warna','getAllColor');
+    Route::get('/color','getAllColor');
     Route::post('/color/add', 'addColor');
     Route::put('/color/edit', 'updateColor');
     Route::delete('/color/delete', 'deleteColor');
 });
 
+Route::controller(BranchController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch','getAllBranch');
+    Route::post('/branch/add', 'addBranch');
+    Route::put('/branch/edit', 'updateBranch');
+    Route::delete('/branch/delete', 'deleteBranch');
+});
+
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
-    })->middleware('isLoggedIn');;
-
-    // Route::get('/warna', function () {
-    //     return view('master.warna');
-    // });
+    })->middleware('isLoggedIn');
 
     Route::get('/user', function () {
         return view('master.user');
@@ -60,9 +63,6 @@ Route::group([], function(){
         return view('master.brand');
     });
 
-    Route::get('/branch', function () {
-        return view('master.branch');
-    });
 });
 
 

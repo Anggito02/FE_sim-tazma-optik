@@ -35,7 +35,7 @@ class IsTokenValid
                 throw new Exception('Token Not Registered');
             }
         } catch(Exception $error) {
-            toastr()->error($error->getMessage(), 'Authentication', ['timeOut' => 3000]);
+            toastr()->error('Please login first!', 'Authentication', ['timeOut' => 3000]);
             return redirect('/login');
         }
     }
