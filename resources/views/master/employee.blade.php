@@ -12,7 +12,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-        <div class="row">
+            <div class="row">
                 <div class="col mb-2">
                     <div>
                         <label for="InputEmployee" class="form-label">Employee Name</label>
@@ -70,10 +70,11 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn-sm btn-primary bold-text mt-4" ><i class="fa-solid fa-magnifying-glass"></i>
+                    <button type="button" class="btn-sm btn-primary bold-text mt-4"><i
+                            class="fa-solid fa-magnifying-glass"></i>
                         Search
                     </button>
-                    <button type="button" class="btn-sm btn-warning bold-text mt-4" ><i class="fa-solid fa-eye"></i>
+                    <button type="button" class="btn-sm btn-warning bold-text mt-4"><i class="fa-solid fa-eye"></i>
                         Show All
                     </button>
                     <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
@@ -96,47 +97,49 @@
                     <thead class="thead-color">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text"><span class="nowrap">Username</span></th>
                             <th class="thead-text"><span class="nowrap">NIK</span></th>
-                            <th class="thead-text"><span class="nowrap">Employee Name</span></th>
-                            <th class="thead-text"><span class="nowrap">Gender</span></th>
-                            <th class="thead-text"><span class="nowrap">Photo</span></th>
-                            <th class="thead-text"><span class="nowrap">Address</span></th>
-                            <th class="thead-text"><span class="nowrap">Phone</span></th>
-                            <th class="thead-text"><span class="nowrap">Mail</span></th>
-                            <th class="thead-text"><span class="nowrap">Departement</span></th>
+                            <th class="thead-text"><span class="nowrap">Name</span></th>
+                            <th class="thead-text"><span class="nowrap">Department</span></th>
                             <th class="thead-text"><span class="nowrap">Section</span></th>
                             <th class="thead-text"><span class="nowrap">Position</span></th>
-                            <th class="thead-text"><span class="nowrap">Group</span></th>
-                            <th class="thead-text"><span class="nowrap">Domisili Kerja</span></th>
+                            <th class="thead-text"><span class="nowrap">Role</span></th>
+                            <th class="thead-text"><span class="nowrap">Plant</span></th>
+                            <th class="thead-text"><span class="nowrap">Status</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        <div class="d-none">
+                            {{ $iterator = 1 }}
+                        </div>
+                        @foreach ($employee as $val)
                         <tr>
-                            <td>1</td>
-                            <td>123456</td>
-                            <td>Divisi Informatika</td>
-                            <td>Laki - Laki</td>
-                            <td></td>
-                            <td>PT. KARYA PUTRA SANGKURIANG</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>ADMIN</td>
-                            <td>ADMIN</td>
-                            <td>ADMINISTRATOR</td>
-                            <td>ADMIN</td>
-                            <td>BANDUNG</td>
+                            <div class="d-none">
+                                {{ $id = $val['id'] }}
+                            </div>
+                            <td><span class="nowrap">{{$iterator}}</span></td>
+                            <td><span class="nowrap">{{$val['username']}}</span></td>
+                            <td><span class="nowrap">{{$val['nik']}}</span></td>
+                            <td><span class="nowrap">{{$val['employee_name']}}</span></td>
+                            <td><span class="nowrap">{{$val['department']}}</span></td>
+                            <td><span class="nowrap">{{$val['section']}}</span></td>
+                            <td><span class="nowrap">{{$val['position']}}</span></td>
+                            <td><span class="nowrap">{{$val['role']}}</span></td>
+                            <td><span class="nowrap">{{$val['plant']}}</span></td>
+                            <td><span class="nowrap">{{$val['status']}}</span></td>
+
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                <!-- Modal Edit-->
+                                <div class="modal fade" id="exampleModalCenterEdit{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                         <div class="modal-content">
@@ -151,107 +154,94 @@
                                             <div class="modal-body">
                                                 <div class="modal-body">
                                                     <div class="container-fluid">
-                                                        <form method="post">
+                                                        <form method="post" action="/employee/edit">
                                                             @csrf
                                                             @method("put")
                                                             <div class="row">
+                                                                <input type="hidden" id="id" name="employee_id"
+                                                                    class="form-control" value="{{ $val['id'] }}">
                                                                 <div class="col">
+                                                                    <div class="mb-3">
+                                                                        <label for="InputUsername"
+                                                                            class="form-label">Username</label>
+                                                                        <input type="text" id="username" name="username"
+                                                                            class="form-control"
+                                                                            value="{{ $val['username']}}">
+                                                                    </div>
                                                                     <div class="mb-3">
                                                                         <label for="InputNIK"
                                                                             class="form-label">NIK</label>
-                                                                        <input type="text" id="InputNIK" name="NIK"
-                                                                            class="form-control">
+                                                                        <input type="text" id="nik" name="nik"
+                                                                            class="form-control"
+                                                                            value="{{ $val['nik']}}">
                                                                     </div>
 
                                                                     <div class="mb-3">
                                                                         <label for="InputEmployee"
-                                                                            class="form-label">Employee Name</label>
-                                                                        <input type="text" id="InputEmployee"
-                                                                            name="Employee Name" class="form-control">
+                                                                            class="form-label">Name</label>
+                                                                        <input type="text" id="employee_name"
+                                                                            name="employee_name" class="form-control"
+                                                                            value="{{ $val['employee_name']}}">
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputGender"
-                                                                            class="form-label">Gender</label>
-                                                                        <div><input type="text" id="InputGender"
-                                                                                name="Gender" class="form-control">
+                                                                        <label for="InputDepartment"
+                                                                            class="form-label">Department</label>
+                                                                        <div><input type="text" id="department"
+                                                                                name="department" class="form-control"
+                                                                                value="{{ $val['department']}}">
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputPhoto"
-                                                                            class="form-label">Photo</label>
-                                                                        <div><input type="file" id="InputPhoto"
-                                                                                name="Photo" class="form-control"
-                                                                                accept="image/png, image/jpg, image/jpeg">
-                                                                        </div>
-                                                                    </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputAddress"
-                                                                            class="form-label">Address</label>
-                                                                        <div><input type="text" id="InputAddress"
-                                                                                name="Address" class="form-control">
-                                                                        </div>
+                                                                        <label for="InputRole"
+                                                                            class="form-label">Role</label>
+                                                                        <div><input type="text" id="role" name="role"
+                                                                                class="form-control"
+                                                                                value="{{ $val['role']}}"></div>
                                                                     </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputPhone"
-                                                                            class="form-label">Phone</label>
-                                                                        <div><input type="text" id="InputPhone"
-                                                                                name="Phone" class="form-control"></div>
-                                                                    </div>
 
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="mb-3">
-                                                                        <label for="InputMail"
-                                                                            class="form-label">Mail</label>
-                                                                        <div><input type="text" id="InputMail"
-                                                                                name="Mail" class="form-control">
+                                                                        <label for="InputPlant"
+                                                                            class="form-label">Plant</label>
+                                                                        <div><input type="text" id="plant" name="plant"
+                                                                                class="form-control"
+                                                                                value="{{ $val['plant']}}">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputDepartement"
-                                                                            class="form-label">Departement</label>
-                                                                        <div><input type="text" id="InputDepartement"
-                                                                                name="Departement" class="form-control">
+                                                                        <label for="InputStatus"
+                                                                            class="form-label">Status</label>
+                                                                        <div><input type="text" id="status"
+                                                                                name="status" class="form-control"
+                                                                                value="{{ $val['status']}}">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
                                                                         <label for="InputSection"
-                                                                            class="form-label">Section</label>
-                                                                        <div><input type="text" id="InputSection"
-                                                                                name="Section" class="form-control">
+                                                                            class="form-label">section</label>
+                                                                        <div><input type="text" id="section"
+                                                                                name="section" class="form-control"
+                                                                                value="{{ $val['section']}}">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
                                                                         <label for="InputPosition"
                                                                             class="form-label">Position</label>
-                                                                        <div><input type="text" id="InputPosition"
-                                                                                name="Position" class="form-control">
+                                                                        <div><input type="text" id="position"
+                                                                                name="position" class="form-control"
+                                                                                value="{{ $val['position']}}">
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputGroup"
-                                                                            class="form-label">Group</label>
-                                                                        <div><input type="text" id="InputGroup"
-                                                                                name="Group" class="form-control"></div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputDomisili"
-                                                                            class="form-label">Domisili Kerja</label>
-                                                                        <div><input type="text" id="InputDomisili"
-                                                                                name="Domisili Kerja"
-                                                                                class="form-control"></div>
-                                                                    </div>
-
-                                                                    <div class="mb-3 float-right">
+                                                                    <div class="mt-5 float-right">
                                                                         <button type="sumbit"
                                                                             class="btn btn-primary">Update</button>
                                                                     </div>
@@ -274,12 +264,12 @@
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                <!-- Modal Delete-->
+                                <div class="modal fade" id="exampleModalCenterDelete{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -296,7 +286,13 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <button type="button" class="btn btn-danger">Yes</button>
+                                                <form method="post" action="/employee/delete"></form>
+                                                @csrf
+                                                @method("DELETE")
+                                                <input type="hidden" id="id" name="id" class="form-control"
+                                                    value="{{ $id }}">
+                                                <button type="submit" class="btn btn-danger">Yes</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -304,6 +300,10 @@
                             </td>
 
                         </tr>
+                        <div class="d-none">
+                            {{ $iterator++ }}
+                        </div>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -311,7 +311,7 @@
     </div>
 
 </div>
-<!-- Modal -->
+<!-- Modal add-->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -325,82 +325,68 @@
             <div class="modal-body">
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form method="post">
+                        <form method="post" action="/employee/add">
                             @csrf
+                            @method("POST")
                             <div class="row black-text">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="InputNIK" class="form-label">NIK</label>
-                                        <input type="text" id="InputNIK" name="NIK" class="form-control">
+                                        <label for="InputUsername" class="form-label">Username</label>
+                                        <input type="text" id="username" name="username" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputEmployee" class="form-label">Employee Name</label>
-                                        <input type="text" id="InputEmployee" name="Employee Name" class="form-control">
+                                        <label for="InputNik" class="form-label">NIK</label>
+                                        <input type="text" id="nik" name="nik" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputGender" class="form-label">Gender</label>
-                                        <div><input type="text" id="InputGender" name="Gender" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputPhoto" class="form-label">Photo</label>
-                                        <div><input type="file" id="InputPhoto" name="Photo" class="form-control"
-                                                accept="image/png, image/jpg, image/jpeg"></div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputAddress" class="form-label">Address</label>
-                                        <div><input type="text" id="InputAddress" name="Address" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputPhone" class="form-label">Phone</label>
-                                        <div><input type="text" id="InputPhone" name="Phone" class="form-control"></div>
-                                    </div>
-
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="InputMail" class="form-label">Mail</label>
-                                        <div><input type="text" id="InputMail" name="Mail" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputDepartement" class="form-label">Departement</label>
-                                        <div><input type="text" id="InputDepartement" name="Departement"
-                                                class="form-control"></div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputSection" class="form-label">Section</label>
-                                        <div><input type="text" id="InputSection" name="Section" class="form-control">
+                                        <label for="InputEmployee" class="form-label">Name</label>
+                                        <div><input type="text" id="employee_name" name="employee_name"
+                                                class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="InputPosition" class="form-label">Position</label>
-                                        <div><input type="text" id="InputPosition" name="Position" class="form-control">
+                                        <div><input type="text" id="position" name="position" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputGroup" class="form-label">Group</label>
-                                        <div><input type="text" id="InputGroup" name="Group" class="form-control"></div>
+                                        <label for="InputSection" class="form-label">Section</label>
+                                        <div><input type="text" id="section" name="section" class="form-control">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="InputRole" class="form-label">Role</label>
+                                        <div><input type="text" id="role" name="role" class="form-control">
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputDomisili" class="form-label">Domisili Kerja</label>
-                                        <div><input type="text" id="InputDomisili" name="Domisili Kerja"
-                                                class="form-control"></div>
+                                        <label for="InputPlant" class="form-label">Plant</label>
+                                        <div><input type="text" id="plant" name="plant" class="form-control"></div>
                                     </div>
 
-                                    <div class="mb-3 float-right">
-                                        <button type="sumbit" class="btn btn-success">Submit</button>
+                                    <div class="mb-3">
+                                        <label for="InputStatus" class="form-label">Status</label>
+                                        <div><input type="text" id="status" name="status" class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mb-3">
+                                        <label for="InputDepartment" class="form-label">Department</label>
+                                        <div><input type="text" id="department" name="department" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5 float-right">
+                                        <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
                             </div>

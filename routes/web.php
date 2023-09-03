@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,14 @@ Route::controller(BrandController::class)->middleware('isTokenValid')->group(fun
     Route::delete('/brand/delete', 'deleteBrand');
 });
 
+
+Route::controller(EmployeeController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/employee','getAllEmployee');
+    Route::post('/employee/add', 'addEmployee');
+    Route::put('/employee/edit', 'updateEmployee');
+    Route::delete('/employee/delete', 'deleteEmployee');
+});
+
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
@@ -58,11 +67,7 @@ Route::group([], function(){
     Route::get('/user', function () {
         return view('master.user');
     });
-
-    Route::get('/employee', function () {
-        return view('master.employee');
-    });
-
+    
     Route::get('/vendors', function () {
         return view('master.vendor');
     });

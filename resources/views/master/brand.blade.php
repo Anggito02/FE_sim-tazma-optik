@@ -78,7 +78,7 @@
                                                             class="form-control" value="{{ $val['id'] }}">
                                                     <div class="mb-3">
                                                         <label for="InputBrand" class="form-label">Brand</label>
-                                                        <input type="text" id="id" name="nama_brand"
+                                                        <input type="text" id="nama_brand" name="nama_brand"
                                                             class="form-control" value="{{ $val['nama_brand'] }}">
                                                     </div>
 
@@ -152,7 +152,7 @@
     </div>
 
 </div>
-<!-- Modal -->
+<!-- Modal add-->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
