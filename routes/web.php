@@ -63,6 +63,18 @@ Route::group([], function(){
         return view('master.brand');
     });
 
+    Route::get('/lens', function () {
+        return view('master.lens');
+    });
+
+    Route::get('/index', function () {
+        return view('master.index');
+    });
+
+    Route::get('/frame', function () {
+        return view('master.frame');
+    });
+
 });
 
 

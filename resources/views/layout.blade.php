@@ -71,11 +71,14 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Master:</h6>
                         <a class="collapse-item" href="/user">Users Information</a>
-                        <a class="collapse-item" href="{{ url('/employee')}}">Employees Information</a>
+                        <a class="collapse-item" href="/employee">Employees Information</a>
                         <a class="collapse-item" href="/color">Colors Information</a>
-                        <a class="collapse-item" href="{{ url('/vendors')}}">Vendors Information</a>
-                        <a class="collapse-item" href="{{ url('/brand')}}">Brands Information</a>
-                        <a class="collapse-item" href="{{ url('/branch')}}">Branches Information</a>
+                        <a class="collapse-item" href="/vendors">Vendors Information</a>
+                        <a class="collapse-item" href="/brand">Brands Information</a>
+                        <a class="collapse-item" href="/branch">Branches Information</a>
+                        <a class="collapse-item" href="/lens">Lens Information</a>
+                        <a class="collapse-item" href="/frame">Frame Information</a>
+                        <a class="collapse-item" href="/index">Index Information</a>
                     </div>
                 </div>
             </li>
