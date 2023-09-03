@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\ErrorPageController;
 use App\Http\Controllers\FrameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
@@ -66,6 +67,10 @@ Route::controller(IndexController::class)->middleware('isTokenValid')->group(fun
     Route::delete('/index/delete', 'deleteIndexCategory');
 });
 
+Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/404','PageError404');
+});
+
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
@@ -81,6 +86,10 @@ Route::group([], function(){
 
     Route::get('/brand', function () {
         return view('master.brand');
+    });
+
+    Route::get('/404', function () {
+        return view('error_page.404');
     });
 
 });

@@ -20,9 +20,7 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/support-index.css')}}" rel="stylesheet">
-
-    <!-- Custom styles for table page -->
-    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet">
 
 </head>
 
@@ -304,8 +302,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js\sb-admin-2.min.js')}}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
