@@ -35,7 +35,7 @@ class ColorController extends Controller
         $user = GetUserInfo::getUserInfo();
 
         if ($color['status'] == 'success'){
-            return view('master.warna', ['color' => $color['data'], 'data' => $user['data']]);
+            return view('master.color', ['color' => $color['data'], 'data' => $user['data']]);
 
         }else{
             return view('/dashboard');
@@ -61,10 +61,10 @@ class ColorController extends Controller
         dd($result);
         if($result['status'] == 'success'){
             toastr()->info('Color added successfully!', 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }else{
             toastr()->error($result['message'], 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }
     }
 
@@ -78,20 +78,19 @@ class ColorController extends Controller
         ];
 
         $api_request = [
-            'id' => $request->id,
+            'id' => $request->color_id,
             'color_name' => $request->color_name
         ];
 
         $response = Http::withHeaders($headers)->put('http://localhost:8001/api/color/edit', $api_request);
 
         $result = $response->json();
-
         if($result['status'] == 'success'){
             toastr()->info('Color updated successfully!', 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }else{
             toastr()->error($result['message'], 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }
     }
 
@@ -105,7 +104,7 @@ class ColorController extends Controller
         ];
 
         $api_request = [
-            'id' => $request->id
+            'id' => $request->color_id
         ];
 
         $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/color/delete', $api_request);
@@ -114,10 +113,10 @@ class ColorController extends Controller
 
         if($result['status'] == 'success'){
             toastr()->info('Color deleted successfully!', 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }else{
             toastr()->error($result['message'], 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }
     }
 
