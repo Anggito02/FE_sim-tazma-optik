@@ -76,7 +76,7 @@
                         <a class="collapse-item" href="/vendors">Vendors Information</a>
                         <a class="collapse-item" href="/brand">Brands Information</a>
                         <a class="collapse-item" href="/branch">Branches Information</a>
-                        <a class="collapse-item" href="/lens">Lens Information</a>
+                        <a class="collapse-item" href="/lens-category">Lens Information</a>
                         <a class="collapse-item" href="/frame-category">Frame Information</a>
                         <a class="collapse-item" href="/index">Index Information</a>
                     </div>

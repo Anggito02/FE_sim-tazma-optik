@@ -134,15 +134,18 @@
                                                                         <label for="InputAlamat"
                                                                             class="form-label">Alamat</label>
                                                                         <div><input type="text" id="alamat_branch"
-                                                                                name="alamat_branch" class="form-control"
+                                                                                name="alamat_branch"
+                                                                                class="form-control"
                                                                                 value="{{ $val['alamat'] }}">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputGender" class="form-label">Employee Name</label>
-                                                                        <select type="employee_name" class="form-select form-control" id="InputGender"
-                                                                            name="employee_id_branch">
+                                                                        <label for="InputGender"
+                                                                            class="form-label">Employee Name</label>
+                                                                        <select type="employee_name"
+                                                                            class="form-select form-control"
+                                                                            id="InputGender" name="employee_id_branch">
                                                                             @foreach ($employee as $val)
                                                                             <option value="{{$val['id']}}">
                                                                                 {{$val['employee_name']}}</option>
@@ -182,7 +185,8 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Branch
+                                                </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -192,14 +196,13 @@
                                                 <p>Are you sure you want to delete?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">No
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No
                                                 </button>
                                                 <form method="post" action="/branch/delete">
                                                     @csrf
                                                     @method("DELETE")
-                                                    <input type="hidden" id="id_branch" name="id_branch" class="form-control"
-                                                        value="{{ $id }}">
+                                                    <input type="hidden" id="id_branch" name="id_branch"
+                                                        class="form-control" value="{{ $id }}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>

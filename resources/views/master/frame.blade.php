@@ -30,7 +30,7 @@
                     <thead class="thead-color">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Warna</span></th>
+                            <th class="thead-text"><span class="nowrap">Nama</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
@@ -61,7 +61,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit User</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Frame</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -75,7 +75,7 @@
                                                     <div class="mb-3">
                                                         <input type="hidden" id="id" name="frame_id"
                                                             class="form-control" value="{{ $val['id'] }}">
-                                                        <label for="InputWarna" class="form-label">Warna</label>
+                                                        <label for="InputWarna" class="form-label">Nama</label>
                                                         <input type="text" id="id" name="frame_nama"
                                                             class="form-control" value="{{ $val['nama_kategori'] }}">
                                                     </div>
@@ -106,7 +106,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Frame</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -150,7 +150,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Warna</h5>
+                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Frame</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

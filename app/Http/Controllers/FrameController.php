@@ -60,7 +60,7 @@ class FrameController extends Controller
         $result = $response->json();
 
         if($result['status'] == 'success'){
-            toastr()->info('Frame added successfully!', 'Frame', ['timeOut' => 3000]);
+            toastr()->info('Frame category added successfully!', 'Frame', ['timeOut' => 3000]);
             return redirect('/frame-category');
         }else{
             toastr()->error($result['message'], 'Frame', ['timeOut' => 3000]);

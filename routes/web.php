@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\FrameController;
+use App\Http\Controllers\LensController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,20 @@ Route::controller(FrameController::class)->middleware('isTokenValid')->group(fun
     Route::delete('/frame-category/delete', 'deleteFrameCategory');
 });
 
+Route::controller(LensController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/lens-category','getAllLensCategory');
+    Route::post('/lens-category/add', 'addLensCategory');
+    Route::put('/lens-category/edit', 'updateLensCategory');
+    Route::delete('/lens-category/delete', 'deleteLensCategory');
+});
+
+Route::controller(IndexController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/index-category','getAllIndexCategory');
+    Route::post('/index-category/add', 'addIndexCategory');
+    Route::put('/index-category/edit', 'updateIndexCategory');
+    Route::delete('/index-category/delete', 'deleteIndexCategory');
+});
+
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
@@ -65,14 +80,6 @@ Route::group([], function(){
 
     Route::get('/brand', function () {
         return view('master.brand');
-    });
-
-    Route::get('/lens', function () {
-        return view('master.lens');
-    });
-
-    Route::get('/index', function () {
-        return view('master.index');
     });
 
 });
