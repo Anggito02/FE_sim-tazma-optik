@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ColorController;
 
 /*
@@ -42,6 +43,13 @@ Route::controller(BranchController::class)->middleware('isTokenValid')->group(fu
     Route::delete('/branch/delete', 'deleteBranch');
 });
 
+Route::controller(BrandController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/brand','getAllBrand');
+    Route::post('/brand/add', 'addBrand');
+    Route::put('/brand/edit', 'updateBrand');
+    Route::delete('/brand/delete', 'deleteBrand');
+});
+
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
@@ -58,11 +66,6 @@ Route::group([], function(){
     Route::get('/vendors', function () {
         return view('master.vendor');
     });
-
-    Route::get('/brand', function () {
-        return view('master.brand');
-    });
-
 });
 
 

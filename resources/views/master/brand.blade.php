@@ -32,24 +32,33 @@
                         <tr>
                             <th class="thead-text">No</th>
                             <th class="thead-text">Brand</th>
-                            <th class="thead-text">Detail</th>
+                            <th class="thead-text">Deskripsi</th>
+                            <th class="thead-text">Edit</th>
                             <th class="thead-text">Delete</th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        <div class="d-none">
+                            {{ $iterator = 1 }}
+                        </div>
+                        @foreach ($brand as $val)
                         <tr>
-                            <td>1</td>
-                            <td>Legion</td>
+                            <div class="d-none">
+                                {{ $id = $val['id'] }}
+                            </div>
+                            <td>{{ $iterator }}</td>
+                            <td>{{ $val['nama_brand']}}</td>
+                            <td>{{ $val['deskripsi']}}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                <!-- Modal Edit-->
+                                <div class="modal fade" id="exampleModalCenterEdit{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -61,14 +70,22 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post" action="">
+                                                <form method="post" action="/brand/edit">
                                                     @csrf
                                                     @method("put")
 
+                                                    <input type="hidden" id="id" name="brand_id"
+                                                            class="form-control" value="{{ $val['id'] }}">
                                                     <div class="mb-3">
                                                         <label for="InputBrand" class="form-label">Brand</label>
-                                                        <input type="text" id="InputNIK" name="Brand"
-                                                            class="form-control">
+                                                        <input type="text" id="id" name="nama_brand"
+                                                            class="form-control" value="{{ $val['nama_brand'] }}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="InputDeskripsi" class="form-label">Deskripsi</label>
+                                                        <input type="text" id="deskripsi" name="deskripsi"
+                                                            class="form-control" value="{{ $val['deskripsi'] }}">
                                                     </div>
 
                                                     <div class="mb-3 float-right">
@@ -88,12 +105,12 @@
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                <!-- Modal Delete-->
+                                <div class="modal fade" id="exampleModalCenterDelete{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -110,7 +127,13 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <button type="button" class="btn btn-danger">Yes</button>
+                                                <form method="post" action="/brand/delete">
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <input type="hidden" id="id" name="id" class="form-control"
+                                                        value="{{ $id }}">
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -118,6 +141,10 @@
                             </td>
 
                         </tr>
+                        <div class="d-none">
+                            {{ $iterator++ }}
+                        </div>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -137,14 +164,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="">
+                <form method="post" action="/brand/add">
                     @csrf
+                    @method("POST")
+                    
                     <div class="mb-3 black-text">
                         <label for="InputBrand" class="form-label">Brand</label>
-                        <input type="text" id="InputBrand" name="Brand" class="form-control">
+                        <input type="text" id="nama_brand" name="nama_brand" class="form-control">
                     </div>
 
-                    <button type="button" class="btn btn-success float-right">Submit</button>
+                    <div class="mb-3 black-text">
+                        <label for="InputDeskripsi" class="form-label">Deskripsi</label>
+                        <input type="text" id="deskripsi" name="deskripsi" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-success float-right">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">
