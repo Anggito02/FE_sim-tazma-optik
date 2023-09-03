@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\FrameController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
 
 /*
@@ -59,10 +60,10 @@ Route::controller(LensController::class)->middleware('isTokenValid')->group(func
 });
 
 Route::controller(IndexController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/index-category','getAllIndexCategory');
-    Route::post('/index-category/add', 'addIndexCategory');
-    Route::put('/index-category/edit', 'updateIndexCategory');
-    Route::delete('/index-category/delete', 'deleteIndexCategory');
+    Route::get('/index','getAllIndexCategory');
+    Route::post('/index/add', 'addIndexCategory');
+    Route::put('/index/edit', 'updateIndexCategory');
+    Route::delete('/index/delete', 'deleteIndexCategory');
 });
 
 Route::group([], function(){
