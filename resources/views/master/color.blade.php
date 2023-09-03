@@ -40,9 +40,12 @@
                             {{ $iterator = 1 }}
                         </div>
                         @foreach ($color as $val)
-                        <tr>
-                            <input type="hidden" id="id" name="color_name" class="form-control"
-                                value="{{ $val['id'] }}">
+                            <tr>
+                                <input type="hidden" id="id" name="color_name" class="form-control"
+                                    value="{{ $val['id'] }}">
+                                <div class="d-none">
+                                  {{ $id = $val['id'] }}
+                                </div>
                             <td>{{ $iterator }}</td>
                             <td>{{ $val['color_name'] }}</td>
                             <td>
@@ -128,10 +131,10 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr>
-                        <div class="d-none">
-                            {{ $iterator = $iterator + 1 }}
-                        </div>
+                            </tr>
+                            <div class="d-none">
+                                {{ $iterator = $iterator + 1 }}
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
