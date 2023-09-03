@@ -49,12 +49,12 @@
                                 <td>
                                     <!-- Button trigger modal Edit -->
                                     <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#exampleModalCenterEdit">
+                                        data-target="#exampleModalCenterEdit{{ $id }}">
                                         <i class="fa fa-edit"></i>
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="exampleModalCenterEdit{{ $id }}" tabindex="-1" role="dialog"
                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
