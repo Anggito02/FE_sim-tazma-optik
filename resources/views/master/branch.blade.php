@@ -74,7 +74,7 @@
                             {{ $iterator = 1 }}
                         </div>
                         @foreach ($branch as $val)
-                            <tr>
+                        <tr>
                             <div class="d-none">
                                 {{ $id = $val['id'] }}
                             </div>
@@ -85,12 +85,12 @@
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterEdit{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                         <div class="modal-content">
@@ -109,32 +109,49 @@
                                                             @method("put")
 
                                                             <div class="row">
-                                                                <input type="hidden" id="id" name="id"
-                                                            class="form-control" value="{{ $id }}">
+                                                                <input type="hidden" id="id_branch " name="id_branch"
+                                                                    class="form-control" value="{{ $id }}">
                                                                 <div class="col">
                                                                     <div class="mb-3">
                                                                         <label for="InputKode"
                                                                             class="form-label">Kode</label>
-                                                                        <input type="text" id="kode_branch" name="kode_branch"
-                                                                            class="form-control" value="{{ $val['kode_branch'] }}">
+                                                                        <input type="text" id="kode_branch"
+                                                                            name="kode_branch" class="form-control"
+                                                                            value="{{ $val['kode_branch'] }}">
                                                                     </div>
 
                                                                     <div class="mb-3">
                                                                         <label for="InputNama"
                                                                             class="form-label">Nama</label>
-                                                                        <input type="text" id="nama_branch" name="nama_branch"
-                                                                            class="form-control" value="{{ $val['nama_branch'] }}">
+                                                                        <input type="text" id="nama_branch"
+                                                                            name="nama_branch" class="form-control"
+                                                                            value="{{ $val['nama_branch'] }}">
                                                                     </div>
 
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="mb-3">
-                                                                        <label for="InputAlamat" class="form-label">Alamat</label>
-                                                                        <div><input type="text" id="alamat"
-                                                                                name="alamat" class="form-control" value="{{ $val['alamat'] }}">
+                                                                        <label for="InputAlamat"
+                                                                            class="form-label">Alamat</label>
+                                                                        <div><input type="text" id="alamat_branch"
+                                                                                name="alamat_branch"
+                                                                                class="form-control"
+                                                                                value="{{ $val['alamat'] }}">
                                                                         </div>
                                                                     </div>
 
+                                                                    <div class="mb-3">
+                                                                        <label for="InputGender"
+                                                                            class="form-label">Employee Name</label>
+                                                                        <select type="employee_name"
+                                                                            class="form-select form-control"
+                                                                            id="InputGender" name="employee_id_branch">
+                                                                            @foreach ($employee as $val)
+                                                                            <option value="{{$val['id']}}">
+                                                                                {{$val['employee_name']}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
 
                                                                     <div class="mb-3 float-right">
                                                                         <button type="sumbit"
@@ -158,17 +175,18 @@
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterDelete{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Branch
+                                                </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -178,14 +196,14 @@
                                                 <p>Are you sure you want to delete?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No
+                                                </button>
                                                 <form method="post" action="/branch/delete">
                                                     @csrf
                                                     @method("DELETE")
-                                                    <input type="hidden" id="id" name="id"
-                                                            class="form-control" value="{{ $id }}">
-                                                    <button type="button" class="btn btn-danger">Yes</button>
+                                                    <input type="hidden" id="id_branch" name="id_branch"
+                                                        class="form-control" value="{{ $id }}">
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -193,10 +211,10 @@
                                 </div>
                             </td>
 
-                            </tr>
-                            <div class="d-none">
-                                {{ $iterator = $iterator + 1}}
-                            </div>
+                        </tr>
+                        <div class="d-none">
+                            {{ $iterator = $iterator + 1}}
+                        </div>
                         @endforeach
 
                     </tbody>
@@ -240,8 +258,20 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="InputAlamat" class="form-label">Alamat</label>
-                                        <div><input type="text" id="alamat" name="alamat" class="form-control">
+                                        <div><input type="text" id="alamat_branch" name="alamat_branch"
+                                                class="form-control">
                                         </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputGender" class="form-label">Employee Name</label>
+                                        <select type="employee_name" class="form-select form-control" id="InputGender"
+                                            name="employee_id_branch">
+                                            @foreach ($employee as $val)
+                                            <option value="{{$val['id']}}" name="employee_id_branch">
+                                                {{$val['employee_name']}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="mb-3 float-right">

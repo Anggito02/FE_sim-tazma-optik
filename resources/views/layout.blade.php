@@ -20,9 +20,7 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/support-index.css')}}" rel="stylesheet">
-
-    <!-- Custom styles for table page -->
-    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet">
 
 </head>
 
@@ -71,11 +69,14 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Master:</h6>
                         <a class="collapse-item" href="/user">Users Information</a>
-                        <a class="collapse-item" href="{{ url('/employee')}}">Employees Information</a>
+                        <a class="collapse-item" href="/employee">Employees Information</a>
                         <a class="collapse-item" href="/color">Colors Information</a>
-                        <a class="collapse-item" href="{{ url('/vendors')}}">Vendors Information</a>
-                        <a class="collapse-item" href="{{ url('/brand')}}">Brands Information</a>
-                        <a class="collapse-item" href="{{ url('/branch')}}">Branches Information</a>
+                        <a class="collapse-item" href="/vendors">Vendors Information</a>
+                        <a class="collapse-item" href="/brand">Brands Information</a>
+                        <a class="collapse-item" href="/branch">Branches Information</a>
+                        <a class="collapse-item" href="/lens-category">Lens Information</a>
+                        <a class="collapse-item" href="/frame-category">Frame Information</a>
+                        <a class="collapse-item" href="/index">Index Information</a>
                     </div>
                 </div>
             </li>
@@ -301,8 +302,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js\sb-admin-2.min.js')}}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

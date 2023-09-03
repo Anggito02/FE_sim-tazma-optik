@@ -25,3 +25,6 @@
 .txt-red {
     color: #ff0000;
 }
+.hidden-option{
+    display: none;
+}

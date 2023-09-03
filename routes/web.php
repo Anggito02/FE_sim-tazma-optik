@@ -8,6 +8,10 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ErrorPageController;
+use App\Http\Controllers\FrameController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LensController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +63,31 @@ Route::controller(EmployeeController::class)->middleware('isTokenValid')->group(
     Route::delete('/employee/delete', 'deleteEmployee');
 });
 
+Route::controller(FrameController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/frame-category','getAllFrameCategory');
+    Route::post('/frame-category/add', 'addFrameCategory');
+    Route::put('/frame-category/edit', 'updateFrameCategory');
+    Route::delete('/frame-category/delete', 'deleteFrameCategory');
+});
+
+Route::controller(LensController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/lens-category','getAllLensCategory');
+    Route::post('/lens-category/add', 'addLensCategory');
+    Route::put('/lens-category/edit', 'updateLensCategory');
+    Route::delete('/lens-category/delete', 'deleteLensCategory');
+});
+
+Route::controller(IndexController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/index','getAllIndexCategory');
+    Route::post('/index/add', 'addIndexCategory');
+    Route::put('/index/edit', 'updateIndexCategory');
+    Route::delete('/index/delete', 'deleteIndexCategory');
+});
+
+Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/404','PageError404');
+});
+
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
@@ -68,9 +97,15 @@ Route::group([], function(){
         return view('master.user');
     });
     
+
     Route::get('/vendors', function () {
         return view('master.vendor');
     });
+
+    Route::get('/404', function () {
+        return view('error_page.404');
+    });
+
 });
 
 

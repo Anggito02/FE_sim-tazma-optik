@@ -29,13 +29,14 @@ class BranchController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get('http://localhost:8001/api/branch/all', $api_request);
+        $response_sup = Http::withHeaders($headers)->get('http://localhost:8001/api/employee/all', $api_request);
 
         $branch = $response->json();
-
+        $employee = $response_sup->json();
         $user = GetUserInfo::getUserInfo();
 
         if ($branch['status'] == 'success'){
-            return view('master.branch', ['branch' => $branch['data'], 'data' => $user['data']]);
+            return view('master.branch', ['branch' => $branch['data'], 'data' => $user['data'], 'employee' => $employee['data']]);
 
         }else{
             return view('/dashboard');
@@ -54,7 +55,8 @@ class BranchController extends Controller
         $api_request = [
             'kode_branch' => $request->kode_branch,
             'nama_branch' => $request->nama_branch,
-            'alamat' => $request->alamat
+            'alamat' => $request->alamat_branch,
+            'employee_id_pic_branch' => $request->employee_id_branch
         ];
 
         $response = Http::withHeaders($headers)->post('http://localhost:8001/api/branch/add', $api_request);
@@ -80,10 +82,11 @@ class BranchController extends Controller
         ];
 
         $api_request = [
-            'id' => $request->id,
+            'id' => $request->id_branch,
             'kode_branch' => $request->kode_branch,
             'nama_branch' => $request->nama_branch,
-            'alamat' => $request->alamat
+            'alamat' => $request->alamat_branch,
+            'employee_id_pic_branch' => $request->employee_id_branch
         ];
 
         $response = Http::withHeaders($headers)->put('http://localhost:8001/api/branch/edit', $api_request);
@@ -109,7 +112,7 @@ class BranchController extends Controller
         ];
 
         $api_request = [
-            'id' => $request->id
+            'id' => $request->id_branch
         ];
 
         $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/branch/delete', $api_request);
