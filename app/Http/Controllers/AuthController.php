@@ -34,6 +34,7 @@ class AuthController extends Controller{
 
             return redirect('/dashboard');
         }else{
+            toastr()->error('Invalid email or password!', 'Authentication', ['timeOut' => 3000]);
             return view('/login', ['data' => $data['message']]);
         }
     }

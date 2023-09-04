@@ -51,8 +51,10 @@ class ColorController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
 
+        $color_name = $request->color_name;
+
         $api_request = [
-            'color_name' => $request->color_name
+            'color_name' => $color_name
         ];
 
         $response = Http::withHeaders($headers)->post('http://localhost:8001/api/color/add', $api_request);
@@ -60,7 +62,7 @@ class ColorController extends Controller
         $result = $response->json();
 
         if($result['status'] == 'success'){
-            toastr()->info('Color added successfully!', 'Color', ['timeOut' => 3000]);
+            toastr()->info('Color '. $color_name .' added successfully!', 'Color', ['timeOut' => 3000]);
             return redirect('/color');
         }else{
             toastr()->error($result['message'], 'Color', ['timeOut' => 3000]);
@@ -77,16 +79,18 @@ class ColorController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
 
+        $color_name = $request->color_name;
+
         $api_request = [
             'id' => $request->color_id,
-            'color_name' => $request->color_name
+            'color_name' => $color_name
         ];
 
         $response = Http::withHeaders($headers)->put('http://localhost:8001/api/color/edit', $api_request);
 
         $result = $response->json();
         if($result['status'] == 'success'){
-            toastr()->info('Color updated successfully!', 'Color', ['timeOut' => 3000]);
+            toastr()->info('Color '. $color_name .' updated successfully!', 'Color', ['timeOut' => 3000]);
             return redirect('/color');
         }else{
             toastr()->error($result['message'], 'Color', ['timeOut' => 3000]);

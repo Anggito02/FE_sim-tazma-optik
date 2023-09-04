@@ -129,7 +129,15 @@
                             <td><span class="nowrap">{{$val['position']}}</span></td>
                             <td><span class="nowrap">{{$val['role']}}</span></td>
                             <td><span class="nowrap">{{$val['plant']}}</span></td>
-                            <td><span class="nowrap">{{$val['status']}}</span></td>
+                                @if ($val['status'] == 'active')
+                                <td class="bg-success d-flex justify-content-center align-items-center">
+                                    <span class="nowrap text-white">{{$val['status']}}</span>
+                                </td>
+                                @elseif ($val['status'] == 'inactive')
+                                <td class="bg-danger d-flex justify-content-center align-items-center">
+                                    <span class="nowrap text-white text-center">{{$val['status']}}</span>
+                                </td>
+                                @endif
 
                             <td>
                                 <!-- Button trigger modal Edit -->
@@ -286,7 +294,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <form method="post" action="/employee/delete"></form>
+                                                <form method="post" action="/employee/delete">
                                                 @csrf
                                                 @method("DELETE")
                                                 <input type="hidden" id="id" name="id" class="form-control"

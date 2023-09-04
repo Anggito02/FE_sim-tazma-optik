@@ -91,12 +91,12 @@ Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
-    })->middleware('isLoggedIn');
+    });
 
     Route::get('/user', function () {
         return view('master.user');
     });
-    
+
 
     Route::get('/vendors', function () {
         return view('master.vendor');
