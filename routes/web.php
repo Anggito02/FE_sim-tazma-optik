@@ -97,7 +97,6 @@ Route::group([], function(){
         return view('master.user');
     });
 
-
     Route::get('/vendors', function () {
         return view('master.vendor');
     });
@@ -106,6 +105,14 @@ Route::group([], function(){
         return view('error_page.404');
     });
 
+    Route::get('/500', function () {
+        return view('error_page.500');
+    });
+
 });
+
+Route::any('{any}', function () {
+    return view('error_page.404');
+})->where('any', '.*');
 
 
