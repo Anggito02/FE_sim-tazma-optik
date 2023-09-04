@@ -76,7 +76,7 @@
                                                         <input type="hidden" id="id" name="index_id"
                                                             class="form-control" value="{{ $val['id'] }}">
                                                         <label for="InputWarna" class="form-label">Nilai index</label>
-                                                        <input type="text" id="id" name="index_size"
+                                                        <input type="number" step="0.01" id="id" name="index_size"
                                                             class="form-control" value="{{ $val['value'] }}">
                                                     </div>
 
@@ -162,7 +162,7 @@
 
                     <div class="mb-3 black-text">
                         <label for="InputWarna" class="form-label">Nilai index</label>
-                        <input type="text" id="index_size" name="index_size" class="form-control">
+                        <input type="number" step="0.01" id="index_size" name="index_size" class="form-control">
                     </div>
 
                     <button type="submit" class="btn btn-success float-right">Submit</button>

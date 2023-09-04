@@ -129,15 +129,15 @@
                             <td><span class="nowrap">{{$val['position']}}</span></td>
                             <td><span class="nowrap">{{$val['role']}}</span></td>
                             <td><span class="nowrap">{{$val['plant']}}</span></td>
-                                @if ($val['status'] == 'active')
-                                <td class="bg-success d-flex justify-content-center align-items-center">
-                                    <span class="nowrap text-white">{{$val['status']}}</span>
-                                </td>
-                                @elseif ($val['status'] == 'inactive')
-                                <td class="bg-danger d-flex justify-content-center align-items-center">
-                                    <span class="nowrap text-white text-center">{{$val['status']}}</span>
-                                </td>
-                                @endif
+                            @if ($val['status'] == 'active')
+                            <td class="bg-success d-flex justify-content-center align-items-center">
+                                <span class="nowrap text-white">{{$val['status']}}</span>
+                            </td>
+                            @elseif ($val['status'] == 'inactive')
+                            <td class="bg-danger d-flex justify-content-center align-items-center">
+                                <span class="nowrap text-white text-center">{{$val['status']}}</span>
+                            </td>
+                            @endif
 
                             <td>
                                 <!-- Button trigger modal Edit -->
@@ -176,13 +176,6 @@
                                                                             class="form-control"
                                                                             value="{{ $val['username']}}">
                                                                     </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="InputNIK"
-                                                                            class="form-label">NIK</label>
-                                                                        <input type="text" id="nik" name="nik"
-                                                                            class="form-control"
-                                                                            value="{{ $val['nik']}}">
-                                                                    </div>
 
                                                                     <div class="mb-3">
                                                                         <label for="InputEmployee"
@@ -190,6 +183,57 @@
                                                                         <input type="text" id="employee_name"
                                                                             name="employee_name" class="form-control"
                                                                             value="{{ $val['employee_name']}}">
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputSection"
+                                                                            class="form-label">Section</label>
+                                                                        <div>
+
+                                                                            <input type="text" id="section"
+                                                                                name="section" class="form-control"
+                                                                                value="{{ $val['section']}}">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputRole"
+                                                                            class="form-label">Role</label>
+                                                                        <select type="role"
+                                                                            class="form-select form-control"
+                                                                            id="InputRole" name="role">
+                                                                            <option selected value="{{ $val['role']}}">
+                                                                                {{$val['role']}}
+                                                                            </option>
+                                                                            <option value="{{ $val['role']}}">user
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputStatus"
+                                                                            class="form-label">Status</label>
+                                                                        <select type="status"
+                                                                            class="form-select form-control"
+                                                                            id="InputStatus" name="status">
+                                                                            <option selected value="{{ $val['status']}}">
+                                                                                {{$val['status']}}
+                                                                            </option>
+                                                                            <option value="{{ $val['status']}}">inactive
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="col">
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputNIK"
+                                                                            class="form-label">NIK</label>
+                                                                        <input type="number" id="nik" name="nik"
+                                                                            class="form-control"
+                                                                            value="{{ $val['nik']}}">
                                                                     </div>
 
                                                                     <div class="mb-3">
@@ -201,18 +245,15 @@
                                                                         </div>
                                                                     </div>
 
-
                                                                     <div class="mb-3">
-                                                                        <label for="InputRole"
-                                                                            class="form-label">Role</label>
-                                                                        <div><input type="text" id="role" name="role"
-                                                                                class="form-control"
-                                                                                value="{{ $val['role']}}"></div>
+                                                                        <label for="InputPosition"
+                                                                            class="form-label">Position</label>
+                                                                        <div><input type="text" id="position"
+                                                                                name="position" class="form-control"
+                                                                                value="{{ $val['position']}}">
+                                                                        </div>
                                                                     </div>
 
-
-                                                                </div>
-                                                                <div class="col">
                                                                     <div class="mb-3">
                                                                         <label for="InputPlant"
                                                                             class="form-label">Plant</label>
@@ -222,32 +263,7 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputStatus"
-                                                                            class="form-label">Status</label>
-                                                                        <div><input type="text" id="status"
-                                                                                name="status" class="form-control"
-                                                                                value="{{ $val['status']}}">
-                                                                        </div>
-                                                                    </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputSection"
-                                                                            class="form-label">section</label>
-                                                                        <div><input type="text" id="section"
-                                                                                name="section" class="form-control"
-                                                                                value="{{ $val['section']}}">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputPosition"
-                                                                            class="form-label">Position</label>
-                                                                        <div><input type="text" id="position"
-                                                                                name="position" class="form-control"
-                                                                                value="{{ $val['position']}}">
-                                                                        </div>
-                                                                    </div>
 
                                                                     <div class="mt-5 float-right">
                                                                         <button type="sumbit"
@@ -295,11 +311,11 @@
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
                                                 <form method="post" action="/employee/delete">
-                                                @csrf
-                                                @method("DELETE")
-                                                <input type="hidden" id="id" name="id" class="form-control"
-                                                    value="{{ $id }}">
-                                                <button type="submit" class="btn btn-danger">Yes</button>
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <input type="hidden" id="id" name="id" class="form-control"
+                                                        value="{{ $id }}">
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -345,13 +361,12 @@
 
                                     <div class="mb-3">
                                         <label for="InputNik" class="form-label">NIK</label>
-                                        <input type="text" id="nik" name="nik" class="form-control">
+                                        <input type="number" id="nik" name="nik" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputEmployee" class="form-label">Name</label>
-                                        <div><input type="text" id="employee_name" name="employee_name"
-                                                class="form-control">
+                                        <label for="InputDepartment" class="form-label">Department</label>
+                                        <div><input type="text" id="department" name="department" class="form-control">
                                         </div>
                                     </div>
 
@@ -362,35 +377,46 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputSection" class="form-label">Section</label>
-                                        <div><input type="text" id="section" name="section" class="form-control">
-                                        </div>
+                                        <label for="InputPlant" class="form-label">Plant</label>
+                                        <div><input type="text" id="plant" name="plant" class="form-control"></div>
                                     </div>
 
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="InputRole" class="form-label">Role</label>
-                                        <div><input type="text" id="role" name="role" class="form-control">
+                                            <label for="InputPhoto" class="form-label">Photo</label>
+                                            <div><input type="file" id="photo" name="photo" class="form-control">
+                                            </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputEmployee" class="form-label">Name</label>
+                                        <div><input type="text" id="employee_name" name="employee_name"
+                                                class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputPlant" class="form-label">Plant</label>
-                                        <div><input type="text" id="plant" name="plant" class="form-control"></div>
+                                        <label for="InputSection" class="form-label">Section</label>
+                                        <div><input type="text" id="section" name="section" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputRole" class="form-label">Role</label>
+                                        <select type="role" name="role" class="form-select form-control" id="inputRole">
+                                            <option value="administrator">administrator</option>
+                                            <option value="user">user</option>
+                                        </select>
+                                        
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="InputStatus" class="form-label">Status</label>
-                                        <div><input type="text" id="status" name="status" class="form-control">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="mb-3">
-                                        <label for="InputDepartment" class="form-label">Department</label>
-                                        <div><input type="text" id="department" name="department" class="form-control">
-                                        </div>
+                                        <select type="status" name="status" class="form-select form-control" id="inputStatus">
+                                            <option value="active">active</option>
+                                            <option value="inactive">inactive</option>
+                                        </select>
                                     </div>
 
                                     <div class="mt-5 float-right">

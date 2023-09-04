@@ -62,6 +62,7 @@
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Kode</span></th>
+                            <th class="thead-text"><span class="nowrap">Karyawan</span></th>
                             <th class="thead-text"><span class="nowrap">Nama</span></th>
                             <th class="thead-text"><span class="nowrap">Alamat</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
@@ -80,6 +81,7 @@
                             </div>
                             <td>{{ $iterator }}</td>
                             <td>{{ $val['kode_branch']}}</td>
+                            <td></td>
                             <td>{{ $val['nama_branch']}}</td>
                             <td>{{ $val['alamat']}}</td>
                             <td>
