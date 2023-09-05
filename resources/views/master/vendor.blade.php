@@ -103,11 +103,13 @@
                             <td><span class="nowrap">{{$val['init_date_supply']}}</span></td>
                             <td><span class="nowrap">{{$val['last_date_supply']}}</span></td>
                             @if ($val['status_blacklist'] == 0)
-                            <td class="bg-success d-flex justify-content-center align-items-center"><span
-                                    class="nowrap text-white text-center">active</span></td>
+                            <td>
+                                <span class="nowrap text-white text-success">active</span>
+                            </td>
                             @elseif ($val['status_blacklist'] == 1)
-                            <td class="bg-danger d-flex justify-content-center align-items-center"><span
-                                    class="nowrap text-white text-center">blacklist</span></td>
+                            <td>
+                                <span class="nowrap text-white text-danger">blacklist</span>
+                            </td>
                             @endif
                             <td>
                                 <!-- Button trigger modal Edit -->

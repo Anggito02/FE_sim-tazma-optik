@@ -130,12 +130,12 @@
                             <td><span class="nowrap">{{$val['role']}}</span></td>
                             <td><span class="nowrap">{{$val['plant']}}</span></td>
                             @if ($val['status'] == 'active')
-                            <td class="bg-success d-flex justify-content-center align-items-center">
-                                <span class="nowrap text-white">{{$val['status']}}</span>
+                            <td>
+                                <span class="nowrap text-success">{{$val['status']}}</span>
                             </td>
                             @elseif ($val['status'] == 'inactive')
-                            <td class="bg-danger d-flex justify-content-center align-items-center">
-                                <span class="nowrap text-white text-center">{{$val['status']}}</span>
+                            <td>
+                                <span class="nowrap text-white text-danger">{{$val['status']}}</span>
                             </td>
                             @endif
 
@@ -228,7 +228,8 @@
                                                                             <option value="active" selected>
                                                                                 active
                                                                             </option>
-                                                                            <option value="inactive">inactive
+                                                                            <option value="inactive">
+                                                                                inactive
                                                                             </option>
                                                                             @elseif ($val['status'] == 'inactive')
                                                                             <option value="active">
