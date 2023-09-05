@@ -95,8 +95,8 @@
                             <td class="txt-center"><span class="nowrap">{{$i}}</span></td>
                             <td><span class="nowrap">{{$val['kode_vendor']}}</span></td>
                             <td class="txt-right"><span class="nowrap">{{$val['npwp_vendor']}}</span></td>
-                            <td><span class="nowrap">{{$val['nama_vendor']}}</span></td>
-                            <td><span class="nowrap">{{$val['alamat_vendor']}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['nama_vendor'])}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['alamat_vendor'])}}</span></td>
                             <td class="txt-right"><span class="nowrap">{{$val['no_telp_vendor']}}</span></td>
                             <td><span class="nowrap">{{$val['pic_vendor']}}</span></td>
                             <td class="txt-right"><span class="nowrap">{{$val['no_telp_pic']}}</span></td>
@@ -104,11 +104,11 @@
                             <td class="txt-right"><span class="nowrap">{{$val['last_date_supply']}}</span></td>
                             @if ($val['status_blacklist'] == 0)
                             <td>
-                                <span class="nowrap text-white text-success">active</span>
+                                <span class="nowrap text-white text-success">Active</span>
                             </td>
                             @elseif ($val['status_blacklist'] == 1)
                             <td>
-                                <span class="nowrap text-white text-danger">blacklist</span>
+                                <span class="nowrap text-white text-danger">Blacklist</span>
                             </td>
                             @endif
                             <td>

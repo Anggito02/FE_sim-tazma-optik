@@ -47,7 +47,7 @@
                                   {{ $id = $val['id'] }}
                                 </div>
                             <td class="txt-center">{{ $iterator }}</td>
-                            <td>{{ $val['color_name'] }}</td>
+                            <td>{{ ucwords(str_replace('_', ' ',$val['color_name'])) }}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"

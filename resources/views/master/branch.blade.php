@@ -81,9 +81,9 @@
                             </div>
                             <td class="txt-center">{{ $iterator }}</td>
                             <td><span class="nowrap">{{ $vals['kode_branch']}}</span></td>
-                            <td><span class="nowrap">{{ $vals['employee_name']}}</span></td>
-                            <td><span class="nowrap">{{ $vals['nama_branch']}}</span></td>
-                            <td><span class="nowrap">{{ $vals['alamat']}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['employee_name'])}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['nama_branch'])}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['alamat'])}}</span></td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"

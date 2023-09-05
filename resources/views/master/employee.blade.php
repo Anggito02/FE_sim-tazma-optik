@@ -123,19 +123,19 @@
                             <td class="txt-center"><span class="nowrap">{{$iterator}}</span></td>
                             <td><span class="nowrap">{{$val['username']}}</span></td>
                             <td><span class="nowrap">{{$val['nik']}}</span></td>
-                            <td><span class="nowrap">{{$val['employee_name']}}</span></td>
-                            <td><span class="nowrap">{{$val['department']}}</span></td>
-                            <td><span class="nowrap">{{$val['section']}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['employee_name'])}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['department'])}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['section'])}}</span></td>
                             <td><span class="nowrap">{{$val['position']}}</span></td>
-                            <td><span class="nowrap">{{$val['role']}}</span></td>
-                            <td><span class="nowrap">{{$val['plant']}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['role'])}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['plant'])}}</span></td>
                             @if ($val['status'] == 'active')
                             <td>
-                                <span class="nowrap text-success">{{$val['status']}}</span>
+                                <span class="nowrap text-success">{{ucwords($val['status'])}}</span>
                             </td>
                             @elseif ($val['status'] == 'inactive')
                             <td>
-                                <span class="nowrap text-white text-danger">{{$val['status']}}</span>
+                                <span class="nowrap text-white text-danger">{{ucwords($val['status'])}}</span>
                             </td>
                             @endif
 
