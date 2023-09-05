@@ -165,8 +165,27 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div class="float-left black-text">
-                        @if ( url('/employee') == url()->current())
+                        @if (url('/dashboard') == url()->current())
+                            <h5>DASHBOARD</h5>
+                        @elseif (url('/user') == url()->current())
+                            <h5>USER SHEET INFORMATION</h5>
+                        @elseif (url('/vendors') == url()->current())
+                            <h5>VENDOR SHEET INFORMATION</h5>
+                        @elseif (url('/color') == url()->current())
+                            <h5>COLOUR SHEET INFORMATION</h5>
+                        @elseif ( url('/employee') == url()->current())
                             <h5>EMPLOYEE SHEET INFORMATION</h5>
+                        @elseif (url('/brand') == url()->current())
+                            <h5>BRAND SHEET INFORMATION</h5>
+                        @elseif (url('/branch') == url()->current())
+                            <h5>BRANCH SHEET INFORMATION</h5>
+                        @elseif (url('/lens-category') == url()->current())
+                            <h5>LENS CATEGORY SHEET INFORMATION</h5>
+                        @elseif (url('/frame-category') == url()->current())
+                            <h5>FRAME CATEGORY SHEET INFORMATION</h5>
+                        @elseif (url('/index') == url()->current())
+                            <h5>INDEX SHEET INFORMATION</h5>
+
                         @endif
                     </div>
                     <!-- Sidebar Toggle (Topbar) -->
