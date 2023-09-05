@@ -204,7 +204,7 @@
                                                     @csrf
                                                     @method("DELETE")
                                                     <input type="hidden" id="id" name="branch_id"
-                                                        class="form-control" value="{{ $val['id'] }}">
+                                                        class="form-control" value="{{ $id }}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>

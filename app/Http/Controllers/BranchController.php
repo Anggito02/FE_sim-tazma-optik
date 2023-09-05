@@ -117,7 +117,7 @@ class BranchController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get('http://localhost:8001/api/branch/delete', $api_request);
-
+        dd($response);
         $result = $response->json();
 
         if($result['status'] == 'success'){

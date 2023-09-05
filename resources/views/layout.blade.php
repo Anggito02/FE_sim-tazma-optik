@@ -164,13 +164,17 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+                    <div class="float-left black-text">
+                        @if ( url('/employee') == url()->current())
+                            <h5>EMPLOYEE SHEET INFORMATION</h5>
+                        @endif
+                    </div>
                     <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
+                    {{-- <form class="form-inline">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-                    </form>
+                    </form> --}}
 
                     <!-- Topbar Search -->
                     {{-- <form
@@ -190,7 +194,7 @@
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
+                        {{-- <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
@@ -212,15 +216,15 @@
                                     </div>
                                 </form>
                             </div>
-                        </li>
-
-                        {{-- <div class="topbar-divider d-none d-sm-block"></div> --}}
+                        </li> --}}
+                        {{-- <div class='d-none d-sm-block'><span>asdsadasd</span></div>
+                        <div class="topbar-divider d-none d-sm-block"></div> --}}
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $data['employee_name'] }}</span>
+                                <span class="mr-2 d-none d-lg-inline black-text small">{{ $data['employee_name'] }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>

@@ -12,6 +12,7 @@ use App\Http\Controllers\ErrorPageController;
 use App\Http\Controllers\FrameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
+use App\Http\Controllers\VendorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,13 @@ Route::controller(IndexController::class)->middleware('isTokenValid')->group(fun
     Route::post('/index/add', 'addIndexCategory');
     Route::put('/index/edit', 'updateIndexCategory');
     Route::delete('/index/delete', 'deleteIndexCategory');
+});
+
+Route::controller(VendorsController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/vendors','getAllIndexCategory');
+    Route::post('/vendors/add', 'addIndexCategory');
+    Route::put('/vendors/edit', 'updateIndexCategory');
+    Route::delete('/vendors/delete', 'deleteIndexCategory');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
