@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AuthController;
 use App\Utils\GetUserInfo;
 
-class BranchController extends Controller
+class VendorsController extends Controller
 {
     public function getAllVendor(){
         $token = $_COOKIE['token'];
@@ -56,15 +56,15 @@ class BranchController extends Controller
             'npwp_vendor' => $request->npwp_vendor,
             'nama_vendor' => $request->nama_vendor,
             'alamat_vendor' => $request->alamat_vendor,
-            'init_data_supply' => $request->init_data_vendor,
-            'last_data_supply' => $request->last_data_vendor,
+            'init_date_supply' => $request->init_data_vendor,
+            'last_date_supply' => $request->last_data_vendor,
             'pic_vendor' => $request->pic_vendor,
             'no_telp_vendor' => $request->note_telp_vendor,
             'no_telp_pic' => $request->no_telp_pic_vendor,
             'status_blacklist' => $request->status_vendor
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/vendor/all', $api_request);
+        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/vendor/add', $api_request);
 
         $result = $response->json();
 
@@ -87,7 +87,7 @@ class BranchController extends Controller
         ];
 
         $api_request = [
-            'id' => $request->id_vendor,
+            'id' => $request->id,
             'kode_vendor' => $request->kode_vendor,
             'npwp_vendor' => $request->npwp_vendor,
             'nama_vendor' => $request->nama_vendor,
@@ -95,7 +95,7 @@ class BranchController extends Controller
             'init_data_supply' => $request->init_data_vendor,
             'last_data_supply' => $request->last_data_vendor,
             'pic_vendor' => $request->pic_vendor,
-            'no_telp_vendor' => $request->note_telp_vendor,
+            'no_telp_vendor' => $request->no_telp_vendor,
             'no_telp_pic' => $request->no_telp_pic_vendor,
             'status_blacklist' => $request->status_vendor
         ];
@@ -121,13 +121,13 @@ class BranchController extends Controller
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
-
+        
         $api_request = [
-            'id' => $request->id_vendor
+            'id' => $request->id
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/vendor/delete', $api_request);
-
+        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/vendor/delete', $api_request);
+        
         $result = $response->json();
 
         if($result['status'] == 'success'){

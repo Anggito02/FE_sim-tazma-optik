@@ -86,10 +86,10 @@ Route::controller(IndexController::class)->middleware('isTokenValid')->group(fun
 });
 
 Route::controller(VendorsController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/vendors','getAllIndexCategory');
-    Route::post('/vendors/add', 'addIndexCategory');
-    Route::put('/vendors/edit', 'updateIndexCategory');
-    Route::delete('/vendors/delete', 'deleteIndexCategory');
+    Route::get('/vendors','getAllVendor');
+    Route::post('/vendors/add', 'addVendor');
+    Route::put('/vendors/edit', 'updateVendor');
+    Route::delete('/vendors/delete', 'deleteVendor');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
@@ -103,11 +103,6 @@ Route::group([], function(){
 
     Route::get('/user', function () {
         return view('master.user');
-    });
-
-
-    Route::get('/vendors', function () {
-        return view('master.vendor');
     });
 
     Route::get('/404', function () {

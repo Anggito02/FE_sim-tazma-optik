@@ -202,11 +202,19 @@
                                                                         <select type="role"
                                                                             class="form-select form-control"
                                                                             id="InputRole" name="role">
-                                                                            <option selected value="{{ $val['role']}}">
-                                                                                {{$val['role']}}
+                                                                            @if ($val['role'] == 'administrator')
+                                                                            <option value="administrator" selected>
+                                                                                administrator
                                                                             </option>
-                                                                            <option value="{{ $val['role']}}">user
+                                                                            <option value="user">user
                                                                             </option>
+                                                                            @elseif ($val['role'] == 'user')
+                                                                            <option value="administrator">
+                                                                                administrator
+                                                                            </option>
+                                                                            <option value="user" selected>user
+                                                                            </option>
+                                                                            @endif
                                                                         </select>
                                                                     </div>
 
@@ -216,11 +224,20 @@
                                                                         <select type="status"
                                                                             class="form-select form-control"
                                                                             id="InputStatus" name="status">
-                                                                            <option selected value="{{ $val['status']}}">
-                                                                                {{$val['status']}}
+                                                                            @if ($val['status'] == 'active')
+                                                                            <option value="active" selected>
+                                                                                active
                                                                             </option>
-                                                                            <option value="{{ $val['status']}}">inactive
+                                                                            <option value="inactive">inactive
                                                                             </option>
+                                                                            @elseif ($val['status'] == 'inactive')
+                                                                            <option value="active">
+                                                                                active
+                                                                            </option>
+                                                                            <option value="inactive" selected>
+                                                                                inactive
+                                                                            </option>
+                                                                            @endif
                                                                         </select>
                                                                     </div>
 
@@ -384,9 +401,9 @@
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
-                                            <label for="InputPhoto" class="form-label">Photo</label>
-                                            <div><input type="file" id="photo" name="photo" class="form-control">
-                                            </div>
+                                        <label for="InputPhoto" class="form-label">Photo</label>
+                                        <div><input type="file" id="photo" name="photo" class="form-control">
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -405,15 +422,18 @@
                                     <div class="mb-3">
                                         <label for="InputRole" class="form-label">Role</label>
                                         <select type="role" name="role" class="form-select form-control" id="inputRole">
+                                            <option value="" disabled selected hidden>Choose...</option>
                                             <option value="administrator">administrator</option>
                                             <option value="user">user</option>
                                         </select>
-                                        
+
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="InputStatus" class="form-label">Status</label>
-                                        <select type="status" name="status" class="form-select form-control" id="inputStatus">
+                                        <select type="status" name="status" class="form-select form-control"
+                                            id="inputStatus">
+                                            <option value="" disabled selected hidden>Choose...</option>
                                             <option value="active">active</option>
                                             <option value="inactive">inactive</option>
                                         </select>
