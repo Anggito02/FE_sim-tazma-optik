@@ -58,7 +58,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-color">
+                    <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Kode</span></th>
@@ -79,12 +79,12 @@
                             <div class="d-none">
                                 {{ $id = $vals['id'] }}
                             </div>
-                            <td>{{ $iterator }}</td>
-                            <td>{{ $vals['kode_branch']}}</td>
-                            <td>{{ $vals['employee_name']}}</td>
-                            <td>{{ $vals['nama_branch']}}</td>
-                            <td>{{ $vals['alamat']}}</td>
-                            <td>
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td><span class="nowrap">{{ $vals['kode_branch']}}</span></td>
+                            <td><span class="nowrap">{{ $vals['employee_name']}}</span></td>
+                            <td><span class="nowrap">{{ $vals['nama_branch']}}</span></td>
+                            <td><span class="nowrap">{{ $vals['alamat']}}</span></td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
@@ -174,7 +174,7 @@
                                 </div>
 
                             </td>
-                            <td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">

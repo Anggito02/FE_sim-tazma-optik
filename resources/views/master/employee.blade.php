@@ -94,7 +94,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-color">
+                    <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Username</span></th>
@@ -120,7 +120,7 @@
                             <div class="d-none">
                                 {{ $id = $val['id'] }}
                             </div>
-                            <td><span class="nowrap">{{$iterator}}</span></td>
+                            <td class="txt-center"><span class="nowrap">{{$iterator}}</span></td>
                             <td><span class="nowrap">{{$val['username']}}</span></td>
                             <td><span class="nowrap">{{$val['nik']}}</span></td>
                             <td><span class="nowrap">{{$val['employee_name']}}</span></td>

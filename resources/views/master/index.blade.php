@@ -27,7 +27,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-color">
+                    <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Nilai Index</span></th>
@@ -46,9 +46,9 @@
                                 <div class="d-none">
                                   {{ $id = $val['id'] }}
                                 </div>
-                            <td>{{ $iterator }}</td>
-                            <td>{{ $val['value'] }}</td>
-                            <td>
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td class="txt-right">{{ $val['value'] }}</td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">
