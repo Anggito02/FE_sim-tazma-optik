@@ -84,9 +84,9 @@ Route::controller(IndexController::class)->middleware('isTokenValid')->group(fun
     Route::delete('/index/delete', 'deleteIndexCategory');
 });
 
-Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/404','PageError404');
-});
+// Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
+//     Route::get('/404','PageError404');
+// });
 
 Route::group([], function(){
     Route::get('/login', function(){
@@ -104,6 +104,10 @@ Route::group([], function(){
 
     Route::get('/404', function () {
         return view('error_page.404');
+    });
+
+    Route::get('/505', function () {
+        return view('error_page.505');
     });
 
 });

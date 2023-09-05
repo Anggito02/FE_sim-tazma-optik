@@ -28,11 +28,12 @@ class BranchController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/branch/all', $api_request);
+        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/branchWith/employee/all', $api_request);
         $response_sup = Http::withHeaders($headers)->get('http://localhost:8001/api/employee/all', $api_request);
 
         $branch = $response->json();
         $employee = $response_sup->json();
+
         $user = GetUserInfo::getUserInfo();
 
         if ($branch['status'] == 'success'){
@@ -112,10 +113,10 @@ class BranchController extends Controller
         ];
 
         $api_request = [
-            'id' => $request->id_branch
+            'id' => $request->branch_id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/branch/delete', $api_request);
+        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/branch/delete', $api_request);
 
         $result = $response->json();
 

@@ -40,6 +40,7 @@
                                     </div>
                                     <form method="post" class="user" action="/login">
                                         @csrf
+                                        <hr>
                                         <div class="form-group">
                                             <input name="email" type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
@@ -56,17 +57,18 @@
                                                     Me</label>
                                             </div>
                                         </div> -->
+                                        <hr>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
-                                        <hr>
+
                                     </form>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    {{-- <div class="text-center">
+                                        <a class="small" href="">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
-                                    </div>
+                                        <a class="small" href="">Create an Account!</a>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
