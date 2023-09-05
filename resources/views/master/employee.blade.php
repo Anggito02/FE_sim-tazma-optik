@@ -200,7 +200,7 @@
                                                                         <label for="InputRole"
                                                                             class="form-label">Role</label>
                                                                         <select type="role"
-                                                                            class="form-select form-control"
+                                                                            class="form-select form-control js-example-basic-single"
                                                                             id="InputRole" name="role">
                                                                             @if ($val['role'] == 'administrator')
                                                                             <option value="administrator" selected>

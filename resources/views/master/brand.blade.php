@@ -50,7 +50,7 @@
                             <td class="txt-center">{{ $iterator }}</td>
                             <td><span class="nowrap">{{ $val['nama_brand']}}</span></td>
                             <td>{{ $val['deskripsi']}}</td>
-                            <td class="txt-center">
+                            <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
@@ -102,7 +102,7 @@
                                 </div>
 
                             </td>
-                            <td class="txt-center">
+                            <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">

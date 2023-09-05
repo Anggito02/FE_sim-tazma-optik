@@ -48,7 +48,7 @@
                                 </div>
                             <td class="txt-center">{{ $iterator }}</td>
                             <td>{{ $val['color_name'] }}</td>
-                            <td class="txt-center">
+                            <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="txt-center">
+                            <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">

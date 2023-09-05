@@ -84,7 +84,7 @@
                             <td><span class="nowrap">{{ $vals['employee_name']}}</span></td>
                             <td><span class="nowrap">{{ $vals['nama_branch']}}</span></td>
                             <td><span class="nowrap">{{ $vals['alamat']}}</span></td>
-                            <td class="txt-center">
+                            <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
@@ -146,7 +146,7 @@
                                                                         <label for="InputGender"
                                                                             class="form-label">Employee Name</label>
                                                                         <select type="employee_name"
-                                                                            class="form-select form-control"
+                                                                            class="form-control js-example-basic-single"
                                                                             id="InputGender" name="employee_id_branch">
                                                                             @foreach ($employee as $val)
                                                                             <option value="" disabled selected hidden>{{$vals['employee_name']}}</option>
@@ -174,7 +174,7 @@
                                 </div>
 
                             </td>
-                            <td class="txt-center">
+                            <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">
