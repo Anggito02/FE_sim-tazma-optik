@@ -370,7 +370,7 @@
                         <form method="post" action="/register/add" enctype="multipart/form-data">
                             @csrf
                             @method("POST")
-                            <div class="row black-text">
+                            <!-- <div class="row black-text">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="InputUsername" class="form-label">Email</label>
@@ -396,31 +396,23 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputDepartment" class="form-label">Phone</label>
-                                        <div><input type="number" id="phone" name="phone" class="form-control">
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputPosition" class="form-label">Section</label>
-                                        <div><input type="text" id="section" name="section" class="form-control">
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputPlant" class="form-label">Group</label>
-                                        <div><input type="text" id="group" name="group" class="form-control"></div>
+                                        
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="">position</label>
-                                        <div><input type="text" id="position" name="position" class="form-control"></div>
+                                        
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputSection" class="form-label">Status</label>
-                                        <div><input type="text" id="status" name="status" class="form-control">
-                                        </div>
+                                        
 
                                     
 
@@ -452,31 +444,149 @@
 
 
                                     <div class="mb-3">
+                                        
+                                    </div>
+
+                                    <div class="mb-3">
+                                        
+                                    </div>
+
+                                    <div class="mb-3">
+                                        
+
+                                    </div>
+
+                                    <div class="mb-3">
+                                        
+                                    </div>
+
+                                    <div class="mb-3">
+                                        
+
+
+                                    <div class="mt-5 float-right">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+                                    <div>
+                                        <label for="InputUsername" class="form-label">Email</label>
+                                        <input type="email" id="username" name="email" class="form-control">
+                                    </div>
+
+                                    <div>
+                                        <label for="InputEmployee" class="form-label">Username</label>
+                                        <input type="text" id="username" name="username" class="form-control">
+                                    </div>
+
+                                    <div>
+                                        <label for="InputPassword" class="form-label">Password</label>
+                                        <input type="text" name="password" class="form-control" minlength="8"
+                                            maxlength="20">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+                                    <div>
+                                        <label for="Inputnik" class="form-label">NIK</label>
+                                        <input type="text" id="nik" name="nik" class="form-control">
+                                    </div>
+
+                                    <div>
+                                        <label for="InputEmployee" class="form-label">Name</label>
+                                        <input type="text" id="employee_name" name="employee_name" class="form-control">
+                                    </div>
+
+                                    <div>
+                                        <label for="InputPhoto" class="form-label">Photo</label>
+                                        <input type="file" id="photo" name="photo" class="form-control"
+                                            accept=".png, .jpg, .jpeg">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+                                    <div>
+                                        <label for="InputEmployee" class="form-label">Gender</label>
+                                        <select type="gender" name="gender" class="form-control" id="">
+                                            <option value="" disabled selected hidden>Choose...</option>
+                                            <option value="laki-laki">Laki-laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
                                         <label for="InputSection" class="form-label">Address</label>
-                                        <div><input type="text" id="address" name="address" class="form-control">
+                                        <input type="text" id="address" name="address" class="form-control">
                                     </div>
 
-                                    <div class="mb-3">
+                                    <div>
+                                        <label for="InputDepartment" class="form-label">Phone</label>
+                                        <input type="number" id="phone" name="phone" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+
+                                    <div>
                                         <label for="InputSection" class="form-label">Department</label>
-                                        <div><input type="text" id="department" name="department" class="form-control">
-                                        </div>
+                                        <input type="text" id="department" name="department" class="form-control">
                                     </div>
 
-                                    <div class="mb-3">
+                                    <div>
+                                        <label for="InputPosition" class="form-label">Section</label>
+                                        <input type="text" id="section" name="section" class="form-control">
+                                    </div>
+
+                                    <div>
+                                        <label for="">Position</label>
+                                        <input type="text" id="position" name="position" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+                                    <div>
                                         <label for="InputRole" class="form-label">Role</label>
                                         <input type="text" id="role" name="role" class="form-control">
-
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="InputSection" class="form-label">Domicile</label>
-                                        <div><input type="text" id="domicile" name="domicile" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
+                                    <div>
                                         <label for="InputPlant" class="form-label">Plant</label>
-                                        <div><input type="text" id="plant" name="plant" class="form-control"></div>
+                                        <input type="text" id="plant" name="plant" class="form-control">
+                                    </div>
+
+                                    <div>
+                                        <label for="InputSection" class="form-label">Status</label>
+                                        <input type="text" id="status" name="status" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+
+                                    <div>
+                                        <label for="InputPlant" class="form-label">Group</label>
+                                        <input type="text" id="group" name="group" class="form-control">
+                                    </div>
+
+                                    <div>
+                                        <label for="InputSection" class="form-label">Domicile</label>
+                                        <input type="text" id="domicile" name="domicile" class="form-control">
+                                    </div>
 
 
                                     <div class="mt-5 float-right">
@@ -484,6 +594,9 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
                         </form>
                     </div>
                 </div>
