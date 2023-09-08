@@ -32,7 +32,7 @@ class EmployeeController extends Controller
         $response = Http::withHeaders($headers)->get('http://localhost:8001/api/employee/all', $api_request);
 
         $employee = $response->json();
-
+        
         $user = GetUserInfo::getUserInfo();
 
         if ($employee['status'] == 'success'){
@@ -50,7 +50,7 @@ class EmployeeController extends Controller
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
-
+        //semua di tolower, symbol dihilanhin, whitespace ganti _
         $api_request = [
             'username' => $request->username,
             'nik' => $request->nik,

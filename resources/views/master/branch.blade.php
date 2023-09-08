@@ -145,9 +145,13 @@
                                                                     <div class="mb-3">
                                                                         <label for="InputGender"
                                                                             class="form-label">Employee Name</label>
+                                                                        <!-- <select class="form-control" name="" id="category">
+                                                                            <option value="">damas</option>
+                                                                            <option value="">toliso</option>
+                                                                        </select> -->
                                                                         <select type="employee_name"
-                                                                            class="form-control js-example-basic-single"
-                                                                            id="InputGender" name="employee_id_branch">
+                                                                            class="form-control select2"
+                                                                            name="employee_id_branch">
                                                                             @foreach ($employee as $val)
                                                                             <option value="" disabled selected hidden>{{$vals['employee_name']}}</option>
                                                                             <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
