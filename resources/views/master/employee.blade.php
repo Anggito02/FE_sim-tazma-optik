@@ -105,7 +105,7 @@
                             <th class="thead-text"><span class="nowrap">Position</span></th>
                             <th class="thead-text"><span class="nowrap">Role</span></th>
                             <th class="thead-text"><span class="nowrap">Plant</span></th>
-                            <th class="thead-text"><span class="nowrap">Status</span></th>
+                            <!-- <th class="thead-text"><span class="nowrap">Status</span></th> -->
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>

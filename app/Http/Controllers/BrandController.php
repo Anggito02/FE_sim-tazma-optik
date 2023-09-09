@@ -29,7 +29,7 @@ class BrandController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/brand/all', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/brand/all', $api_request);
 
         $brand = $response->json();
 
@@ -57,7 +57,7 @@ class BrandController extends Controller
             'deskripsi' => $request->deskripsi,
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/brand/add', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/brand/add', $api_request);
 
         $result = $response->json();
 
@@ -86,7 +86,7 @@ class BrandController extends Controller
         ];
         
 
-        $response = Http::withHeaders($headers)->put('http://localhost:8001/api/brand/edit', $api_request);
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/brand/edit', $api_request);
 
         $result = $response->json();
 
@@ -112,7 +112,7 @@ class BrandController extends Controller
             'id' => $request->id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/brand/delete', $api_request);
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/brand/delete', $api_request);
 
         $result = $response->json();
 

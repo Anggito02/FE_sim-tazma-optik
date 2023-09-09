@@ -28,7 +28,7 @@ class VendorsController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/vendor/all', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
 
         $vendor = $response->json();
 
@@ -64,7 +64,7 @@ class VendorsController extends Controller
             'status_blacklist' => $request->status_vendor
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/vendor/add', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/vendor/add', $api_request);
 
         $result = $response->json();
 
@@ -100,7 +100,7 @@ class VendorsController extends Controller
             'status_blacklist' => $request->status_vendor
         ];
 
-        $response = Http::withHeaders($headers)->put('http://localhost:8001/api/vendor/edit', $api_request);
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/vendor/edit', $api_request);
 
         $result = $response->json();
 
@@ -126,7 +126,7 @@ class VendorsController extends Controller
             'id' => $request->id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/vendor/delete', $api_request);
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/vendor/delete', $api_request);
         
         $result = $response->json();
 
