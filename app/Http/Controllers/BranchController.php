@@ -29,7 +29,7 @@ class BranchController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get('http://localhost:8001/api/branchWith/employee/all', $api_request);
-        $response_sup = Http::withHeaders($headers)->get('http://localhost:8001/api/employee/all', $api_request);
+        $response_sup = Http::withHeaders($headers)->get( $_ENV['BACKEND_API_ENDPOINT].'/employee/all , $api_request);
 
         $branch = $response->json();
         $employee = $response_sup->json();
@@ -60,7 +60,7 @@ class BranchController extends Controller
             'employee_id_pic_branch' => $request->employee_id_branch
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/branch/add', $api_request);
+        $response = Http::withHeaders($headers)->post( $_ENV['BACKEND_API_ENDPOINT].'/branch/add , $api_request);
 
         $result = $response->json();
 
@@ -90,7 +90,7 @@ class BranchController extends Controller
             'employee_id_pic_branch' => $request->employee_id_branch
         ];
 
-        $response = Http::withHeaders($headers)->put('http://localhost:8001/api/branch/edit', $api_request);
+        $response = Http::withHeaders($headers)->put( $_ENV['BACKEND_API_ENDPOINT].'/branch/edit , $api_request);
 
         $result = $response->json();
 
@@ -116,7 +116,7 @@ class BranchController extends Controller
             'id' => $request->branch_id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/branch/delete', $api_request);
+        $response = Http::withHeaders($headers)->delete( $_ENV['BACKEND_API_ENDPOINT].'/branch/delete , $api_request);
         
         $result = $response->json();
 
