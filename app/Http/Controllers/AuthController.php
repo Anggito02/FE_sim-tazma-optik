@@ -48,7 +48,7 @@ class AuthController extends Controller{
             'Authorization' => 'Bearer '.$token
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/logout');
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT].'/logout);
 
         $result = $response->json();
 
@@ -109,7 +109,7 @@ class AuthController extends Controller{
 
         $response = Http::withHeaders($headers)
             ->attach('photo', $request->file('photo'))
-            ->post('http://localhost:8001/api/register', $api_request);
+            ->post( $_ENV['BACKEND_API_ENDPOINT].'/register, $api_request);
         $result = $response->json();
         dd($result);
         if($result['status'] == 'success'){
