@@ -12,7 +12,7 @@ use App\Utils\GetUserInfo;
 
 class ColorController extends Controller
 {
-    public function getAllColor(Request $request){
+    public function getAllColor(){
         $token = $_COOKIE['token'];
 
         $page = 1;
@@ -28,14 +28,15 @@ class ColorController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/color/all', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/color/all', $api_request);
+        
 
         $color = $response->json();
 
         $user = GetUserInfo::getUserInfo();
 
         if ($color['status'] == 'success'){
-            return view('master.warna', ['color' => $color['data'], 'data' => $user['data']]);
+            return view('master.color', ['color' => $color['data'], 'data' => $user['data']]);
 
         }else{
             return view('/dashboard');
@@ -51,20 +52,22 @@ class ColorController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
 
+        $color_name = $request->color_name;
+
         $api_request = [
-            'color_name' => $request->color_name
+            'color_name' => $color_name
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/color/add', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/color/add', $api_request);
 
         $result = $response->json();
 
         if($result['status'] == 'success'){
-            toastr()->info('Color added successfully!', 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            toastr()->info('Color '. $color_name .' added successfully!', 'Color', ['timeOut' => 3000]);
+            return redirect('/color');
         }else{
             toastr()->error($result['message'], 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }
     }
 
@@ -77,21 +80,22 @@ class ColorController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
 
+        $color_name = $request->color_name;
+
         $api_request = [
-            'id' => $request->id,
-            'color_name' => $request->color_name
+            'id' => $request->color_id,
+            'color_name' => $color_name
         ];
 
-        $response = Http::withHeaders($headers)->put('http://localhost:8001/api/color/edit', $api_request);
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/color/edit', $api_request);
 
         $result = $response->json();
-
         if($result['status'] == 'success'){
-            toastr()->info('Color updated successfully!', 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            toastr()->info('Color '. $color_name .' updated successfully!', 'Color', ['timeOut' => 3000]);
+            return redirect('/color');
         }else{
             toastr()->error($result['message'], 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }
     }
 
@@ -105,19 +109,19 @@ class ColorController extends Controller
         ];
 
         $api_request = [
-            'id' => $request->id
+            'id' => $request->color_id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/color/delete', $api_request);
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/color/delete', $api_request);
 
         $result = $response->json();
 
         if($result['status'] == 'success'){
             toastr()->info('Color deleted successfully!', 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }else{
             toastr()->error($result['message'], 'Color', ['timeOut' => 3000]);
-            return redirect('/warna');
+            return redirect('/color');
         }
     }
 

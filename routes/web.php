@@ -4,8 +4,15 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ColorController;
-use Illuminate\Routing\ViewController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ErrorPageController;
+use App\Http\Controllers\FrameController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LensController;
+use App\Http\Controllers\VendorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,43 +33,87 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login');
     Route::get('/dashboard', 'getUserInfo')->middleware('isTokenValid');
     Route::get('/logout', 'logout')->middleware('isTokenValid');
+    Route::post('/register/add', 'register')->middleware('isTokenValid');
 });
 
 Route::controller(ColorController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/warna','getAllColor');
+    Route::get('/color','getAllColor');
     Route::post('/color/add', 'addColor');
     Route::put('/color/edit', 'updateColor');
     Route::delete('/color/delete', 'deleteColor');
 });
 
+Route::controller(BranchController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch','getAllBranch');
+    Route::post('/branch/add', 'addBranch');
+    Route::put('/branch/edit', 'updateBranch');
+    Route::delete('/branch/delete', 'deleteBranch');
+});
+
+Route::controller(BrandController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/brand','getAllBrand');
+    Route::post('/brand/add', 'addBrand');
+    Route::put('/brand/edit', 'updateBrand');
+    Route::delete('/brand/delete', 'deleteBrand');
+});
+
+
+Route::controller(EmployeeController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/employee','getAllEmployee');
+    Route::post('/employee/add', 'addEmployee');
+    Route::put('/employee/edit', 'updateEmployee');
+    Route::delete('/employee/delete', 'deleteEmployee');
+});
+
+Route::controller(FrameController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/frame-category','getAllFrameCategory');
+    Route::post('/frame-category/add', 'addFrameCategory');
+    Route::put('/frame-category/edit', 'updateFrameCategory');
+    Route::delete('/frame-category/delete', 'deleteFrameCategory');
+});
+
+Route::controller(LensController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/lens-category','getAllLensCategory');
+    Route::post('/lens-category/add', 'addLensCategory');
+    Route::put('/lens-category/edit', 'updateLensCategory');
+    Route::delete('/lens-category/delete', 'deleteLensCategory');
+});
+
+Route::controller(IndexController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/index','getAllIndexCategory');
+    Route::post('/index/add', 'addIndexCategory');
+    Route::put('/index/edit', 'updateIndexCategory');
+    Route::delete('/index/delete', 'deleteIndexCategory');
+});
+
+Route::controller(VendorsController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/vendors','getAllVendor');
+    Route::post('/vendors/add', 'addVendor');
+    Route::put('/vendors/edit', 'updateVendor');
+    Route::delete('/vendors/delete', 'deleteVendor');
+});
+
+// Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
+//     Route::get('/404','PageError404');
+// });
+
 Route::group([], function(){
     Route::get('/login', function(){
         return view('login');
-    })->middleware('isLoggedIn');;
-
-    // Route::get('/warna', function () {
-    //     return view('master.warna');
-    // });
+    });
 
     Route::get('/user', function () {
         return view('master.user');
     });
 
-    Route::get('/employee', function () {
-        return view('master.employee');
+    Route::get('/404', function () {
+        return view('error_page.404');
     });
 
-    Route::get('/vendors', function () {
-        return view('master.vendor');
+    Route::get('/505', function () {
+        return view('error_page.505');
     });
 
-    Route::get('/brand', function () {
-        return view('master.brand');
-    });
-
-    Route::get('/branch', function () {
-        return view('master.branch');
-    });
 });
 
 

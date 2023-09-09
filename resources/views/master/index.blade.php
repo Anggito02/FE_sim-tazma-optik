@@ -10,19 +10,18 @@
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
     <!-- DataTales Example -->
-
     <div class="card shadow mb-4">
         <div class="card-body">
             <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
                 data-target="#exampleModalCenter">
-                New Brand
+                New Index
             </button>
         </div>
     </div>
 
     <div class="card shadow mb-4">
         <!-- <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">BRAND SHEET</h6>
+            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
         </div> -->
 
         <div class="card-body">
@@ -30,26 +29,25 @@
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr>
-                            <th class="thead-text">No</th>
-                            <th class="thead-text">Brand</th>
-                            <th class="thead-text">Deskripsi</th>
-                            <th class="thead-text">Edit</th>
-                            <th class="thead-text">Delete</th>
+                            <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text"><span class="nowrap">Nilai Index</span></th>
+                            <th class="thead-text"><span class="nowrap">Detail</span></th>
+                            <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <div class="d-none">
                             {{ $iterator = 1 }}
                         </div>
-                        @foreach ($brand as $val)
-                        <tr>
-                            <div class="d-none">
-                                {{ $id = $val['id'] }}
-                            </div>
+                        @foreach ($index as $val)
+                            <tr>
+                                <input type="hidden" id="id" name="index_id" class="form-control"
+                                    value="{{ $val['id'] }}">
+                                <div class="d-none">
+                                  {{ $id = $val['id'] }}
+                                </div>
                             <td class="txt-center">{{ $iterator }}</td>
-                            <td><span class="nowrap">{{ ucwords($val['nama_brand'])}}</span></td>
-                            <td>{{ $val['deskripsi']}}</td>
+                            <td class="txt-right">{{ $val['value'] }}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
@@ -57,35 +55,29 @@
                                     <i class="fa fa-edit"></i>
                                 </button>
 
-                                <!-- Modal Edit-->
+                                <!-- Modal Update Data -->
                                 <div class="modal fade" id="exampleModalCenterEdit{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit User</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Index</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post" action="/brand/edit">
+                                                <form method="post" action="/index/edit">
                                                     @csrf
                                                     @method("put")
 
-                                                    <input type="hidden" id="id" name="brand_id"
+                                                    <div class="mb-3">
+                                                        <input type="hidden" id="id" name="index_id"
                                                             class="form-control" value="{{ $val['id'] }}">
-                                                    <div class="mb-3">
-                                                        <label for="InputBrand" class="form-label">Brand</label>
-                                                        <input type="text" id="nama_brand" name="nama_brand"
-                                                            class="form-control" value="{{ $val['nama_brand'] }}">
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label for="InputDeskripsi" class="form-label">Deskripsi</label>
-                                                        <input type="text" id="deskripsi" name="deskripsi"
-                                                            class="form-control" value="{{ $val['deskripsi'] }}">
+                                                        <label for="InputWarna" class="form-label">Nilai index</label>
+                                                        <input type="number" step="0.01" id="id" name="index_size"
+                                                            class="form-control" value="{{ $val['value'] }}">
                                                     </div>
 
                                                     <div class="mb-3 float-right">
@@ -100,7 +92,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </td>
                             <td>
                                 <!-- Button trigger modal Delete -->
@@ -109,13 +100,13 @@
                                     <i class="fa fa-trash"></i>
                                 </button>
 
-                                <!-- Modal Delete-->
+                                <!-- Modal Delete Data -->
                                 <div class="modal fade" id="exampleModalCenterDelete{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Index</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -127,11 +118,12 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <form method="post" action="/brand/delete">
+                                                <form method="post" action="/index/delete">
                                                     @csrf
                                                     @method("DELETE")
-                                                    <input type="hidden" id="id" name="id" class="form-control"
-                                                        value="{{ $id }}">
+
+                                                    <input type="hidden" id="id" name="index_id" class="form-control"
+                                                        value="{{ $val['id'] }}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>
@@ -139,11 +131,10 @@
                                     </div>
                                 </div>
                             </td>
-
-                        </tr>
-                        <div class="d-none">
-                            {{ $iterator++ }}
-                        </div>
+                            </tr>
+                            <div class="d-none">
+                                {{ $iterator = $iterator + 1 }}
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -152,30 +143,26 @@
     </div>
 
 </div>
-<!-- Modal add-->
+
+<!-- Modal Add Data-->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Brand</h5>
+                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Index</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/brand/add">
+                <form method="post" action="/index/add">
                     @csrf
                     @method("POST")
-                    
-                    <div class="mb-3 black-text">
-                        <label for="InputBrand" class="form-label">Brand</label>
-                        <input type="text" id="nama_brand" name="nama_brand" class="form-control">
-                    </div>
 
                     <div class="mb-3 black-text">
-                        <label for="InputDeskripsi" class="form-label">Deskripsi</label>
-                        <input type="text" id="deskripsi" name="deskripsi" class="form-control">
+                        <label for="InputWarna" class="form-label">Nilai index</label>
+                        <input type="number" step="0.01" id="index_size" name="index_size" class="form-control">
                     </div>
 
                     <button type="submit" class="btn btn-success float-right">Submit</button>

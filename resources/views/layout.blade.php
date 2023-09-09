@@ -21,8 +21,13 @@
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/support-index.css')}}" rel="stylesheet">
 
-    <!-- Custom styles for table page -->
+    <!-- datatables bootstrap 4 -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <!-- <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet"> -->
 
 </head>
 
@@ -71,11 +76,14 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Master:</h6>
                         <a class="collapse-item" href="/user">Users Information</a>
-                        <a class="collapse-item" href="{{ url('/employee')}}">Employees Information</a>
-                        <a class="collapse-item" href="/warna">Colors Information</a>
-                        <a class="collapse-item" href="{{ url('/vendors')}}">Vendors Information</a>
-                        <a class="collapse-item" href="{{ url('/brand')}}">Brands Information</a>
-                        <a class="collapse-item" href="{{ url('/branch')}}">Branches Information</a>
+                        <a class="collapse-item" href="/employee">Employees Information</a>
+                        <a class="collapse-item" href="/color">Colors Information</a>
+                        <a class="collapse-item" href="/vendors">Vendors Information</a>
+                        <a class="collapse-item" href="/brand">Brands Information</a>
+                        <a class="collapse-item" href="/branch">Branches Information</a>
+                        <a class="collapse-item" href="/lens-category">Lens Information</a>
+                        <a class="collapse-item" href="/frame-category">Frame Information</a>
+                        <a class="collapse-item" href="/index">Index Information</a>
                     </div>
                 </div>
             </li>
@@ -161,16 +169,39 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <div class="float-left black-text">
+                        @if (url('/dashboard') == url()->current())
+                            <h5>DASHBOARD</h5>
+                        @elseif (url('/user') == url()->current())
+                            <h5>USER SHEET INFORMATION</h5>
+                        @elseif (url('/vendors') == url()->current())
+                            <h5>VENDOR SHEET INFORMATION</h5>
+                        @elseif (url('/color') == url()->current())
+                            <h5>COLOUR SHEET INFORMATION</h5>
+                        @elseif ( url('/employee') == url()->current())
+                            <h5>EMPLOYEE SHEET INFORMATION</h5>
+                        @elseif (url('/brand') == url()->current())
+                            <h5>BRAND SHEET INFORMATION</h5>
+                        @elseif (url('/branch') == url()->current())
+                            <h5>BRANCH SHEET INFORMATION</h5>
+                        @elseif (url('/lens-category') == url()->current())
+                            <h5>LENS CATEGORY SHEET INFORMATION</h5>
+                        @elseif (url('/frame-category') == url()->current())
+                            <h5>FRAME CATEGORY SHEET INFORMATION</h5>
+                        @elseif (url('/index') == url()->current())
+                            <h5>INDEX SHEET INFORMATION</h5>
 
+                        @endif
+                    </div>
                     <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
+                    {{-- <form class="form-inline">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-                    </form>
+                    </form> --}}
 
                     <!-- Topbar Search -->
-                    <form
+                    {{-- <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -181,13 +212,13 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
+                        {{-- <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
@@ -209,15 +240,15 @@
                                     </div>
                                 </form>
                             </div>
-                        </li>
-
-                        {{-- <div class="topbar-divider d-none d-sm-block"></div> --}}
+                        </li> --}}
+                        {{-- <div class='d-none d-sm-block'><span>asdsadasd</span></div>
+                        <div class="topbar-divider d-none d-sm-block"></div> --}}
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $data['employee_name'] }}</span>
+                                <span class="mr-2 d-none d-lg-inline black-text small">{{ $data['employee_name'] }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -301,6 +332,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js\sb-admin-2.min.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js\support.js')}}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

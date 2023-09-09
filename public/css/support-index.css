@@ -17,3 +17,23 @@
 .bold-text{
     font-weight: 900;
 }
+
+.txt-green {
+    color: #00ff00;
+}
+
+.txt-red {
+    color: #ff0000;
+}
+
+.hidden-option{
+    display: none;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.txt-right {
+    text-align: right;
+}

@@ -24,8 +24,9 @@ class AuthController extends Controller{
             'password' => $password
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/login', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
         $data = $response->json();
+        
 
         if ($data['status'] == 'success'){
             setcookie('token', $data['data']['token'], time()+60*60*24, '/', '', false, true);
@@ -34,6 +35,7 @@ class AuthController extends Controller{
 
             return redirect('/dashboard');
         }else{
+            toastr()->error('Invalid email or password!', 'Authentication', ['timeOut' => 3000]);
             return view('/login', ['data' => $data['message']]);
         }
     }
@@ -46,7 +48,7 @@ class AuthController extends Controller{
             'Authorization' => 'Bearer '.$token
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/logout');
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/logout');
 
         $result = $response->json();
 
@@ -63,5 +65,88 @@ class AuthController extends Controller{
         $user = GetUserInfo::getUserInfo();
 
         return view('dashboard', ['data' => $user['data']]);
+    }
+    
+    public function register(Request $request){
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+    
+        $api_request = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'username' => $request->username,
+            'nik' => $request->nik,
+            'employee_name' => $request->employee_name,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'department' => $request->department,
+            'section' => $request->section,
+            'position' => $request->position,
+            'role' => $request->role,
+            'plant' => $request->plant,
+            'status' => $request->status,
+            'group' => $request->group,
+            'domicile' => $request->domicile
+        ];
+    
+        $response = Http::withHeaders($headers)
+            ->attach('photo', $request->file('photo'))
+            ->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
+
+        // $token = $_COOKIE['token'];
+        // $headers = [
+        //     'Accept' => 'application\json',
+        //     'Authorization' => 'Bearer '.$token
+        // ];
+        // //semua di tolower, symbol dihilanhin, whitespace ganti _
+        // $api_request = [
+        //     'email' => $request->email,
+        //     'password' => $request->password,
+        //     'username' => $request->username,
+        //     'nik' => $request->nik,
+        //     'employee_name' => $request->employee_name,
+        //     'photo' => $request->photo,
+        //     'gender' => $request->gender,
+        //     'address' => $request->address,
+        //     'phone' => $request->phone,
+        //     'department' => $request->department,
+        //     'section' => $request->section,
+        //     'position' => $request->position,
+        //     'role' => $request->role,
+        //     'plant' => $request->plant,
+        //     'status' => $request->status,
+        //     'group' => $request->group,
+        //     'domicile' => $request->domicile
+            
+        //     // 'username' => $request->username,
+        //     // 'nik' => $request->nik,
+        //     // 'photo' => $request->photo,
+        //     // 'employee_name' => $request->employee_name,
+        //     // 'department' => $request->department,
+        //     // 'section' => $request->section,
+        //     // 'position' => $request->position,
+        //     // 'role' => $request->role,
+        //     // 'plant' => $request->plant,
+        //     // 'status' => $request->status
+        // ];
+
+
+        // $response = Http::withHeaders($headers)
+        //     ->attach('photo', $request->file('photo'))
+        //     ->post('http://localhost:8001/api/register', $api_request);
+        $result = $response->json();
+        dd($result);
+        if($result['status'] == 'success'){
+            toastr()->info('Employee added successfully!', 'Employee', ['timeOut' => 3000]);
+            return redirect('/employee');
+        }else{
+            toastr()->error($result['message'], 'Employee', ['timeOut' => 3000]);
+            return redirect('/employee');
+        }
+         
     }
 }

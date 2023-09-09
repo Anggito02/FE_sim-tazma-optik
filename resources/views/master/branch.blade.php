@@ -34,10 +34,11 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn-sm btn-primary bold-text mt-4" ><i class="fa-solid fa-magnifying-glass"></i>
+                    <button type="button" class="btn-sm btn-primary bold-text mt-4"><i
+                            class="fa-solid fa-magnifying-glass"></i>
                         Search
                     </button>
-                    <button type="button" class="btn-sm btn-warning bold-text mt-4" ><i class="fa-solid fa-eye"></i>
+                    <button type="button" class="btn-sm btn-warning bold-text mt-4"><i class="fa-solid fa-eye"></i>
                         Show All
                     </button>
                     <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
@@ -57,44 +58,41 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-color">
+                    <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text"><span class="nowrap">Kode</span></th>
+                            <th class="thead-text"><span class="nowrap">Nama PIC</span></th>
                             <th class="thead-text"><span class="nowrap">Nama</span></th>
                             <th class="thead-text"><span class="nowrap">Alamat</span></th>
-                            <th class="thead-text"><span class="nowrap">Kode</span></th>
-                            <th class="thead-text"><span class="nowrap">No Telp Cabang</span></th>
-                            <th class="thead-text"><span class="nowrap">PIC</span></th>
-                            <th class="thead-text"><span class="nowrap">No Telp PIC</span></th>
-                            <th class="thead-text"><span class="nowrap">Init Supply</span></th>
-                            <th class="thead-text"><span class="nowrap">Checkin Supply</span></th>
-                            <th class="thead-text"><span class="nowrap">Checkout Supply</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        <div class="d-none">
+                            {{ $iterator = 1 }}
+                        </div>
+                        @foreach ($branch as $vals)
                         <tr>
-                            <td>1</td>
-                            <td>Anggito</td>
-                            <td>Jl. Disitu Boleh</td>
-                            <td>SI-155-25-40</td>
-                            <td>456778903578</td>
-                            <td>Anandito</td>
-                            <td>432187654321</td>
-                            <td>3500</td>
-                            <td>1500</td>
-                            <td>500</td>
+                            <div class="d-none">
+                                {{ $id = $vals['id'] }}
+                            </div>
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td><span class="nowrap">{{ $vals['kode_branch']}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['employee_name'])}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['nama_branch'])}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['alamat'])}}</span></td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterEdit{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                         <div class="modal-content">
@@ -108,80 +106,57 @@
                                             <div class="modal-body">
                                                 <div class="modal-body">
                                                     <div class="container-fluid">
-                                                        <form method="post">
+                                                        <form method="post" action="/branch/edit">
                                                             @csrf
                                                             @method("put")
+
                                                             <div class="row">
+                                                                <input type="hidden" id="id_branch " name="id_branch"
+                                                                    class="form-control" value="{{ $id }}">
                                                                 <div class="col">
-                                                                    <div class="mb-3">
-                                                                        <label for="InputNama"
-                                                                            class="form-label">Nama</label>
-                                                                        <input type="text" id="InputNama" name="Nama"
-                                                                            class="form-control">
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputAlamatss="
-                                                                            form-label">Alamat</label>
-                                                                        <input type="text" id="InputAlamate=" Alamat"
-                                                                            class="form-control">
-                                                                    </div>
-
                                                                     <div class="mb-3">
                                                                         <label for="InputKode"
                                                                             class="form-label">Kode</label>
-                                                                        <div><input type="text" id="InputKode"
-                                                                                name="Kode" class="form-control"></div>
+                                                                        <input type="text" id="kode_branch"
+                                                                            name="kode_branch" class="form-control"
+                                                                            value="{{ $vals['kode_branch'] }}">
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputTelpCabang"
-                                                                            class="form-label">No Telp Cabang</label>
-                                                                        <div><input type="text" id="InputTelpCabang"
-                                                                                name="TelpCabang" class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputPIC"
-                                                                            class="form-label">PIC</label>
-                                                                        <div><input type="text" id="InputPIC" name="PIC"
-                                                                                class="form-control">
-                                                                        </div>
+                                                                        <label for="InputNama"
+                                                                            class="form-label">Nama</label>
+                                                                        <input type="text" id="nama_branch"
+                                                                            name="nama_branch" class="form-control"
+                                                                            value="{{ $vals['nama_branch'] }}">
                                                                     </div>
 
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="mb-3">
-                                                                        <label for="InputTelpPIC" class="form-label">No
-                                                                            Telp PIC</label>
-                                                                        <div><input type="text" id="InputTelpPIC"
-                                                                                name="TelpPIC" class="form-control">
+                                                                        <label for="InputAlamat"
+                                                                            class="form-label">Alamat</label>
+                                                                        <div><input type="text" id="alamat_branch"
+                                                                                name="alamat_branch"
+                                                                                class="form-control"
+                                                                                value="{{ $vals['alamat'] }}">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputInitSupply"
-                                                                            class="form-label">Init Supply</label>
-                                                                        <div><input type="text" id="InputInitSupply"
-                                                                                name="InitSupply" class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputCheckInSupply"
-                                                                            class="form-label">Checkin Supply</label>
-                                                                        <div><input type="text" id="InputCheckInSupply"
-                                                                                name="CheckInSupply"
-                                                                                class="form-control"></div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputCheckOutSupply"
-                                                                            class="form-label">Checkout Supply</label>
-                                                                        <div><input type="text" id="InputCheckOutSupply"
-                                                                                name="CheckOutSupply"
-                                                                                class="form-control"></div>
+                                                                        <label for="InputGender"
+                                                                            class="form-label">Employee Name</label>
+                                                                        <!-- <select class="form-control" name="" id="category">
+                                                                            <option value="">damas</option>
+                                                                            <option value="">toliso</option>
+                                                                        </select> -->
+                                                                        <select type="employee_name"
+                                                                            class="form-control select2"
+                                                                            name="employee_id_branch">
+                                                                            @foreach ($employee as $val)
+                                                                            <option value="" disabled selected hidden>{{$vals['employee_name']}}</option>
+                                                                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
+                                                                            @endforeach
+                                                                        </select>
                                                                     </div>
 
                                                                     <div class="mb-3 float-right">
@@ -206,17 +181,18 @@
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterDelete{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Branch
+                                                </h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -226,9 +202,15 @@
                                                 <p>Are you sure you want to delete?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">No</button>
-                                                <button type="button" class="btn btn-danger">Yes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No
+                                                </button>
+                                                <form method="post" action="/branch/delete">
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <input type="hidden" id="id" name="branch_id"
+                                                        class="form-control" value="{{ $id }}">
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -236,6 +218,11 @@
                             </td>
 
                         </tr>
+                        <div class="d-none">
+                            {{ $iterator = $iterator + 1}}
+                        </div>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -258,61 +245,40 @@
             <div class="modal-body">
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form method="post">
+                        <form method="POST" action="/branch/add">
                             @csrf
+                            @method("POST")
                             <div class="row black-text">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="InputNama" class="form-label">Nama</label>
-                                        <input type="text" id="InputNama" name="Nama" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputAlamatss=" form-label">Alamat</label>
-                                        <input type="text" id="InputAlamate=" Alamat" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
                                         <label for="InputKode" class="form-label">Kode</label>
-                                        <div><input type="text" id="InputKode" name="Kode" class="form-control"></div>
+                                        <input type="text" id="kode_branch" name="kode_branch" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputTelpCabang" class="form-label">No Telp Cabang</label>
-                                        <div><input type="text" id="InputTelpCabang" name="TelpCabang"
-                                                class="form-control"></div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputPIC" class="form-label">PIC</label>
-                                        <div><input type="text" id="InputPIC" name="PIC" class="form-control">
-                                        </div>
+                                        <label for="InputNama" class="form-label">Nama</label>
+                                        <input type="text" id="nama_branch" name="nama_branch" class="form-control">
                                     </div>
 
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="InputTelpPIC" class="form-label">No Telp PIC</label>
-                                        <div><input type="text" id="InputTelpPIC" name="TelpPIC" class="form-control">
+                                        <label for="InputAlamat" class="form-label">Alamat</label>
+                                        <div>
+                                            <input type="text" id="alamat_branch" name="alamat_branch"
+                                            class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputInitSupply" class="form-label">Init Supply</label>
-                                        <div><input type="text" id="InputInitSupply" name="InitSupply"
-                                                class="form-control"></div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputCheckInSupply" class="form-label">Checkin Supply</label>
-                                        <div><input type="text" id="InputCheckInSupply" name="CheckInSupply"
-                                                class="form-control"></div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputCheckOutSupply" class="form-label">Checkout Supply</label>
-                                        <div><input type="text" id="InputCheckOutSupply" name="CheckOutSupply"
-                                                class="form-control"></div>
+                                        <label for="InputGender" class="form-label">Employee Name</label>
+                                        <select type="employee_name" class="form-select form-control" id="InputGender"
+                                            name="employee_id_branch">
+                                            @foreach ($employee as $val)
+                                            <option value="" disabled selected hidden>Choose...</option>
+                                            <option value="{{$val['id']}}" name="employee_id_branch">{{$val['employee_name']}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="mb-3 float-right">
