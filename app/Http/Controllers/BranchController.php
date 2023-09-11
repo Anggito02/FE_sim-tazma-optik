@@ -37,7 +37,11 @@ class BranchController extends Controller
         $user = GetUserInfo::getUserInfo();
 
         if ($branch['status'] == 'success'){
-            return view('master.branch', ['branch' => $branch['data'], 'data' => $user['data'], 'employee' => $employee['data']]);
+            return view('master.branch', [
+                'branch' => $branch['data'],
+                'data' => $user['data'],
+                'employee' => $employee['data']
+            ]);
 
         }else{
             return view('/dashboard');
@@ -117,7 +121,7 @@ class BranchController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/branch/delete', $api_request);
-        
+
         $result = $response->json();
 
         if($result['status'] == 'success'){
