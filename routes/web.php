@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CoaController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ErrorPageController;
@@ -91,6 +92,13 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
     Route::post('/vendors/add', 'addVendor');
     Route::put('/vendors/edit', 'updateVendor');
     Route::delete('/vendors/delete', 'deleteVendor');
+});
+
+Route::controller(CoaController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/coa','getAllCoa');
+    Route::post('/coa/add', 'addCoa');
+    Route::put('/coa/edit', 'updateCoa');
+    Route::delete('/coa/delete', 'deleteCoa');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
