@@ -386,9 +386,9 @@
                                         <label for="InputNik" class="form-label">Employee Name</label>
                                         <input type="text" id="employee_name" name="employee_name" class="form-control">
                                     </div>
-                                    
-                    
-                                    
+
+
+
                                     <div class="mb-3">
                                         <label for="InputPhoto" class="form-label">Photo</label>
                                         <div><input type="file" id="photo" name="photo" class="form-control" accept=".png, .jpg, .jpeg">
@@ -396,25 +396,25 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        
+
                                     </div>
 
                                     <div class="mb-3">
-                                        
+
                                     </div>
 
                                     <div class="mb-3">
-                                        
+
                                     </div>
 
                                     <div class="mb-3">
-                                        
+
                                     </div>
 
                                     <div class="mb-3">
-                                        
 
-                                    
+
+
 
                                 </div>
                                 <div class="col">
@@ -428,9 +428,9 @@
                                         <label for="InputNik" class="form-label">NIK</label>
                                         <input type="number" id="nik" name="nik" class="form-control">
                                     </div>
-                                    
 
-                
+
+
 
 
                                     <div class="mb-3">
@@ -444,24 +444,24 @@
 
 
                                     <div class="mb-3">
-                                        
-                                    </div>
-
-                                    <div class="mb-3">
-                                        
-                                    </div>
-
-                                    <div class="mb-3">
-                                        
 
                                     </div>
 
                                     <div class="mb-3">
-                                        
+
                                     </div>
 
                                     <div class="mb-3">
-                                        
+
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
 
 
                                     <div class="mt-5 float-right">
@@ -556,12 +556,12 @@
                                             maxlength="20">
                                     </div>
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
 
                                         <label for="InputPhoto" class="form-label">Photo</label>
                                         <input type="file" id="photo" name="photo" class="form-control"
                                             accept=".png, .jpg, .jpeg">
-                                    </div>
+                                    </div> --}}
 
                                     <div class="mb-3">
 
@@ -591,15 +591,15 @@
                             <!-- <div class="row black-text">
                                 <div class="col d-flex justify-content-between">
                                     <div>
-                                        
-                                    </div>
-
-                                    <div>
 
                                     </div>
 
                                     <div>
-                                        
+
+                                    </div>
+
+                                    <div>
+
                                     </div>
                                 </div>
                             </div> -->

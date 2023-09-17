@@ -42,7 +42,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-icon">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-glasses"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">TAZMA OPTIK</div>
             </a>
@@ -69,13 +69,12 @@
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fa-solid fa-database"></i>
                     <span>Master Module</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Master:</h6>
-                        <!-- <a class="collapse-item" href="/user">Users Information</a> -->
+                        <h6 class="collapse-header">Master Sheet:</h6>
                         <a class="collapse-item" href="/employee">Employees Information</a>
                         <a class="collapse-item" href="/color">Colors Information</a>
                         <a class="collapse-item" href="/vendors">Vendors Information</a>
@@ -92,17 +91,19 @@
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <i class="fa-solid fa-cart-flatbed-suitcase"></i>
+                    <span>Purchase Module</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <h6 class="collapse-header">Purchase Sheet:</h6>
+                        <a class="collapse-item" href="/preorder">PO (Pre-Order)</a>
+                        <a class="collapse-item" href="">RO (Receive Order)</a>
+                        <a class="collapse-item" href="">Inventory Information</a>
+                        <a class="collapse-item" href="">Invoice Information</a>
+                        <a class="collapse-item" href="">QR Code Generator</a>
+                        <a class="collapse-item" href="">Monitoring Purchase</a>
                     </div>
                 </div>
             </li>
@@ -190,6 +191,8 @@
                             <h5>FRAME CATEGORY SHEET INFORMATION</h5>
                         @elseif (url('/index') == url()->current())
                             <h5>INDEX SHEET INFORMATION</h5>
+                        @elseif (url('/preorder') == url()->current())
+                            <h5>PRE-ORDER SHEET INFORMATION</h5>
 
                         @endif
                     </div>
@@ -248,7 +251,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline black-text small">{{ $data['employee_name'] }}</span>
+                                <span class="mr-2 d-none d-lg-inline black-text small">damas</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
