@@ -98,7 +98,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Purchase Sheet:</h6>
-                        <a class="collapse-item" href="">PO (Pre-Order)</a>
+                        <a class="collapse-item" href="/preorder">PO (Pre-Order)</a>
                         <a class="collapse-item" href="">RO (Receive Order)</a>
                         <a class="collapse-item" href="">Inventory Information</a>
                         <a class="collapse-item" href="">Invoice Information</a>
@@ -191,6 +191,8 @@
                             <h5>FRAME CATEGORY SHEET INFORMATION</h5>
                         @elseif (url('/index') == url()->current())
                             <h5>INDEX SHEET INFORMATION</h5>
+                        @elseif (url('/preorder') == url()->current())
+                            <h5>PRE-ORDER SHEET INFORMATION</h5>
 
                         @endif
                     </div>
@@ -249,7 +251,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline black-text small">{{ $data['employee_name'] }}</span>
+                                <span class="mr-2 d-none d-lg-inline black-text small">damas</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>

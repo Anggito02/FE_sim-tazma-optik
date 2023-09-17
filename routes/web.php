@@ -93,6 +93,7 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
     Route::delete('/vendors/delete', 'deleteVendor');
 });
 
+
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
 // });
@@ -112,6 +113,10 @@ Route::group([], function(){
 
     Route::get('/505', function () {
         return view('error_page.505');
+    });
+
+    Route::get('/preorder', function () {
+        return view('master.preorder');
     });
 
 });
