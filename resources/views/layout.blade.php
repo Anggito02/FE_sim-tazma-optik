@@ -99,7 +99,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Purchase Sheet:</h6>
                         <a class="collapse-item" href="/preorder">PO (Pre-Order)</a>
-                        <a class="collapse-item" href="">RO (Receive Order)</a>
+                        <a class="collapse-item" href="/receiveorder">RO (Receive Order)</a>
                         <a class="collapse-item" href="">Inventory Information</a>
                         <a class="collapse-item" href="">Invoice Information</a>
                         <a class="collapse-item" href="">QR Code Generator</a>
@@ -193,6 +193,8 @@
                             <h5>INDEX SHEET INFORMATION</h5>
                         @elseif (url('/preorder') == url()->current())
                             <h5>PRE-ORDER SHEET INFORMATION</h5>
+                        @elseif (url('/receiveorder') == url()->current())
+                            <h5>RECEIVE-ORDER SHEET INFORMATION</h5>
 
                         @endif
                     </div>

@@ -119,6 +119,10 @@ Route::group([], function(){
         return view('master.preorder');
     });
 
+    Route::get('/receiveorder', function () {
+        return view('master.receiveorder');
+    });
+
 });
 
 
