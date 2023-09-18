@@ -118,10 +118,10 @@ Route::group([], function(){
         return view('error_page.404');
     });
 
-    Route::get('/505', function () {
-        return view('error_page.505');
-    });
-
 });
+
+Route::any('{any}', function () {
+    return view('error_page.404');
+})->where('any', '.*');
 
 
