@@ -28,7 +28,7 @@ class IndexController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/index/all', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/index/all', $api_request);
 
         $index = $response->json();
 
@@ -55,7 +55,7 @@ class IndexController extends Controller
             'value' => $request->index_size
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/index/add', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/index/add', $api_request);
 
         $result = $response->json();
 
@@ -82,7 +82,7 @@ class IndexController extends Controller
             'value' => $request->index_size
         ];
 
-        $response = Http::withHeaders($headers)->put('http://localhost:8001/api/index/edit', $api_request);
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/index/edit', $api_request);
 
         $result = $response->json();
         if($result['status'] == 'success'){
@@ -107,7 +107,7 @@ class IndexController extends Controller
             'id' => $request->index_id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/index/delete', $api_request);
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/index/delete', $api_request);
 
         $result = $response->json();
 

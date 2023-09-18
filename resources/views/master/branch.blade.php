@@ -58,10 +58,11 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-color">
+                    <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Kode</span></th>
+                            <th class="thead-text"><span class="nowrap">Nama PIC</span></th>
                             <th class="thead-text"><span class="nowrap">Nama</span></th>
                             <th class="thead-text"><span class="nowrap">Alamat</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
@@ -73,15 +74,16 @@
                         <div class="d-none">
                             {{ $iterator = 1 }}
                         </div>
-                        @foreach ($branch as $val)
+                        @foreach ($branch as $vals)
                         <tr>
                             <div class="d-none">
-                                {{ $id = $val['id'] }}
+                                {{ $id = $vals['id'] }}
                             </div>
-                            <td>{{ $iterator }}</td>
-                            <td>{{ $val['kode_branch']}}</td>
-                            <td>{{ $val['nama_branch']}}</td>
-                            <td>{{ $val['alamat']}}</td>
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td><span class="nowrap">{{ $vals['kode_branch']}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['employee_name'])}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['nama_branch'])}}</span></td>
+                            <td><span class="nowrap">{{ ucwords($vals['alamat'])}}</span></td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
@@ -117,7 +119,7 @@
                                                                             class="form-label">Kode</label>
                                                                         <input type="text" id="kode_branch"
                                                                             name="kode_branch" class="form-control"
-                                                                            value="{{ $val['kode_branch'] }}">
+                                                                            value="{{ $vals['kode_branch'] }}">
                                                                     </div>
 
                                                                     <div class="mb-3">
@@ -125,7 +127,7 @@
                                                                             class="form-label">Nama</label>
                                                                         <input type="text" id="nama_branch"
                                                                             name="nama_branch" class="form-control"
-                                                                            value="{{ $val['nama_branch'] }}">
+                                                                            value="{{ $vals['nama_branch'] }}">
                                                                     </div>
 
                                                                 </div>
@@ -136,19 +138,23 @@
                                                                         <div><input type="text" id="alamat_branch"
                                                                                 name="alamat_branch"
                                                                                 class="form-control"
-                                                                                value="{{ $val['alamat'] }}">
+                                                                                value="{{ $vals['alamat'] }}">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
                                                                         <label for="InputGender"
                                                                             class="form-label">Employee Name</label>
+                                                                        <!-- <select class="form-control" name="" id="category">
+                                                                            <option value="">damas</option>
+                                                                            <option value="">toliso</option>
+                                                                        </select> -->
                                                                         <select type="employee_name"
-                                                                            class="form-select form-control"
-                                                                            id="InputGender" name="employee_id_branch">
+                                                                            class="form-control select2"
+                                                                            name="employee_id_branch">
                                                                             @foreach ($employee as $val)
-                                                                            <option value="{{$val['id']}}">
-                                                                                {{$val['employee_name']}}</option>
+                                                                            <option value="" disabled selected hidden>{{$vals['employee_name']}}</option>
+                                                                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
@@ -201,7 +207,7 @@
                                                 <form method="post" action="/branch/delete">
                                                     @csrf
                                                     @method("DELETE")
-                                                    <input type="hidden" id="id_branch" name="id_branch"
+                                                    <input type="hidden" id="id" name="branch_id"
                                                         class="form-control" value="{{ $id }}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
@@ -258,8 +264,9 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="InputAlamat" class="form-label">Alamat</label>
-                                        <div><input type="text" id="alamat_branch" name="alamat_branch"
-                                                class="form-control">
+                                        <div>
+                                            <input type="text" id="alamat_branch" name="alamat_branch"
+                                            class="form-control">
                                         </div>
                                     </div>
 
@@ -268,8 +275,8 @@
                                         <select type="employee_name" class="form-select form-control" id="InputGender"
                                             name="employee_id_branch">
                                             @foreach ($employee as $val)
-                                            <option value="{{$val['id']}}" name="employee_id_branch">
-                                                {{$val['employee_name']}}</option>
+                                            <option value="" disabled selected hidden>Choose...</option>
+                                            <option value="{{$val['id']}}" name="employee_id_branch">{{$val['employee_name']}}</option>
                                             @endforeach
                                         </select>
                                     </div>

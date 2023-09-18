@@ -28,7 +28,7 @@ class LensController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/lens-category/all', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/all', $api_request);
 
         $lens = $response->json();
 
@@ -55,7 +55,7 @@ class LensController extends Controller
             'nama_kategori' => $request->lens_nama
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/lens-category/add', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/add', $api_request);
 
         $result = $response->json();
 
@@ -82,7 +82,7 @@ class LensController extends Controller
             'nama_kategori' => $request->lens_nama
         ];
 
-        $response = Http::withHeaders($headers)->put('http://localhost:8001/api/lens-category/edit', $api_request);
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/edit', $api_request);
 
         $result = $response->json();
         if($result['status'] == 'success'){
@@ -107,7 +107,7 @@ class LensController extends Controller
             'id' => $request->lens_id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/lens-category/delete', $api_request);
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/delete', $api_request);
 
         $result = $response->json();
 

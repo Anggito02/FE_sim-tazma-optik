@@ -22,7 +22,7 @@
                 <div class="col mb-2">
                     <div>
                         <label for="InputGender" class="form-label">Gender</label>
-                        <select type="gender" class="form-select form-control" id="InputGender">
+                        <select type="gender" class="form-control" id="">
                             <option>Laki-laki</option>
                             <option>Perempuan</option>
                         </select>
@@ -79,7 +79,7 @@
                     </button>
                     <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
                         data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
-                        Add New
+                        Register
                     </button>
                 </div>
             </div>
@@ -94,7 +94,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-color">
+                    <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Username</span></th>
@@ -105,7 +105,7 @@
                             <th class="thead-text"><span class="nowrap">Position</span></th>
                             <th class="thead-text"><span class="nowrap">Role</span></th>
                             <th class="thead-text"><span class="nowrap">Plant</span></th>
-                            <th class="thead-text"><span class="nowrap">Status</span></th>
+                            <!-- <th class="thead-text"><span class="nowrap">Status</span></th> -->
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
@@ -120,24 +120,24 @@
                             <div class="d-none">
                                 {{ $id = $val['id'] }}
                             </div>
-                            <td><span class="nowrap">{{$iterator}}</span></td>
+                            <td class="txt-center"><span class="nowrap">{{$iterator}}</span></td>
                             <td><span class="nowrap">{{$val['username']}}</span></td>
                             <td><span class="nowrap">{{$val['nik']}}</span></td>
-                            <td><span class="nowrap">{{$val['employee_name']}}</span></td>
-                            <td><span class="nowrap">{{$val['department']}}</span></td>
-                            <td><span class="nowrap">{{$val['section']}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['employee_name'])}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['department'])}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['section'])}}</span></td>
                             <td><span class="nowrap">{{$val['position']}}</span></td>
-                            <td><span class="nowrap">{{$val['role']}}</span></td>
-                            <td><span class="nowrap">{{$val['plant']}}</span></td>
-                                @if ($val['status'] == 'active')
-                                <td class="bg-success d-flex justify-content-center align-items-center">
-                                    <span class="nowrap text-white">{{$val['status']}}</span>
-                                </td>
-                                @elseif ($val['status'] == 'inactive')
-                                <td class="bg-danger d-flex justify-content-center align-items-center">
-                                    <span class="nowrap text-white text-center">{{$val['status']}}</span>
-                                </td>
-                                @endif
+                            <td><span class="nowrap">{{ucwords($val['role'])}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['plant'])}}</span></td>
+                            @if ($val['status'] == 'active')
+                            <td>
+                                <span class="nowrap text-success">{{ucwords($val['status'])}}</span>
+                            </td>
+                            @elseif ($val['status'] == 'inactive')
+                            <td>
+                                <span class="nowrap text-white text-danger">{{ucwords($val['status'])}}</span>
+                            </td>
+                            @endif
 
                             <td>
                                 <!-- Button trigger modal Edit -->
@@ -176,13 +176,6 @@
                                                                             class="form-control"
                                                                             value="{{ $val['username']}}">
                                                                     </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="InputNIK"
-                                                                            class="form-label">NIK</label>
-                                                                        <input type="text" id="nik" name="nik"
-                                                                            class="form-control"
-                                                                            value="{{ $val['nik']}}">
-                                                                    </div>
 
                                                                     <div class="mb-3">
                                                                         <label for="InputEmployee"
@@ -190,6 +183,75 @@
                                                                         <input type="text" id="employee_name"
                                                                             name="employee_name" class="form-control"
                                                                             value="{{ $val['employee_name']}}">
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputSection"
+                                                                            class="form-label">Section</label>
+                                                                        <div>
+
+                                                                            <input type="text" id="section"
+                                                                                name="section" class="form-control"
+                                                                                value="{{ $val['section']}}">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputRole"
+                                                                            class="form-label">Role</label>
+                                                                        <select type="role"
+                                                                            class="form-select form-control js-example-basic-single"
+                                                                            id="InputRole" name="role">
+                                                                            @if ($val['role'] == 'administrator')
+                                                                            <option value="administrator" selected>
+                                                                                administrator
+                                                                            </option>
+                                                                            <option value="user">user
+                                                                            </option>
+                                                                            @elseif ($val['role'] == 'user')
+                                                                            <option value="administrator">
+                                                                                administrator
+                                                                            </option>
+                                                                            <option value="user" selected>user
+                                                                            </option>
+                                                                            @endif
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputStatus"
+                                                                            class="form-label">Status</label>
+                                                                        <select type="status"
+                                                                            class="form-select form-control"
+                                                                            id="InputStatus" name="status">
+                                                                            @if ($val['status'] == 'active')
+                                                                            <option value="active" selected>
+                                                                                active
+                                                                            </option>
+                                                                            <option value="inactive">
+                                                                                inactive
+                                                                            </option>
+                                                                            @elseif ($val['status'] == 'inactive')
+                                                                            <option value="active">
+                                                                                active
+                                                                            </option>
+                                                                            <option value="inactive" selected>
+                                                                                inactive
+                                                                            </option>
+                                                                            @endif
+                                                                        </select>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="col">
+
+                                                                    <div class="mb-3">
+                                                                        <label for="InputNIK"
+                                                                            class="form-label">NIK</label>
+                                                                        <input type="number" id="nik" name="nik"
+                                                                            class="form-control"
+                                                                            value="{{ $val['nik']}}">
                                                                     </div>
 
                                                                     <div class="mb-3">
@@ -201,18 +263,15 @@
                                                                         </div>
                                                                     </div>
 
-
                                                                     <div class="mb-3">
-                                                                        <label for="InputRole"
-                                                                            class="form-label">Role</label>
-                                                                        <div><input type="text" id="role" name="role"
-                                                                                class="form-control"
-                                                                                value="{{ $val['role']}}"></div>
+                                                                        <label for="InputPosition"
+                                                                            class="form-label">Position</label>
+                                                                        <div><input type="text" id="position"
+                                                                                name="position" class="form-control"
+                                                                                value="{{ $val['position']}}">
+                                                                        </div>
                                                                     </div>
 
-
-                                                                </div>
-                                                                <div class="col">
                                                                     <div class="mb-3">
                                                                         <label for="InputPlant"
                                                                             class="form-label">Plant</label>
@@ -222,32 +281,7 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputStatus"
-                                                                            class="form-label">Status</label>
-                                                                        <div><input type="text" id="status"
-                                                                                name="status" class="form-control"
-                                                                                value="{{ $val['status']}}">
-                                                                        </div>
-                                                                    </div>
 
-                                                                    <div class="mb-3">
-                                                                        <label for="InputSection"
-                                                                            class="form-label">section</label>
-                                                                        <div><input type="text" id="section"
-                                                                                name="section" class="form-control"
-                                                                                value="{{ $val['section']}}">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label for="InputPosition"
-                                                                            class="form-label">Position</label>
-                                                                        <div><input type="text" id="position"
-                                                                                name="position" class="form-control"
-                                                                                value="{{ $val['position']}}">
-                                                                        </div>
-                                                                    </div>
 
                                                                     <div class="mt-5 float-right">
                                                                         <button type="sumbit"
@@ -295,11 +329,11 @@
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
                                                 <form method="post" action="/employee/delete">
-                                                @csrf
-                                                @method("DELETE")
-                                                <input type="hidden" id="id" name="id" class="form-control"
-                                                    value="{{ $id }}">
-                                                <button type="submit" class="btn btn-danger">Yes</button>
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <input type="hidden" id="id" name="id" class="form-control"
+                                                        value="{{ $id }}">
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -322,7 +356,7 @@
 <!-- Modal add-->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Employee</h5>
@@ -333,71 +367,328 @@
             <div class="modal-body">
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form method="post" action="/employee/add">
+                        <form method="post" action="/register/add" enctype="multipart/form-data">
                             @csrf
                             @method("POST")
-                            <div class="row black-text">
+                            <!-- <div class="row black-text">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="InputUsername" class="form-label">Username</label>
+                                        <label for="InputUsername" class="form-label">Email</label>
+                                        <input type="email" id="username" name="email" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="InputEmployee" class="form-label">Username</label>
                                         <input type="text" id="username" name="username" class="form-control">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputNik" class="form-label">NIK</label>
-                                        <input type="text" id="nik" name="nik" class="form-control">
+                                        <label for="InputNik" class="form-label">Employee Name</label>
+                                        <input type="text" id="employee_name" name="employee_name" class="form-control">
                                     </div>
 
+
+
                                     <div class="mb-3">
-                                        <label for="InputEmployee" class="form-label">Name</label>
-                                        <div><input type="text" id="employee_name" name="employee_name"
-                                                class="form-control">
+                                        <label for="InputPhoto" class="form-label">Photo</label>
+                                        <div><input type="file" id="photo" name="photo" class="form-control" accept=".png, .jpg, .jpeg">
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputPosition" class="form-label">Position</label>
-                                        <div><input type="text" id="position" name="position" class="form-control">
-                                        </div>
+
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputSection" class="form-label">Section</label>
-                                        <div><input type="text" id="section" name="section" class="form-control">
-                                        </div>
+
                                     </div>
+
+                                    <div class="mb-3">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+
+
 
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="InputRole" class="form-label">Role</label>
-                                        <div><input type="text" id="role" name="role" class="form-control">
+                                        <label for="InputPhoto" class="form-label">Password</label>
+                                        <div><input type="text" name="password" class="form-control" minlength="8" maxlength="20">
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="InputPlant" class="form-label">Plant</label>
-                                        <div><input type="text" id="plant" name="plant" class="form-control"></div>
+                                        <label for="InputNik" class="form-label">NIK</label>
+                                        <input type="number" id="nik" name="nik" class="form-control">
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="InputStatus" class="form-label">Status</label>
-                                        <div><input type="text" id="status" name="status" class="form-control">
-                                        </div>
-                                    </div>
+
+
 
 
                                     <div class="mb-3">
-                                        <label for="InputDepartment" class="form-label">Department</label>
-                                        <div><input type="text" id="department" name="department" class="form-control">
-                                        </div>
+                                        <label for="InputEmployee" class="form-label">Gender</label>
+                                        <select type="gender" name="gender" class="form-control" id="">
+                                            <option value="" disabled selected hidden>Choose...</option>
+                                            <option value="laki-laki">Laki-laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                        </select>
                                     </div>
+
+
+                                    <div class="mb-3">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+
 
                                     <div class="mt-5 float-right">
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
+                            </div> -->
+
+                            <div class="row black-text">
+                                <div class="col">
+                                    <div class="mb-3">
+
+                                        <label for="InputUsername" class="form-label">Email</label>
+                                        <input type="email" id="username" name="email" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="Inputnik" class="form-label">NIK</label>
+                                        <input type="text" id="nik" name="nik" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+
+                                        <label for="InputEmployee" class="form-label">Gender</label>
+                                        <select type="gender" name="gender" class="form-control" id="">
+                                            <option value="" disabled selected hidden>Choose...</option>
+                                            <option value="laki-laki">Laki-laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+
+                                        <label for="InputSection" class="form-label">Department</label>
+                                        <input type="text" id="department" name="department" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+
+                                        <label for="InputRole" class="form-label">Role</label>
+                                        <input type="text" id="role" name="role" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+
+                                        <label for="InputPlant" class="form-label">Group</label>
+                                        <input type="text" id="group" name="group" class="form-control">
+                                    </div>
+
+                                </div>
+
+                                <div class="col">
+                                    <div class="mb-3">
+
+                                        <label for="InputEmployee" class="form-label">Username</label>
+                                        <input type="text" id="username" name="username" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="InputEmployee" class="form-label">Name</label>
+                                        <input type="text" id="employee_name" name="employee_name" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="InputSection" class="form-label">Address</label>
+                                        <input type="text" id="address" name="address" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="InputPosition" class="form-label">Section</label>
+                                        <input type="text" id="section" name="section" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="InputPlant" class="form-label">Plant</label>
+                                        <input type="text" id="plant" name="plant" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="InputSection" class="form-label">Domicile</label>
+                                        <input type="text" id="domicile" name="domicile" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="mb-3">
+
+                                        <label for="InputPassword" class="form-label">Password</label>
+                                        <input type="text" name="password" class="form-control" minlength="8"
+                                            maxlength="20">
+                                    </div>
+
+                                    {{-- <div class="mb-3">
+
+                                        <label for="InputPhoto" class="form-label">Photo</label>
+                                        <input type="file" id="photo" name="photo" class="form-control"
+                                            accept=".png, .jpg, .jpeg">
+                                    </div> --}}
+
+                                    <div class="mb-3">
+
+                                        <label for="InputDepartment" class="form-label">Phone</label>
+                                        <input type="number" id="phone" name="phone" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="">Position</label>
+                                        <input type="text" id="position" name="position" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <label for="InputSection" class="form-label">Status</label>
+                                        <input type="text" id="status" name="status" class="form-control">
+                                    </div>
+
+                                    <div class="mt-4 float-right">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+
+                                </div>
                             </div>
+
+                            <!-- <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <!-- <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+                                    <div>
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row black-text">
+                                <div class="col d-flex justify-content-between">
+
+                                    <div>
+
+                                    </div>
+
+                                    <div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div> -->
+
+
+
                         </form>
                     </div>
                 </div>

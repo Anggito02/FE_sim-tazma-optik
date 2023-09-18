@@ -27,7 +27,7 @@ class ErrorPageController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/user/info', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/user/info', $api_request);
 
         $frame = $response->json();
 

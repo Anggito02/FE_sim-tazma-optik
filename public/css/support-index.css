@@ -25,6 +25,15 @@
 .txt-red {
     color: #ff0000;
 }
+
 .hidden-option{
     display: none;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.txt-right {
+    text-align: right;
 }

@@ -28,7 +28,8 @@ class ColorController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/color/all', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/color/all', $api_request);
+        
 
         $color = $response->json();
 
@@ -57,7 +58,7 @@ class ColorController extends Controller
             'color_name' => $color_name
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/color/add', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/color/add', $api_request);
 
         $result = $response->json();
 
@@ -86,7 +87,7 @@ class ColorController extends Controller
             'color_name' => $color_name
         ];
 
-        $response = Http::withHeaders($headers)->put('http://localhost:8001/api/color/edit', $api_request);
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/color/edit', $api_request);
 
         $result = $response->json();
         if($result['status'] == 'success'){
@@ -111,7 +112,7 @@ class ColorController extends Controller
             'id' => $request->color_id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/color/delete', $api_request);
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/color/delete', $api_request);
 
         $result = $response->json();
 

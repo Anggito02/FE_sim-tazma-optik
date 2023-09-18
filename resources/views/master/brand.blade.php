@@ -28,7 +28,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-color">
+                    <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text">No</th>
                             <th class="thead-text">Brand</th>
@@ -47,8 +47,8 @@
                             <div class="d-none">
                                 {{ $id = $val['id'] }}
                             </div>
-                            <td>{{ $iterator }}</td>
-                            <td>{{ $val['nama_brand']}}</td>
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td><span class="nowrap">{{ ucwords($val['nama_brand'])}}</span></td>
                             <td>{{ $val['deskripsi']}}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->

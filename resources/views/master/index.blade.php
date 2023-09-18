@@ -27,7 +27,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-color">
+                    <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Nilai Index</span></th>
@@ -46,8 +46,8 @@
                                 <div class="d-none">
                                   {{ $id = $val['id'] }}
                                 </div>
-                            <td>{{ $iterator }}</td>
-                            <td>{{ $val['value'] }}</td>
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td class="txt-right">{{ $val['value'] }}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
@@ -76,7 +76,7 @@
                                                         <input type="hidden" id="id" name="index_id"
                                                             class="form-control" value="{{ $val['id'] }}">
                                                         <label for="InputWarna" class="form-label">Nilai index</label>
-                                                        <input type="text" id="id" name="index_size"
+                                                        <input type="number" step="0.01" id="id" name="index_size"
                                                             class="form-control" value="{{ $val['value'] }}">
                                                     </div>
 
@@ -162,7 +162,7 @@
 
                     <div class="mb-3 black-text">
                         <label for="InputWarna" class="form-label">Nilai index</label>
-                        <input type="text" id="index_size" name="index_size" class="form-control">
+                        <input type="number" step="0.01" id="index_size" name="index_size" class="form-control">
                     </div>
 
                     <button type="submit" class="btn btn-success float-right">Submit</button>

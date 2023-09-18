@@ -12,6 +12,7 @@ use App\Http\Controllers\ErrorPageController;
 use App\Http\Controllers\FrameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
+use App\Http\Controllers\VendorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login');
     Route::get('/dashboard', 'getUserInfo')->middleware('isTokenValid');
     Route::get('/logout', 'logout')->middleware('isTokenValid');
+    Route::post('/register/add', 'register')->middleware('isTokenValid');
 });
 
 Route::controller(ColorController::class)->middleware('isTokenValid')->group(function(){
@@ -84,9 +86,17 @@ Route::controller(IndexController::class)->middleware('isTokenValid')->group(fun
     Route::delete('/index/delete', 'deleteIndexCategory');
 });
 
-Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/404','PageError404');
+Route::controller(VendorsController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/vendors','getAllVendor');
+    Route::post('/vendors/add', 'addVendor');
+    Route::put('/vendors/edit', 'updateVendor');
+    Route::delete('/vendors/delete', 'deleteVendor');
 });
+
+
+// Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
+//     Route::get('/404','PageError404');
+// });
 
 Route::group([], function(){
     Route::get('/login', function(){
@@ -97,16 +107,8 @@ Route::group([], function(){
         return view('master.user');
     });
 
-    Route::get('/vendors', function () {
-        return view('master.vendor');
-    });
-
     Route::get('/404', function () {
         return view('error_page.404');
-    });
-
-    Route::get('/500', function () {
-        return view('error_page.500');
     });
 
 });
