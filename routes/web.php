@@ -13,6 +13,7 @@ use App\Http\Controllers\FrameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
 use App\Http\Controllers\VendorsController;
+use App\Http\Controllers\PurchaseOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,10 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
     Route::delete('/vendors/delete', 'deleteVendor');
 });
 
+Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/preorder','getAllPO');
+});
+
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
@@ -114,11 +119,6 @@ Route::group([], function(){
     Route::get('/505', function () {
         return view('error_page.505');
     });
-
-    Route::get('/preorder', function () {
-        return view('master.preorder');
-    });
-
 });
 
 

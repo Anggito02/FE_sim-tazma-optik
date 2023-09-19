@@ -52,12 +52,13 @@
                     </thead>
                     <tbody>
 
-
+                        <div class="d-none">
+                            {{ $iterator = 1 }}
+                        </div>
+                        @foreach ($po as $val)
                         <tr>
-
-
-                            <td class="txt-center">1</td>
-                            <td class="nowrap">CV GITO</td>
+                            <td class="txt-center">{{ $iterator}}</td>
+                            <td class="nowrap">{{ $val['nama_vendor'] }}</td>
                             <td class="nowrap">RayBand</td>
                             <td class="nowrap text-right">100</td>
                             <td class="nowrap text-right">Rp 120.000</td>
