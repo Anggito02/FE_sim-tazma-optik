@@ -37,6 +37,7 @@
                             <th class="thead-text"><span class="nowrap">Harga Beli Frame</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Jual Frame</span></th>
                             <th class="thead-text"><span class="nowrap">Jenis Produk Lensa</span></th>
+                            <th class="thead-text"><span class="nowrap">Kategori Lensa</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Beli Lensa</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Jual Lensa</span></th>
                             <th class="thead-text"><span class="nowrap">Nama Item Aksesoris</span></th>
@@ -58,21 +59,22 @@
                                 {{ $id = $val['id'] }}
                             </div>
                             <td class="txt-center"><span class="nowrap">{{$iterator}}</span></td>
-                            <td class="nowrap">CV GITO</td>
-                            <td class="nowrap">RayBand</td>
-                            <td class="nowrap text-right">100</td>
-                            <td class="nowrap text-right">Rp 120.000</td>
-                            <td class="nowrap text-right">Rp 150.000</td>
-                            <td class="nowrap text-right">9-11-2023</td>
-                            <td class="nowrap">AAB-01</td>
-                            <td class="nowrap">dummy item</td>
-                            <td class="nowrap">1/item</td>
-                            <td class="nowrap text-right">10%</td>
-                            <td class="nowrap">Last login</td>
-                            <td class="nowrap">employee A</td>
-                            <td class="nowrap">employee A</td>
-                            <td class="nowrap">open</td>
-                            <td class="nowrap">close</td>
+                            <td class="nowrap">{{ $val['jenis_item'] }}</td>
+                            <td class="nowrap">{{ $val['kode_item']}}</td>
+                            <td class="nowrap text-right">{{ $val['deskripsi']}}</td>
+                            <td class="nowrap text-right">{{ $val['frame_sku_vendor']}}</td>
+                            <td class="nowrap text-right">{{ $val['frame_sub_kategori']}}</td>
+                            <td class="nowrap text-right">{{ $val['frame_kode']}}</td>
+                            <td class="nowrap">{{ $val['frame_harga_beli']}}</td>
+                            <td class="nowrap">{{ $val['frame_harga_jual']}}</td>
+                            <td class="nowrap">{{ $val['lensa_jenis_produk']}}</td>
+                            <td class="nowrap text-right">{{ $val['lensa_kategori_lensa']}}</td>
+                            <td class="nowrap">{{ $val['lensa_harga_beli']}}</td>
+                            <td class="nowrap">{{ $val['lensa_harga_jual']}}</td>
+                            <td class="nowrap">{{ $val['aksesoris_nama_item']}}</td>
+                            <td class="nowrap">{{ $val['aksesoris_kategori']}}</td>
+                            <td class="nowrap">{{ $val['aksesoris_harga_beli']}}</td>
+                            <td class="nowrap">{{ $val['aksesoris_harga_jual']}}</td>
                             <td>
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit">
@@ -88,6 +90,10 @@
 
                             </td>
                         </tr>
+                        <div class="d-none">
+                            {{ $iterator++ }}
+                        </div>
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -327,7 +333,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="sumbit" class="btn btn-primary">Yes</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
                 </div>
             </div>
         </div>

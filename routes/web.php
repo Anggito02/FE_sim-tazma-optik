@@ -13,6 +13,7 @@ use App\Http\Controllers\FrameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
 use App\Http\Controllers\VendorsController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,13 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
     Route::delete('/vendors/delete', 'deleteVendor');
 });
 
+Route::controller(ItemController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/item','getAllItem');
+    Route::post('/item/add', 'addItem');
+    Route::put('/item/edit', 'updateItem');
+    Route::delete('/item/delete', 'deleteItem');
+});
+
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
@@ -121,10 +129,6 @@ Route::group([], function(){
 
     Route::get('/receiveorder', function () {
         return view('master.receiveorder');
-    });
-
-    Route::get('/item', function () {
-        return view('master.item');
     });
 
 });
