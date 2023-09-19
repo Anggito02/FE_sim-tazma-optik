@@ -14,7 +14,7 @@ class GetUserInfo {
         ];
 
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/user/info');
-        dd($response);
+        
         $user = $response->json();
 
         return $user;
