@@ -24,17 +24,25 @@ class ItemController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
 
+
+        $jenis_item = $request->jenis_item;
+
+        if ($jenis_item == null){
+            $jenis_item ='frame';
+        };
+
         $api_request = [
-            "jenis_item" => $request->jenis_item,
+            "jenis_item" => $jenis_item,
             "page" => $page,
             "limit" => $limit
         ];
+        // dd($api_request);
         
-        
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item-jenis/all', $api_request);
+        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/item/allWithJenis', $api_request);
     
         $item = $response->json();
-        dd($item);
+        dd($response);
+        
 
         $user = GetUserInfo::getUserInfo();
 
