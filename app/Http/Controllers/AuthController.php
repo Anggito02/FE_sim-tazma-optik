@@ -94,7 +94,7 @@ class AuthController extends Controller{
         ];
     
         $response = Http::withHeaders($headers)
-            ->attach('photo', $request->file('photo'))
+            
             ->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
 
         // $token = $_COOKIE['token'];
@@ -139,7 +139,7 @@ class AuthController extends Controller{
         //     ->attach('photo', $request->file('photo'))
         //     ->post('http://localhost:8001/api/register', $api_request);
         $result = $response->json();
-        dd($result);
+        
         if($result['status'] == 'success'){
             toastr()->info('Employee added successfully!', 'Employee', ['timeOut' => 3000]);
             return redirect('/employee');

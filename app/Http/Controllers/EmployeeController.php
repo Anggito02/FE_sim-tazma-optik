@@ -63,7 +63,7 @@ class EmployeeController extends Controller
             'status' => $request->status
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8001/api/employee/add', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/employee/add', $api_request);
 
         $result = $response->json();
 
@@ -98,7 +98,7 @@ class EmployeeController extends Controller
         ];
         
 
-        $response = Http::withHeaders($headers)->put('http://localhost:8001/api/employee/edit', $api_request);
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/employee/edit', $api_request);
 
         $result = $response->json();
 
@@ -124,7 +124,7 @@ class EmployeeController extends Controller
             'id' => $request->id
         ];
 
-        $response = Http::withHeaders($headers)->delete('http://localhost:8001/api/employee/delete', $api_request);
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/employee/delete', $api_request);
 
         $result = $response->json();
 
