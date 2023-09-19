@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CoaController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ErrorPageController;
@@ -93,6 +94,12 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
     Route::delete('/vendors/delete', 'deleteVendor');
 });
 
+Route::controller(CoaController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/coa','getAllCoa');
+    Route::post('/coa/add', 'addCoa');
+    Route::put('/coa/edit', 'updateCoa');
+    Route::delete('/coa/delete', 'deleteCoa');
+});
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
@@ -111,18 +118,10 @@ Route::group([], function(){
         return view('error_page.404');
     });
 
-    Route::get('/505', function () {
-        return view('error_page.505');
-    });
-
-    Route::get('/preorder', function () {
-        return view('master.preorder');
-    });
-
-    Route::get('/receiveorder', function () {
-        return view('master.receiveorder');
-    });
-
 });
+
+Route::any('{any}', function () {
+    return view('error_page.404');
+})->where('any', '.*');
 
 
