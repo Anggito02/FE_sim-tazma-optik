@@ -83,6 +83,7 @@
                         <a class="collapse-item" href="/lens-category">Lens Information</a>
                         <a class="collapse-item" href="/frame-category">Frame Information</a>
                         <a class="collapse-item" href="/index">Index Information</a>
+                        <a class="collapse-item" href="/item">Item Information</a>
                     </div>
                 </div>
             </li>
@@ -195,6 +196,8 @@
                             <h5>PRE-ORDER SHEET INFORMATION</h5>
                         @elseif (url('/receiveorder') == url()->current())
                             <h5>RECEIVE-ORDER SHEET INFORMATION</h5>
+                        @elseif (url('/item') == url()->current())
+                            <h5>ITEM SHEET INFORMATION</h5>
 
                         @endif
                     </div>

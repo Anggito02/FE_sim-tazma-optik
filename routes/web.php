@@ -123,6 +123,10 @@ Route::group([], function(){
         return view('master.receiveorder');
     });
 
+    Route::get('/item', function () {
+        return view('master.item');
+    });
+
 });
 
 
