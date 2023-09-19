@@ -29,9 +29,9 @@ class VendorsController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
-
+        dd($response);
         $vendor = $response->json();
-        dd($vendor);
+        
 
         $user = GetUserInfo::getUserInfo();
 
