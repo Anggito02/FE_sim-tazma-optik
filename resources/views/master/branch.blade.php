@@ -63,7 +63,7 @@
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Kode</span></th>
                             <th class="thead-text"><span class="nowrap">Nama PIC</span></th>
-                            <th class="thead-text"><span class="nowrap">Nama</span></th>
+                            <th class="thead-text"><span class="nowrap">Nama Branch</span></th>
                             <th class="thead-text"><span class="nowrap">Alamat</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
@@ -124,7 +124,7 @@
 
                                                                     <div class="mb-3">
                                                                         <label for="InputNama"
-                                                                            class="form-label">Nama</label>
+                                                                            class="form-label">Nama Cabang</label>
                                                                         <input type="text" id="nama_branch"
                                                                             name="nama_branch" class="form-control"
                                                                             value="{{ $vals['nama_branch'] }}">
@@ -160,7 +160,7 @@
                                                                     </div>
 
                                                                     <div class="mb-3 float-right">
-                                                                        <button type="sumbit"
+                                                                        <button type="submit"
                                                                             class="btn btn-primary">Update</button>
                                                                     </div>
                                                                 </div>
