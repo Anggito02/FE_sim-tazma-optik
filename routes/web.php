@@ -14,6 +14,7 @@ use App\Http\Controllers\FrameController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
 use App\Http\Controllers\VendorsController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,13 @@ Route::controller(CoaController::class)->middleware('isTokenValid')->group(funct
     Route::put('/coa/edit', 'updateCoa');
     Route::delete('/coa/delete', 'deleteCoa');
 });
+Route::controller(ItemController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/item','getAllItem');
+    Route::post('/item/add', 'addItem');
+    Route::put('/item/edit', 'updateItem');
+    Route::delete('/item/delete', 'deleteItem');
+});
+
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
