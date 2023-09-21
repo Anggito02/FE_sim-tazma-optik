@@ -38,7 +38,7 @@ class FrameController extends Controller
             return view('master.frame', ['frame' => $frame['data'], 'data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

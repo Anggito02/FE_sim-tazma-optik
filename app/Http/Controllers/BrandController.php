@@ -39,7 +39,7 @@ class BrandController extends Controller
             return view('master.brand', ['brand' => $brand['data'], 'data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

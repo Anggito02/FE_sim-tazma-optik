@@ -44,7 +44,7 @@ class BranchController extends Controller
             ]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

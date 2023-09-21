@@ -38,7 +38,7 @@ class EmployeeController extends Controller
         if ($employee['status'] == 'success'){
             return view('master.employee', ['employee' => $employee['data'], 'data' => $user['data']]);
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

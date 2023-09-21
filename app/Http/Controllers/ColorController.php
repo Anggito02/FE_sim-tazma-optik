@@ -39,7 +39,7 @@ class ColorController extends Controller
             return view('master.color', ['color' => $color['data'], 'data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

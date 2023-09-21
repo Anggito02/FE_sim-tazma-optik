@@ -39,7 +39,7 @@ class CoaController extends Controller
             return view('master.coa', ['coa' => $coa['data'], 'data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

@@ -41,7 +41,7 @@ class ItemController extends Controller
         $response = Http::withHeaders($headers)->get('http://localhost:8001/api/item/allWithJenis', $api_request);
     
         $item = $response->json();
-        dd($response);
+        // dd($response);
         
 
         $user = GetUserInfo::getUserInfo();
@@ -49,7 +49,7 @@ class ItemController extends Controller
         if ($item['status'] == 'success'){
             return view('master.item', ['item' => $item['data'], 'data' => $user['data']]);
         } else {
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
 
     }

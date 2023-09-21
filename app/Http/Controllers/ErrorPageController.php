@@ -37,7 +37,7 @@ class ErrorPageController extends Controller
             return view('error_page.404', ['data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 }
