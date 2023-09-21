@@ -31,16 +31,17 @@ class VendorsController extends Controller
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
         
 
-        $color = $response->json();
-        dd($color);
+        $vendor = $response->json();
+        // dd($vendor);
 
         $user = GetUserInfo::getUserInfo();
 
-        if ($color['status'] == 'success'){
-            return view('master.vendor', ['color' => $color['data'], 'data' => $user['data']]);
+        if ($vendor['status'] == 'success'){
+            return view('master.vendor', ['vendor' => $vendor['data'], 'data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            // return view('/dashboard');
+            return redirect('/dashboard');
         }
 
         // $token = $_COOKIE['token'];
