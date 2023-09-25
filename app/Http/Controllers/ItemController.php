@@ -38,7 +38,7 @@ class ItemController extends Controller
         ];
         // dd($api_request);
         
-        $response = Http::withHeaders($headers)->get('http://localhost:8001/api/item/allWithJenis', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $api_request);
     
         $item = $response->json();
         // dd($response);
