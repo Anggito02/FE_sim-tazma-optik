@@ -9,19 +9,33 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-body">
-            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter">
-                New Item
-            </button>
+        <div class="card-body d-flex justify-content-end">
+            <div class="me-5">
+                <form method="get" action="/item/allWithJenis">
+                  <select class="form-select form-control" aria-label="Small select example" name="jenis_item" onchange="this.form.submit()">
+                    <option selected value="frame">Frame</option>
+                    <option value="lensa">Lensa</option>
+                    <option value="aksesoris">Aksesoris</option>
+                  </select>
+                </form>
+                <!-- <form action="post" action="/item/allWithJenis">
+                    <select class="form-select form-control" aria-label="Small select example" name="jenis_item">
+                        <option selected value="frame" type="submit">Frame</option>
+                        <option value="lensa" type="submit">Lensa</option>
+                        <option value="aksesoris" type="submit">Aksesoris</option>
+                    </select>
+                </form> -->
+            </div>
+            <div class="me-5">
+                <button type="button" class="btn-sm btn-success bold-text" data-toggle="modal"
+                    data-target="#exampleModalCenter">
+                    New Item
+                </button>
+            </div>
         </div>
     </div>
 
     <div class="card shadow mb-4">
-        <!-- <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
-        </div> -->
-
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
@@ -115,13 +129,13 @@
                 <div class="modal-body">
                     <form method="post" action="">
 
-                    <div class="row">
+                        <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="InputItem" class="form-label">Jenis Item</label>
                                     <input type="text" id="id" name="" class="form-control" value="">
                                 </div>
-                            
+
                                 <div class="mb-3">
                                     <label for="InputDeskripsi" class="form-label">Deskripsi</label>
                                     <input type="text" id="id" name="" class="form-control" value="">
@@ -222,14 +236,14 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" action="">
-                        
-                    <div class="row">
+
+                        <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="InputItem" class="form-label">Jenis Item</label>
                                     <input type="text" id="id" name="" class="form-control" value="">
                                 </div>
-                            
+
                                 <div class="mb-3">
                                     <label for="InputDeskripsi" class="form-label">Deskripsi</label>
                                     <input type="text" id="id" name="" class="form-control" value="">
