@@ -13,9 +13,7 @@
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
@@ -27,7 +25,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    <!-- <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet"> -->
+    {{-- <!-- <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet"> --> --}}
 
 </head>
 
@@ -83,6 +81,7 @@
                         <a class="collapse-item" href="/lens-category">Lens Information</a>
                         <a class="collapse-item" href="/frame-category">Frame Information</a>
                         <a class="collapse-item" href="/index">Index Information</a>
+                        <a class="collapse-item" href="/item">Item Information</a>
                     </div>
                 </div>
             </li>
@@ -104,6 +103,21 @@
                         <a class="collapse-item" href="">Invoice Information</a>
                         <a class="collapse-item" href="">QR Code Generator</a>
                         <a class="collapse-item" href="">Monitoring Purchase</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiestest"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>TESTING</span>
+                </a>
+                <div id="collapseUtilitiestest" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Testing Sheet:</h6>
+                        <a class="collapse-item" href="/coa">COA</a>
                     </div>
                 </div>
             </li>
@@ -193,6 +207,12 @@
                             <h5>INDEX SHEET INFORMATION</h5>
                         @elseif (url('/preorder') == url()->current())
                             <h5>PRE-ORDER SHEET INFORMATION</h5>
+                        @elseif (url('/receiveorder') == url()->current())
+                            <h5>RECEIVE-ORDER SHEET INFORMATION</h5>
+                        @elseif (url('/coa') == url()->current())
+                            <h5>COA SHEET INFORMATION</h5>
+                        @elseif (url('/item') == url()->current())
+                            <h5>ITEM SHEET INFORMATION</h5>
 
                         @endif
                     </div>

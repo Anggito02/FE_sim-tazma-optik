@@ -29,8 +29,10 @@ class VendorsController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
+        
 
         $vendor = $response->json();
+        // dd($vendor);
 
         $user = GetUserInfo::getUserInfo();
 
@@ -38,8 +40,38 @@ class VendorsController extends Controller
             return view('master.vendor', ['vendor' => $vendor['data'], 'data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            // return view('/dashboard');
+            return redirect('/dashboard');
         }
+
+        // $token = $_COOKIE['token'];
+
+        // $page = 1;
+        // $limit = 100;
+
+        // $headers = [
+        //     'Accept' => 'application/json',
+        //     'Authorization' => 'Bearer '.$token
+        // ];
+
+        // $api_request = [
+        //     "page" => $page,
+        //     "limit" => $limit
+        // ];
+
+        // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
+        // dd($response);
+        // $vendor = $response->json();
+        
+
+        // $user = GetUserInfo::getUserInfo();
+
+        // if ($vendor['status'] == 'success'){
+        //     return view('master.vendor', ['vendor' => $vendor['data'], 'data' => $user['data']]);
+
+        // }else{
+        //     return view('/dashboard');
+        // }
     }
 
     public function addVendor(Request $request)

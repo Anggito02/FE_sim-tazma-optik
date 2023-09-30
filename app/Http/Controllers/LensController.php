@@ -38,7 +38,7 @@ class LensController extends Controller
             return view('master.lens', ['lens' => $lens['data'], 'data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

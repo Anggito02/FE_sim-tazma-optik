@@ -35,7 +35,7 @@ class BranchController extends Controller
         $employee = $response_sup->json();
 
         $user = GetUserInfo::getUserInfo();
-
+      
         if ($branch['status'] == 'success'){
             return view('master.branch', [
                 'branch' => $branch['data'],
@@ -44,7 +44,7 @@ class BranchController extends Controller
             ]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

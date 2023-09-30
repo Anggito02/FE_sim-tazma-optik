@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CoaController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ErrorPageController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\LensController;
 use App\Http\Controllers\VendorsController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseOrderDetailController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +104,17 @@ Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->g
 
 Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
     
+Route::controller(CoaController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/coa','getAllCoa');
+    Route::post('/coa/add', 'addCoa');
+    Route::put('/coa/edit', 'updateCoa');
+    Route::delete('/coa/delete', 'deleteCoa');
+});
+Route::controller(ItemController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/item','getAllItem');
+    Route::post('/item/add', 'addItem');
+    Route::put('/item/edit', 'updateItem');
+    Route::delete('/item/delete', 'deleteItem');
 });
 
 
@@ -134,6 +147,11 @@ Route::group([], function(){
         return view('master.poDetail');
     });
     
+});
+
+    Route::any('{any}', function () {
+        return view('error_page.404');
+    })->where('any', '.*');
 });
 
 

@@ -38,7 +38,7 @@ class IndexController extends Controller
             return view('master.index', ['index' => $index['data'], 'data' => $user['data']]);
 
         }else{
-            return view('/dashboard');
+            return redirect('/dashboard');
         }
     }
 

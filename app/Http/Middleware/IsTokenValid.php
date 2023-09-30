@@ -25,7 +25,7 @@ class IsTokenValid
                 'Authorization' => 'Bearer '.$token
             ];
 
-            $response = Http::withHeaders($headers)->post('http://localhost:8001/api/token-test');
+            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/token-test');
 
             $result = $response->json();
 
