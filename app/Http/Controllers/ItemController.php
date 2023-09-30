@@ -25,10 +25,10 @@ class ItemController extends Controller
         ];
 
 
-        $jenis_item = $request->jenis_item;
+        $jenis_item = $request->input('jenis_item');
 
         if ($jenis_item == null){
-            $jenis_item ='frame';
+            $jenis_item ='aksesoris';
         };
 
         $api_request = [
@@ -41,7 +41,7 @@ class ItemController extends Controller
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $api_request);
         // dd($response);
         $item = $response->json();
-        // dd($response);
+        // dd($item);
         
 
         $user = GetUserInfo::getUserInfo();
@@ -52,6 +52,106 @@ class ItemController extends Controller
             return redirect('/dashboard');
         }
 
+    }
+
+    public function addItem(Request $request)
+    {
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request = [
+            'jenis_item' => $request->jenis_item,
+            'deskripsi' => $request->deskripsi,
+            'kode_item' => $request->kode_item,
+            'stok' => $request->stok,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'frame_sku_vendor' => $request->frame_sku_vendor,
+            'frame_sub_kategori' => $request->frame_sub_kategori,
+            'frame_kode' => $request->frame_kode,
+            'lensa_jenis_produk' => $request->lensa_jenis_produk,
+            'lensa_jenis_lensa' => $request->lensa_jenis_lensa,
+            'aksesoris_kategori' => $request->aksesoris_kategori
+        ];
+
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/item/add', $api_request);
+
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            toastr()->info('Item added successfully!', 'Item', ['timeOut' => 3000]);
+            return redirect('/item');
+        }else{
+            toastr()->error($result['message'], 'Item', ['timeOut' => 3000]);
+            return redirect('/item');
+        }
+    }
+
+    public function updateItem(Request $request) {
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request = [
+            'id' => $request->item_id,
+            'jenis_item' => $request->jenis_item,
+            'deskripsi' => $request->deskripsi,
+            'kode_item' => $request->kode_item,
+            'stok' => $request->stok,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'frame_sku_vendor' => $request->frame_sku_vendor,
+            'frame_sub_kategori' => $request->frame_sub_kategori,
+            'frame_kode' => $request->frame_kode,
+            'lensa_jenis_produk' => $request->lensa_jenis_produk,
+            'lensa_jenis_lensa' => $request->lensa_jenis_lensa,
+            'aksesoris_kategori' => $request->aksesoris_kategori
+        ];
+
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/item/edit', $api_request);
+
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            toastr()->info('Item updated successfully!', 'Item', ['timeOut' => 3000]);
+            return redirect('/item');
+        }else{
+            toastr()->error($result['message'], 'Item', ['timeOut' => 3000]);
+            return redirect('/item');
+        }
+    }
+
+    public function deleteItem(Request $request)
+    {
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request = [
+            'id' => $request->id
+        ];
+
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/item/delete', $api_request);
+
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            toastr()->info('Item deleted successfully!', 'Item', ['timeOut' => 3000]);
+            return redirect('/item');
+        }else{
+            toastr()->error($result['message'], 'Item', ['timeOut' => 3000]);
+            return redirect('/item');
+        }
     }
 }
 
