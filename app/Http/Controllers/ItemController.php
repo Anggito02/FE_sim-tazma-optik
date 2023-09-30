@@ -42,6 +42,7 @@ class ItemController extends Controller
         // dd($response);
         $item = $response->json();
         // dd($item);
+        dd($item);
         
 
         $user = GetUserInfo::getUserInfo();
