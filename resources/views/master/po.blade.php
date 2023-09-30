@@ -28,23 +28,12 @@
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Vendor</span></th>
-                            <th class="thead-text"><span class="nowrap">Merek</span></th>
-                            <th class="thead-text"><span class="nowrap">Jumlah</span></th>
-                            <th class="thead-text"><span class="nowrap">Harga Beli Unit</span></th>
-                            <th class="thead-text"><span class="nowrap">Harga Jual Unit</span></th>
-                            <th class="thead-text"><span class="nowrap">Tanggal Masuk PO</span></th>
-                            <th class="thead-text"><span class="nowrap">Kode Item</span></th>
-                            <th class="thead-text"><span class="nowrap">Nama Item</span></th>
-                            <th class="thead-text"><span class="nowrap">Unit</span></th>
-                            <th class="thead-text"><span class="nowrap">Diskon</span></th>
-                            <th class="thead-text"><span class="nowrap">Made By</span></th>
-                            <th class="thead-text"><span class="nowrap">Check By</span></th>
-                            <th class="thead-text"><span class="nowrap">Approve By</span></th>
-                            <th class="thead-text"><span class="nowrap">Status PO</span></th>
-                            <th class="thead-text"><span class="nowrap">Status Receiving</span></th>
-                            <th class="thead-text"><span class="nowrap">Status Invoice</span></th>
                             <th class="thead-text"><span class="nowrap">Nomor PO</span></th>
+                            <th class="thead-text"><span class="nowrap">Tanggal Dibuat</span></th>
+                            <th class="thead-text"><span class="nowrap">Status PO</span></th>
+                            <th class="thead-text"><span class="nowrap">Status Pembayaran</span></th>
+                            <th class="thead-text"><span class="nowrap">Status Penerimaan</span></th>
+                            <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Edit</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
 
@@ -57,24 +46,57 @@
                         </div>
                         @foreach ($po as $val)
                         <tr>
-                            <td class="txt-center">{{ $iterator}}</td>
-                            <td class="nowrap">{{ $val['nama_vendor'] }}</td>
-                            <td class="nowrap">RayBand</td>
-                            <td class="nowrap text-right">100</td>
-                            <td class="nowrap text-right">Rp 120.000</td>
-                            <td class="nowrap text-right">Rp 150.000</td>
-                            <td class="nowrap text-right">9-11-2023</td>
-                            <td class="nowrap">AAB-01</td>
-                            <td class="nowrap">dummy item</td>
-                            <td class="nowrap">1/item</td>
-                            <td class="nowrap text-right">10%</td>
-                            <td class="nowrap">Last login</td>
-                            <td class="nowrap">employee A</td>
-                            <td class="nowrap">employee A</td>
-                            <td class="nowrap">open</td>
-                            <td class="nowrap">close</td>
-                            <td class="nowrap">paid</td>
-                            <td class="nowrap">YEAR/SC/PO-MONTH/NOMORURUT</td>
+                            <div class="d-none">
+                                {{ $id = $val['id'] }}
+                            </div>
+
+                            <div class="d-none">
+                                {{ $vendor_id = $val['vendor_id'] }}
+                            </div>
+
+                            <div class="d-none">
+                                {{ $made_by = $val['made_by'] }}
+                            </div>
+
+                            <div class="d-none">
+                                {{ $checked_by = $val['checked_by'] }}
+                            </div>
+
+                            <div class="d-none">
+                                {{ $approved_by = $val['approved_by'] }}
+                            </div>
+
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td class="nowrap">{{ $val['nomor_po'] }}</td>
+                            <td class="nowrap">{{ $val['tanggal_dibuat'] }}</td>
+                            @if ($val['status_po'] == '1')
+                                <td class="text-white text-success">OPEN</td>
+                            @elseif ($val['status_po'] == '0')
+                                <td class="text-white text-danger">CLOSED</td>
+                            @endif
+
+                            @if ($val['status_pembayaran'] == '1')
+                                <td class="text-white text-success">PAID</td>
+                            @elseif ($val['status_pembayaran'] == '0')
+                                <td class="text-white text-danger">UNPAID</td>
+                            @endif
+
+                            @if ($val['status_penerimaan'] == '1')
+                                <td class="text-white text-success">OPEN</td>
+                            @elseif ($val['status_penerimaan'] == '0')
+                                <td class="text-white text-danger">CLOSED</td>
+                            @endif
+                            <td>
+                                <form action="" method="get">
+                                    @csrf
+                                    @method("GET")
+                                    <button type="submit" class="btn-sm btn-info">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+
+                                </form>
+                                                       
+                            </td>
                             <td>
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit">
@@ -90,7 +112,10 @@
 
                             </td>
                         </tr>
-
+                        <div class="d-none">
+                            {{ $iterator = $iterator + 1 }}
+                        </div>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -100,7 +125,7 @@
     <!-- Modal Add Data -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">New Pre-Order</h5>
@@ -109,95 +134,91 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="">
-
+                    <form method="post" action="/PO/add">
+                        @csrf
+                        @method("POST")
                     <div class="row">
                             <div class="col">
+
                                 <div class="mb-3">
                                     <label for="InputVendor" class="form-label">Vendor</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
+                                    <select type="vendor" name="vendor_id" class="form-control" id="">
+                                        @foreach ($vendor as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}" name="vendor_id">{{$val['nama_vendor']}}</option>
+                                        @endforeach
+                                    </select>
+                                
                                 </div>
                             
-                                <div class="mb-3">
-                                    <label for="InputJumlah" class="form-label">Jumlah</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputJual" class="form-label">Harga Jual Unit</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputKode" class="form-label">Kode Item</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputUnit" class="form-label">Unit</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="InputMade" class="form-label">Made by</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
+                                    <select type="made-by" name="made_by" class="form-control" name="made_by" id="">
+                                        @foreach ($employee as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}" name="made_by">{{$val['employee_name']}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
+                                
                                 <div class="mb-3">
-                                    <label for="InputApprove" class="form-label">Approve by</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
+                                    <label for="InputApprove" class="form-label">Approved by</label>
+                                    <select type="approved-by" name="approved_by" class="form-control" id="">
+                                        @foreach ($employee as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}" name="approved_by">{{$val['employee_name']}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                
 
                                 <div class="mb-3">
-                                    <label for="InputStatus" class="form-label">Status Receiving</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
+                                    <label for="InputStatus" class="form-label">Status Penerimaan</label>
+                                    <select type="status-penerimaan" name="status_penerimaan" class="form-control" id="">
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="true">OPEN</option>
+                                        <option value="false">CLOSED</option>
+                                    </select>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="InputNomor" class="form-label">Nomor PO</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
                             </div>
 
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="InputMerk" class="form-label">Merek</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputBeli" class="form-label">Harga Beli Unit</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputTanggal" class="form-label">Tanggal Masuk PO</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputName" class="form-label">Nama Item</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputDisc" class="form-label">Diskon</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
+                                    <label for="InputTanggal" class="form-label">Tanggal Dibuat</label>
+                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control" placeholder="YYYY-MM-DD">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="InputCheck" class="form-label">Check by</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
+                                    
+                                    <select type="check-by" name="checked_by" class="form-control" id="">
+                                        @foreach ($employee as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
+                                        @endforeach
+                                    </select>
+                                    
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="InputStatus" class="form-label">Status PO</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
+                                    <select type="status-po" name="status_po" class="form-control" id="">
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="true">OPEN</option>
+                                        <option value="false">CLOSED</option>
+                                    </select>                                
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="InputStatus" class="form-label">Status Invoice</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
+                                    <label for="InputStatus" class="form-label">Status Pembayaran</label>
+                                    <select type="status-pembayaran" name="status_pembayaran" class="form-control" id="">
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="true">PAID</option>
+                                        <option value="false">UNPAID</option>
+                                    </select>
                                 </div>
 
                                 <div class="mt-5 float-right">

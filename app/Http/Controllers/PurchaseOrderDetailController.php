@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AuthController;
 use App\Utils\GetUserInfo;
 
-class PurchaseOrderController extends Controller
+class PurchaseOrderDetailController extends Controller
 {
     //
     public function getAllPO () {
@@ -48,39 +48,6 @@ class PurchaseOrderController extends Controller
             ]);
         }else{
             return redirect('/dashboard');
-        }
-    }
-
-    public function addPO(Request $request) {
-        $token = $_COOKIE['token'];
-
-        $headers = [
-            'Accept' => 'application\json',
-            'Authorization' => 'Bearer '.$token
-        ];
-
-        $api_request = [
-            'nomor_po' => $request->nomor_po,
-            'tanggal_dibuat' => $request->tanggal_dibuat,
-            'status_penerimaan' => $request->status_penerimaan,
-            'status_pembayaran' => $request->status_pembayaran,
-            'status_po' => $request->status_po,
-            'checked_by' => $request->checked_by,
-            'made_by' => $request->made_by,
-            'approved_by' => $request->approved_by,
-            'vendor_id' => $request->vendor_id
-        ];
-
-        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/add', $api_request);
-
-        $result = $response->json();
-
-        if($result['status'] == 'success'){
-            toastr()->info('Purchase order added successfully!', 'Purchase Order', ['timeOut' => 3000]);
-            return redirect('/PO');
-        }else{
-            toastr()->error($result['message'], 'Purchase Order', ['timeOut' => 3000]);
-            return redirect('/PO');
         }
     }
 }

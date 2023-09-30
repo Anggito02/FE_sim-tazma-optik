@@ -14,6 +14,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
 use App\Http\Controllers\VendorsController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\PurchaseOrderDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +96,12 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
 });
 
 Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/preorder','getAllPO');
+    Route::get('/PO','getAllPO');
+    Route::post('/PO/add', 'addPO');
+});
+
+Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
+    
 });
 
 
@@ -119,6 +125,15 @@ Route::group([], function(){
     Route::get('/505', function () {
         return view('error_page.505');
     });
+
+    // Route::get('/PO', function () {
+    //     return view('master.po');
+    // });
+
+    Route::get('/PO/detail', function () {
+        return view('master.poDetail');
+    });
+    
 });
 
 
