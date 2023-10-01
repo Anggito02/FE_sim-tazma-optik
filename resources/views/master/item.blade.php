@@ -316,8 +316,14 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="InputDeskripsi" class="form-label">Deskripsi</label>
-                                    <input type="text" id="id_addItem" name="deskripsi" class="form-control addItem"
+                                    <label for="InputNamaBrand" class="form-label">Nama Brand</label>
+                                    <input type="text" id="id_addItem" name="nama_brand_item" class="form-control addItem"
+                                        disabled>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="InputJualFrame" class="form-label">Harga Jual</label>
+                                    <input type="text" id="id_addItem" name="harga_jual" class="form-control addItem"
                                         disabled>
                                 </div>
 
@@ -328,11 +334,10 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="InputBeliFrame" class="form-label">Harga Beli</label>
-                                    <input type="text" id="id_addItem" name="harga_beli" class="form-control addItem"
-                                        disabled>
+                                    <label for="InputKodeFrame" class="form-label">Kode Frame</label>
+                                    <input type="text" id="kodeFrame" name="frame_kode" class="form-control" disabled>
                                 </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="InputBeliLensa" class="form-label">Jenis Produk Lensa</label>
                                     <input type="text" id="jenisProdukLensa" name="lensa_jenis_produk"
@@ -342,9 +347,9 @@
                                 <div class="mb-3">
                                     <label for="InputAksesoris" class="form-label">Kategori Aksesoris</label>
                                     <input type="text" id="kategoriAksesoris" name="aksesoris_kategori"
-                                        class="form-control" disabled>
+                                    class="form-control" disabled>
                                 </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="stok" class="form-label">Stok</label>
                                     <input type="number" id="id_addItem" name="stok" class="form-control addItem"
@@ -354,11 +359,23 @@
 
                             <div class="col">
                                 <div class="mb-3">
+                                    <label for="InputDeskripsi" class="form-label">Deskripsi</label>
+                                    <input type="text" id="id_addItem" name="deskripsi" class="form-control addItem"
+                                        disabled>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="InputBeliFrame" class="form-label">Harga Beli</label>
+                                    <input type="text" id="id_addItem" name="harga_beli" class="form-control addItem"
+                                        disabled>
+                                </div>
+                                
+                                <div class="mb-3">
                                     <label for="InputKode" class="form-label">Kode Item</label>
                                     <input type="text" id="id_addItem" name="kode_item" class="form-control addItem"
                                         disabled>
                                 </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="InputFrameSku" class="form-label">Frame SKU Vendor</label>
                                     <input type="text" id="frameSkuVendor" name="frame_sku_vendor" class="form-control"
@@ -366,15 +383,13 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="InputKodeFrame" class="form-label">Kode Frame</label>
-                                    <input type="text" id="kodeFrame" name="frame_kode" class="form-control" disabled>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputJualFrame" class="form-label">Harga Jual</label>
-                                    <input type="text" id="id_addItem" name="harga_jual" class="form-control addItem"
+                                    <label for="InputIndexLensa" class="form-label">Index Lensa</label>
+                                    <input type="text" id="indexLensa" name="index_lensa" class="form-control"
                                         disabled>
                                 </div>
+
+
+
 
                                 <div class="mb-3">
                                     <label for="InputJenisLensa" class="form-label">Jenis Lensa</label>

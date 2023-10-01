@@ -10,6 +10,7 @@ const jenisProdukLensaInput = document.querySelector('#jenisProdukLensa');
 const jenisLensaInput = document.querySelector('#jenisLensa');
 const namaItemAksesorisInput = document.querySelector('#namaItemAksesoris');
 const kategoriAksesorisInput = document.querySelector('#kategoriAksesoris');
+const indexLensaInput = document.querySelector('#indexLensa');
 
 const frameSubKategoriEdit = document.querySelector('.frameSubKategoriEdit');
 const frameSkuVendorEdit = document.querySelector('.frameSkuVendorEdit');
@@ -26,6 +27,7 @@ selectElementAddItem.addEventListener('change', function() {
         frameSubKategoriInput.disabled = false;
         frameSkuVendorInput.disabled = false;
         kodeFrameInput.disabled = false;
+        indexLensaInput.disabled = true;
         jenisProdukLensaInput.disabled = true;
         jenisLensaInput.disabled = true;
         namaItemAksesorisInput.disabled = true;
@@ -37,6 +39,7 @@ selectElementAddItem.addEventListener('change', function() {
         frameSubKategoriInput.disabled = true;
         frameSkuVendorInput.disabled = true;
         kodeFrameInput.disabled = true;
+        indexLensaInput.disabled = false;
         jenisProdukLensaInput.disabled = false;
         jenisLensaInput.disabled = false;
         namaItemAksesorisInput.disabled = true;
@@ -48,6 +51,7 @@ selectElementAddItem.addEventListener('change', function() {
         frameSubKategoriInput.disabled = true;
         frameSkuVendorInput.disabled = true;
         kodeFrameInput.disabled = true;
+        indexLensaInput.disabled = true;
         jenisProdukLensaInput.disabled = true;
         jenisLensaInput.disabled = true;
         namaItemAksesorisInput.disabled = false;
@@ -59,6 +63,7 @@ selectElementAddItem.addEventListener('change', function() {
         frameSubKategoriInput.disabled = true;
         frameSkuVendorInput.disabled = true;
         kodeFrameInput.disabled = true;
+        indexLensaInput.disabled = true;
         jenisProdukLensaInput.disabled = true;
         jenisLensaInput.disabled = true;
         namaItemAksesorisInput.disabled = true;
