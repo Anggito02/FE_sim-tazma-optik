@@ -46,6 +46,7 @@ class ItemController extends Controller
         $user = GetUserInfo::getUserInfo();
         // dd($user);
 
+        dd($item['status']);
         if ($item['status'] == 'success'){
             return view('master.item', ['item' => $item['data'], 'data' => $user['data']]);
         } else {
