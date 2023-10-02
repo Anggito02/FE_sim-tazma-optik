@@ -290,7 +290,7 @@
     <!-- Modal Add Data -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">New Item</h5>
@@ -308,7 +308,7 @@
                                     <label for="InputItem" class="form-label">Jenis Item</label>
                                     <select type="jenis" name="jenis_item" id="choose_jenisItem" class="form-control"
                                         id="">
-                                        <option value="" disablemd selected hidden>Choose...</option>
+                                        <option value="" disabled selected hidden>Choose...</option>
                                         <option value="frame">Frame</option>
                                         <option value="lensa">Lensa</option>
                                         <option value="aksesoris">Aksesoris</option>
@@ -322,10 +322,14 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="InputWarna" class="form-label">Warna Frame</label>
+                                    <input type="text" name="warna_item" class="form-control">
+                                </div>
+                                <!-- <div class="mb-3">
                                     <label for="InputJualFrame" class="form-label">Harga Jual</label>
                                     <input type="text" id="id_addItem" name="harga_jual" class="form-control addItem"
                                         disabled>
-                                </div>
+                                </div> -->
 
                                 <div class="mb-3">
                                     <label for="InputFrameSub" class="form-label">Frame SUB Kategori</label>
@@ -351,8 +355,48 @@
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="stok" class="form-label">Stok</label>
-                                    <input type="number" id="id_addItem" name="stok" class="form-control addItem"
+                                    <label for="InputIndexBrand" class="form-label">Brand Lensa</label>
+                                    <select type="number" name="lensa_brand_id" class="form-control" id="" disabled>
+                                        @foreach ($brand as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}">{{$val['nama_brand']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="InputIndexBrand" class="form-label">Brand Frame</label>
+                                    <select type="number" name="Frame_brand_id" class="form-control" id="" >
+                                        @foreach ($brand as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}">{{$val['nama_brand']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="InputIndexBrand" class="form-label">Brand Aksesoris</label>
+                                    <select type="number" name="aksesoris_brand_id" class="form-control" id="" disabled>
+                                        @foreach ($brand as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}">{{$val['nama_brand']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="InputVendor" class="form-label">Vendor</label>
+                                    <select type="number" name="frame_vendor_id" class="form-control" id="">
+                                        @foreach ($vendor as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}">{{$val['nama_vendor']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="index" class="form-label">Lensa Index</label>
+                                    <input type="" id="id_addItem" name="index_lensa" class="form-control addItem"
                                         disabled>
                                 </div>
                             </div>
@@ -364,17 +408,17 @@
                                         disabled>
                                 </div>
 
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label for="InputBeliFrame" class="form-label">Harga Beli</label>
                                     <input type="text" id="id_addItem" name="harga_beli" class="form-control addItem"
                                         disabled>
-                                </div>
+                                </div> -->
                                 
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label for="InputKode" class="form-label">Kode Item</label>
                                     <input type="text" id="id_addItem" name="kode_item" class="form-control addItem"
                                         disabled>
-                                </div>
+                                </div> -->
                                 
                                 <div class="mb-3">
                                     <label for="InputFrameSku" class="form-label">Frame SKU Vendor</label>
@@ -384,12 +428,34 @@
 
                                 <div class="mb-3">
                                     <label for="InputIndexLensa" class="form-label">Index Lensa</label>
-                                    <input type="text" id="indexLensa" name="index_lensa" class="form-control"
-                                        disabled>
+                                    <select type="number" name="lensa_index_id" id="indexLensa" class="form-control" disabled
+                                        >
+                                        @foreach ($index as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}" name="lensa_index_id">{{$val['value']}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
+                                <div class="mb-3">
+                                    <label for="InputColor" class="form-label">Color</label>
+                                    <select type="number" name="frame_color_id" id="" class="form-control">
+                                        @foreach ($color as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id'].'_'.$val['color_name']}}" name="frame_color_id">{{$val['color_name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-
+                                <div class="mb-3">
+                                    <label for="FrameCategory" class="form-label">Kategori Frame</label>
+                                    <select type="number" name="frame_frame_category_id" id="" class="form-control">
+                                        @foreach ($frameCategory as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}">{{$val['nama_kategori']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 <div class="mb-3">
                                     <label for="InputJenisLensa" class="form-label">Jenis Lensa</label>
@@ -398,10 +464,23 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="LensaCategory" class="form-label">Kategori Lensa</label>
+                                    <select type="number" name="lensa_lens_category_id" id="" class="form-control" disabled>
+                                        @foreach ($lensaCategory as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}">{{$val['nama_kategori']}}</option>
+                                        @endforeach
+                                    </select>
+                                
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="InputItemAksesoris" class="form-label">Nama Item Aksesoris</label>
                                     <input type="text" id="namaItemAksesoris" name="aksesoris_nama_item"
                                         class="form-control" disabled>
                                 </div>
+
+                                
 
                                 <div class="mt-5 float-right">
                                     <button type="submit" class="btn btn-success">Add new</button>
