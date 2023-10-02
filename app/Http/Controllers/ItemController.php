@@ -25,7 +25,7 @@ class ItemController extends Controller
         ];
 
 
-        $jenis_item = $request->input('jenis_item');
+        $jenis_item = '';
 
         if ($jenis_item == null){
             $jenis_item ='aksesoris';
@@ -39,9 +39,9 @@ class ItemController extends Controller
         // dd($api_request);
         
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $api_request);
-        dd($response);
+        // dd($response);
         $item = $response->json();
-        // dd($item);
+        dd($item);
         
         
 
