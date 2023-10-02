@@ -41,11 +41,10 @@ class ItemController extends Controller
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $api_request);
         // dd($response);
         $item = $response->json();
-        dd($item);
+        // dd($item);
         
-        
-
         $user = GetUserInfo::getUserInfo();
+        // dd($user);
 
         if ($item['status'] == 'success'){
             return view('master.item', ['item' => $item['data'], 'data' => $user['data']]);
