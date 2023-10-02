@@ -46,7 +46,7 @@ class ItemController extends Controller
         $user = GetUserInfo::getUserInfo();
         // dd($user);
 
-        dd($item);
+        // dd($item);
 
         
         if ($item['status'] == 'success' && $item['status'] != null){
