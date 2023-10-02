@@ -46,8 +46,10 @@ class ItemController extends Controller
         $user = GetUserInfo::getUserInfo();
         // dd($user);
 
-        // dd($item);
-        if ($item['status'] == 'success'){
+        dd($item);
+
+        
+        if ($item['status'] == 'success' && $item['status'] != null){
             return view('master.item', ['item' => $item['data'], 'data' => $user['data']]);
         } else {
             return redirect('/dashboard');
