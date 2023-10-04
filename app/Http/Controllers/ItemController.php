@@ -55,8 +55,8 @@ class ItemController extends Controller
         $lensaCategory = $response_lensaCategory->json();
         // dd($lensaCategory);
         
-
         $user = GetUserInfo::getUserInfo();
+        // dd($user);
 
         if ($item['status'] == 'success'){
             return view('master.item', [
