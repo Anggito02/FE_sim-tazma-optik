@@ -1,107 +1,121 @@
 const selectElementAddItem = document.querySelector('#choose_jenisItem');
 const selectElementEditItem = document.querySelector('#edit_jenisItem');
-const searchItemByJenis = document.getElementById('get_jenis_item');
 const searchAddItemModal = document.querySelectorAll('.addItem');
+const buttonAddItem = document.querySelector('.btn-new-item');
+const buttonEditItem = document.querySelector('.btn-edit-item');
 
 const frameSubKategoriInput = document.querySelector('#frameSubKategori');
 const frameSkuVendorInput = document.querySelector('#frameSkuVendor');
+const kategoriframeInput = document.querySelector('#kategoriFrame');
 const kodeFrameInput = document.querySelector('#kodeFrame');
 const jenisProdukLensaInput = document.querySelector('#jenisProdukLensa');
+const brandLensaInput = document.querySelector('#brandLensa');
+const brandFrameInput = document.querySelector('#brandFrame');
+const colorItemInput = document.querySelector('#colorItem');
 const jenisLensaInput = document.querySelector('#jenisLensa');
+const kategoriLensaInput = document.querySelector('#kategoriLensa');
+const brandAksesorisInput = document.querySelector('#brandAksesoris');
 const namaItemAksesorisInput = document.querySelector('#namaItemAksesoris');
 const kategoriAksesorisInput = document.querySelector('#kategoriAksesoris');
+const indexLensaInput = document.querySelector('#indexLensa');
+const vendorInput = document.querySelector('#vendorItem');
 
-const frameSubKategoriEdit = document.querySelector('.frameSubKategoriEdit');
-const frameSkuVendorEdit = document.querySelector('.frameSkuVendorEdit');
-const kodeFrameEdit = document.querySelector('.kodeFrameEdit');
-const jenisProdukLensaEdit = document.querySelector('.jenisProdukLensaEdit');
-const jenisLensaEdit = document.querySelector('.jenisLensaEdit');
-const namaItemAksesorisEdit = document.querySelector('.namaItemAksesorisEdit');
-const kategoriAksesorisEdit = document.querySelector('.kategoriAksesorisEdit');
+buttonAddItem.addEventListener('click', function() {
+    const addDnone = document.querySelectorAll('.form-add-item');
+    for (let i = 0; i < addDnone.length; i++) {
+        addDnone[i].style.display = 'none';
+    }
+})
+
+buttonEditItem.addEventListener('click', function() {
+    const editDnone = document.querySelectorAll('.form-edit-item');
+    for (let i = 0; i < editDnone.length; i++) {
+        editDnone[i].style.display = 'none';
+    }
+})
 
 selectElementAddItem.addEventListener('change', function() {
     const selectedAddOption = selectElementAddItem.value;
     
     if (selectedAddOption === 'frame') {
-        frameSubKategoriInput.disabled = false;
-        frameSkuVendorInput.disabled = false;
-        kodeFrameInput.disabled = false;
-        jenisProdukLensaInput.disabled = true;
-        jenisLensaInput.disabled = true;
-        namaItemAksesorisInput.disabled = true;
-        kategoriAksesorisInput.disabled = true;
+        frameSubKategoriInput.style.display = 'block';
+        frameSkuVendorInput.style.display = 'block';
+        brandFrameInput.style.display = 'block';
+        kategoriframeInput.style.display = 'block';
+        colorItemInput.style.display = 'block';
+        kodeFrameInput.style.display = 'block';
+        vendorInput.style.display = 'block';
+        kategoriLensaInput.style.display = 'none'; 
+        indexLensaInput.style.display = 'none'; 
+        jenisProdukLensaInput.style.display = 'none'; 
+        brandLensaInput.style.display = 'none'; 
+        jenisLensaInput.style.display = 'none'; 
+        brandAksesorisInput.style.display = 'none'; 
+        namaItemAksesorisInput.style.display = 'none'; 
+        kategoriAksesorisInput.style.display = 'none'; 
         for (let i = 0; i < searchAddItemModal.length; i++) {
-            searchAddItemModal[i].disabled = false;
+            searchAddItemModal[i].style.display = 'block';
         };
+        // searchAddItemModal.classList.remove('d-none');
     } else if (selectedAddOption === 'lensa') {
-        frameSubKategoriInput.disabled = true;
-        frameSkuVendorInput.disabled = true;
-        kodeFrameInput.disabled = true;
-        jenisProdukLensaInput.disabled = false;
-        jenisLensaInput.disabled = false;
-        namaItemAksesorisInput.disabled = true;
-        kategoriAksesorisInput.disabled = true;
+        frameSubKategoriInput.style.display = "none";
+        frameSkuVendorInput.style.display = "none";
+        kategoriframeInput.style.display = "none";
+        kodeFrameInput.style.display = "none";
+        colorItemInput.style.display = "none";
+        vendorInput.style.display = "none";
+        kategoriLensaInput.style.display = "block";
+        indexLensaInput.style.display = "block";
+        brandLensaInput.style.display = "block";
+        brandFrameInput.style.display = "none";
+        jenisProdukLensaInput.style.display = "block";
+        jenisLensaInput.style.display = "block";
+        brandAksesorisInput.style.display = "none";
+        namaItemAksesorisInput.style.display = "none";
+        kategoriAksesorisInput.style.display = "none";
         for (let i = 0; i < searchAddItemModal.length; i++) {
-            searchAddItemModal[i].disabled = false;
+            searchAddItemModal[i].style.display = 'block';
         };
     } else if (selectedAddOption === 'aksesoris') {
-        frameSubKategoriInput.disabled = true;
-        frameSkuVendorInput.disabled = true;
-        kodeFrameInput.disabled = true;
-        jenisProdukLensaInput.disabled = true;
-        jenisLensaInput.disabled = true;
-        namaItemAksesorisInput.disabled = false;
-        kategoriAksesorisInput.disabled = false;
+        frameSubKategoriInput.style.display = "none";
+        frameSkuVendorInput.style.display = "none";
+        kategoriframeInput.style.display = "none";
+        colorItemInput.style.display = "none";
+        kodeFrameInput.style.display = "none";
+        vendorInput.style.display = "none";
+        kategoriLensaInput.style.display = "none";
+        indexLensaInput.style.display = "none";
+        brandLensaInput.style.display = "none";
+        brandFrameInput.style.display = "none";
+        jenisProdukLensaInput.style.display = "none";
+        jenisLensaInput.style.display = "none";
+        brandAksesorisInput.style.display = "block";
+        namaItemAksesorisInput.style.display = "block";
+        kategoriAksesorisInput.style.display = "block";
         for (let i = 0; i < searchAddItemModal.length; i++) {
-            searchAddItemModal[i].disabled = false;
+            searchAddItemModal[i].style.display = 'block';
         };
     } else {
-        frameSubKategoriInput.disabled = true;
-        frameSkuVendorInput.disabled = true;
-        kodeFrameInput.disabled = true;
-        jenisProdukLensaInput.disabled = true;
-        jenisLensaInput.disabled = true;
-        namaItemAksesorisInput.disabled = true;
-        kategoriAksesorisInput.disabled = true;
+        frameSubKategoriInput.style.display = "none";
+        frameSkuVendorInput.style.display = "none";
+        kategoriframeInput.style.display = "none";
+        colorItemInput.style.display = "none";
+        kodeFrameInput.style.display = "none";
+        vendorInput.style.display = "none";
+        kategoriLensaInput.style.display = "none";
+        indexLensaInput.style.display = "none";
+        brandLensaInput.style.display = "none";
+        brandFrameInput .style.display = "none";
+        jenisProdukLensaInput.style.display = "none";
+        jenisLensaInput.style.display = "none";
+        brandAksesorisInput.style.display = "none";
+        namaItemAksesorisInput.style.display = "none";
+        kategoriAksesorisInput.style.display = "none";
         for (let i = 0; i < searchAddItemModal.length; i++) {
-            searchAddItemModal[i].disabled = false;
+            searchAddItemModal[i].style.display = 'none';
         };
     };
 });
-
-selectElementEditItem.addEventListener('change', function() {
-    const selectedEditOption = selectElementEditItem.value;
-
-    if (selectedEditOption === 'frame') {
-        frameSubKategoriEdit.style.display  = "block";
-        frameSkuVendorEdit.style.display  = "block";
-        kodeFrameEdit.style.display  = "block";
-        jenisProdukLensaEdit.style.display  = "none";
-        jenisLensaEdit.style.display  = "none";
-        namaItemAksesorisEdit.style.display  = "none";
-        kategoriAksesorisEdit.style.display  = "none";
-    } else if (selectedEditOption === 'lensa') {
-        frameSubKategoriEdit.style.display = "none";
-        frameSkuVendorEdit.style.display = "none";
-        kodeFrameEdit.style.display = "none";
-        jenisProdukLensaEdit.style.display = "block";
-        jenisLensaEdit.style.display = "block";
-        namaItemAksesorisEdit.style.display = "none";
-        kategoriAksesorisEdit.style.display = "none";
-    } else if (selectedEditOption === 'aksesoris') {
-        frameSubKategoriEdit.style.display = "none";
-        frameSkuVendorEdit.style.display = "none";
-        kodeFrameEdit.style.display = "none";
-        jenisProdukLensaEdit.style.display = "none";
-        jenisLensaEdit.style.display = "none";
-        namaItemAksesorisEdit.style.display = "block";
-        kategoriAksesorisEdit.style.display = "block";
-    } 
-});
-
-searchItemByJenis.addEventListener('change', function() {
-    document.getElementById('itemForm').submit();
-})
 
 $(document).ready(function() {
     $('#select2').select2({
