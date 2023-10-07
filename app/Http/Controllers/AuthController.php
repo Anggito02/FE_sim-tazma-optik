@@ -33,7 +33,7 @@ class AuthController extends Controller{
                 setcookie('token', $data['data']['token'], time() + 60*60*24, '/', '', false, true);
                 toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
 
-                redirect('/dashboard');
+                return redirect('/dashboard');
             }else{
                 toastr()->error('Invalid email or password!', 'Authentication', ['timeOut' => 3000]);
                 return view('/login', ['data' => $data['message']]);
@@ -98,9 +98,7 @@ class AuthController extends Controller{
             'domicile' => $request->domicile
         ];
 
-        $response = Http::withHeaders($headers)
-
-            ->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
 
         // $token = $_COOKIE['token'];
         // $headers = [

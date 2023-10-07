@@ -102,7 +102,9 @@ Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->g
     Route::post('/PO/add', 'addPO');
 });
 
-// Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
+Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
+
+});
 
 Route::controller(CoaController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/coa','getAllCoa');
@@ -110,13 +112,13 @@ Route::controller(CoaController::class)->middleware('isTokenValid')->group(funct
     Route::put('/coa/edit', 'updateCoa');
     Route::delete('/coa/delete', 'deleteCoa');
 });
+
 Route::controller(ItemController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/item','getAllItem');
     Route::post('/item/add', 'addItem');
     Route::put('/item/edit', 'updateItem');
     Route::delete('/item/delete', 'deleteItem');
 });
-
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
