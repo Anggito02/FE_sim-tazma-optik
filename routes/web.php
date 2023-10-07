@@ -30,7 +30,7 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', function () {
-    // return redirect('/login');
+    return redirect('/login');
 });
 
 Route::controller(AuthController::class)->group(function(){
