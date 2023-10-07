@@ -30,7 +30,7 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    // return redirect('/login');
 });
 
 Route::controller(AuthController::class)->group(function(){
@@ -123,10 +123,6 @@ Route::controller(ItemController::class)->middleware('isTokenValid')->group(func
 // });
 
 Route::group([], function(){
-    Route::get('/login', function(){
-        return view('login');
-    });
-
     Route::get('/user', function () {
         return view('master.user');
     });
