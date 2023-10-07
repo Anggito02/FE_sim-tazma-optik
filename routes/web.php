@@ -123,17 +123,21 @@ Route::controller(ItemController::class)->middleware('isTokenValid')->group(func
 // });
 
 Route::group([], function(){
+    Route::get('/login', function () {
+        return view('login');
+    });
+
     // Route::get('/user', function () {
     //     return view('master.user');
     // });
 
-    // Route::get('/404', function () {
-    //     return view('error_page.404');
-    // });
+    Route::get('/404', function () {
+        return view('error_page.404');
+    });
 
-    // Route::get('/505', function () {
-    //     return view('error_page.505');
-    // });
+    Route::get('/505', function () {
+        return view('error_page.505');
+    });
 
     // Route::get('/PO', function () {
     //     return view('master.po');
