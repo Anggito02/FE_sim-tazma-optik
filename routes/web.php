@@ -34,7 +34,7 @@ Route::get('/', function () {
 });
 
 Route::controller(AuthController::class)->group(function(){
-    Route::post('/login', 'login');
+    Route::post('/login', 'login')->middleware('guest');
     Route::get('/dashboard', 'getUserInfo')->middleware('isTokenValid');
     Route::get('/logout', 'logout')->middleware('isTokenValid');
     Route::post('/register/add', 'register')->middleware('isTokenValid');
@@ -103,7 +103,7 @@ Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->g
 });
 
 Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
-    
+
 Route::controller(CoaController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/coa','getAllCoa');
     Route::post('/coa/add', 'addCoa');
@@ -146,7 +146,7 @@ Route::group([], function(){
     Route::get('/PO/detail', function () {
         return view('master.poDetail');
     });
-    
+
 });
 
     Route::any('{any}', function () {

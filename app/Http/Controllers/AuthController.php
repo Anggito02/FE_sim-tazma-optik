@@ -26,11 +26,10 @@ class AuthController extends Controller{
 
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
         $data = $response->json();
-        
+
 
         if ($data['status'] == 'success'){
-            setcookie('token', $data['data']['token'], time()+60*60*24, '/', '', false, true);
-
+            setcookie('token', $data['data']['token'], time() + 60*60*24, '/', '', false, true);
             toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
 
             return redirect('/dashboard');
@@ -66,14 +65,14 @@ class AuthController extends Controller{
 
         return view('dashboard', ['data' => $user['data']]);
     }
-    
+
     public function register(Request $request){
         $token = $_COOKIE['token'];
         $headers = [
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
-    
+
         $api_request = [
             'email' => $request->email,
             'password' => $request->password,
@@ -92,9 +91,9 @@ class AuthController extends Controller{
             'group' => $request->group,
             'domicile' => $request->domicile
         ];
-    
+
         $response = Http::withHeaders($headers)
-            
+
             ->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
 
         // $token = $_COOKIE['token'];
@@ -121,7 +120,7 @@ class AuthController extends Controller{
         //     'status' => $request->status,
         //     'group' => $request->group,
         //     'domicile' => $request->domicile
-            
+
         //     // 'username' => $request->username,
         //     // 'nik' => $request->nik,
         //     // 'photo' => $request->photo,
@@ -139,7 +138,7 @@ class AuthController extends Controller{
         //     ->attach('photo', $request->file('photo'))
         //     ->post('http://localhost:8001/api/register', $api_request);
         $result = $response->json();
-        
+
         if($result['status'] == 'success'){
             toastr()->info('Employee added successfully!', 'Employee', ['timeOut' => 3000]);
             return redirect('/employee');
@@ -147,6 +146,6 @@ class AuthController extends Controller{
             toastr()->error($result['message'], 'Employee', ['timeOut' => 3000]);
             return redirect('/employee');
         }
-         
+
     }
 }
