@@ -102,7 +102,7 @@ Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->g
     Route::post('/PO/add', 'addPO');
 });
 
-Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
+// Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
 
 Route::controller(CoaController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/coa','getAllCoa');
@@ -123,31 +123,31 @@ Route::controller(ItemController::class)->middleware('isTokenValid')->group(func
 // });
 
 Route::group([], function(){
-    Route::get('/user', function () {
-        return view('master.user');
-    });
+    // Route::get('/user', function () {
+    //     return view('master.user');
+    // });
 
-    Route::get('/404', function () {
-        return view('error_page.404');
-    });
+    // Route::get('/404', function () {
+    //     return view('error_page.404');
+    // });
 
-    Route::get('/505', function () {
-        return view('error_page.505');
-    });
+    // Route::get('/505', function () {
+    //     return view('error_page.505');
+    // });
 
     // Route::get('/PO', function () {
     //     return view('master.po');
     // });
 
-    Route::get('/PO/detail', function () {
-        return view('master.poDetail');
-    });
+    // Route::get('/PO/detail', function () {
+    //     return view('master.poDetail');
+    // });
 
 });
 
-    Route::any('{any}', function () {
-        return view('error_page.404');
-    })->where('any', '.*');
-});
+
+Route::any('{any}', function () {
+    return view('error_page.404');
+})->where('any', '.*');
 
 
