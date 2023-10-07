@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Redirect;
 class AuthController extends Controller{
     public function login(Request $request){
         try{
+            dd($request->all());
+
             $headers = [
                 'Accept' => 'application/json'
             ];
