@@ -36,7 +36,7 @@ class IsTokenValid
             }
         } catch(Exception $error) {
             toastr()->error('Please login first!', 'Authentication', ['timeOut' => 3000]);
-            return view('/login');
+            return redirect('/login');
         }
     }
 }
