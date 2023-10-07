@@ -12,31 +12,37 @@ use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller{
     public function login(Request $request){
-        $headers = [
-            'Accept' => 'application/json'
-        ];
+        try{
+            $headers = [
+                'Accept' => 'application/json'
+            ];
 
-        $email = $request->email;
-        $password = $request->password;
+            $email = $request->email;
+            $password = $request->password;
 
-        $api_request = [
-            'email' => $email,
-            'password' => $password
-        ];
+            $api_request = [
+                'email' => $email,
+                'password' => $password
+            ];
 
-        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
-        $data = $response->json();
+            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
+            $data = $response->json();
 
 
-        if ($data['status'] == 'success'){
-            setcookie('token', $data['data']['token'], time() + 60*60*24, '/', '', false, true);
-            toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
+            if ($data['status'] == 'success'){
+                setcookie('token', $data['data']['token'], time() + 60*60*24, '/', '', false, true);
+                toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
 
-            redirect('/dashboard');
-        }else{
-            toastr()->error('Invalid email or password!', 'Authentication', ['timeOut' => 3000]);
-            return view('/login', ['data' => $data['message']]);
+                redirect('/dashboard');
+            }else{
+                toastr()->error('Invalid email or password!', 'Authentication', ['timeOut' => 3000]);
+                return view('/login', ['data' => $data['message']]);
+            }
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
         }
+
     }
 
     public function logout(){
