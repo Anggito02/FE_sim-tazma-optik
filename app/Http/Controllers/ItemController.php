@@ -26,9 +26,9 @@ class ItemController extends Controller
 
         $jenis_item = null;
         $jenis_item = $request->jenis_item;
-        
+
         if ($request->jenis_item == null){
-            $jenis_item ='frame';
+            $jenis_item = 'frame';
         };
 
         $api_request = [
@@ -36,8 +36,8 @@ class ItemController extends Controller
             "page" => $page,
             "limit" => $limit
         ];
-        // dd($api_request);
-        
+
+
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $api_request);
         $response_index = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/index/all', $api_request);
         $response_brand = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/brand/all', $api_request);
@@ -54,7 +54,7 @@ class ItemController extends Controller
         $frameCategory = $response_frameCategory->json();
         $lensaCategory = $response_lensaCategory->json();
         // dd($lensaCategory);
-        
+
         $user = GetUserInfo::getUserInfo();
         // dd($user);
 
@@ -84,7 +84,7 @@ class ItemController extends Controller
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
-        
+
         if ($request->jenis_item == "frame") {
             $nama_brand_item = explode('-', $request->frame_brand_id);
             $nama_brand_item = $nama_brand_item[1];

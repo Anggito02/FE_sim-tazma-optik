@@ -14,15 +14,15 @@
 
                 <div class="search">
 
-                    <form action="/item" method="POST">
+                    <form action="/item" method="GET">
                         @csrf
-                        @method("POST")
+                        @method("GET")
                         <select name="jenis_item" class="form-control">
                             <option value="frame">Frame</option>
                             <option value="lensa">Lensa</option>
                             <option value="aksesoris">Aksesoris</option>
                         </select>
-                        <!-- <button type="submit">Submit</button> -->
+                        <button type="submit">Submit</button>
                     </form>
                 </div>
 
