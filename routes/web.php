@@ -100,10 +100,15 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
 Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/PO','getAllPO');
     Route::post('/PO/add', 'addPO');
+    Route::put('/PO/edit', 'updatePO');
+    Route::delete('/PO/delete', 'deletePO');
 });
 
 Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
-
+    Route::post('/PO/detail','getAllPODetail');
+    Route::post('/PO/detail/add', 'addPODetail');
+    Route::put('/PO/detail/edit', 'updatePODetail');
+    Route::delete('/PO/detail/delete', 'deletePODetail');
 });
 
 Route::controller(CoaController::class)->middleware('isTokenValid')->group(function(){
@@ -145,9 +150,9 @@ Route::group([], function(){
     //     return view('master.po');
     // });
 
-    // Route::get('/PO/detail', function () {
-    //     return view('master.poDetail');
-    // });
+    Route::get('/PO/detail', function () {
+        return view('master.poDetail');
+    });
 
 });
 
