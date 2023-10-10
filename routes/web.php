@@ -17,6 +17,7 @@ use App\Http\Controllers\VendorsController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseOrderDetailController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ReceiveOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +119,11 @@ Route::controller(ItemController::class)->middleware('isTokenValid')->group(func
     Route::post('/item/add', 'addItem');
     Route::put('/item/edit', 'updateItem');
     Route::delete('/item/delete', 'deleteItem');
+});
+
+Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/receive-order','getAllReceiveOrder');
+    Route::post('/receive-order/add', 'addReceiveOrder');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
