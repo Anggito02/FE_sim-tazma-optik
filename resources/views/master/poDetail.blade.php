@@ -12,24 +12,24 @@
         <div class="card-body">
             <div class="d-flex justify-content-between p-5">
                 <div class="d-flex flex-column">
-                    <h1>No PO</h1>
-                    <h2>YYYY-MM-DD</h2>
+                    <h1>{{$po['nomor_po']}}</h1>
+                    <h2>{{$po['tanggal_dibuat']}}</h2>
                 </div>
                 <div class="d-flex flex-column align-items-end">
-                    <p>Made By</p>
-                    <p>Checked By</p>
-                    <p>Approved By</p>
+                    <p>made: {{$po['made_by_name']}}</p>
+                    <p>checked: {{$po['checked_by_name']}}</p>
+                    <p>Approved By: {{$po['approved_by_name']}}</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-between p-5">
                 <div class="d-flex flex-column">
-                    <h3>Nama Vendor</h3>
+                    <h3>Nama Vendor: {{$po['nama_vendor']}}</h3>
                 </div>
                 <div class="d-flex flex-column align-items-end">
-                    <p>Status PO</p>
-                    <p>Status Penerimaan</p>
-                    <p>Status Pembayaran</p>
+                    <p>Status PO: {{$po['status_po']}}</p>
+                    <p>Status Penerimaan: {{$po['status_penerimaan']}}</p>
+                    <p>Status Pembayaran: {{$po['status_pembayaran']}}</p>
                 </div>
             </div>
         </div>
@@ -125,23 +125,23 @@
                                 <div class="mb-3">
                                     <label for="InputVendor" class="form-label">Pre-Order Quantity</label>
                                     <input type="text" id="id" name="tanggal_dibuat" class="form-control">
-                                
+
                                 </div>
-                            
-                                
+
+
                                 <div class="mb-3">
                                     <label for="InputMade" class="form-label">Harga Beli Satuan</label>
                                     <input type="text" id="id" name="tanggal_dibuat" class="form-control" >
 
                                 </div>
 
-                                
+
                                 <div class="mb-3">
                                     <label for="InputApprove" class="form-label">Diskon</label>
                                     <input type="text" id="id" name="tanggal_dibuat" class="form-control">
 
                                 </div>
-                            
+
                             </div>
 
                             <div class="col">
@@ -153,13 +153,13 @@
                                 <div class="mb-3">
                                     <label for="InputCheck" class="form-label">Harga Jual Satuan</label>
                                     <input type="text" id="id" name="tanggal_dibuat" class="form-control">
-                                    
+
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="InputStatus" class="form-label">ID Item</label>
                                     <input type="text" id="id" name="tanggal_dibuat" class="form-control">
-                             
+
                                 </div>
 
                                 <div class="mt-5 float-right">

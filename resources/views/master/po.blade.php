@@ -9,7 +9,7 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-body">
+        <div class="card-body black-text">
             <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
                 data-target="#exampleModalCenter">
                 New Pre-Order
@@ -55,15 +55,15 @@
                             </div>
 
                             <div class="d-none">
-                                {{ $made_by = $val['made_by'] }}
+                                {{ $made_by = $val['made_by_name'] }}
                             </div>
 
                             <div class="d-none">
-                                {{ $checked_by = $val['checked_by'] }}
+                                {{ $checked_by = $val['checked_by_name'] }}
                             </div>
 
                             <div class="d-none">
-                                {{ $approved_by = $val['approved_by'] }}
+                                {{ $approved_by = $val['approved_by_name'] }}
                             </div>
 
                             <td class="txt-center">{{ $iterator }}</td>
@@ -87,15 +87,47 @@
                                 <td class="text-white text-danger">CLOSED</td>
                             @endif
                             <td>
-                                <form action="" method="get">
+                                @foreach ($po as $val)
+                                    <form action="/PO/detail" method="post">
                                     @csrf
-                                    @method("GET")
+                                    @method("POST")
+                                    <input type="hidden" id="id" name="status_po" class="form-control"
+                                        value="{{ $val['status_po'] }}">
+
+                                    <input type="hidden" id="id" name="status_pembayaran" class="form-control"
+                                        value="{{ $val['status_pembayaran'] }}">
+
+                                    <input type="hidden" id="id" name="status_penerimaan" class="form-control"
+                                        value="{{ $val['status_penerimaan'] }}">
+
+                                    <input type="hidden" id="id" name="checked_by_name" class="form-control"
+                                        value="{{ $val['checked_by_name'] }}">
+
+                                    <input type="hidden" id="id" name="tanggal_dibuat" class="form-control"
+                                        value="{{ $val['tanggal_dibuat'] }}">
+
+                                    <input type="hidden" id="id" name="nomor_po" class="form-control"
+                                        value="{{ $val['nomor_po'] }}">
+
+                                    <input type="hidden" id="id" name="po_id" class="form-control"
+                                        value="{{ $val['id'] }}">
+
+                                    <input type="hidden" id="id" name="nama_vendor" class="form-control"
+                                        value="{{ $val['nama_vendor'] }}">
+
+                                    <input type="hidden" id="id" name="made_by_name" class="form-control"
+                                        value="{{ $val['made_by_name'] }}">
+
+                                    <input type="hidden" id="id" name="approved_by_name" class="form-control"
+                                        value="{{ $val['approved_by_name'] }}">
+
                                     <button type="submit" class="btn-sm btn-info">
                                         <i class="fa fa-eye"></i>
                                     </button>
 
                                 </form>
-                                                       
+                                @endforeach
+
                             </td>
                             <td>
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
@@ -128,12 +160,12 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">New Pre-Order</h5>
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">New Pre-Order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body black-text">
                     <form method="post" action="/PO/add">
                         @csrf
                         @method("POST")
@@ -148,10 +180,10 @@
                                         <option value="{{$val['id']}}" name="vendor_id">{{$val['nama_vendor']}}</option>
                                         @endforeach
                                     </select>
-                                
+
                                 </div>
-                            
-                                
+
+
                                 <div class="mb-3">
                                     <label for="InputMade" class="form-label">Made by</label>
                                     <select type="made-by" name="made_by" class="form-control" name="made_by" id="">
@@ -162,7 +194,7 @@
                                     </select>
                                 </div>
 
-                                
+
                                 <div class="mb-3">
                                     <label for="InputApprove" class="form-label">Approved by</label>
                                     <select type="approved-by" name="approved_by" class="form-control" id="">
@@ -172,7 +204,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
+
 
                                 <div class="mb-3">
                                     <label for="InputStatus" class="form-label">Status Penerimaan</label>
@@ -193,14 +225,14 @@
 
                                 <div class="mb-3">
                                     <label for="InputCheck" class="form-label">Check by</label>
-                                    
+
                                     <select type="check-by" name="checked_by" class="form-control" id="">
                                         @foreach ($employee as $val)
                                         <option value="" disabled selected hidden>Choose...</option>
                                         <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
                                         @endforeach
                                     </select>
-                                    
+
                                 </div>
 
                                 <div class="mb-3">
@@ -209,7 +241,7 @@
                                         <option value="" disabled selected hidden>Choose...</option>
                                         <option value="true">OPEN</option>
                                         <option value="false">CLOSED</option>
-                                    </select>                                
+                                    </select>
                                 </div>
 
                                 <div class="mb-3">
@@ -247,7 +279,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body black-text">
                     <form method="post" action="">
                         <div class="row">
                             <div class="col">
@@ -255,7 +287,7 @@
                                     <label for="InputVendor" class="form-label">Vendor</label>
                                     <input type="text" id="id" name="" class="form-control" value="">
                                 </div>
-                            
+
                                 <div class="mb-3">
                                     <label for="InputJumlah" class="form-label">Jumlah</label>
                                     <input type="text" id="id" name="" class="form-control" value="">
@@ -345,7 +377,7 @@
                         </div>
 
 
-                            
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -370,8 +402,17 @@
                     <p>Are you sure you want to delete?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="sumbit" class="btn btn-primary">Yes</button>
+                    @foreach ($po as $val)
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <form method="post" action="/PO/delete">
+                            @csrf
+                            @method("DELETE")
+
+                            <input type="hidden" id="id" name="po_id" class="form-control"
+                                value="{{ $val['id'] }}">
+                            <button type="submit" class="btn btn-primary">Yes</button>
+                        </form>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@ use App\Http\Controllers\VendorsController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseOrderDetailController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ReceiveOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,10 +101,15 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
 Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/PO','getAllPO');
     Route::post('/PO/add', 'addPO');
+    Route::put('/PO/edit', 'updatePO');
+    Route::delete('/PO/delete', 'deletePO');
 });
 
 Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
-
+    Route::post('/PO/detail','getAllPODetail');
+    Route::post('/PO/detail/add', 'addPODetail');
+    Route::put('/PO/detail/edit', 'updatePODetail');
+    Route::delete('/PO/detail/delete', 'deletePODetail');
 });
 
 Route::controller(CoaController::class)->middleware('isTokenValid')->group(function(){
@@ -118,6 +124,11 @@ Route::controller(ItemController::class)->middleware('isTokenValid')->group(func
     Route::post('/item/add', 'addItem');
     Route::put('/item/edit', 'updateItem');
     Route::delete('/item/delete', 'deleteItem');
+});
+
+Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/receive-order','getAllReceiveOrder');
+    Route::post('/receive-order/add', 'addReceiveOrder');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
@@ -145,9 +156,9 @@ Route::group([], function(){
     //     return view('master.po');
     // });
 
-    // Route::get('/PO/detail', function () {
-    //     return view('master.poDetail');
-    // });
+    Route::get('/PO/detail', function () {
+        return view('master.poDetail');
+    });
 
 });
 
