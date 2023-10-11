@@ -98,7 +98,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Purchase Sheet:</h6>
                         <a class="collapse-item" href="/PO">PO (Purchase Order)</a>
-                        <a class="collapse-item" href="">RO (Receive Order)</a>
+                        <a class="collapse-item" href="/receive-order">RO (Receive Order)</a>
                         <a class="collapse-item" href="">Inventory Information</a>
                         <a class="collapse-item" href="">Invoice Information</a>
                         <a class="collapse-item" href="">QR Code Generator</a>
