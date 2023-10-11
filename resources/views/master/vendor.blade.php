@@ -401,7 +401,7 @@
                                     </div>
 
                                     <div class="mb-3 float-right">
-                                        <button type="submit" class="btn btn-success">Update</button>
+                                        <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
                             </div>
