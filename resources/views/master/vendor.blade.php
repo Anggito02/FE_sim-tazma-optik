@@ -345,7 +345,7 @@
 
                                     <div class="mb-3">
                                         <label for="InputTelpVendor" class="form-label">No Telp Vendor</label>
-                                        <input type="number" id="no_telp_vendor" name="no_telp_vendor"
+                                        <input type="text" id="no_telp_vendor" name="no_telp_vendor"
                                             class="form-control">
 
                                     </div>
