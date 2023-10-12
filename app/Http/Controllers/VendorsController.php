@@ -29,7 +29,7 @@ class VendorsController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
-        
+
 
         $vendor = $response->json();
         // dd($vendor);
@@ -62,7 +62,7 @@ class VendorsController extends Controller
         // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
         // dd($response);
         // $vendor = $response->json();
-        
+
 
         // $user = GetUserInfo::getUserInfo();
 
@@ -124,12 +124,12 @@ class VendorsController extends Controller
             'npwp_vendor' => $request->npwp_vendor,
             'nama_vendor' => $request->nama_vendor,
             'alamat_vendor' => $request->alamat_vendor,
-            'init_data_supply' => $request->init_data_vendor,
-            'last_data_supply' => $request->last_data_vendor,
+            'init_date_supply' => $request->init_date_supply,
+            'last_date_supply' => $request->last_date_supply,
             'pic_vendor' => $request->pic_vendor,
             'no_telp_vendor' => $request->no_telp_vendor,
             'no_telp_pic' => $request->no_telp_pic_vendor,
-            'status_blacklist' => $request->status_vendor
+            'status_blacklist' => $request->status_blacklist
         ];
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/vendor/edit', $api_request);
@@ -153,13 +153,13 @@ class VendorsController extends Controller
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
-        
+
         $api_request = [
             'id' => $request->id
         ];
 
         $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/vendor/delete', $api_request);
-        
+
         $result = $response->json();
 
         if($result['status'] == 'success'){
