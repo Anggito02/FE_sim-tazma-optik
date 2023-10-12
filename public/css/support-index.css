@@ -37,3 +37,15 @@
 .txt-right {
     text-align: right;
 }
+
+.frame-detail {
+    display: none;
+}
+
+.lensa-detail {
+    display: none;
+}
+
+.aksesoris-detail {
+    display: none;
+}
