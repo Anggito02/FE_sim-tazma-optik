@@ -227,7 +227,8 @@
                                                                             <option value="1">Blacklist</option>
                                                                             @elseif ($val['status_blacklist'] == 1)
                                                                             <option value="0">Active</option>
-                                                                            <option value="1" selected>Blacklist</option>
+                                                                            <option value="1" selected>Blacklist
+                                                                            </option>
                                                                             @endif
                                                                         </select>
                                                                     </div>
