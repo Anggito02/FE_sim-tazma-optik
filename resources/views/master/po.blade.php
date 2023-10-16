@@ -87,7 +87,7 @@
                                 <td class="text-white text-danger">CLOSED</td>
                             @endif
                             <td>
-                                @foreach ($po as $val)
+
                                     <form action="/PO/detail" method="post">
                                     @csrf
                                     @method("POST")
@@ -126,7 +126,7 @@
                                     </button>
 
                                 </form>
-                                @endforeach
+
 
                             </td>
                             <td>
@@ -273,7 +273,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Data PO</h5>
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">Edit Data PO</h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -393,16 +393,16 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Data PO</h5>
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">Delete Data PO</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body black-text">
                     <p>Are you sure you want to delete?</p>
                 </div>
-                <div class="modal-footer">
-                    @foreach ($po as $val)
+                <div class="modal-footer black-text">
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                         <form method="post" action="/PO/delete">
                             @csrf
@@ -412,7 +412,7 @@
                                 value="{{ $val['id'] }}">
                             <button type="submit" class="btn btn-primary">Yes</button>
                         </form>
-                    @endforeach
+
                 </div>
             </div>
         </div>

@@ -128,7 +128,7 @@ class VendorsController extends Controller
             'last_date_supply' => $request->last_date_supply,
             'pic_vendor' => $request->pic_vendor,
             'no_telp_vendor' => $request->no_telp_vendor,
-            'no_telp_pic' => $request->no_telp_pic_vendor,
+            'no_telp_pic' => $request->no_telp_pic,
             'status_blacklist' => $request->status_blacklist
         ];
 

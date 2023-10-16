@@ -10,7 +10,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="d-flex justify-content-between p-5">
+            <div class="d-flex justify-content-between p-5 black-text">
                 <div class="d-flex flex-column">
                     <h1>{{$po['nomor_po']}}</h1>
                     <h2>{{$po['tanggal_dibuat']}}</h2>
@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-between p-5">
+            <div class="d-flex justify-content-between p-5 black-text">
                 <div class="d-flex flex-column">
                     <h3>Nama Vendor: {{$po['nama_vendor']}}</h3>
                 </div>
@@ -110,12 +110,12 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">New Pre-Order</h5>
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">New Pre-Order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body black-text">
                     <form method="post" action="/PO/add">
                         @csrf
                         @method("POST")
@@ -182,13 +182,13 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Data PO</h5>
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">Edit Data PO</h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body black-text">
                     <form method="post" action="">
                         <div class="row">
                             <div class="col">
@@ -302,15 +302,15 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Data PO</h5>
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">Delete Data PO</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body black-text">
                     <p>Are you sure you want to delete?</p>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer black-text">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                     <button type="sumbit" class="btn btn-primary">Yes</button>
                 </div>
