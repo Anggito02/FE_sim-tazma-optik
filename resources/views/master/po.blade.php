@@ -70,21 +70,21 @@
                             <td class="nowrap">{{ $val['nomor_po'] }}</td>
                             <td class="nowrap">{{ $val['tanggal_dibuat'] }}</td>
                             @if ($val['status_po'] == '1')
-                                <td class="text-white text-success">OPEN</td>
+                            <td class="text-white text-success">OPEN</td>
                             @elseif ($val['status_po'] == '0')
-                                <td class="text-white text-danger">CLOSED</td>
+                            <td class="text-white text-danger">CLOSED</td>
                             @endif
 
                             @if ($val['status_pembayaran'] == '1')
-                                <td class="text-white text-success">PAID</td>
+                            <td class="text-white text-success">PAID</td>
                             @elseif ($val['status_pembayaran'] == '0')
-                                <td class="text-white text-danger">UNPAID</td>
+                            <td class="text-white text-danger">UNPAID</td>
                             @endif
 
                             @if ($val['status_penerimaan'] == '1')
-                                <td class="text-white text-success">OPEN</td>
+                            <td class="text-white text-success">OPEN</td>
                             @elseif ($val['status_penerimaan'] == '0')
-                                <td class="text-white text-danger">CLOSED</td>
+                            <td class="text-white text-danger">CLOSED</td>
                             @endif
                             <td>
                                 <button type="button" class="btn-sm btn-info">
@@ -95,15 +95,204 @@
                             </td>
                             <td>
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
+
+                                <!-- Modal Update Data -->
+                                <div class="modal fade" id="exampleModalCenterEdit{{$id}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title black-text" id="exampleModalLongTitle">Edit Data
+                                                    PO</h5>
+
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body black-text">
+                                                <form method="post" action="">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label for="InputVendor"
+                                                                    class="form-label">Vendor</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputJumlah"
+                                                                    class="form-label">Jumlah</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputJual" class="form-label">Harga Jual
+                                                                    Unit</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputKode" class="form-label">Kode
+                                                                    Item</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputUnit" class="form-label">Unit</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputMade" class="form-label">Made
+                                                                    by</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputApprove" class="form-label">Approve
+                                                                    by</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputStatus" class="form-label">Status
+                                                                    Receiving</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputNomor" class="form-label">Nomor
+                                                                    PO</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label for="InputMerk" class="form-label">Merek</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputBeli" class="form-label">Harga Beli
+                                                                    Unit</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputTanggal" class="form-label">Tanggal
+                                                                    Masuk PO</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputName" class="form-label">Nama
+                                                                    Item</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputDisc" class="form-label">Diskon</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputCheck" class="form-label">Check
+                                                                    by</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputStatus" class="form-label">Status
+                                                                    PO</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputStatus" class="form-label">Status
+                                                                    Invoice</label>
+                                                                <input type="text" id="id" name="" class="form-control"
+                                                                    value="">
+                                                            </div>
+
+                                                            <div class="mt-5 float-right">
+                                                                <button type="sumbit"
+                                                                    class="btn btn-primary">Update</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td>
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
+
+                                <!-- Modal Delete Data -->
+                                <div class="modal fade" id="exampleModalCenterDelete{{$id}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title black-text" id="exampleModalLongTitle">Delete
+                                                    Data PO</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body black-text">
+                                                <p>Are you sure you want to delete?</p>
+                                            </div>
+                                            <div class="modal-footer black-text">
+
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">No</button>
+                                                <form method="post" action="/PO/delete">
+                                                    @csrf
+                                                    @method("DELETE")
+
+                                                    <input type="hidden" id="id" name="po_id" class="form-control"
+                                                        value="{{ $id }}">
+                                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
 
                             </td>
@@ -133,7 +322,7 @@
                     <form method="post" action="/PO/add">
                         @csrf
                         @method("POST")
-                    <div class="row">
+                        <div class="row">
                             <div class="col">
 
                                 <div class="mb-3">
@@ -164,7 +353,8 @@
                                     <select type="approved-by" name="approved_by" class="form-control" id="">
                                         @foreach ($employee as $val)
                                         <option value="" disabled selected hidden>Choose...</option>
-                                        <option value="{{$val['id']}}" name="approved_by">{{$val['employee_name']}}</option>
+                                        <option value="{{$val['id']}}" name="approved_by">{{$val['employee_name']}}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -172,7 +362,8 @@
 
                                 <div class="mb-3">
                                     <label for="InputStatus" class="form-label">Status Penerimaan</label>
-                                    <select type="status-penerimaan" name="status_penerimaan" class="form-control" id="">
+                                    <select type="status-penerimaan" name="status_penerimaan" class="form-control"
+                                        id="">
                                         <option value="" disabled selected hidden>Choose...</option>
                                         <option value="true">OPEN</option>
                                         <option value="false">CLOSED</option>
@@ -183,8 +374,11 @@
 
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="InputTanggal" class="form-label">Tanggal Dibuat</label>
-                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control" placeholder="YYYY-MM-DD">
+                                    {{-- <label for="InputTanggal" class="form-label">Tanggal Dibuat</label>
+                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control" placeholder="YYYY-MM-DD"> --}}
+                                    <label for="InputLastDateSupply" class="form-label">Tanggal Dibuat</label>
+                                    <div><input type="date" id="id" name="tanggal_dibuat" class="form-control" value="">
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
@@ -210,7 +404,8 @@
 
                                 <div class="mb-3">
                                     <label for="InputStatus" class="form-label">Status Pembayaran</label>
-                                    <select type="status-pembayaran" name="status_pembayaran" class="form-control" id="">
+                                    <select type="status-pembayaran" name="status_pembayaran" class="form-control"
+                                        id="">
                                         <option value="" disabled selected hidden>Choose...</option>
                                         <option value="true">PAID</option>
                                         <option value="false">UNPAID</option>
@@ -230,158 +425,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal Update Data -->
-    <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Data PO</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body black-text">
-                    <form method="post" action="">
-                        <div class="row">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="InputVendor" class="form-label">Vendor</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputJumlah" class="form-label">Jumlah</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputJual" class="form-label">Harga Jual Unit</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputKode" class="form-label">Kode Item</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputUnit" class="form-label">Unit</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputMade" class="form-label">Made by</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputApprove" class="form-label">Approve by</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputStatus" class="form-label">Status Receiving</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputNomor" class="form-label">Nomor PO</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="InputMerk" class="form-label">Merek</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputBeli" class="form-label">Harga Beli Unit</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputTanggal" class="form-label">Tanggal Masuk PO</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputName" class="form-label">Nama Item</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputDisc" class="form-label">Diskon</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputCheck" class="form-label">Check by</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputStatus" class="form-label">Status PO</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputStatus" class="form-label">Status Invoice</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mt-5 float-right">
-                                    <button type="sumbit" class="btn btn-primary">Update</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Delete Data -->
-    <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Data PO</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete?</p>
-                </div>
-                <div class="modal-footer">
-                    @foreach ($po as $val)
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <form method="post" action="/PO/delete">
-                            @csrf
-                            @method("DELETE")
-
-                            <input type="hidden" id="id" name="po_id" class="form-control"
-                                value="{{ $val['id'] }}">
-                            <button type="submit" class="btn btn-primary">Yes</button>
-                        </form>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 </div>
 @endsection

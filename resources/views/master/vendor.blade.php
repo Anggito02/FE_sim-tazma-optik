@@ -227,7 +227,8 @@
                                                                             <option value="1">Blacklist</option>
                                                                             @elseif ($val['status_blacklist'] == 1)
                                                                             <option value="0">Active</option>
-                                                                            <option value="1" selected>Blacklist</option>
+                                                                            <option value="1" selected>Blacklist
+                                                                            </option>
                                                                             @endif
                                                                         </select>
                                                                     </div>
@@ -324,7 +325,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="modal-body">
+                <div class="modal-body black-text">
                     <div class="container-fluid">
                         <form method="post" action="/vendors/add">
                             @csrf
@@ -356,12 +357,7 @@
 
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="InputInitDateSupply" class="form-label">Tanggal Awal
-                                            Persediaan</label>
-                                        <input type="date" id="init_date_supply" name="init_date_supply"
-                                            class="form-control">
-                                    </div>
+
 
                                 </div>
                                 <div class="col">
@@ -384,6 +380,13 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label for="InputInitDateSupply" class="form-label">Tanggal Awal
+                                            Persediaan</label>
+                                        <input type="date" id="init_date_supply" name="init_date_supply"
+                                            class="form-control">
+                                    </div>
+
+                                    {{-- <div class="mb-3">
                                         <label for="InputStatus" class="form-label">Status</label>
                                         <select type="status_blacklist" class="form-select form-control"
                                             name="status_blacklist" id="status_blacklist">
@@ -391,14 +394,14 @@
                                             <option value="0">Active</option>
                                             <option value="1">Blacklist</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label for="InputLastDateSupply" class="form-label">Tanggal Terakhir
                                             Persediaan</label>
                                         <input type="date" id="last_date_supply" name="last_date_supply"
                                             class="form-control">
-                                    </div>
+                                    </div> --}}
 
                                     <div class="mb-3 float-right">
                                         <button type="submit" class="btn btn-success">Submit</button>
