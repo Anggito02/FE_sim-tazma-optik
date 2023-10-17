@@ -16,8 +16,8 @@
                     <h2>{{$po['tanggal_dibuat']}}</h2>
                 </div>
                 <div class="d-flex flex-column align-items-end">
-                    <p>made: {{$po['made_by_name']}}</p>
-                    <p>checked: {{$po['checked_by_name']}}</p>
+                    <p>Made By: {{$po['made_by_name']}}</p>
+                    <p>Checked By: {{$po['checked_by_name']}}</p>
                     <p>Approved By: {{$po['approved_by_name']}}</p>
                 </div>
             </div>
@@ -27,9 +27,24 @@
                     <h3>Nama Vendor: {{$po['nama_vendor']}}</h3>
                 </div>
                 <div class="d-flex flex-column align-items-end">
-                    <p>Status PO: {{$po['status_po']}}</p>
-                    <p>Status Penerimaan: {{$po['status_penerimaan']}}</p>
-                    <p>Status Pembayaran: {{$po['status_pembayaran']}}</p>
+                    @if ($po['status_po'] == '1') 
+                    <p>Status PO: <span class="badge badge-success">OPEN</span></p>
+                    @elseif ($po['status_po'] == '0')
+                    <p>Status PO: <span class="badge badge-danger">CLOSED</span></p>
+                    @endif
+
+                    @if ($po['status_penerimaan'] == '1')
+                    <p>Status Penerimaan: <span class="badge badge-success">OPEN</span></p>
+                    @elseif ($po['status_penerimaan'] == '0')
+                    <p>Status Penerimaan: <span class="badge badge-danger">CLOSED</span></p>
+                    @endif
+
+                    @if ($po['status_pembayaran'] == '1')
+                    <p>Status Pembayaran: <span class="badge badge-success">PAID</span></p>
+                    @elseif ($po['status_pembayaran'] == '0')
+                    <p>Status Pembayaran: <span class="badge badge-danger">UNPAID</span></p>
+                    @endif
+                    
                 </div>
             </div>
         </div>
@@ -122,7 +137,7 @@
                     </button>
                 </div>
                 <div class="modal-body black-text">
-                    <form method="post" action="/PO/add">
+                    <form method="post" action="/PO/detail/add">
                         @csrf
                         @method("POST")
                     <div class="row">
