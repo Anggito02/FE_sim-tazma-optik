@@ -106,6 +106,7 @@ Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->g
 });
 
 Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/PO/detail/{id}','getAllPODetail');
     Route::post('/PO/detail','getAllPODetail');
     Route::post('/PO/detail/add', 'addPODetail');
     Route::put('/PO/detail/edit', 'updatePODetail');
@@ -155,10 +156,6 @@ Route::group([], function(){
     // Route::get('/PO', function () {
     //     return view('master.po');
     // });
-
-    Route::get('/PO/detail', function () {
-        return view('master.poDetail');
-    });
 
 });
 

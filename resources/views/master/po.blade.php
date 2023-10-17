@@ -87,47 +87,11 @@
                                 <td class="text-white text-danger">CLOSED</td>
                             @endif
                             <td>
-                                @foreach ($po as $val)
-                                    <form action="/PO/detail" method="post">
-                                    @csrf
-                                    @method("POST")
-                                    <input type="hidden" id="id" name="status_po" class="form-control"
-                                        value="{{ $val['status_po'] }}">
-
-                                    <input type="hidden" id="id" name="status_pembayaran" class="form-control"
-                                        value="{{ $val['status_pembayaran'] }}">
-
-                                    <input type="hidden" id="id" name="status_penerimaan" class="form-control"
-                                        value="{{ $val['status_penerimaan'] }}">
-
-                                    <input type="hidden" id="id" name="checked_by_name" class="form-control"
-                                        value="{{ $val['checked_by_name'] }}">
-
-                                    <input type="hidden" id="id" name="tanggal_dibuat" class="form-control"
-                                        value="{{ $val['tanggal_dibuat'] }}">
-
-                                    <input type="hidden" id="id" name="nomor_po" class="form-control"
-                                        value="{{ $val['nomor_po'] }}">
-
-                                    <input type="hidden" id="id" name="po_id" class="form-control"
-                                        value="{{ $val['id'] }}">
-
-                                    <input type="hidden" id="id" name="nama_vendor" class="form-control"
-                                        value="{{ $val['nama_vendor'] }}">
-
-                                    <input type="hidden" id="id" name="made_by_name" class="form-control"
-                                        value="{{ $val['made_by_name'] }}">
-
-                                    <input type="hidden" id="id" name="approved_by_name" class="form-control"
-                                        value="{{ $val['approved_by_name'] }}">
-
-                                    <button type="submit" class="btn-sm btn-info">
+                                <button type="button" class="btn-sm btn-info">
+                                    <a href="/PO/detail/{{ $val['id'] }}">
                                         <i class="fa fa-eye"></i>
-                                    </button>
-
-                                </form>
-                                @endforeach
-
+                                    </a>
+                                </button>
                             </td>
                             <td>
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"

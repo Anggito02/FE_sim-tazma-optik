@@ -58,8 +58,6 @@
                             <th class="thead-text"><span class="nowrap">Harga Beli Satuan</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Jual Satuan</span></th>
                             <th class="thead-text"><span class="nowrap">Diskon</span></th>
-                            <th class="thead-text"><span class="nowrap">Purchase Order Id</span></th>
-                            <th class="thead-text"><span class="nowrap">Item Id</span></th>
                             <th class="thead-text"><span class="nowrap">Edit</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
 
@@ -68,35 +66,43 @@
                     <tbody>
 
                         <div class="d-none">
-
+                            {{ $iterator = 1 }}
                         </div>
-
-                        <tr>
-                            <td class="txt-center"></td>
-                            <td class="nowrap"></td>
-                            <td class="nowrap"></td>
-                            <td class="nowrap text-right"></td>
-                            <td class="nowrap text-right"></td>
-                            <td class="nowrap text-right"></td>
-                            <td class="nowrap text-right"></td>
-                            <td class="nowrap text-right"></td>
-                            <td class="nowrap text-right"></td>
-                            <td class="nowrap text-right"></td>
-                            <td>
-                                <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn-sm btn-danger" data-toggle="modal"
+                        @foreach ($pod as $valPod)
+                            <tr>
+                                <td class="txt-center">{{ $iterator }}</td>
+                                <td class="nowrap">{{ $valPod['pre_order_qty'] }}</td>
+                                <td class="nowrap">@if ($valPod['received_qty'] == null)
+                                <div class="text-danger">Item Not Received</div>
+                                @else
+                                {{ $valPod['received_qty'] }}
+                                @endif</td>
+                                <td class="nowrap">@if ($valPod['not_good_qty'] == null)
+                                <div class="text-danger">Item Not Received</div>
+                                @else
+                                {{ $valPod['not_good_qty'] }}
+                                @endif</td>
+                                <td class="nowrap text-right">{{ $valPod['unit'] }}</td>
+                                <td class="nowrap text-right">{{ $valPod['harga_beli_satuan'] }}</td>
+                                <td class="nowrap text-right">{{ $valPod['harga_jual_satuan'] }}</td>
+                                    <td class="nowrap text-right">{{ $valPod['diskon'] }}</td>
+                                    <td>
+                                        <button type="button" class="btn-sm btn-primary" data-toggle="modal"
+                                        data-target="#exampleModalCenterEdit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete">
                                     <i class="fa fa-trash"></i>
                                 </button>
-
-
                             </td>
                         </tr>
+                        <div class="d-none">
+                            {{ $iterator = $iterator + 1 }}
+                        </div>
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -116,29 +122,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/PO/add">
+                    <form method="post" action="/PO/detail/add">
                         @csrf
                         @method("POST")
                     <div class="row">
                             <div class="col">
 
+                                <div>
+                                <input type="hidden" id="POId" name="purchase_order_id" class="form-control" value="{{ $po['id'] }}">
+                                </div>
+
+
                                 <div class="mb-3">
-                                    <label for="InputVendor" class="form-label">Pre-Order Quantity</label>
-                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control">
+                                    <label for="POQty" class="form-label">Pre-Order Quantity</label>
+                                    <input type="number" id="POQty" name="pre_order_qty" class="form-control">
 
                                 </div>
 
 
                                 <div class="mb-3">
-                                    <label for="InputMade" class="form-label">Harga Beli Satuan</label>
-                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control" >
+                                    <label for="HargaBeliSatuan" class="form-label">Harga Beli Satuan</label>
+                                    <input type="number" id="HargaBeliSatuan" name="harga_beli_satuan" class="form-control" >
 
                                 </div>
 
 
                                 <div class="mb-3">
-                                    <label for="InputApprove" class="form-label">Diskon</label>
-                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control">
+                                    <label for="Diskon" class="form-label">Diskon</label>
+                                    <input type="number" id="Diskon" name="diskon" class="form-control">
 
                                 </div>
 
@@ -146,20 +157,24 @@
 
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="InputTanggal" class="form-label">Unit</label>
-                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control">
+                                    <label for="Unit" class="form-label">Unit</label>
+                                    <input type="text" id="Unit" name="unit" class="form-control">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="InputCheck" class="form-label">Harga Jual Satuan</label>
-                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control">
+                                    <label for="HargaJualSatuan" class="form-label">Harga Jual Satuan</label>
+                                    <input type="number" id="HargaJualSatuan" name="harga_jual_satuan" class="form-control">
 
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="InputStatus" class="form-label">ID Item</label>
-                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control">
-
+                                    <label for="Item" class="form-label">Item</label>
+                                    <select type="text" name="item_id" class="form-control" id="">
+                                        @foreach ($items as $items)
+                                            <option value="" disabled selected hidden>Choose...</option>
+                                            <option value="{{ $items['id'] }}">{{ $items['kode_item'] }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="mt-5 float-right">

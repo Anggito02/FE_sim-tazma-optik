@@ -13,7 +13,7 @@ use App\Utils\GetUserInfo;
 class PurchaseOrderDetailController extends Controller
 {
     //
-    public function getAllPODetail (Request $request) {
+    public function getAllPODetail (Request $request, int $po_id) {
         $token = $_COOKIE['token'];
 
         $page = 1;
@@ -24,41 +24,76 @@ class PurchaseOrderDetailController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
 
-        $api_request = [
-            "purchase_order_id" => $request->po_id,
+        $api_request_po = [
+            "id" => $po_id
+        ];
+
+        $api_request_pod = [
+            "purchase_order_id" => $po_id,
             "page" => $page,
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/all', $api_request);
+        $api_request = [
+            "page" => $page,
+            "limit" => $limit
+        ];
+
+        $response_po = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/one', $api_request_po);
+        $response_pod = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/all', $api_request_pod);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
+        $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/all', $api_request);
 
-        $pod = $response->json();
+        $po = $response_po->json();
+        $pod = $response_pod->json();
         $employee = $response_employee->json();
         $vendor = $response_vendor->json();
+        $item = $response_item->json();
 
         $user = GetUserInfo::getUserInfo();
         if ($employee['status'] == 'success' && $vendor['status'] == 'success'){
             return view('master.poDetail', [
-                'po' => [
-                    'nomor_po' => $request->nomor_po,
-                    'status_pembayaran' => $request->status_pembayaran,
-                    'status_penerimaan' => $request->status_penerimaan,
-                    'tanggal_dibuat' => $request->tanggal_dibuat,
-                    'status_po' => $request->status_po,
-                    'nama_vendor' => $request->nama_vendor,
-                    'made_by_name' => $request->made_by_name,
-                    'approved_by_name' => $request->approved_by_name,
-                    'checked_by_name' => $request->checked_by_name
-                ],
-                // 'pod' => $pod['data'],
+                'po' => $po['data'],
+                'pod' => $pod['data'],
                 'data' => $user['data'],
                 'employee' => $employee['data'],
-                'vendor' => $vendor['data']
+                'vendor' => $vendor['data'],
+                'items' => $item['data']
             ]);
         }else{
             return redirect('/dashboard');
         }
+    }
+
+    public function addPODetail(Request $request) {
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request = [
+            'pre_order_qty' => $request->pre_order_qty,
+            'unit' => $request->unit,
+            'harga_beli_satuan' => $request->harga_beli_satuan,
+            'harga_jual_satuan' => $request->harga_jual_satuan,
+            'diskon' => $request->diskon,
+            'item_id' => $request->item_id,
+            'purchase_order_id' => $request->purchase_order_id
+        ];
+
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/add', $api_request);
+
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            toastr()->info('Purchase Order Detail added successfully!', 'Purchase Order Detail', ['timeOut' => 3000]);
+            return redirect('/PO/detail/'.$request->purchase_order_id);
+        } else {
+            toastr()->error($result['message'], 'Purchase Order Detail', ['timeOut' => 3000]);
+        }
+
     }
 }
