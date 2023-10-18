@@ -153,9 +153,9 @@ Route::group([], function(){
         return view('error_page.505');
     });
 
-    // Route::get('/PO', function () {
-    //     return view('master.po');
-    // });
+    Route::get('/Receive-Order', function () {
+        return view('master.receiveorder');
+    });
 
 });
 

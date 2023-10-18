@@ -374,14 +374,6 @@
 
                             <div class="col">
                                 <div class="mb-3">
-                                    {{-- <label for="InputTanggal" class="form-label">Tanggal Dibuat</label>
-                                    <input type="text" id="id" name="tanggal_dibuat" class="form-control" placeholder="YYYY-MM-DD"> --}}
-                                    <label for="InputLastDateSupply" class="form-label">Tanggal Dibuat</label>
-                                    <div><input type="date" id="id" name="tanggal_dibuat" class="form-control" value="">
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
                                     <label for="InputCheck" class="form-label">Check by</label>
 
                                     <select type="check-by" name="checked_by" class="form-control" id="">
