@@ -8,12 +8,28 @@
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
     <!-- DataTales Example -->
+    <div class="mb-4">
+        <a href="/PO/detail/{{ $po['id'] }}"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
     <div class="card shadow mb-4">
         <div class="card-body">
-            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter">
-                New Pre-Order
-            </button>
+            <div class="d-flex justify-content-between p-5 black-text">
+                <div class="d-flex flex-column">
+                    <h1>{{$ro['nomor_receive_order']}}</h1>
+                    <h2>{{$ro['tanggal_penerimaan']}}</h2>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between p-5 black-text">
+                <div class="d-flex flex-column">
+                    <h3>Nama Vendor: {{$po['nama_vendor']}}</h3>
+                </div>
+                <div class="d-flex flex-column align-items-end">
+                    <p>Checked By: {{$ro['checked_by_name']}}</p>
+                    <p>Approved By: {{$ro['approved_by_name']}}</p>
+                    <p>Receive By: {{$ro['received_by_name']}}</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -28,230 +44,106 @@
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Nomor PO</span></th>
-                            <th class="thead-text"><span class="nowrap">Quantity PO Receive</span></th>
-                            <th class="thead-text"><span class="nowrap">Quantity PO NG</span></th>
-                            <th class="thead-text"><span class="nowrap">Receive By</span></th>
-                            <th class="thead-text"><span class="nowrap">Check By</span></th>
-                            <th class="thead-text"><span class="nowrap">Approve By</span></th>
-                            <th class="thead-text"><span class="nowrap">Nomor Receive</span></th>
-                            <th class="thead-text"><span class="nowrap">Receive Date</span></th>
-                            <th class="thead-text"><span class="nowrap">Status Invoice</span></th>
+                            <th class="thead-text"><span class="nowrap">Nama Item</span></th>
+                            <th class="thead-text"><span class="nowrap">PO Quantity</span></th>
+                            <th class="thead-text"><span class="nowrap">Received Quantity</span></th>
+                            <th class="thead-text"><span class="nowrap">Not Good Quantity</span></th>
+                            <th class="thead-text"><span class="nowrap">Unit</span></th>
+                            <th class="thead-text"><span class="nowrap">Harga Beli Satuan</span></th>
                             <th class="thead-text"><span class="nowrap">Edit</span></th>
-                            <th class="thead-text"><span class="nowrap">Delete</span></th>
-
                         </tr>
                     </thead>
                     <tbody>
 
-
+                        <div class="d-none">
+                            {{ $iterator = 1 }}
+                        </div>
+                        @foreach ($pod as $valPod)
                         <tr>
-                            <td class="txt-center">1</td>
-                            <td class="nowrap">PO-01</td>
-                            <td class="nowrap text-right">100</td>
-                            <td class="nowrap text-right">0</td>
-                            <td class="nowrap text-right">Nggito</td>
-                            <td class="nowrap text-right">Nggito</td>
-                            <td class="nowrap text-right">Nggito</td>
-                            <td class="nowrap">AAB-01</td>
-                            <td class="nowrap">11-10-2023</td>
-                            <td class="nowrap">Accept</td>
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td class="nowrap">{{ $valPod['kode_item'] }}</td>
+                            <td class="nowrap text-right">{{ $valPod['pre_order_qty'] }}</td>
+                            <td class="nowrap">@if ($valPod['received_qty'] == null)
+                                <div class="text-danger">Item Not Received</div>
+                                @else
+                                <div class="text-right">{{ $valPod['received_qty'] }}</div>
+                                @endif</td>
+                            <td class="nowrap">@if ($valPod['not_good_qty'] == null)
+                                <div class="text-danger">Item Not Received</div>
+                                @else
+                                <div class="text-right">{{ $valPod['not_good_qty'] }}</div>
+                                @endif</td>
+                            <td class="nowrap ">{{ $valPod['unit'] }}</td>
+                            <td class="nowrap text-right">{{ $valPod['harga_beli_satuan'] }}</td>
                             <td>
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </td>
+                                data-target="#exampleModalCenterEdit{{$valPod['id']}}">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <!-- Modal Update Data -->
+                            <div class="modal fade" id="exampleModalCenterEdit{{$valPod['id']}}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Edit Data PO</h5>
+                        
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" action="/receive-order/edit">
+                                                @csrf
+                                                @method("PUT")
+                                                <div class="row">
+                                                    <div class="col">
+                                                    <input type="hidden" name="id" class="form-control" value="{{ $valPod['id'] }}">
+                                                    <input type="hidden" name="pre_order_qty" class="form-control" value="{{ $valPod['pre_order_qty'] }}">
+                                                    <input type="hidden" name="unit" class="form-control" value="{{ $valPod['unit'] }}">
+                                                    <input type="hidden" name="harga_beli_satuan" class="form-control" value="{{ $valPod['harga_beli_satuan'] }}">
+                                                    <input type="hidden" name="harga_jual_satuan" class="form-control" value="{{ $valPod['harga_jual_satuan'] }}">
+                                                    <input type="hidden" name="diskon" class="form-control" value="{{ $valPod['diskon'] }}">
+                                                    <input type="hidden" name="item_id" class="form-control" value="{{ $valPod['item_id'] }}">
+                                                    <input type="hidden" name="purchase_order_id" class="form-control" value="{{ $valPod['purchase_order_id'] }}">
+                                                    <input type="hidden" name="receive_order_id" class="form-control" value="{{ $ro['id'] }}">
+                        
+                                                        <div class="mb-3">
+                                                            <label for="InputNomor" class="form-label">Received Quantity</label>
+                                                            <input type="number" name="received_qty" class="form-control" value="{{ $valPod['received_qty'] }}">
+                                                        </div>
+                                                    </div>
+                        
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label for="InputQtyReceive" class="form-label">Not Good Quantity</label>
+                                                            <input type="number" name="not_good_qty" class="form-control" value="{{ $valPod['not_good_qty'] }}">
+                                                        </div>
+                        
+                                                        <div class="mt-2 float-right">
+                                                            <button type="submit" class="btn btn-success">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         </tr>
+                        <div class="d-none">
+                            {{ $iterator = $iterator + 1 }}
+                        </div>
+                        @endforeach
 
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-    <!-- Modal Add Data -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">New Receive-Order</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="">
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="InputNomor" class="form-label">Nomor PO</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputQtyNg" class="form-label">Quantity PO NG</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputCheck" class="form-label">Check By</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputNomor" class="form-label">Nomor Receive</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputApprove" class="form-label">Status Invoice</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="InputQtyReceive" class="form-label">Quantity PO Receive</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputReceive" class="form-label">Receive By</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputApprove" class="form-label">Approve By</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputDate" class="form-label">Receive Date</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mt-5 float-right">
-                                    <button type="submit" class="btn btn-success">Add new</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Update Data -->
-    <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Data PO</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="">
-                        <div class="row">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="InputNomor" class="form-label">Nomor PO</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputQtyNg" class="form-label">Quantity PO NG</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputCheck" class="form-label">Check By</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputNomor" class="form-label">Nomor Receive</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputApprove" class="form-label">Status Invoice</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="InputQtyReceive" class="form-label">Quantity PO Receive</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputReceive" class="form-label">Receive By</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputApprove" class="form-label">Approve By</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="InputDate" class="form-label">Receive Date</label>
-                                    <input type="text" id="id" name="" class="form-control" value="">
-                                </div>
-
-                                <div class="mt-5 float-right">
-                                    <button type="submit" class="btn btn-success">Add new</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Delete Data -->
-    <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Data PO</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="sumbit" class="btn btn-primary">Yes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 </div>
 @endsection
