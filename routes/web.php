@@ -128,8 +128,9 @@ Route::controller(ItemController::class)->middleware('isTokenValid')->group(func
 });
 
 Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/receive-order','getAllReceiveOrder');
+    Route::get('/receive-order/{id}','getReceiveOrder');
     Route::post('/receive-order/add', 'addReceiveOrder');
+    Route::put('/receive-order/edit', 'updateReceiveOrder');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
@@ -153,9 +154,9 @@ Route::group([], function(){
         return view('error_page.505');
     });
 
-    Route::get('/Receive-Order', function () {
-        return view('master.receiveorder');
-    });
+    // Route::get('/Receive-Order', function () {
+    //     return view('master.receiveorder');
+    // });
 
 });
 
