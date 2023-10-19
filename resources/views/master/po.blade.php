@@ -76,15 +76,15 @@
                             @endif
 
                             @if ($val['status_pembayaran'] == '1')
-                            <td class="text-white text-success">PAID</td>
+                            <td class="text-white text-success">Sudah Dibayar</td>
                             @elseif ($val['status_pembayaran'] == '0')
-                            <td class="text-white text-danger">UNPAID</td>
+                            <td class="text-white text-danger">Belum Dibayar</td>
                             @endif
 
                             @if ($val['status_penerimaan'] == '1')
-                            <td class="text-white text-success">OPEN</td>
+                            <td class="text-white text-success">Sudah diterima</td>
                             @elseif ($val['status_penerimaan'] == '0')
-                            <td class="text-white text-danger">CLOSED</td>
+                            <td class="text-white text-danger">Belum diterima</td>
                             @endif
                             <td>
                                 <button type="button" class="btn-sm btn-info">
@@ -333,7 +333,6 @@
                                         <option value="{{$val['id']}}" name="vendor_id">{{$val['nama_vendor']}}</option>
                                         @endforeach
                                     </select>
-
                                 </div>
 
 
@@ -361,13 +360,8 @@
 
 
                                 <div class="mb-3">
-                                    <label for="InputStatus" class="form-label">Status Penerimaan</label>
-                                    <select type="status-penerimaan" name="status_penerimaan" class="form-control"
-                                        id="">
-                                        <option value="" disabled selected hidden>Choose...</option>
-                                        <option value="true">OPEN</option>
-                                        <option value="false">CLOSED</option>
-                                    </select>
+                                    <label for="InputVendor" class="form-label">Status Penerimaan</label>
+                                    <input type="text" name="status_penerimaan" class="form-control" value="Belum Diterima" readonly="readonly">
                                 </div>
 
                             </div>
@@ -389,8 +383,8 @@
                                     <label for="InputStatus" class="form-label">Status PO</label>
                                     <select type="status-po" name="status_po" class="form-control" id="">
                                         <option value="" disabled selected hidden>Choose...</option>
-                                        <option value="true">OPEN</option>
-                                        <option value="false">CLOSED</option>
+                                        <option value="OPEN">OPEN</option>
+                                        <option value="CLOSED">CLOSED</option>
                                     </select>
                                 </div>
 
@@ -399,8 +393,8 @@
                                     <select type="status-pembayaran" name="status_pembayaran" class="form-control"
                                         id="">
                                         <option value="" disabled selected hidden>Choose...</option>
-                                        <option value="true">PAID</option>
-                                        <option value="false">UNPAID</option>
+                                        <option value="Sudah Dibayar">Sudah Dibayar</option>
+                                        <option value="Belum Dibayar">Belum Dibayar</option>
                                     </select>
                                 </div>
 
