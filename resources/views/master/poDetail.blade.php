@@ -154,7 +154,8 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Item</label>
                                                                 <select type="text" name="item_id" class="form-control">
-                                                                    <option value="{{ $valPod['item_id']}}" selected>{{$valPod['kode_item']}}</option>
+                                                                    <option value="{{ $valPod['item_id']}}" selected>
+                                                                        {{$valPod['kode_item']}}</option>
                                                                 </select>
                                                             </div>
 
@@ -222,9 +223,42 @@
                             </td>
                             <td>
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
+
+                                <!-- Modal Delete Data -->
+                                <div class="modal fade" id="exampleModalCenterDelete{{$id}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title black-text" id="exampleModalLongTitle">Delete
+                                                    Data PO</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body black-text">
+                                                <p>Are you sure you want to delete?</p>
+                                            </div>
+                                            <div class="modal-footer black-text">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">No</button>
+
+                                                <form method="post" action="/PO/delete">
+                                                    @csrf
+                                                    @method("DELETE")
+
+                                                    <input type="hidden" id="id" name="po_detail_id" class="form-control"
+                                                        value="{{ $id }}">
+                                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <div class="d-none">
@@ -409,27 +443,7 @@
     </div>
 
 
-    <!-- Modal Delete Data -->
-    <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title black-text" id="exampleModalLongTitle">Delete Data PO</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body black-text">
-                    <p>Are you sure you want to delete?</p>
-                </div>
-                <div class="modal-footer black-text">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="sumbit" class="btn btn-primary">Yes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 
 </div>

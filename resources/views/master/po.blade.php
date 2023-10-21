@@ -280,7 +280,7 @@
 
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <form method="post" action="/PO/delete">
+                                                <form method="post" action="/PO/detail/delete">
                                                     @csrf
                                                     @method("DELETE")
 

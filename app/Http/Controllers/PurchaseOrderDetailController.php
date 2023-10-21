@@ -135,4 +135,29 @@ class PurchaseOrderDetailController extends Controller
             return redirect('/PO/detail/'.$request->purchase_order_id);
         }
     }
+
+    public function deletePODetail(Request $request){
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request = [
+            'id' => $request->po_detail_id
+        ];
+
+        $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/delete', $api_request);
+
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            toastr()->info('Purchase Order Detail deleted successfully!', 'Purchase Order Detail', ['timeOut' => 3000]);
+            return redirect('/PO/detail/');
+        }else{
+            toastr()->error($result['message'], 'Purchase Order Detail', ['timeOut' => 3000]);
+            return redirect('/PO/detail/');
+        }
+    }
 }
