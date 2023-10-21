@@ -15,8 +15,11 @@
         <div class="card-body">
             <div class="d-flex justify-content-between p-5 black-text">
                 <div class="d-flex flex-column">
-                    <h1>{{$po['nomor_po']}}</h1>
-                    <h2>{{$po['tanggal_dibuat']}}</h2>
+                    <h3>Nomor PO:</h3>
+                    <h3>{{$po['nomor_po']}}</h3>
+                    <h3><br></h3>
+                    <h3>Tanggal Dibuat:</h3>
+                    <h3>{{$po['tanggal_dibuat']}}</h3>
                 </div>
                 <div class="d-flex flex-column align-items-end">
                     <p>Made By: {{$po['made_by_name']}}</p>
@@ -27,7 +30,8 @@
 
             <div class="d-flex justify-content-between p-5 black-text">
                 <div class="d-flex flex-column">
-                    <h3>Nama Vendor: {{$po['nama_vendor']}}</h3>
+                    <h3>Nama Vendor:</h3>
+                    <h3>{{$po['nama_vendor']}}</h3>
                 </div>
 
                 <div class="d-flex flex-column align-items-end">
@@ -75,7 +79,7 @@
 
         <div class="card-body">
             <button type="button" class="btn-sm btn-success float-right bold-text mb-3" data-toggle="modal"
-                data-target="#exampleModalCenter">
+                data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
                 New Pre-Order
             </button>
 

@@ -11,8 +11,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-end">
-
-                <div class="search">
+                <div class="search mx-1">
 
                     <form action="/item" method="GET">
                         @csrf
@@ -28,7 +27,7 @@
 
                 <div class="add-btn">
                     <button type="button" class="btn-sm btn-success bold-text btn-new-item" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
                         New Item
                     </button>
                 </div>

@@ -50,7 +50,7 @@
                     </button>
                     <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
                         data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
-                        Add New
+                        New Vendor
                     </button>
                 </div>
             </div>

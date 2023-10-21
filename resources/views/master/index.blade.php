@@ -10,10 +10,10 @@
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4"><i class="fa-solid fa-pencil"></i>
         <div class="card-body">
             <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter">
+                data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
                 New Index
             </button>
         </div>

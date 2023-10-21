@@ -11,7 +11,7 @@
     <div class="card shadow mb-4">
         <div class="card-body black-text">
             <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter">
+                data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
                 New Pre-Order
             </button>
         </div>
