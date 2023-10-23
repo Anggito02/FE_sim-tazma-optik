@@ -120,17 +120,13 @@ class ReceiveOrderController extends Controller
             'pre_order_qty' => $request->pre_order_qty,
             'received_qty' => $request->received_qty,
             'not_good_qty' => $request->not_good_qty,
-            'unit' => $request->unit,
-            'harga_beli_satuan' => $request->harga_beli_satuan,
-            'harga_jual_satuan' => $request->harga_jual_satuan,
-            'diskon' => $request->diskon,
             'item_id' => $request->item_id,
             'purchase_order_id' => $request->purchase_order_id,
             'receive_order_id' => $request->receive_order_id
         ];
         // dd($api_request);
 
-        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/edit', $api_request);
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/update-stok', $api_request);
 
         $result = $response->json();
         // dd($result);

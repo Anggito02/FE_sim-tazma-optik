@@ -63,12 +63,14 @@
                             <td class="txt-center">{{ $iterator }}</td>
                             <td class="nowrap">{{ $valPod['kode_item'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['pre_order_qty'] }}</td>
-                            <td class="nowrap">@if ($valPod['received_qty'] == null)
+                            <td class="nowrap">
+                                @if ($valPod['received_qty'] == null)
                                 <div class="text-danger">Item Not Received</div>
                                 @else
                                 <div class="text-right">{{ $valPod['received_qty'] }}</div>
                                 @endif</td>
-                            <td class="nowrap">@if ($valPod['not_good_qty'] == null)
+                            <td class="nowrap">
+                                @if ($valPod['not_good_qty'] == null)
                                 <div class="text-danger">Item Not Received</div>
                                 @else
                                 <div class="text-right">{{ $valPod['not_good_qty'] }}</div>
@@ -76,64 +78,118 @@
                             <td class="nowrap ">{{ $valPod['unit'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['harga_beli_satuan'] }}</td>
                             <td>
+                                @if ($valPod['received_qty'] && $valPod['not_good_qty'] == null)
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                data-target="#exampleModalCenterEdit{{$valPod['id']}}">
-                                <i class="fa fa-edit"></i>
-                            </button>
-                            <!-- Modal Update Data -->
-                            <div class="modal fade" id="exampleModalCenterEdit{{$valPod['id']}}" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Edit Data PO</h5>
-                        
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="post" action="/receive-order/edit">
-                                                @csrf
-                                                @method("PUT")
-                                                <div class="row">
-                                                    <div class="col">
-                                                    <input type="hidden" name="id" class="form-control" value="{{ $valPod['id'] }}">
-                                                    <input type="hidden" name="pre_order_qty" class="form-control" value="{{ $valPod['pre_order_qty'] }}">
-                                                    <input type="hidden" name="unit" class="form-control" value="{{ $valPod['unit'] }}">
-                                                    <input type="hidden" name="harga_beli_satuan" class="form-control" value="{{ $valPod['harga_beli_satuan'] }}">
-                                                    <input type="hidden" name="harga_jual_satuan" class="form-control" value="{{ $valPod['harga_jual_satuan'] }}">
-                                                    <input type="hidden" name="diskon" class="form-control" value="{{ $valPod['diskon'] }}">
-                                                    <input type="hidden" name="item_id" class="form-control" value="{{ $valPod['item_id'] }}">
-                                                    <input type="hidden" name="purchase_order_id" class="form-control" value="{{ $valPod['purchase_order_id'] }}">
-                                                    <input type="hidden" name="receive_order_id" class="form-control" value="{{ $ro['id'] }}">
-                        
-                                                        <div class="mb-3">
-                                                            <label for="InputNomor" class="form-label">Received Quantity</label>
-                                                            <input type="number" name="received_qty" class="form-control" value="{{ $valPod['received_qty'] }}">
+                                    data-target="#exampleModalCenterEdit{{$valPod['id']}}">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                @elseif ($valPod['received_qty'] || $valPod['not_good_qty'] != null) 
+                                <button type="button" class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                @endif
+                                <!-- Modal Update Data -->
+                                <div class="modal fade" id="exampleModalCenterEdit{{$valPod['id']}}" tabindex="-1"
+                                    role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data PO</h5>
+
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" action="/receive-order/edit">
+                                                    @csrf
+                                                    @method("PUT")
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="hidden" name="id" class="form-control"
+                                                                value="{{ $valPod['id'] }}">
+                                                            <input type="hidden" name="pre_order_qty"
+                                                                class="form-control"
+                                                                value="{{ $valPod['pre_order_qty'] }}">
+                                                            <input type="hidden" name="item_id" class="form-control"
+                                                                value="{{ $valPod['item_id'] }}">
+                                                            <input type="hidden" name="purchase_order_id"
+                                                                class="form-control"
+                                                                value="{{ $valPod['purchase_order_id'] }}">
+                                                            <input type="hidden" name="receive_order_id"
+                                                                class="form-control" value="{{ $ro['id'] }}">
+
+                                                            <div class="mb-3">
+                                                                <label for="InputNomor" class="form-label">Received
+                                                                    Quantity</label>
+                                                                <input type="number" name="received_qty"
+                                                                    class="form-control"
+                                                                    value="{{ $valPod['received_qty'] }}">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                        
-                                                    <div class="col">
-                                                        <div class="mb-3">
-                                                            <label for="InputQtyReceive" class="form-label">Not Good Quantity</label>
-                                                            <input type="number" name="not_good_qty" class="form-control" value="{{ $valPod['not_good_qty'] }}">
+
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label for="InputQtyReceive" class="form-label">Not Good
+                                                                    Quantity</label>
+                                                                <input type="number" name="not_good_qty"
+                                                                    class="form-control"
+                                                                    value="{{ $valPod['not_good_qty'] }}">
+                                                            </div>
+
+                                                            <div class="mt-2 float-right">
+                                                                <button type="button"
+                                                                    class="btn-sm btn-success bold-text mb-3"
+                                                                    data-toggle="modal"
+                                                                    data-target="#exampleModalCenterConfirm{{$valPod['id']}}">
+                                                                    Update
+                                                                </button>
+                                                                <div class="modal fade"
+                                                                    id="exampleModalCenterConfirm{{$valPod['id']}}"
+                                                                    tabindex="-1" role="dialog"
+                                                                    aria-labelledby="exampleModalCenterTitle"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-lg"
+                                                                        role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLongTitle">Are You
+                                                                                    Sure?</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal"
+                                                                                    aria-label="Close">
+                                                                                    <span
+                                                                                        aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Once you click "Yes" it cannot be
+                                                                                undone.
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">Yes</button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-dismiss="modal">No</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                        
-                                                        <div class="mt-2 float-right">
-                                                            <button type="submit" class="btn btn-success">Update</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
                         </tr>
                         <div class="d-none">
                             {{ $iterator = $iterator + 1 }}

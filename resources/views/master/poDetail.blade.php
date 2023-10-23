@@ -42,10 +42,8 @@
                         </a>
                     </button>
                     @elseif ($po['status_penerimaan'] == '0')
-                    <button type="button" class="btn-sm btn-info mb-3" disabled>
-                        <a href="/receive-order/{{ $po['id'] }}" class="text-white">
-                            Check Receive Order
-                        </a>
+                    <button type="button" class="btn-sm btn-secondary mb-3" disabled>
+                        Check Receive Order
                     </button>
                     @endif
 
@@ -78,9 +76,9 @@
         </div> -->
 
         <div class="card-body">
-            <button type="button" class="btn-sm btn-success float-right bold-text mb-3" data-toggle="modal"
+            <button type="button" class="btn-sm btn-success float-right bold-text mb-3 @if ($po['status_penerimaan'] == '1') d-none @endif" data-toggle="modal"
                 data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
-                New Pre-Order
+                Add Item
             </button>
 
             <div class="table-responsive">
@@ -89,15 +87,15 @@
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Kode Item</span></th>
-                            <th class="thead-text"><span class="nowrap">Pre Order Quantity</span></th>
+                            <th class="thead-text"><span class="nowrap">PO Quantity</span></th>
                             <th class="thead-text"><span class="nowrap">Received Quantity</span></th>
                             <th class="thead-text"><span class="nowrap">Not Good Quantity</span></th>
                             <th class="thead-text"><span class="nowrap">Unit</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Beli Satuan</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Jual Satuan</span></th>
                             <th class="thead-text"><span class="nowrap">Diskon</span></th>
-                            <th class="thead-text"><span class="nowrap">Edit</span></th>
-                            <th class="thead-text"><span class="nowrap">Delete</span></th>
+                            <th class="thead-text @if ($po['status_penerimaan'] == '1') d-none @endif"><span class="nowrap">Edit</span></th>
+                            <th class="thead-text @if ($po['status_penerimaan'] == '1') d-none @endif"><span class="nowrap">Delete</span></th>
 
                         </tr>
                     </thead>
@@ -125,7 +123,7 @@
                             <td class="nowrap text-right">{{ $valPod['harga_beli_satuan'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['harga_jual_satuan'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['diskon'] }}</td>
-                            <td>
+                            <td class="@if ($po['status_penerimaan'] == '1') d-none @endif">
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$valPod['id']}}">
                                     <i class="fa fa-edit"></i>
@@ -150,6 +148,8 @@
                                                     @csrf
                                                     @method("PUT")
                                                     <div class="row">
+                                                        <input type="hidden" name="id" value="{{$valPod['id']}}">
+                                                        <input type="hidden" name="purchase_order_id" value="{{$valPod['purchase_order_id']}}">
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label class="form-label">Item</label>
@@ -161,44 +161,36 @@
 
                                                             <div class="mb-3">
                                                                 <label class="form-label">Unit</label>
-                                                                <input type="text" id="id" name="" class="form-control"
-                                                                    value="{{$valPod['unit']}}">
+                                                                <input type="text" name="unit" class="form-control"
+                                                                    value="{{$valPod['unit']}}" >
                                                             </div>
 
                                                             <div class="mb-3">
                                                                 <label for="InputJual" class="form-label">Harga Jual
                                                                     Satuan</label>
-                                                                <input type="text" id="id" name="" class="form-control"
+                                                                <input type="number" id="id" name="harga_jual_satuan" class="form-control"
                                                                     value="{{$valPod['harga_jual_satuan']}}">
                                                             </div>
-
-                                                            <input type="hidden" class="form-control"
-                                                                name="received_qty" value="{{$valPod['received_qty']}}">
-                                                            <input type="hidden" class="form-control"
-                                                                name="not_good_qty" value="{{$valPod['not_good_qty']}}">
-                                                            <input type="hidden" class="form-control"
-                                                                name="receive_order_id"
-                                                                value="{{$valPod['receive_order_id']}}">
                                                         </div>
 
                                                         <div class="col">
                                                             <div class="mb-3">
                                                                 <label for="InputMerk" class="form-label">PO
                                                                     Quantity</label>
-                                                                <input type="text" id="id" name="" class="form-control"
+                                                                <input type="number" name="pre_order_qty" class="form-control"
                                                                     value="{{$valPod['pre_order_qty']}}">
                                                             </div>
 
                                                             <div class="mb-3">
                                                                 <label for="InputBeli" class="form-label">Harga Beli
                                                                     Satuan</label>
-                                                                <input type="text" id="id" name="" class="form-control"
+                                                                <input type="number" name="harga_beli_satuan" class="form-control"
                                                                     value="{{$valPod['harga_beli_satuan']}}">
                                                             </div>
 
                                                             <div class="mb-3">
                                                                 <label for="InputDisc" class="form-label">Diskon</label>
-                                                                <input type="text" id="id" name="" class="form-control"
+                                                                <input type="number" name="diskon" class="form-control"
                                                                     value="{{$valPod['diskon']}}">
                                                             </div>
 
@@ -221,14 +213,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="@if ($po['status_penerimaan'] == '1') d-none @endif">
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete{{$id}}">
+                                    data-target="#exampleModalCenterDelete{{$valPod['id']}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
                                 <!-- Modal Delete Data -->
-                                <div class="modal fade" id="exampleModalCenterDelete{{$id}}" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterDelete{{$valPod['id']}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -247,12 +239,12 @@
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
 
-                                                <form method="post" action="/PO/delete">
+                                                <form method="post" action="/PO/detail/delete">
                                                     @csrf
                                                     @method("DELETE")
 
-                                                    <input type="hidden" id="id" name="po_detail_id" class="form-control"
-                                                        value="{{ $id }}">
+                                                    <input type="hidden" name="po_detail_id" class="form-control"
+                                                        value="{{ $valPod['id'] }}">
                                                     <button type="submit" class="btn btn-primary">Yes</button>
                                                 </form>
                                             </div>
@@ -269,7 +261,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    <button type="button" class="btn-sm btn-success bold-text mb-3 @if (count($pod) == 0) d-none @endif"
+                    <button type="button" class="btn-sm btn-success bold-text mb-3 @if (count($pod) == 0) d-none @endif @if ($po['status_penerimaan'] == '1') d-none @endif"
                         data-toggle="modal" data-target="#exampleModalCenterRO">
                         Create Receive Order
                     </button>
@@ -284,7 +276,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title black-text" id="exampleModalLongTitle">New Pre-Order</h5>
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">New Item</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -295,15 +287,24 @@
                         @method("POST")
                         <div class="row">
                             <div class="col">
-
+                                
                                 <div>
                                     <input type="hidden" id="POId" name="purchase_order_id" class="form-control"
-                                        value="{{ $po['id'] }}">
+                                    value="{{ $po['id'] }}">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="Item" class="form-label">Item</label>
+                                    <select type="text" name="item_id" class="form-control" id="">
+                                        @foreach ($items as $items)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{ $items['id'] }}">{{ $items['kode_item'] }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-
                                 <div class="mb-3">
-                                    <label for="POQty" class="form-label">Pre-Order Quantity</label>
+                                    <label for="POQty" class="form-label">PO Quantity</label>
                                     <input type="number" id="POQty" name="pre_order_qty" class="form-control">
 
                                 </div>
@@ -317,35 +318,24 @@
                                 </div>
 
 
-                                <div class="mb-3">
-                                    <label for="Diskon" class="form-label">Diskon</label>
-                                    <input type="number" id="Diskon" name="diskon" class="form-control">
-
-                                </div>
-
+                                
                             </div>
-
+                            
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="Unit" class="form-label">Unit</label>
                                     <input type="text" id="Unit" name="unit" class="form-control">
                                 </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="HargaJualSatuan" class="form-label">Harga Jual Satuan</label>
                                     <input type="number" id="HargaJualSatuan" name="harga_jual_satuan"
-                                        class="form-control">
-
+                                    class="form-control">
                                 </div>
-
+                                
                                 <div class="mb-3">
-                                    <label for="Item" class="form-label">Item</label>
-                                    <select type="text" name="item_id" class="form-control" id="">
-                                        @foreach ($items as $items)
-                                        <option value="" disabled selected hidden>Choose...</option>
-                                        <option value="{{ $items['id'] }}">{{ $items['kode_item'] }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="Diskon" class="form-label">Diskon</label>
+                                    <input type="number" id="Diskon" name="diskon" class="form-control">
                                 </div>
 
                                 <div class="mt-5 float-right">
