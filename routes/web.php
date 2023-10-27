@@ -18,6 +18,7 @@ use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\PurchaseOrderDetailController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ReceiveOrderController;
+use App\Http\Controllers\BranchItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,6 +132,11 @@ Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->gr
     Route::get('/receive-order/{id}','getReceiveOrder');
     Route::post('/receive-order/add', 'addReceiveOrder');
     Route::put('/receive-order/edit', 'updateReceiveOrder');
+});
+
+Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch-item','getAllBranchItem');
+    Route::post('/branch-item/add', 'addBranchItem');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
