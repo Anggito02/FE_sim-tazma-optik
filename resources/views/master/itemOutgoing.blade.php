@@ -63,7 +63,7 @@
                             <td class="nowrap">{{$vals['delivered_by_name']}}</td>
                             <td class="nowrap">{{$vals['received_by_name']}}</td>
                             <td>
-                                <a href="">
+                                <a href="/item-outgoing/detail/{{ $vals['id'] }}">
                                     <button type="button" class="btn-sm btn-info">
                                         <i class="fa fa-eye"></i>
                                     </button>
