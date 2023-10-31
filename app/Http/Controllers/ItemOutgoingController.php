@@ -66,7 +66,6 @@ class ItemOutgoingController extends Controller
             'checked_by' => $request->checked_by,
             'approved_by' => $request->approved_by,
             'delivered_by' => $request->delivered_by,
-            'received_by' => $request->received_by
         ];
 
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/item-outgoing/add', $api_request);

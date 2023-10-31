@@ -60,8 +60,18 @@
                             <td class="nowrap">{{$vals['known_by_name']}}</td>
                             <td class="nowrap">{{$vals['checked_by_name']}}</td>
                             <td class="nowrap">{{$vals['approved_by_name']}}</td>
+                            
+                            @if ($vals['delivered_by'] == null)
+                            <td class="nowrap text-danger">Belum Dikirim</td>
+                            @else
                             <td class="nowrap">{{$vals['delivered_by_name']}}</td>
+                            @endif
+
+                            @if ($vals['received_by'] == null)
+                            <td class="nowrap text-danger">Belum Diterima</td>
+                            @else
                             <td class="nowrap">{{$vals['received_by_name']}}</td>
+                            @endif
                             <td>
                                 <a href="/item-outgoing/detail/{{ $vals['id'] }}">
                                     <button type="button" class="btn-sm btn-info">
@@ -289,6 +299,11 @@
                                     </select>
                                 </div>
 
+                                
+                                
+                            </div>
+                            
+                            <div class="col">
                                 <div class="mb-3">
                                     <label class="form-label">Checked By</label>
                                     <select name="checked_by" class="form-control">
@@ -298,12 +313,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                                 
-                            </div>
-                            
-                            <div class="col">
-
                                 <div class="mb-3">
                                     <label class="form-label">Approved By</label>
                                     <select name="approved_by" class="form-control">
@@ -317,16 +327,6 @@
                                 <div class="mb-3">
                                     <label class="form-label">Delivered By</label>
                                     <select name="delivered_by" class="form-control">
-                                        <option value="" selected disabled>Select Employee</option>
-                                        @foreach ($employee as $employeeVal)
-                                        <option value="{{$employeeVal['id']}}">{{$employeeVal['employee_name']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Received By</label>
-                                    <select name="received_by" class="form-control">
                                         <option value="" selected disabled>Select Employee</option>
                                         @foreach ($employee as $employeeVal)
                                         <option value="{{$employeeVal['id']}}">{{$employeeVal['employee_name']}}</option>
