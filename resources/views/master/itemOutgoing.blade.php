@@ -60,7 +60,7 @@
                             <td class="nowrap">{{$vals['known_by_name']}}</td>
                             <td class="nowrap">{{$vals['checked_by_name']}}</td>
                             <td class="nowrap">{{$vals['approved_by_name']}}</td>
-                            
+
                             @if ($vals['delivered_by'] == null)
                             <td class="nowrap text-danger">Belum Dikirim</td>
                             @else
@@ -282,7 +282,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Branch</label>
                                     <select class="form-control" name="branch_id">
-                                        <option value="" selected disabled>Select Branch</option>
+                                        <option value="" hidden selected disabled>Select Branch</option>
                                         @foreach ($branch as $branchVal)
                                         <option value="{{$branchVal['id']}}">{{$branchVal['nama_branch']}}</option>
                                         @endforeach
@@ -292,7 +292,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Known By</label>
                                     <select name="known_by" class="form-control">
-                                        <option value="" selected disabled>Select Employee</option>
+                                        <option value="" hidden selected disabled>Select Employee</option>
                                         @foreach ($employee as $employeeVal)
                                         <option value="{{$employeeVal['id']}}">{{$employeeVal['employee_name']}}</option>
                                         @endforeach
@@ -307,7 +307,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Checked By</label>
                                     <select name="checked_by" class="form-control">
-                                        <option value="" selected disabled>Select Employee</option>
+                                        <option value="" hidden selected disabled>Select Employee</option>
                                         @foreach ($employee as $employeeVal)
                                         <option value="{{$employeeVal['id']}}">{{$employeeVal['employee_name']}}</option>
                                         @endforeach
@@ -317,7 +317,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Approved By</label>
                                     <select name="approved_by" class="form-control">
-                                        <option value="" selected disabled>Select Employee</option>
+                                        <option value="" hidden selected disabled>Select Employee</option>
                                         @foreach ($employee as $employeeVal)
                                         <option value="{{$employeeVal['id']}}">{{$employeeVal['employee_name']}}</option>
                                         @endforeach
@@ -327,7 +327,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Delivered By</label>
                                     <select name="delivered_by" class="form-control">
-                                        <option value="" selected disabled>Select Employee</option>
+                                        <option value="" hidden selected disabled>Select Employee</option>
                                         @foreach ($employee as $employeeVal)
                                         <option value="{{$employeeVal['id']}}">{{$employeeVal['employee_name']}}</option>
                                         @endforeach
