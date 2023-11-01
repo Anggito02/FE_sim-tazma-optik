@@ -108,12 +108,9 @@
                                                         <div class="col">
                                                             <input type="hidden" name="id" value="{{$vals['id']}}">
                                                             <div class="mb-3">
-                                                                {{-- <label for="InputTanggal" class="form-label">Tanggal Pengiriman</label>
-                                                                <input type="text" id="id" name="tanggal_pengiriman" class="form-control" value="{{$vals['tanggal_pengiriman']}}"> --}}
-                                                                <label for="InputLastDateSupply" class="form-label">Tanggal Pengiriman</label>
-                                                                <div>
-                                                                    <input type="date" id="id" name="tanggal_pengiriman" class="form-control" value="{{$vals['tanggal_pengiriman']}}">
-                                                                </div>
+                                                                <label class="form-label">Tanggal Pengiriman</label>          
+                                                                <input type="date" name="tanggal_pengiriman" class="form-control" value="{{ date('Y-m-d', strtotime($vals['tanggal_pengiriman'])) }}">
+                                                                
                                                             </div>
                                                             
                                                             <div class="mb-3">
