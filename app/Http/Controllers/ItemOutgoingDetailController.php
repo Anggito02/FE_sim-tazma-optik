@@ -117,6 +117,7 @@ class ItemOutgoingDetailController extends Controller
         $result = $response->json();
 
         if($result['status'] == 'success') {
+            // dd($request->outgoing_id);
             toastr()->info('Item Outgoing Detail updated successfully!', 'Item Outgoing Detail', ['timeOut' => 3000]);
             return redirect('/item-outgoing/detail/'.$request->outgoing_id);
         } else {

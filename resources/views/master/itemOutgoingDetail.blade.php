@@ -67,11 +67,11 @@
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Jumlah yang dikirimkan</span></th>
-                            <th class="thead-text"><span class="nowrap">Verified At</span></th>
-                            <th class="thead-text"><span class="nowrap">Verified Status</span></th>
-                            <th class="thead-text"><span class="nowrap">Verified By</th>
+                            <th class="thead-text"><span class="nowrap">Waktu Verifikasi</span></th>
+                            <th class="thead-text"><span class="nowrap">Status Verifikasi</span></th>
+                            <th class="thead-text"><span class="nowrap">Diverifikasi oleh</span></th>
                             <th class="thead-text"><span class="nowrap">Item</span></th>
-                            <th class="thead-text"><span class="nowrap">Verify</span></th>
+                            <th class="thead-text"><span class="nowrap">Verifikasi</span></th>
                             <th class="thead-text"><span class="nowrap">Edit</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
 
@@ -95,10 +95,16 @@
                             <td class="nowrap text-center">{{ $valIod['verified_by_nama'] }}</td>
                             <td class="nowrap text-right">{{ $valIod['kode_item'] }}</td>
                             <td>
+                                @if ($valIod['verified_status'] == 1)
+                                <button class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-square-check"></i>
+                                </button>
+                                @elseif ($valIod['verified_status'] == 0)
                                 <button type="button" class="btn-sm btn-success" data-toggle="modal"
                                     data-target="#exampleModalCenterVerify{{$valIod['id']}}">
                                     <i class="fa fa-square-check"></i>
                                 </button>
+                                @endif
 
                                 <!-- Modal Verify Data -->
                                 <div class="modal fade" id="exampleModalCenterVerify{{$valIod['id']}}" tabindex="-1"
@@ -115,15 +121,17 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body black-text">
-                                                <p>Are you sure you want to verify?</p>
+                                                <p>Apakah data berikut sudah benar?</p>
                                                 <p>Jumlah yang dikirim: {{$valIod['delivered_qty']}}</p>
                                                 <p>Diverifikasi Oleh: {{$valIod['verified_by_nama']}}</p>
+                                                <p>Barang: {{$valIod['kode_item']}} - {{$valIod['jenis_item']}}</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <form action="/item-outgoing/detail/verify" method="post">
                                                     @csrf
                                                     @method("PUT")
                                                     <input type="hidden" name="id" value="{{$valIod['id']}}">
+                                                    <input type="hidden" name="outgoing_id" value="{{$valIod['outgoing_id']}}">
                                                     <input type="hidden" name="delivered_qty" value="{{$valIod['delivered_qty']}}">
                                                     <input type="hidden" name="item_id" value="{{$valIod['item_id']}}">
                                                     <input type="hidden" name="outgoing_id" value="{{$valIod['outgoing_id']}}">
@@ -139,10 +147,16 @@
                                 </div>
                             </td>
                             <td>
+                                @if ($valIod['verified_status'] == 1)
+                                <button class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                @elseif ($valIod['verified_status'] == 0)
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$valIod['id']}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
+                                @endif
 
                                 <!-- Modal Update Data -->
                                 <div class="modal fade" id="exampleModalCenterEdit{{$valIod['id']}}" tabindex="-1"
@@ -166,6 +180,7 @@
                                                         <div class="col">
                                                             
                                                             <input type="hidden" name="id" value="{{$valIod['id']}}">
+                                                            <input type="hidden" name="outgoing_id" value="{{$valIod['outgoing_id']}}">
                                                             <div class="mb-3">
                                                                 <label class="form-label">Jumlah yang dikirimkan</label>
                                                                 <input type="number" class="form-control" name="delivered_qty" value="{{$valIod['delivered_qty']}}">
@@ -211,10 +226,16 @@
                                 </div>
                             </td>
                             <td>
+                                @if ($valIod['verified_status'] == 1)
+                                <button class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                @elseif ($valIod['verified_status'] == 0)
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$valIod['id']}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
+                                @endif
 
                                 <!-- Modal Delete Data -->
                                 <div class="modal fade" id="exampleModalCenterDelete{{$valIod['id']}}" tabindex="-1" role="dialog"
@@ -240,6 +261,7 @@
                                                     @csrf
                                                     @method("DELETE")
                                                     <input type="hidden" name="id" value="{{$valIod['id']}}">
+                                                    <input type="hidden" name="outgoing_id" value="{{$valIod['outgoing_id']}}">
                                                     <button type="submit" class="btn btn-primary">Yes</button>
                                                 </form>
                                             </div>

@@ -80,10 +80,16 @@
                                 </a>
                             </td>
                             <td>
+                                @if ($vals['received_by'] != null)
+                                <button class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                @elseif ($vals['received_by'] == null)
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
+                                @endif
                                 
                             
                                 <!-- Modal Update Data -->
@@ -199,10 +205,16 @@
                                 </div>
                             </td>
                             <td>
+                                @if ($vals['received_by'] != null)
+                                <button class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                @elseif ($vals['received_by'] == null)
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
+                                @endif
                                 
 
                                 <!-- Modal Delete Data -->
