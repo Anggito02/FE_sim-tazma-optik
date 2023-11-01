@@ -19,6 +19,8 @@ use App\Http\Controllers\PurchaseOrderDetailController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ReceiveOrderController;
 use App\Http\Controllers\BranchItemController;
+use App\Http\Controllers\ItemOutgoingController;
+use App\Http\Controllers\ItemOutgoingDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,6 +141,21 @@ Route::controller(BranchItemController::class)->middleware('isTokenValid')->grou
     Route::post('/branch-item/add', 'addBranchItem');
 });
 
+Route::controller(ItemOutgoingController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/item-outgoing','getAllItemOutgoing');
+    Route::post('/item-outgoing/add', 'addItemOutgoing');
+    Route::put('/item-outgoing/edit', 'updateItemOutgoing');
+    Route::delete('/item-outgoing/delete', 'deleteItemOutgoing');
+});
+
+Route::controller(ItemOutgoingDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/item-outgoing/detail/{id}','getAllItemOutgoingDetail');
+    Route::post('/item-outgoing/detail/add','addItemOutgoingDetail');
+    Route::put('/item-outgoing/detail/edit', 'updateItemOutgoingDetail');
+    Route::put('/item-outgoing/detail/verify', 'verifyItemOutgoingDetail');
+    Route::delete('/item-outgoing/detail/delete', 'deleteItemOutgoingDetail');
+});
+
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
 // });
@@ -148,10 +165,6 @@ Route::group([], function(){
         return view('login');
     });
 
-    // Route::get('/user', function () {
-    //     return view('master.user');
-    // });
-
     Route::get('/404', function () {
         return view('error_page.404');
     });
@@ -159,11 +172,6 @@ Route::group([], function(){
     Route::get('/505', function () {
         return view('error_page.505');
     });
-
-    // Route::get('/Receive-Order', function () {
-    //     return view('master.receiveorder');
-    // });
-
 });
 
 

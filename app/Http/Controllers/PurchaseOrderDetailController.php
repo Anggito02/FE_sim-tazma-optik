@@ -52,7 +52,7 @@ class PurchaseOrderDetailController extends Controller
         $employee = $response_employee->json();
         $vendor = $response_vendor->json();
         $item = $response_item->json();
-        // dd($item);
+        
 
         $user = GetUserInfo::getUserInfo();
         if ($employee['status'] == 'success' && $vendor['status'] == 'success'){
