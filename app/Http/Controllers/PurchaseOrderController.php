@@ -40,7 +40,7 @@ class PurchaseOrderController extends Controller
         $user = GetUserInfo::getUserInfo();
 
         if ($po['status'] == 'success'){
-            return view('master.po', [
+            return view('purchase.po', [
                 'po' => $po['data'],
                 'data' => $user['data'],
                 'employee' => $employee['data'],

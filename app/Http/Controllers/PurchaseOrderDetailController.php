@@ -56,7 +56,7 @@ class PurchaseOrderDetailController extends Controller
 
         $user = GetUserInfo::getUserInfo();
         if ($employee['status'] == 'success' && $vendor['status'] == 'success'){
-            return view('master.poDetail', [
+            return view('purchase.poDetail', [
                 'po' => $po['data'],
                 'pod' => $pod['data'],
                 'data' => $user['data'],

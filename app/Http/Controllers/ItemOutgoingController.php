@@ -40,7 +40,7 @@ class ItemOutgoingController extends Controller
         $user = GetUserInfo::getUserInfo();
 
         if($item_outgoing['status'] == 'success') {
-            return view('master.itemOutgoing', [
+            return view('inventory.itemOutgoing', [
                 'item_outgoing' => $item_outgoing['data'],
                 'data' => $user['data'],
                 'branch' => $branch['data'],

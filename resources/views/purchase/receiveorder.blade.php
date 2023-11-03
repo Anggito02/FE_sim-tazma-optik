@@ -78,12 +78,12 @@
                             <td class="nowrap ">{{ $valPod['unit'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['harga_beli_satuan'] }}</td>
                             <td>
-                                @if ($valPod['received_qty'] && $valPod['not_good_qty'] == null)
+                                @if (($valPod['received_qty'] && $valPod['not_good_qty']) == null)
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$valPod['id']}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                @elseif ($valPod['received_qty'] || $valPod['not_good_qty'] != null) 
+                                @elseif (($valPod['received_qty'] || $valPod['not_good_qty']) != null) 
                                 <button type="button" class="btn-sm btn-secondary" disabled>
                                     <i class="fa fa-edit"></i>
                                 </button>

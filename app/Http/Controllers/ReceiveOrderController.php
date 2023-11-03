@@ -63,7 +63,7 @@ class ReceiveOrderController extends Controller
         $user = GetUserInfo::getUserInfo();
 
         if ($ro['status'] == 'success' && $vendor['status'] == 'success'){
-            return view('master.receiveorder', [
+            return view('purchase.receiveorder', [
                 'ro' => $ro['data'],
                 'po' => $po['data'],
                 'pod' => $pod['data'],
@@ -102,7 +102,7 @@ class ReceiveOrderController extends Controller
             toastr()->info('Receive order added successfully!', 'Receive Order', ['timeOut' => 3000]);
             return redirect('/PO/detail/'.$request->purchase_order_id);
         }else{
-            toastr()->error($result['message'], 'Receive Order', ['timeOut' => 3000]);
+            toastr()->error($result['data'], 'Receive Order', ['timeOut' => 3000]);
             return redirect('/PO/detail/'.$request->purchase_order_id);
         }
     }
