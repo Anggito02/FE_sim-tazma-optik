@@ -38,8 +38,8 @@ class BranchItemController extends Controller
     public function getAllBranchItem (Request $request) {
         $token = $_COOKIE['token'];
 
-        $page = $request->page;
-        $limit = $request->limit;
+        $page = 1;
+        $limit = 100;
 
         $headers = [
             'Accept' => 'application/json',
@@ -56,7 +56,6 @@ class BranchItemController extends Controller
         $branch_item = $response->json();
 
         $user = GetUserInfo::getUserInfo();
-
         if ($branch_item['status'] == 'success'){
             return view('master.branch-item', [
                 'branch_item' => $branch_item['data'],

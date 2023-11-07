@@ -38,7 +38,6 @@ class ItemOutgoingController extends Controller
         $employee = $response_employee->json();
 
         $user = GetUserInfo::getUserInfo();
-
         if($item_outgoing['status'] == 'success') {
             return view('inventory.itemOutgoing', [
                 'item_outgoing' => $item_outgoing['data'],
@@ -79,7 +78,7 @@ class ItemOutgoingController extends Controller
             toastr()->error($result['message'], 'Item Outgoing', ['timeOut' => 3000]);
             return redirect('/item-outgoing');
         }
-        
+
     }
 
     public function updateItemOutgoing(Request $request) {
@@ -123,7 +122,7 @@ class ItemOutgoingController extends Controller
         $api_request = [
             'id' => $request->id
         ];
-        
+
         $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/item-outgoing/delete', $api_request);
 
         $result = $response->json();
