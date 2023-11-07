@@ -156,6 +156,11 @@ Route::controller(ItemOutgoingDetailController::class)->middleware('isTokenValid
     Route::delete('/item-outgoing/detail/delete', 'deleteItemOutgoingDetail');
 });
 
+Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch-item','getAllBranchItem');
+    Route::post('/branch-item/add', 'addBranchItem');
+});
+
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
 // });
