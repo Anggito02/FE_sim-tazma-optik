@@ -666,3 +666,7 @@
 </div>
 
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/item.js') }}"></script>
+@endpush
