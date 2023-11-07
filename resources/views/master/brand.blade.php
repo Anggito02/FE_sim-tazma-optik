@@ -14,7 +14,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter">
+                data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
                 New Brand
             </button>
         </div>
@@ -167,7 +167,7 @@
                 <form method="post" action="/brand/add">
                     @csrf
                     @method("POST")
-                    
+
                     <div class="mb-3 black-text">
                         <label for="InputBrand" class="form-label">Brand</label>
                         <input type="text" id="nama_brand" name="nama_brand" class="form-control">

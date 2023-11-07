@@ -1,3 +1,11 @@
+a:hover {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
 .nowrap {
     white-space:nowrap;
 }
@@ -49,3 +57,5 @@
 .aksesoris-detail {
     display: none;
 }
+
+

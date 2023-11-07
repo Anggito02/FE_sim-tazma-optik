@@ -41,7 +41,7 @@ class PurchaseOrderController extends Controller
         $user = GetUserInfo::getUserInfo();
 
         if ($po['status'] == 'success'){
-            return view('master.po', [
+            return view('purchase.po', [
                 'po' => $po['data'],
                 'data' => $user['data'],
                 'employee' => $employee['data'],
@@ -60,22 +60,46 @@ class PurchaseOrderController extends Controller
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
+        // dd($request->all());
+        $status_penerimaan = $request->status_penerimaan;
+        $status_pembayaran = $request->status_pembayaran;
+        $status_po = $request->status_po;
+
+        if ($status_penerimaan == 'Belum Diterima') {
+            $status_penerimaan = 0;
+        } else {
+            $status_penerimaan = 1;
+        }
+
+        if ($status_pembayaran == 'Belum Dibayar') {
+            $status_pembayaran = 0;
+        } else {
+            $status_pembayaran = 1;
+        }
+
+        if ($status_po == 'OPEN') {
+            $status_po = 1;
+        } else {
+            $status_po = 0;
+        }
 
         $api_request = [
             'nomor_po' => $request->nomor_po,
             'tanggal_dibuat' => $request->tanggal_dibuat,
-            'status_penerimaan' => $request->status_penerimaan,
-            'status_pembayaran' => $request->status_pembayaran,
-            'status_po' => $request->status_po,
+            'status_penerimaan' => $status_penerimaan,
+            'status_pembayaran' => $status_pembayaran,
+            'status_po' => $status_po,
             'checked_by' => $request->checked_by,
             'made_by' => $request->made_by,
             'approved_by' => $request->approved_by,
             'vendor_id' => $request->vendor_id
         ];
+        // dd($api_request);
 
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/add', $api_request);
 
         $result = $response->json();
+        // dd($result);
 
         if($result['status'] == 'success'){
             toastr()->info('Purchase order added successfully!', 'Purchase Order', ['timeOut' => 3000]);
@@ -95,8 +119,7 @@ class PurchaseOrderController extends Controller
         ];
 
         $api_request = [
-            'nomor_po' => $request->nomor_po,
-            'tanggal_dibuat' => $request->tanggal_dibuat,
+            'id' => $request->id,
             'status_penerimaan' => $request->status_penerimaan,
             'status_pembayaran' => $request->status_pembayaran,
             'status_po' => $request->status_po,
@@ -105,6 +128,7 @@ class PurchaseOrderController extends Controller
             'approved_by' => $request->approved_by,
             'vendor_id' => $request->vendor_id
         ];
+        // dd($api_request);
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/edit', $api_request);
 
@@ -114,7 +138,7 @@ class PurchaseOrderController extends Controller
             toastr()->info('Purchase Order updated successfully!', 'Purchase Order', ['timeOut' => 3000]);
             return redirect('/PO');
         }else{
-            toastr()->error($result['message'], 'Purchase Order', ['timeOut' => 3000]);
+            toastr()->error($result['data'], 'Purchase Order', ['timeOut' => 3000]);
             return redirect('/PO');
         }
     }
@@ -130,7 +154,7 @@ class PurchaseOrderController extends Controller
         $api_request = [
             'id' => $request->po_id
         ];
-
+        // dd($api_request);
         $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/delete', $api_request);
 
         $result = $response->json();

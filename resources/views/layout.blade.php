@@ -98,7 +98,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Purchase Sheet:</h6>
                         <a class="collapse-item" href="/PO">PO (Purchase Order)</a>
-                        <a class="collapse-item" href="/receive-order">RO (Receive Order)</a>
+                        <!-- <a class="collapse-item" href="/receive-order">RO (Receive Order)</a> -->
                         <a class="collapse-item" href="">Inventory Information</a>
                         <a class="collapse-item" href="">Invoice Information</a>
                         <a class="collapse-item" href="">QR Code Generator</a>
@@ -107,6 +107,22 @@
                 </div>
             </li>
 
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#inventory"
+                    aria-expanded="true" aria-controls="inventory">
+                    <i class="fa-solid fa-truck-moving"></i>
+                    <span>Inventory Module</span>
+                </a>
+                <div id="inventory" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Inventory Sheet:</h6>
+                        <a class="collapse-item" href="/item-outgoing">Item Outgoing</a>
+                        <a class="collapse-item" href="">Branch Item</a>
+                    </div>
+                </div>
+            </li>
+            
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiestest"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -213,7 +229,10 @@
                             <h5>COA SHEET INFORMATION</h5>
                         @elseif (url('/item') == url()->current())
                             <h5>ITEM SHEET INFORMATION</h5>
-
+                        @elseif (url('/PO') == url()->current())
+                            <h5>PO SHEET INFORMATION</h5>
+                        @elseif (url('/item-outgoing') == url()->current())
+                            <h5>ITEM OUTGOING SHEET INFORMATION</h5>
                         @endif
                     </div>
                     <!-- Sidebar Toggle (Topbar) -->

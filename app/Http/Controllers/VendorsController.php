@@ -88,12 +88,12 @@ class VendorsController extends Controller
             'npwp_vendor' => $request->npwp_vendor,
             'nama_vendor' => $request->nama_vendor,
             'alamat_vendor' => $request->alamat_vendor,
-            'init_date_supply' => $request->init_data_vendor,
-            'last_date_supply' => $request->last_data_vendor,
+            'init_date_supply' => $request->init_date_supply,
+            'last_date_supply' => $request->last_date_supply,
             'pic_vendor' => $request->pic_vendor,
-            'no_telp_vendor' => $request->note_telp_vendor,
-            'no_telp_pic' => $request->no_telp_pic_vendor,
-            'status_blacklist' => $request->status_vendor
+            'no_telp_vendor' => $request->no_telp_vendor,
+            'no_telp_pic' => $request->no_telp_pic,
+            'status_blacklist' => $request->status_blacklist
         ];
 
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/vendor/add', $api_request);
@@ -128,7 +128,7 @@ class VendorsController extends Controller
             'last_date_supply' => $request->last_date_supply,
             'pic_vendor' => $request->pic_vendor,
             'no_telp_vendor' => $request->no_telp_vendor,
-            'no_telp_pic' => $request->no_telp_pic_vendor,
+            'no_telp_pic' => $request->no_telp_pic,
             'status_blacklist' => $request->status_blacklist
         ];
 
