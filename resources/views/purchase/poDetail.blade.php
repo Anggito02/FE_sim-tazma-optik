@@ -419,7 +419,7 @@
                                 </div> -->
 
                                 <div class="mt-5 float-right">
-                                    <button type="submit" class="btn btn-success">Add new</button>
+                                    <button type="submit" class="btn btn-success">Create Receive Order</button>
                                 </div>
                             </div>
                         </div>

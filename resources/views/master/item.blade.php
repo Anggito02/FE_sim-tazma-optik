@@ -46,15 +46,15 @@
                             <th class="thead-text"><span class="nowrap">Jenis Item</span></th>
                             <th class="thead-text"><span class="nowrap">Kode Item</span></th>
                             <th class="thead-text"><span class="nowrap">Deskripsi</span></th>
-                            <th class="thead-text"><span class="nowrap">Frame SKU Vendor</span></th>
-                            <th class="thead-text"><span class="nowrap">Frame SUB Kategori</span></th>
-                            <th class="thead-text"><span class="nowrap">Kode Frame</span></th>
+                            <th class="thead-text @if ($jenis_item == 'lensa' || $jenis_item == 'aksesoris' ) d-none @endif"><span class="nowrap">Frame SKU Vendor</span></th>
+                            <th class="thead-text @if ($jenis_item == 'lensa' || $jenis_item == 'aksesoris' ) d-none @endif"><span class="nowrap">Frame SUB Kategori</span></th>
+                            <th class="thead-text @if ($jenis_item == 'lensa' || $jenis_item == 'aksesoris' ) d-none @endif"><span class="nowrap">Kode Frame</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Beli</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Jual</span></th>
-                            <th class="thead-text"><span class="nowrap">Jenis Produk Lensa</span></th>
-                            <th class="thead-text"><span class="nowrap">Jenis Lensa</span></th>
-                            <th class="thead-text"><span class="nowrap">Nama Item Aksesoris</span></th>
-                            <th class="thead-text"><span class="nowrap">Kategori Aksesoris</span></th>
+                            <th class="thead-text @if ($jenis_item == 'frame' || $jenis_item == 'aksesoris' ) d-none @endif"><span class="nowrap">Jenis Produk Lensa</span></th>
+                            <th class="thead-text @if ($jenis_item == 'frame' || $jenis_item == 'aksesoris' ) d-none @endif"><span class="nowrap">Jenis Lensa</span></th>
+                            <th class="thead-text @if ($jenis_item == 'frame' || $jenis_item == 'lensa' ) d-none @endif"><span class="nowrap">Nama Item Aksesoris</span></th>
+                            <th class="thead-text @if ($jenis_item == 'frame' || $jenis_item == 'lensa' ) d-none @endif"><span class="nowrap">Kategori Aksesoris</span></th>
                             <th class="thead-text"><span class="nowrap">Stok</span></th>
                             <th class="thead-text"><span class="nowrap">Edit</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
@@ -74,15 +74,15 @@
                             <td class="nowrap">{{ $vals['jenis_item'] }}</td>
                             <td class="nowrap">{{ $vals['kode_item']}}</td>
                             <td class="nowrap text-right">{{ $vals['deskripsi']}}</td>
-                            <td class="nowrap text-right">{{ $vals['frame_sku_vendor']}}</td>
-                            <td class="nowrap text-right">{{ $vals['frame_sub_kategori']}}</td>
-                            <td class="nowrap text-right">{{ $vals['frame_kode']}}</td>
+                            <td class="nowrap text-right @if ($jenis_item == 'lensa' || $jenis_item == 'aksesoris' ) d-none @endif">{{ $vals['frame_sku_vendor']}}</td>
+                            <td class="nowrap text-right @if ($jenis_item == 'lensa' || $jenis_item == 'aksesoris' ) d-none @endif">{{ $vals['frame_sub_kategori']}}</td>
+                            <td class="nowrap text-right @if ($jenis_item == 'lensa' || $jenis_item == 'aksesoris' ) d-none @endif">{{ $vals['frame_kode']}}</td>
                             <td class="nowrap">{{ $vals['harga_beli']}}</td>
                             <td class="nowrap">{{ $vals['harga_jual']}}</td>
-                            <td class="nowrap">{{ $vals['lensa_jenis_produk']}}</td>
-                            <td class="nowrap text-right">{{ $vals['lensa_jenis_lensa']}}</td>
-                            <td class="nowrap">{{ $vals['aksesoris_nama_item']}}</td>
-                            <td class="nowrap">{{ $vals['aksesoris_kategori']}}</td>
+                            <td class="nowrap @if ($jenis_item == 'frame' || $jenis_item == 'aksesoris' ) d-none @endif">{{ $vals['lensa_jenis_produk']}}</td>
+                            <td class="nowrap text-right @if ($jenis_item == 'frame' || $jenis_item == 'aksesoris' ) d-none @endif">{{ $vals['lensa_jenis_lensa']}}</td>
+                            <td class="nowrap @if ($jenis_item == 'frame' || $jenis_item == 'lensa' ) d-none @endif">{{ $vals['aksesoris_nama_item']}}</td>
+                            <td class="nowrap @if ($jenis_item == 'frame' || $jenis_item == 'lensa' ) d-none @endif">{{ $vals['aksesoris_kategori']}}</td>
                             <td class="nowrap">{{ $vals['stok']}}</td>
                             <td>
                                 <button type="button" class="btn-sm btn-primary btn-edit-item" data-toggle="modal"
