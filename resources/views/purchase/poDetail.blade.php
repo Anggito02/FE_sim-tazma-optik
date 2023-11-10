@@ -154,7 +154,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Item</label>
                                                                 <select type="text" name="item_id" class="form-control">
-                                                                    <option value="{{ $valPod['item_id']}}" selected>
+                                                                    <option value="{{ $valPod['item_id']}}" selected hidden>
                                                                         {{$valPod['kode_item']}}</option>
                                                                 </select>
                                                             </div>

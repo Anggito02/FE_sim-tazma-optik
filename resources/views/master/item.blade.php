@@ -13,15 +13,16 @@
             <div class="d-flex justify-content-end">
                 <div class="search mx-1">
 
-                    <form action="/item" method="GET">
+                    <form id="itemForm" action="/item" method="GET" onchange="document.getElementById('itemForm').submit()">
                         @csrf
                         @method("GET")
                         <select name="jenis_item" class="form-control">
+                            <option value="{{$jenis_item}}" disabled selected hidden>{{$jenis_item}}</option>
                             <option value="frame">Frame</option>
                             <option value="lensa">Lensa</option>
                             <option value="aksesoris">Aksesoris</option>
                         </select>
-                        <button type="submit">Submit</button>
+                        <!-- <button type="submit">Submit</button> -->
                     </form>
                 </div>
 
