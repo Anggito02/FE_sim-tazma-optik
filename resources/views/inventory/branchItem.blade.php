@@ -8,15 +8,6 @@
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
     
     <div class="card shadow mb-4">
-        <div class="card-body black-text">
-            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
-                New Branch Item
-            </button>
-        </div>
-    </div>
-
-    <div class="card shadow mb-4">
         <!-- <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
         </div> -->
@@ -60,60 +51,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Add Data -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title black-text" id="exampleModalLongTitle">New Item Outgoing</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body black-text">
-                    <form method="post" action="/branch-item/add">
-                        @csrf
-                        @method("POST")
-                        <div class="row">
-                            <div class="col">
-                                
-                                <div class="mb-3">
-                                    <label class="form-label">Cabang</label>
-                                    <select class="form-control" name="branch_id">
-                                        <option value="" hidden selected disabled>Select Branch</option>
-                                        @foreach ($branch as $val)
-                                        <option value="{{$val['id']}}">{{$val['nama_branch']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label class="form-label">Barang</label>
-                                    <select class="form-control" name="item_id">
-                                        <option value="" hidden selected disabled>Select Item</option>
-                                        @foreach ($item as $val)
-                                        <option value="{{$val['id']}}">{{$val['jenis_item']}} - {{$val['kode_item']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                
-                                <div class="mt-5 float-right">
-                                    <button type="submit" class="btn btn-success">Add new</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
             </div>
         </div>
     </div>

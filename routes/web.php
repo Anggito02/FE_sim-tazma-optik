@@ -138,7 +138,6 @@ Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->gr
 
 Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/branch-item','getAllBranchItem');
-    Route::post('/branch-item/add', 'addBranchItem');
 });
 
 Route::controller(ItemOutgoingController::class)->middleware('isTokenValid')->group(function(){
