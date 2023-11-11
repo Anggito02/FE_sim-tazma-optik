@@ -27,12 +27,12 @@ buttonAddItem.addEventListener('click', function() {
     }
 })
 
-buttonEditItem.addEventListener('click', function() {
-    const editDnone = document.querySelectorAll('.form-edit-item');
-    for (let i = 0; i < editDnone.length; i++) {
-        editDnone[i].style.display = 'none';
-    }
-})
+// buttonEditItem.addEventListener('click', function() {
+//     const editDnone = document.querySelectorAll('.form-edit-item');
+//     for (let i = 0; i < editDnone.length; i++) {
+//         editDnone[i].style.display = 'none';
+//     }
+// });
 
 selectElementAddItem.addEventListener('change', function() {
     const selectedAddOption = selectElementAddItem.value;

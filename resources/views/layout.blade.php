@@ -8,11 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>TAZMA</title>
+    <script type="text/javascript" src="{{ asset('vendor/jquery/jquery.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/jquery/jquery-3.6.4.min.js')}}"></script>
+    
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.fixedColumns.min.js')}}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ asset('vendor/select2/select2.js')}}"></script>
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/select2/select2.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -21,12 +30,15 @@
 
     <!-- datatables bootstrap 4 -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <!-- <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet"> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     {{-- <!-- <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet"> --> --}}
+    
 
+    
 </head>
 
 <body id="page-top">
@@ -366,7 +378,8 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor\jquery\jquery.min.js')}}"></script>
+    <!-- <script src="{{ asset('vendor\jquery\jquery.min.js')}}"></script> -->
+    
     <script src="{{ asset('vendor\bootstrap\js\bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -379,6 +392,11 @@
     <script src="{{ asset('js\support.js')}}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".select2").select2();
+        });
+    </script>
 </body>
 
 </html>
