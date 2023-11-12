@@ -17,7 +17,7 @@ class PurchaseOrderDetailController extends Controller
         $token = $_COOKIE['token'];
 
         $page = 1;
-        $limit = 100;
+        $limit = 50;
 
         $headers = [
             'Accept' => 'application/json',

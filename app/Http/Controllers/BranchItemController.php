@@ -52,13 +52,21 @@ class BranchItemController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch-item/all', $api_request_getBranchItem);
-
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request_getBranchItem);
+        $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/all', $api_request_getBranchItem);
         $branch_item = $response->json();
+        $branch = $response_branch->json();
+        // dd($branch);
+        $item = $response_item->json();
+        // dd($item);
+        // dd($branch_item);
 
         $user = GetUserInfo::getUserInfo();
         if ($branch_item['status'] == 'success'){
-            return view('master.branch-item', [
+            return view('inventory.branchItem', [
                 'branch_item' => $branch_item['data'],
+                'branch' => $branch['data'],
+                'item' => $item['data'],
                 'data' => $user['data']
             ]);
         }else{
@@ -97,6 +105,7 @@ class BranchItemController extends Controller
         $response_addBranchItem = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/branch-item/add', $api_request_addBranchItem);
 
         $result_addBranchItem = $response_addBranchItem->json();
+        // dd($result_addBranchItem);
 
         if ($result_addBranchItem['status'] == 'success'){
             toastr()->info('Branch item added successfully!', 'Branch Item', ["timeOut" => 3000]);

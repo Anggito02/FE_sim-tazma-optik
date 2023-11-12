@@ -131,7 +131,7 @@
                                                             <div class="mb-3">
                                                                 <label for="UpdateVendor" class="form-label">Vendor</label>
                                                                 <select name="vendor_id" class="form-control">
-                                                                    <option value="{{$val['vendor_id']}}" selected>{{$val['nama_vendor']}}</option>
+                                                                    <option value="{{$val['vendor_id']}}" selected hidden>{{$val['nama_vendor']}}</option>
                                                                     @foreach ($vendor as $valvendor)
                                                                         <option value="{{$valvendor['id']}}" name="vendor_id">{{$valvendor['nama_vendor']}}</option>
                                                                     @endforeach
@@ -141,7 +141,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Status PO</label>
                                                                 <select type="text" name="status_po" class="form-control">
-                                                                    <option value="@if ($val['status_po'] == 1) OPEN @elseif ($val['status_po'] == 0) CLOSED @endif" selected>@if ($val['status_po'] == 1) OPEN @elseif ($val['status_po'] == 0) CLOSED @endif</option>
+                                                                    <option value="@if ($val['status_po'] == 1) OPEN @elseif ($val['status_po'] == 0) CLOSED @endif" selected hidden >@if ($val['status_po'] == 1) OPEN @elseif ($val['status_po'] == 0) CLOSED @endif</option>
                                                                     <option value="1">OPEN</option>
                                                                     <option value="0">CLOSED</option>
                                                                 </select>
@@ -150,7 +150,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Checked By</label>
                                                                 <select type="text" name="checked_by" class="form-control" value="">
-                                                                <option value="{{$val['checked_by_id']}}" selected>{{$val['checked_by_name']}}</option>
+                                                                <option value="{{$val['checked_by_id']}}" selected hidden>{{$val['checked_by_name']}}</option>
                                                                     @foreach ($employee as $valemployee)
                                                                         <option value="{{$valemployee['id']}}" name="checked_by">{{$valemployee['employee_name']}}</option>
                                                                     @endforeach
@@ -164,7 +164,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Status Pembayaran</label>
                                                                 <select name="status_pembayaran" class="form-control">
-                                                                    <option value="@if ($val['status_pembayaran'] == 1) Sudah Dibayar @elseif ($val['status_pembayaran'] == 0) Belum Dibayar @endif" selected>@if ($val['status_pembayaran'] == 1) Sudah Dibayar @elseif ($val['status_pembayaran'] == 0) Belum Dibayar @endif</option>
+                                                                    <option value="@if ($val['status_pembayaran'] == 1) Sudah Dibayar @elseif ($val['status_pembayaran'] == 0) Belum Dibayar @endif" selected hidden >@if ($val['status_pembayaran'] == 1) Sudah Dibayar @elseif ($val['status_pembayaran'] == 0) Belum Dibayar @endif</option>
                                                                     <option value="1">Sudah Dibayar</option>
                                                                     <option value="0">Belum Dibayar</option>
                                                                 </select>
@@ -173,7 +173,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Made By</label>
                                                                 <select type="text" name="made_by" class="form-control" value="">
-                                                                <option value="{{$val['made_by_id']}}"selected>{{$val['made_by_name']}}</option>
+                                                                <option value="{{$val['made_by_id']}}"selected hidden>{{$val['made_by_name']}}</option>
                                                                     @foreach ($employee as $valemployee)
                                                                         <option value="{{$valemployee['id']}}" name="made_by">{{$valemployee['employee_name']}}</option>
                                                                     @endforeach
@@ -183,7 +183,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Approved By</label>
                                                                 <select type="text" name="approved_by" class="form-control">
-                                                                    <option value="{{$val['approved_by_id']}}"selected>{{$val['approved_by_name']}}</option>
+                                                                    <option value="{{$val['approved_by_id']}}"selected hidden>{{$val['approved_by_name']}}</option>
                                                                     @foreach ($employee as $valemployee)
                                                                         <option value="{{$valemployee['id']}}" name="approved_by">{{$valemployee['employee_name']}}</option>
                                                                     @endforeach

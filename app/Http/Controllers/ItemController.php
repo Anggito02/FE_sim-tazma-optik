@@ -47,11 +47,13 @@ class ItemController extends Controller
         $response_lensaCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/all', $api_request);
         // dd($response);
         $item = $response->json();
+        // dd($item);
         $index = $response_index->json();
         $brand = $response_brand->json();
         $vendor = $response_vendor->json();
         $color = $response_color->json();
         $frameCategory = $response_frameCategory->json();
+        // dd($frameCategory);
         $lensaCategory = $response_lensaCategory->json();
         // dd($lensaCategory);
 
@@ -67,7 +69,8 @@ class ItemController extends Controller
                 'vendor' => $vendor['data'],
                 'color' => $color['data'],
                 'frameCategory' => $frameCategory['data'],
-                'lensaCategory' => $lensaCategory['data']
+                'lensaCategory' => $lensaCategory['data'],
+                'jenis_item' => $jenis_item
             ]);
         } else {
             return redirect('/dashboard');

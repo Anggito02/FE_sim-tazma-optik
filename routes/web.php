@@ -138,7 +138,6 @@ Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->gr
 
 Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/branch-item','getAllBranchItem');
-    Route::post('/branch-item/add', 'addBranchItem');
 });
 
 Route::controller(ItemOutgoingController::class)->middleware('isTokenValid')->group(function(){
@@ -154,6 +153,11 @@ Route::controller(ItemOutgoingDetailController::class)->middleware('isTokenValid
     Route::put('/item-outgoing/detail/edit', 'updateItemOutgoingDetail');
     Route::put('/item-outgoing/detail/verify', 'verifyItemOutgoingDetail');
     Route::delete('/item-outgoing/detail/delete', 'deleteItemOutgoingDetail');
+});
+
+Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch-item','getAllBranchItem');
+    Route::post('/branch-item/add', 'addBranchItem');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
