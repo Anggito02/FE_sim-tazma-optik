@@ -88,7 +88,11 @@ class ItemController extends Controller
                 'lensaCategory' => $lensaCategory['data'],
                 'jenis_item' => $jenis_item,
                 'kode_item' => $request->kode_item,
-                'aksesoris_nama_item' => $request->aksesoris_nama_item
+                'aksesoris_nama_item' => $request->aksesoris_nama_item,
+                'frame_sub_kategori' => $request->frame_sub_kategori,
+                'frame_kode' => $request->frame_kode,
+                'lensa_jenis_lensa' => $request->lensa_jenis_lensa,
+                'aksesoris_kategori' => $request->aksesoris_kategori
             ]);
         } else {
             return redirect('/dashboard');
@@ -103,7 +107,7 @@ class ItemController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        $data = $request->all(); 
+        $data = $request->all();
         $api_request = [
             "page" => 1,
             "limit" => 10000
@@ -142,6 +146,7 @@ class ItemController extends Controller
 
         return response()->json($item);
     }
+
     public function addItem(Request $request)
     {
         $token = $_COOKIE['token'];

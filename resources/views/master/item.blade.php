@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="container-fluid">
+
     <!-- Page Heading -->
     {{-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
@@ -44,7 +45,7 @@
                         <option value="lensa" {{ $jenis_item == 'lensa' ? 'selected' : '' }}>Lensa</option>
                         <option value="aksesoris" {{ $jenis_item == 'aksesoris' ? 'selected' : '' }}>Aksesoris</option>
                     </select>
-                </div> 
+                </div>
                 <div class="form-group col-md-2">
                     <label for="kode_item" class="form-label">Kode Item (SKU)</label>
                     <input type="text" name="kode_item" id="kode_item" class="form-control" value="{{$kode_item}}">
@@ -52,6 +53,22 @@
                 <div class="form-group col-md-2">
                     <label for="aksesoris_nama_item" class="form-label">Nama Item</label>
                     <input type="text" name="aksesoris_nama_item" id="aksesoris_nama_item" class="form-control" value="{{$aksesoris_nama_item}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="frame_sub_kategori" class="form-label">Frame Shape</label>
+                    <input type="text" name="frame_sub_kategori" id="frame_sub_kategori" class="form-control" value="{{$frame_sub_kategori}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="frame_kode" class="form-label">Frame Code</label>
+                    <input type="text" name="frame_kode" id="frame_kode" class="form-control" value="{{$frame_kode}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="lensa_jenis_lensa" class="form-label">Jenis Lensa</label>
+                    <input type="text" name="lensa_jenis_lensa" id="lensa_jenis_lensa" class="form-control" value="{{$lensa_jenis_lensa}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="aksesoris_kategori" class="form-label">Kategori Aksesoris</label>
+                    <input type="text" name="aksesoris_kategori" id="aksesoris_kategori" class="form-control" value="{{$aksesoris_kategori}}">
                 </div>
 
                 <!-- <div class="form-group col-md-2">
@@ -68,15 +85,22 @@
                 </div>
             </div>
         </form>
-        <div class="col-md-3">
+        <div class="d-flex flex-row md-3">
             <!-- Add the button inside another column -->
             <div class="form-group">
                 <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter">
                     <i class="fa-solid fa-pencil"></i> New Item
                 </button>
             </div>
+
+            {{-- <div class="form-group mx-3">
+                <button type="button" class="btn btn-warning btn-new-item" href="/item">
+                    <i class="fa-solid fa-eye"></i> Show All
+                </button>
+            </div> --}}
         </div>
     </div>
+
 </div>
 
 
@@ -121,7 +145,6 @@
        		<div id="forNOmore"></div>
     	</div>
     </div>
-</div>
 <!-- Your script using jQuery -->
 <script>
     function formatNumber(number) {
@@ -159,10 +182,10 @@
             $("#forLoad").append(load_img);
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-                method: "POST", 
+                method: "POST",
                 type  : 'ajax',
                 url   : settings.data_url,
-                data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'jenis_item':settings.jenis_item,'kode_item':settings.kode_item,'aksesoris_nama_item':settings.aksesoris_nama_item},
+                data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'jenis_item':settings.jenis_item,'kode_item':settings.kode_item,'aksesoris_nama_item':settings.aksesoris_nama_item,'frame_sub_kategori':settings.frame_sub_kategori,'frame_kode':settings.frame_kode,'lensa_jenis_lensa':settings.lensa_jenis_lensa,'aksesoris_kategori':settings.aksesoris_kategori},
                 async : true,
                 dataType : 'json',
                 error: function (request, error) {
@@ -178,7 +201,7 @@
                         button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
                         button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
                         rowData.push([
-							offsetN0,  
+							offsetN0,
                             currentItem.jenis_item,
                             currentItem.kode_item,
                             currentItem.aksesoris_nama_item,
@@ -221,7 +244,7 @@
         }
     }
     function masterContent() {
-		var settings = $.extend({ 
+		var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
             data_url: "{{ url('/item/loadDataMaster') }}",
             end_record_text : 'No more records found!', //no more records to load
@@ -232,8 +255,12 @@
             jenis_item      : document.getElementById('jenis_item').value, //initial page
             kode_item      : document.getElementById('kode_item').value, //initial page
             aksesoris_nama_item      : document.getElementById('aksesoris_nama_item').value, //initial page
+            frame_sub_kategori      : document.getElementById('frame_sub_kategori').value, //initial page
+            frame_kode      : document.getElementById('frame_kode').value, //initial page
+            lensa_jenis_lensa      : document.getElementById('lensa_jenis_lensa').value, //initial page
+            aksesoris_kategori      : document.getElementById('aksesoris_kategori').value, //initial page
         });
-        loading  = false; 
+        loading  = false;
 	    end_record = false;
 	    addContent(settings);
 	}
@@ -267,21 +294,21 @@
 								'targets': 7,
 								'createdCell':  function (td, cellData, rowData, row, col) {
 									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right'); 
+									$(td).attr('align', 'right');
 								}
 							},
                             {
 								'targets': 8,
 								'createdCell':  function (td, cellData, rowData, row, col) {
 									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right'); 
+									$(td).attr('align', 'right');
 								}
 							},
                             {
 								'targets': 9,
 								'createdCell':  function (td, cellData, rowData, row, col) {
 									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right'); 
+									$(td).attr('align', 'right');
 								}
 							},
 						]
@@ -301,7 +328,7 @@
             </button>
         </div>
 	    <div class="modal-body" id="panelUpdateData">
-	     
+
 
 	    </div>
 	  </div>
