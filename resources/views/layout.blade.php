@@ -13,7 +13,7 @@
     <title>TAZMA</title>
     <script type="text/javascript" src="{{ asset('vendor/jquery/jquery.js')}}"></script>
     <script type="text/javascript" src="{{ asset('vendor/jquery/jquery-3.6.4.min.js')}}"></script>
-    
+
     <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.fixedColumns.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
@@ -36,9 +36,9 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     {{-- <!-- <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet"> --> --}}
-    
 
-    
+
+
 </head>
 
 <body id="page-top">
@@ -111,8 +111,8 @@
                         <h6 class="collapse-header">Purchase Sheet:</h6>
                         <a class="collapse-item" href="/PO">PO (Purchase Order)</a>
                         <!-- <a class="collapse-item" href="/receive-order">RO (Receive Order)</a> -->
-                        <a class="collapse-item" href="">Inventory Information</a>
-                        <a class="collapse-item" href="">Invoice Information</a>
+                        {{-- <a class="collapse-item" href="">Inventory Information</a>
+                        <a class="collapse-item" href="">Invoice Information</a> --}}
                         <a class="collapse-item" href="">QR Code Generator</a>
                         <a class="collapse-item" href="">Monitoring Purchase</a>
                     </div>
@@ -379,7 +379,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <!-- <script src="{{ asset('vendor\jquery\jquery.min.js')}}"></script> -->
-    
+
     <script src="{{ asset('vendor\bootstrap\js\bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
