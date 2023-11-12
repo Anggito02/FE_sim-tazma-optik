@@ -28,7 +28,7 @@ class ItemController extends Controller
         $jenis_item = $request->jenis_item;
 
         if ($request->jenis_item == null){
-            $jenis_item = 'frame';
+            $jenis_item = '0';
         };
 
         $api_request = [
@@ -36,7 +36,7 @@ class ItemController extends Controller
             "page" => $page,
             "limit" => $limit
         ];
-
+        // print_r($api_request);
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $api_request);
         $response_index = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/index/all', $api_request);
@@ -47,6 +47,7 @@ class ItemController extends Controller
         $response_lensaCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/all', $api_request);
         // dd($response);
         $item = $response->json();
+        // print_r($item);
         // dd($item);
         $index = $response_index->json();
         $brand = $response_brand->json();
@@ -60,6 +61,21 @@ class ItemController extends Controller
         $user = GetUserInfo::getUserInfo();
         // dd($user);
 
+        // if ($item['status'] == 'success'){
+        //     return view('master.item', [
+        //         'item' => $item['data'],
+        //         'data' => $user['data'],
+        //         'index' => $index['data'],
+        //         'brand' => $brand['data'],
+        //         'vendor' => $vendor['data'],
+        //         'color' => $color['data'],
+        //         'frameCategory' => $frameCategory['data'],
+        //         'lensaCategory' => $lensaCategory['data'],
+        //         'jenis_item' => $jenis_item
+        //     ]);
+        // } else {
+        //     return redirect('/dashboard');
+        // }
         if ($item['status'] == 'success'){
             return view('master.item', [
                 'item' => $item['data'],
@@ -70,7 +86,9 @@ class ItemController extends Controller
                 'color' => $color['data'],
                 'frameCategory' => $frameCategory['data'],
                 'lensaCategory' => $lensaCategory['data'],
-                'jenis_item' => $jenis_item
+                'jenis_item' => $jenis_item,
+                'kode_item' => $request->kode_item,
+                'aksesoris_nama_item' => $request->aksesoris_nama_item
             ]);
         } else {
             return redirect('/dashboard');
@@ -78,7 +96,52 @@ class ItemController extends Controller
         // dd($item);
 
     }
+    public function loadDataDetailOnly(Request $request)
+    {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all(); 
+        $api_request = [
+            "page" => 1,
+            "limit" => 10000
+        ];
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/one', $data)->json();
+        $response_index = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/index/all', $api_request)->json();
+        $response_brand = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/brand/all', $api_request)->json();
+        $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request)->json();
+        $response_color = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/color/all', $api_request)->json();
+        $response_frameCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/frame-category/all', $api_request)->json();
+        $response_lensaCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/all', $api_request)->json();
+        return view('master.itemEdit',['vals'=>$response['data'],'index' => $response_index['data'],'brand' => $response_brand['data'],'vendor' => $response_vendor['data'],'color' => $response_color['data'],'frameCategory' => $response_frameCategory['data'],'lensaCategory' => $response_lensaCategory['data'],]);
+    }
+    public function loadDataMaster(Request $request)
+    {
+        $token = $_COOKIE['token'];
 
+        // $page = 1;
+        // $limit = 100;
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all(); // Retrieve all input data from the request
+        // $data['jenis_item'] ="frame";
+        // $api_request = [
+        //     "jenis_item" => $jenis_item,
+        //     "page" => $page,
+        //     "limit" => $limit
+        // ];
+        // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $data);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $data);
+        // $response = ['data' => 'Berhasil']; // Replace 'data' with whatever key you want
+        $item = $response->json();
+
+        return response()->json($item);
+    }
     public function addItem(Request $request)
     {
         $token = $_COOKIE['token'];
