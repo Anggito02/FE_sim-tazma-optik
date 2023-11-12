@@ -131,10 +131,24 @@
 			return '0';
 		}
 	}
-    function handleButtonClick(draftNumber) {
+    function handleButtonClick(id) {
+        var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
+        $("#panelUpdateData").html(load_img);
+        $.ajax({
+		    url   	: "{{ url('/item/loadDataDetailOnly') }}",
+		    data 	:{'id':id},
+		    method	: "POST",
+		    success : function(data){
+                console.log(data);
+		    	$('#panelUpdateData').html(data);
+                $('#add-update-data').modal('show');
+		    }
+		});
         // Lakukan sesuatu dengan nomor draft (draftNumber)
-        alert('Button clicked for draft number: ' + draftNumber);
+        // alert('Button clicked for draft number: ' + draftNumber);
         // Anda dapat menambahkan logika atau tindakan lain yang diperlukan di sini
+        $('#spin_update').hide();
+		$('#spin_update_table').show();
     }
     function addContent(settings) {
         var load_img = $('<img/>').attr('src',settings.loading_gif_url).addClass('loading-image');
@@ -276,6 +290,24 @@
         masterContent();
     });
 </script>
+<!-- Modal ADD UPDATE DATA-->
+<div class="modal fade" id="add-update-data" tabindex="-1"  data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+	  <div class="modal-content">
+      <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Item</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+	    <div class="modal-body" id="panelUpdateData">
+	     
+
+	    </div>
+	  </div>
+	</div>
+</div>
+<!-- Modal ADD UPDATE DATA -->
 <!-- Modal Add Data -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">

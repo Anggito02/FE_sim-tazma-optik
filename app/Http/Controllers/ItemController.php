@@ -96,6 +96,27 @@ class ItemController extends Controller
         // dd($item);
 
     }
+    public function loadDataDetailOnly(Request $request)
+    {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all(); 
+        $api_request = [
+            "page" => 1,
+            "limit" => 10000
+        ];
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/one', $data)->json();
+        $response_index = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/index/all', $api_request)->json();
+        $response_brand = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/brand/all', $api_request)->json();
+        $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request)->json();
+        $response_color = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/color/all', $api_request)->json();
+        $response_frameCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/frame-category/all', $api_request)->json();
+        $response_lensaCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/all', $api_request)->json();
+        return view('master.itemEdit',['vals'=>$response['data'],'index' => $response_index['data'],'brand' => $response_brand['data'],'vendor' => $response_vendor['data'],'color' => $response_color['data'],'frameCategory' => $response_frameCategory['data'],'lensaCategory' => $response_lensaCategory['data'],]);
+    }
     public function loadDataMaster(Request $request)
     {
         $token = $_COOKIE['token'];
