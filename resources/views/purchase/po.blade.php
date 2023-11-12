@@ -172,11 +172,11 @@
 
                                                             <div class="mb-3">
                                                                 <label class="form-label">Made By</label>
-                                                                <select disabled type="text" name="made_by" class="form-control" value="">
+                                                                <select type="text" name="made_by" class="form-control" value="">
                                                                 <option value="{{$val['made_by_id']}}"selected hidden>{{$val['made_by_name']}}</option>
-                                                                    {{-- @foreach ($employee as $valemployee)
+                                                                    @foreach ($employee as $valemployee)
                                                                         <option value="{{$valemployee['id']}}" name="made_by">{{$valemployee['employee_name']}}</option>
-                                                                    @endforeach --}}
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
 
