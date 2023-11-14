@@ -84,12 +84,13 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Master Sheet:</h6>
+                        <h6 class="collapse-header">Business Sheet:</h6>
                         <a class="collapse-item" href="/employee">Employees Information</a>
-                        <a class="collapse-item" href="/color">Colors Information</a>
-                        <a class="collapse-item" href="/vendors">Vendors Information</a>
-                        <a class="collapse-item" href="/brand">Brands Information</a>
                         <a class="collapse-item" href="/branch">Branches Information</a>
+                        <a class="collapse-item" href="/vendors">Vendors Information</a>
+                        <h6 class="collapse-header">Master Sheet:</h6>
+                        <a class="collapse-item" href="/brand">Brands Information</a>
+                        <a class="collapse-item" href="/color">Colors Information</a>
                         <a class="collapse-item" href="/lens-category">Lens Information</a>
                         <a class="collapse-item" href="/frame-category">Frame Information</a>
                         <a class="collapse-item" href="/index">Index Information</a>
