@@ -235,7 +235,7 @@ class ItemController extends Controller
             toastr()->info('Item added successfully!', 'Item', ['timeOut' => 3000]);
             return redirect('/item');
         }else{
-            toastr()->error($result['message'], 'Item', ['timeOut' => 3000]);
+            toastr()->error($result['data'], 'Item', ['timeOut' => 3000]);
             return redirect('/item');
         }
     }

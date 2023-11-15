@@ -96,9 +96,11 @@
 
                     <div class="form-group col-md-auto">
                         <br />
-                        <button type="button" class="btn-sm btn-warning btn-new-item" href="/item">
-                            <i class="fa-solid fa-eye"></i> Show All
-                        </button>
+                        <a href="/item">
+                            <button type="button" class="btn-sm btn-warning btn-new-item" href="/item">
+                                <i class="fa-solid fa-eye"></i> Show All
+                            </button>
+                        </a>
                     </div>
 
 
