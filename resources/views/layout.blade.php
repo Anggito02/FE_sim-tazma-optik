@@ -151,6 +151,22 @@
                 </div>
             </li>
 
+            <!-- Sales -->
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sales"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>SALES</span>
+                </a>
+                <div id="sales" class="collapse" aria-labelledby="sales"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sales Sheet:</h6>
+                        <a class="collapse-item" href="/sales">SALES</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
