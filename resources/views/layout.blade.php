@@ -13,7 +13,7 @@
     <title>TAZMA</title>
     <script type="text/javascript" src="{{ asset('vendor/jquery/jquery.js')}}"></script>
     <script type="text/javascript" src="{{ asset('vendor/jquery/jquery-3.6.4.min.js')}}"></script>
-    
+
     <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.fixedColumns.min.js')}}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
@@ -42,9 +42,9 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     {{-- <!-- <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet"> --> --}}
-    
 
-    
+
+
 </head>
 
 <body id="page-top">
@@ -90,12 +90,13 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Master Sheet:</h6>
+                        <h6 class="collapse-header">Business Sheet:</h6>
                         <a class="collapse-item" href="/employee">Employees Information</a>
-                        <a class="collapse-item" href="/color">Colors Information</a>
-                        <a class="collapse-item" href="/vendors">Vendors Information</a>
-                        <a class="collapse-item" href="/brand">Brands Information</a>
                         <a class="collapse-item" href="/branch">Branches Information</a>
+                        <a class="collapse-item" href="/vendors">Vendors Information</a>
+                        <h6 class="collapse-header">Master Sheet:</h6>
+                        <a class="collapse-item" href="/brand">Brands Information</a>
+                        <a class="collapse-item" href="/color">Colors Information</a>
                         <a class="collapse-item" href="/lens-category">Lens Information</a>
                         <a class="collapse-item" href="/frame-category">Frame Information</a>
                         <a class="collapse-item" href="/index">Index Information</a>
@@ -117,8 +118,8 @@
                         <h6 class="collapse-header">Purchase Sheet:</h6>
                         <a class="collapse-item" href="/PO">PO (Purchase Order)</a>
                         <!-- <a class="collapse-item" href="/receive-order">RO (Receive Order)</a> -->
-                        <a class="collapse-item" href="">Inventory Information</a>
-                        <a class="collapse-item" href="">Invoice Information</a>
+                        {{-- <a class="collapse-item" href="">Inventory Information</a>
+                        <a class="collapse-item" href="">Invoice Information</a> --}}
                         <a class="collapse-item" href="">QR Code Generator</a>
                         <a class="collapse-item" href="">Monitoring Purchase</a>
                     </div>
@@ -140,7 +141,7 @@
                     </div>
                 </div>
             </li>
-            
+
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiestest"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -152,6 +153,22 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Testing Sheet:</h6>
                         <a class="collapse-item" href="/coa">COA</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Sales -->
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sales"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>SALES</span>
+                </a>
+                <div id="sales" class="collapse" aria-labelledby="sales"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Sales Sheet:</h6>
+                        <a class="collapse-item" href="/sales">SALES</a>
                     </div>
                 </div>
             </li>
@@ -385,7 +402,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <!-- <script src="{{ asset('vendor\jquery\jquery.min.js')}}"></script> -->
-    
+
     <script src="{{ asset('vendor\bootstrap\js\bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->

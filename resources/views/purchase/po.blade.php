@@ -104,7 +104,7 @@
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 @endif
-                            
+
                                 <!-- Modal Update Data -->
                                 <div class="modal fade" id="exampleModalCenterEdit{{$id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -158,9 +158,9 @@
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                         <div class="col">
-                                                            
+
                                                             <div class="mb-3">
                                                                 <label class="form-label">Status Pembayaran</label>
                                                                 <select name="status_pembayaran" class="form-control">
@@ -179,7 +179,7 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-    
+
                                                             <div class="mb-3">
                                                                 <label class="form-label">Approved By</label>
                                                                 <select type="text" name="approved_by" class="form-control">

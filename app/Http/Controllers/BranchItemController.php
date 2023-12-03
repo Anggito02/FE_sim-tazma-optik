@@ -62,7 +62,6 @@ class BranchItemController extends Controller
         // dd($branch_item);
 
         $user = GetUserInfo::getUserInfo();
-
         if ($branch_item['status'] == 'success'){
             return view('inventory.branchItem', [
                 'branch_item' => $branch_item['data'],
