@@ -179,8 +179,8 @@ Route::group([], function(){
         return view('error_page.505');
     });
 
-    Route::get('/sales', function () {
-        return view('sales.sales');
+    Route::get('/test', function () {
+        return view('addcart');
     });
 });
 
