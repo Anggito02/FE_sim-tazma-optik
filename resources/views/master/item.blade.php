@@ -38,7 +38,7 @@
                 @method("GET")
                 <div class="form-group col-md-2">
                     <label for="jenis_item" class="form-label">Jenis Item</label>
-                    <select id="jenis_item" name="jenis_item" class="form-control select2">
+                    <select id="jenis_item" width="100%" name="jenis_item" class="form-control select2">
                         <option value="0" {{ $jenis_item == '0' ? 'selected' : '' }}>-- Pilih Jenis Item --</option>
                         <option value="frame" {{ $jenis_item == 'frame' ? 'selected' : '' }}>Frame</option>
                         <option value="lensa" {{ $jenis_item == 'lensa' ? 'selected' : '' }}>Lensa</option>
@@ -123,6 +123,11 @@
     </div>
 </div>
 <!-- Your script using jQuery -->
+<script type="text/javascript">
+    $('#add-update-data').on('shown.bs.modal', function (e) {
+        $(".select2").select2();
+    });
+</script>
 <script>
     function formatNumber(number) {
 		if(number!==null && number!=="null"){
@@ -139,7 +144,6 @@
 		    data 	:{'id':id},
 		    method	: "POST",
 		    success : function(data){
-                console.log(data);
 		    	$('#panelUpdateData').html(data);
                 $('#add-update-data').modal('show');
 		    }
@@ -169,7 +173,7 @@
 	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
 			    },
                 success : function(result){
-                    console.log(result.data);
+                    // console.log(result.data);
 					var table = $('#data_item_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
@@ -193,7 +197,7 @@
                             currentItem.frame_kode,
                             currentItem.lensa_jenis_lensa,
                             "Index Lensa",
-                            currentItem.aksesoris_kategori,
+                            // currentItem.aksesoris_kategori,
                             currentItem.deskripsi,
                             button_draft_1,
                             button_draft_2,
@@ -342,19 +346,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-add-item " id="kategoriFrame">
-                                <div class="mb-3">
-                                    <label for="FrameCategory" class="form-label">Kategori Frame</label>
-                                    <select type="number" name="frame_frame_category_id" id="" class="form-control">
-                                        @foreach ($frameCategory as $val)
-                                        <option value="" disabled selected hidden>Choose...</option>
-                                        <option value="{{$val['id']}}" name="frame_frame_category_id">
-                                            {{$val['nama_kategori']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
                             <div class="form-add-item " id="indexLensa">
                                 <div class="mb-3">
                                     <label for="InputIndexLensa" class="form-label">Index Lensa</label>
@@ -375,12 +366,12 @@
                                 </div>
                             </div>
 
-                            <div class="form-add-item " id="kategoriAksesoris">
+                            <!-- <div class="form-add-item " id="kategoriAksesoris">
                                 <div class="mb-3">
                                     <label for="InputAksesoris" class="form-label">Kategori Aksesoris</label>
                                     <input type="text" name="aksesoris_kategori" class="form-control">
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="form-add-item " id="brandFrame">
                                 <div class="mb-3">
@@ -448,19 +439,6 @@
                                 <div class="mb-3">
                                     <label for="InputJenisLensa" class="form-label">Jenis Lensa</label>
                                     <input type="text" name="lensa_jenis_lensa" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-add-item " id="kategoriLensa">
-                                <div class="mb-3">
-                                    <label for="LensaCategory" class="form-label">Kategori Lensa</label>
-                                    <select type="number" name="lensa_lens_category_id" id="" class="form-control">
-                                        @foreach ($lensaCategory as $val)
-                                        <option value="" disabled selected hidden>Choose...</option>
-                                        <option value="{{$val['id']}}" name="lensa_lens_category_id">
-                                            {{$val['nama_kategori']}}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
 

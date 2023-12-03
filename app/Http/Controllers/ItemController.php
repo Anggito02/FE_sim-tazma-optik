@@ -23,7 +23,7 @@ class ItemController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-
+        // print_r($headers);
         $jenis_item = null;
         $jenis_item = $request->jenis_item;
 
@@ -38,61 +38,45 @@ class ItemController extends Controller
         ];
         // print_r($api_request);
 
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $api_request);
+        // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $api_request);
         $response_index = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/index/all', $api_request);
         $response_brand = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/brand/all', $api_request);
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
         $response_color = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/color/all', $api_request);
-        $response_frameCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/frame-category/all', $api_request);
-        $response_lensaCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/all', $api_request);
+        // $response_Category = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/frame-category/all', $api_request);
+        // $response_lensaCategory = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/lens-category/all', $api_request);
         // dd($response);
-        $item = $response->json();
+        // $item = $response->json();
         // print_r($item);
         // dd($item);
         $index = $response_index->json();
         $brand = $response_brand->json();
         $vendor = $response_vendor->json();
         $color = $response_color->json();
-        $frameCategory = $response_frameCategory->json();
+        // $frameCategory = $response_frameCategory->json();
         // dd($frameCategory);
-        $lensaCategory = $response_lensaCategory->json();
+        // $lensaCategory = $response_lensaCategory->json();
         // dd($lensaCategory);
 
         $user = GetUserInfo::getUserInfo();
         // dd($user);
-
         // if ($item['status'] == 'success'){
-        //     return view('master.item', [
-        //         'item' => $item['data'],
-        //         'data' => $user['data'],
-        //         'index' => $index['data'],
-        //         'brand' => $brand['data'],
-        //         'vendor' => $vendor['data'],
-        //         'color' => $color['data'],
-        //         'frameCategory' => $frameCategory['data'],
-        //         'lensaCategory' => $lensaCategory['data'],
-        //         'jenis_item' => $jenis_item
-        //     ]);
-        // } else {
-        //     return redirect('/dashboard');
-        // }
-        if ($item['status'] == 'success'){
             return view('master.item', [
-                'item' => $item['data'],
+                // 'item' => $item['data'],
                 'data' => $user['data'],
                 'index' => $index['data'],
                 'brand' => $brand['data'],
                 'vendor' => $vendor['data'],
                 'color' => $color['data'],
-                'frameCategory' => $frameCategory['data'],
-                'lensaCategory' => $lensaCategory['data'],
+                // 'frameCategory' => $frameCategory['data'],
+                // 'lensaCategory' => $lensaCategory['data'],
                 'jenis_item' => $jenis_item,
                 'kode_item' => $request->kode_item,
                 'aksesoris_nama_item' => $request->aksesoris_nama_item
             ]);
-        } else {
-            return redirect('/dashboard');
-        }
+        // } else {
+            // return redirect('/dashboard');
+        // }
         // dd($item);
 
     }
@@ -120,26 +104,14 @@ class ItemController extends Controller
     public function loadDataMaster(Request $request)
     {
         $token = $_COOKIE['token'];
-
-        // $page = 1;
-        // $limit = 100;
-
         $headers = [
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
         $data = $request->all(); // Retrieve all input data from the request
-        // $data['jenis_item'] ="frame";
-        // $api_request = [
-        //     "jenis_item" => $jenis_item,
-        //     "page" => $page,
-        //     "limit" => $limit
-        // ];
-        // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $data);
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $data);
-        // $response = ['data' => 'Berhasil']; // Replace 'data' with whatever key you want
         $item = $response->json();
-
+        // print_r($item);
         return response()->json($item);
     }
     public function addItem(Request $request)
@@ -241,7 +213,7 @@ class ItemController extends Controller
         $headers = [
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
-        ];
+        ]; 
 
         if ($request->jenis_item == "frame") {
             $frame_frame_category_id = explode('-', $request->frame_frame_category_id);
@@ -277,21 +249,15 @@ class ItemController extends Controller
         } else {
             $aksesoris_brand_id = null;
         }
-
-        $api_request = [
-            'id' => intval($request->item_id),
-            'jenis_item' => $request->jenis_item,
-            'deskripsi' => $request->deskripsi,
-            'stok' => intval($request->stok),
-            'harga_beli' => intval($request->harga_beli),
-            'harga_jual' => intval($request->harga_jual),
-            'frame_sku_vendor' => $request->frame_sku_vendor,
-            'frame_sub_kategori' => $request->frame_sub_kategori,
-            'frame_kode' => $request->frame_kode,
-            'lensa_jenis_produk' => $request->lensa_jenis_produk,
-            'lensa_jenis_lensa' => $request->lensa_jenis_lensa,
-            'aksesoris_nama_item' => $request->aksesoris_nama_item,
-            'aksesoris_kategori' => $request->aksesoris_kategori,
+        $fields = ['jenis_item','deskripsi','stok', 'harga_beli','harga_jual','frame_sku_vendor','frame_sub_kategori','frame_kode','lensa_jenis_produk','lensa_jenis_lensa','aksesoris_nama_item','aksesoris_kategori'];
+        $api_request = ['id' => intval($request->item_id)];
+        foreach ($fields as $field) {
+            if (!is_null($request->$field)) {
+                $api_request[$field] = $request->$field;
+            }
+        }
+        $fields2 = ['frame_frame_category_id','frame_brand_id','frame_vendor_id','frame_color_id','lensa_lens_category_id','lensa_brand_id','lensa_index_id','aksesoris_brand_id'];
+        $fields3 = [
             'frame_frame_category_id' => $frame_frame_category_id,
             'frame_brand_id' => $frame_brand_id,
             'frame_vendor_id' => $frame_vendor_id,
@@ -301,22 +267,32 @@ class ItemController extends Controller
             'lensa_index_id' => $lensa_index_id,
             'aksesoris_brand_id' => $aksesoris_brand_id
         ];
-        // dd($api_request);
+        foreach ($fields2 as $field2) {
+            if (!is_null($fields3[$field2])) {
+                $api_request[$field2] = $fields3[$field2];
+            }
+        }
+        print_r($api_request);
+        // // dd($api_request);
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/item/edit', $api_request);
 
-        // dd($response);
+        // // dd($response);
 
         $result = $response->json();
-        // dd($result);
+        print_r($result);
+        // // dd($result);
 
         if($result['status'] == 'success'){
-            toastr()->info('Item updated successfully!', 'Item', ['timeOut' => 3000]);
-            return redirect('/item');
+            $row['message']="The data has been successfully updated";
+            //     toastr()->info('Item updated successfully!', 'Item', ['timeOut' => 3000]);
+            //     return redirect('/item');
         }else{
-            toastr()->error($result['message'], 'Item', ['timeOut' => 3000]);
-            return redirect('/item');
+            $row['message']="Update data failed ";
+        //     toastr()->error($result['message'], 'Item', ['timeOut' => 3000]);
+        //     return redirect('/item');
         }
+        return response()->json($row);
     }
 
     public function deleteItem(Request $request)
