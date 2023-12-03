@@ -178,6 +178,10 @@ Route::group([], function(){
     Route::get('/505', function () {
         return view('error_page.505');
     });
+
+    Route::get('/test', function () {
+        return view('addcart');
+    });
 });
 
 
