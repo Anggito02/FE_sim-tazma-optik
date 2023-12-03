@@ -104,7 +104,7 @@
                             <th class="thead-text"><span class="nowrap">Kode Frame</span></th>
                             <th class="thead-text"><span class="nowrap">Jenis Lensa</span></th>
                             <th class="thead-text"><span class="nowrap">Indeks Lensa</span></th>
-                            <th class="thead-text"><span class="nowrap">Kategori Aksesoris</span></th>
+                            <!-- <th class="thead-text"><span class="nowrap">Kategori Aksesoris</span></th> -->
                             <th class="thead-text"><span class="nowrap">Deskripsi</span></th>
                             <th class="thead-text"><span class="nowrap">Edit</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
@@ -173,7 +173,7 @@
 	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
 			    },
                 success : function(result){
-                    // console.log(result.data);
+                    console.log(result.data);
 					var table = $('#data_item_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
@@ -186,18 +186,17 @@
                             currentItem.jenis_item,
                             currentItem.kode_item,
                             currentItem.aksesoris_nama_item,
-                            "high low dll",
-                            "nama Brand",
-                            "nama Vendor",
+                            currentItem.nama_kategori,
+                            currentItem.nama_brand,
+                            currentItem.nama_vendor,
                             formatNumber(currentItem.harga_beli),
                             formatNumber(currentItem.harga_jual),
                             formatNumber(currentItem.stok),
                             currentItem.frame_sub_kategori,
-                            "Frame Color",
+                            currentItem.frame_nama_warna,
                             currentItem.frame_kode,
                             currentItem.lensa_jenis_lensa,
-                            "Index Lensa",
-                            // currentItem.aksesoris_kategori,
+                            currentItem.lensa_nama_index,
                             currentItem.deskripsi,
                             button_draft_1,
                             button_draft_2,
