@@ -360,6 +360,7 @@
                 @yield('content')
 
             <!-- Footer -->
+            @if (url('/test') != url()->current())
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -367,6 +368,7 @@
                     </div>
                 </div>
             </footer>
+            @endif
             <!-- End of Footer -->
 
         </div>
