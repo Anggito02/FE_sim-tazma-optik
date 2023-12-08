@@ -127,7 +127,7 @@ Route::controller(ItemController::class)->middleware('isTokenValid')->group(func
     Route::get('/item','getAllItem');
     Route::post('/item/add', 'addItem');
     Route::post('/item/edit', 'updateItem');
-    Route::delete('/item/delete', 'deleteItem');
+    Route::post('/item/delete', 'deleteItem');
     Route::post('/item/loadDataMaster', 'loadDataMaster');
     Route::post('/item/loadDataDetailOnly', 'loadDataDetailOnly');
 });
