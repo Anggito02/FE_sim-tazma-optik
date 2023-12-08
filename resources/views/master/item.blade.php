@@ -9,6 +9,7 @@
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
     <div class="card shadow mb-4">
+        <span id="tambah_info"></span> 
         <form id="itemForm" action="/item" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row">
@@ -23,6 +24,15 @@
                         <option value="lensa" {{ $jenis_item == 'lensa' ? 'selected' : '' }}>Lensa</option>
                         <option value="aksesoris" {{ $jenis_item == 'aksesoris' ? 'selected' : '' }}>Aksesoris</option>
                     </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="jenis_item" class="form-label">Vendor</label>
+                    <select name="vendor_id" class="form-control chosen-select">
+                        <option value="0"selected>Choose...</option>
+                        @foreach ($vendor as $val)
+                            <option value="{{$val['id']}}">{{$val['nama_vendor']}}</option>
+                        @endforeach
+                    </select>
                 </div> 
                 <div class="form-group col-md-2">
                     <label for="kode_item" class="form-label">Kode Item (SKU)</label>
@@ -32,20 +42,13 @@
                     <label for="aksesoris_nama_item" class="form-label">Nama Item</label>
                     <input type="text" name="aksesoris_nama_item" id="aksesoris_nama_item" class="form-control" value="{{$aksesoris_nama_item}}">
                 </div>
-                <div class="form-group col-md-1">
+                <div class="form-group col-md-3">
                     <br/>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Item</button>
                 </div>
             </div>
         </form>
-        <div class="col-md-3">
-            <!-- Add the button inside another column -->
-            <div class="form-group">
-                <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i class="fa-solid fa-pencil"></i> New Item
-                </button>
-            </div>
-        </div>
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -87,6 +90,39 @@
 </div>
 <!-- Your script using jQuery -->
 <script type="text/javascript">
+    function confirmDelete(itemId) {
+        var confirmation = confirm("Are you sure you want to delete this item?");
+        if (confirmation) {
+            deleteItem(itemId);
+        }
+    }
+    function deleteItem(id) {
+    $.ajax({
+		    url   	: "{{ url('/item/delete') }}",
+		    data 	:{'id':id},
+		    method	: "POST",
+        error: function (request, error) {
+                console.log(error);
+                alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+        },
+        success: function(result) {
+            // console.log(result);
+            if(result.message=="The data has been successfully deleted"){ 
+                    $('#tambah_info').html(' <div class="alert alert-success alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+                    setTimeout(function(){  
+                    $('#tambah_info').hide(); 
+                    location.reload();
+                    },3500);
+            }else{
+                $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show(); 
+                setTimeout(function(){
+                    $('#tambah_info').hide(); 
+                    location.reload();
+                },3000)
+            }
+        },
+    });
+}
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
     });
@@ -173,7 +209,7 @@
                         let currentItem = result.data[i];
 						offsetN0++;
                         button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
-                        button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
+                        button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
                         rowData.push([
 							offsetN0,  
                             currentItem.jenis_item,
