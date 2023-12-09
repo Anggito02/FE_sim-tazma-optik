@@ -51,6 +51,50 @@ class PurchaseOrderController extends Controller
         }
     }
 
+    public function loadDataDetailOnly(Request $request)
+    {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all();
+        $api_request = [
+            "page" => 1,
+            "limit" => 10000
+        ];
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-orderWith/info/all', $api_request);
+        $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
+        $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
+        return view('master.poEdit',['vals'=>$response['data'],'employee' => $response_employee['data'],'vendor' => $response_vendor['data']]);
+    }
+
+    public function loadDataMaster(Request $request)
+    {
+        $token = $_COOKIE['token'];
+
+        // $page = 1;
+        // $limit = 100;
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all(); // Retrieve all input data from the request
+        // $data['jenis_item'] ="frame";
+        // $api_request = [
+        //     "jenis_item" => $jenis_item,
+        //     "page" => $page,
+        //     "limit" => $limit
+        // ];
+        // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $data);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/po/filtered', $data);
+        // $response = ['data' => 'Berhasil']; // Replace 'data' with whatever key you want
+        $item = $response->json();
+
+        return response()->json($item);
+    }
+
     public function addPO(Request $request) {
         $token = $_COOKIE['token'];
 
