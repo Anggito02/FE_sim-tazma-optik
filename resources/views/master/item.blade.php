@@ -44,11 +44,11 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="harga_jual_from" class="form-label">Harga Jual From</label>
-                    <input type="number" name="harga_jual_from" id="harga_jual_from" class="form-control" value="">
+                    <input type="number" name="harga_jual_from" id="harga_jual_from" class="form-control" value="{{$harga_jual_from}}">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="harga_jual_until" class="form-label">Harga Jual Until</label>
-                    <input type="number" name="harga_jual_until" id="harga_jual_until" class="form-control" value="">
+                    <input type="number" name="harga_jual_until" id="harga_jual_until" class="form-control" value="{{$harga_jual_until}}">
                 </div>
                 <div class="form-group col-md-3">
                     <br/>
