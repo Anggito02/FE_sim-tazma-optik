@@ -12,7 +12,7 @@ use App\Utils\GetUserInfo;
 
 class ItemController extends Controller
 {
-    //
+
     public function getAllItem(Request $request){
         $token = $_COOKIE['token'];
 
@@ -72,7 +72,7 @@ class ItemController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        $data = $request->all(); 
+        $data = $request->all();
         $api_request = [
             "page" => 1,
             "limit" => 10000
@@ -171,7 +171,7 @@ class ItemController extends Controller
         $headers = [
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
-        ]; 
+        ];
         $row=$request;
         $category_id=$request->category_id;
         $brand_id=$request->brand_id;

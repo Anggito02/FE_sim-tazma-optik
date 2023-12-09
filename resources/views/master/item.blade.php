@@ -9,7 +9,7 @@
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
     <div class="card shadow mb-4">
-        <span id="tambah_info"></span> 
+        <span id="tambah_info"></span>
         <form id="itemForm" action="/item" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row">
@@ -33,7 +33,7 @@
                             <option value="{{$val['id']}}">{{$val['nama_vendor']}}</option>
                         @endforeach
                     </select>
-                </div> 
+                </div>
                 <div class="form-group col-md-2">
                     <label for="kode_item" class="form-label">Kode Item (SKU)</label>
                     <input type="text" name="kode_item" id="kode_item" class="form-control" value="{{$kode_item}}">
@@ -41,6 +41,14 @@
                 <div class="form-group col-md-2">
                     <label for="aksesoris_nama_item" class="form-label">Nama Item</label>
                     <input type="text" name="aksesoris_nama_item" id="aksesoris_nama_item" class="form-control" value="{{$aksesoris_nama_item}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="harga_jual_from" class="form-label">Harga Jual From</label>
+                    <input type="number" name="harga_jual_from" id="harga_jual_from" class="form-control" value="">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="harga_jual_until" class="form-label">Harga Jual Until</label>
+                    <input type="number" name="harga_jual_until" id="harga_jual_until" class="form-control" value="">
                 </div>
                 <div class="form-group col-md-3">
                     <br/>
@@ -107,16 +115,16 @@
         },
         success: function(result) {
             // console.log(result);
-            if(result.message=="The data has been successfully deleted"){ 
+            if(result.message=="The data has been successfully deleted"){
                     $('#tambah_info').html(' <div class="alert alert-success alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-                    setTimeout(function(){  
-                    $('#tambah_info').hide(); 
+                    setTimeout(function(){
+                    $('#tambah_info').hide();
                     location.reload();
                     },3500);
             }else{
-                $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show(); 
+                $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
                 setTimeout(function(){
-                    $('#tambah_info').hide(); 
+                    $('#tambah_info').hide();
                     location.reload();
                 },3000)
             }
@@ -192,10 +200,11 @@
             $("#forLoad").append(load_img);
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-                method: "POST", 
+                method: "POST",
                 type  : 'ajax',
                 url   : settings.data_url,
-                data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'jenis_item':settings.jenis_item,'kode_item':settings.kode_item,'aksesoris_nama_item':settings.aksesoris_nama_item},
+                data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'jenis_item':settings.jenis_item,'kode_item':settings.kode_item,
+                'aksesoris_nama_item':settings.aksesoris_nama_item,'harga_jual':settings.harga_jual,},
                 async : true,
                 dataType : 'json',
                 error: function (request, error) {
@@ -211,7 +220,7 @@
                         button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
                         button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
                         rowData.push([
-							offsetN0,  
+							offsetN0,
                             currentItem.jenis_item,
                             currentItem.kode_item,
                             currentItem.aksesoris_nama_item,
@@ -253,7 +262,7 @@
         }
     }
     function masterContent() {
-		var settings = $.extend({ 
+		var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
             data_url: "{{ url('/item/loadDataMaster') }}",
             end_record_text : 'No more records found!', //no more records to load
@@ -264,8 +273,9 @@
             jenis_item      : document.getElementById('jenis_item').value, //initial page
             kode_item      : document.getElementById('kode_item').value, //initial page
             aksesoris_nama_item      : document.getElementById('aksesoris_nama_item').value, //initial page
+            harga_jual      : document.getElementById('harga_jual').value, //initial page
         });
-        loading  = false; 
+        loading  = false;
 	    end_record = false;
 	    addContent(settings);
 	}
@@ -299,21 +309,21 @@
 								'targets': 7,
 								'createdCell':  function (td, cellData, rowData, row, col) {
 									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right'); 
+									$(td).attr('align', 'right');
 								}
 							},
                             {
 								'targets': 8,
 								'createdCell':  function (td, cellData, rowData, row, col) {
 									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right'); 
+									$(td).attr('align', 'right');
 								}
 							},
                             {
 								'targets': 9,
 								'createdCell':  function (td, cellData, rowData, row, col) {
 									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right'); 
+									$(td).attr('align', 'right');
 								}
 							},
 						]
@@ -321,14 +331,14 @@
 		});
         masterContent();
     });
-    function submitForm(event){   
+    function submitForm(event){
 		$('#btn_submit').hide();
 		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
 	    event.preventDefault();
         var form = document.getElementById('add_info');
 
         var formData = new FormData(form);
-	    $.ajax({ 
+	    $.ajax({
             url   : "{{ url('/item/add') }}",
             type: 'POST',
             data: formData,
@@ -339,16 +349,16 @@
             dataType: 'json',
             success: function (result) {
                 console.log(result);
-            if(result.message=="The data has been successfully updated"){ 
+            if(result.message=="The data has been successfully updated"){
 				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){  
-					 $('#tambah_info').hide(); 
+				  	setTimeout(function(){
+					 $('#tambah_info').hide();
                      location.reload();
 					},3500);
 			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show(); 
+				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				setTimeout(function(){
-					$('#tambah_info').hide(); 
+					$('#tambah_info').hide();
                     location.reload();
 				},3000)
 			}
@@ -369,7 +379,7 @@
             </button>
         </div>
 	    <div class="modal-body" id="panelUpdateData">
-	     
+
 
 	    </div>
 	  </div>
@@ -386,7 +396,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <span id="tambah_info"></span> 
+                <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
                 <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
