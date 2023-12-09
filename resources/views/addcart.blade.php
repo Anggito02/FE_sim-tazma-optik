@@ -83,7 +83,7 @@
         <div>
             <button href="" class="btn btn-primary btn-lg w-100 border-bottom-0 rounded-0" type="button" role="button" aria-pressed="true" data-toggle="modal" data-target="#addCustomer">
                 + Add Customer
-            </button>   
+            </button>
             <!-- Modal New Customer-->
             <div class="modal fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="addCustomerLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document" style="max-width:70%; max-height:60%">
@@ -207,7 +207,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
              <!-- Nested Modal New Customer-->
             <div class="modal fade" id="createNewCustomer" tabindex="-1" role="dialog" aria-labelledby="createNewCustomer" aria-hidden="true">
                 <div class="modal-dialog" role="document" style="max-width:70%; max-height:60%">
@@ -231,16 +231,16 @@
                                 <label for="inputEmail" class="form-label"><b>Email</b></label>
                                 <input id="inputEmail" type="text" class="form-control w-100 rounded" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
-                        </div>  
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex flex-column align-items-center" style="height:60%;">
-                <li class="nav-item dropdown" style="list-style: none; min-width:100%">
+                {{-- <li class="nav-item dropdown" style="list-style: none; min-width:100%">
                     <a class="btn text-dark d-flex flex-row align-items-center justify-content-center nav-link dropdown-toggle" data-toggle="collapse" href="#dropdownOptions" aria-controls="dropdownOptions">
                         <b id="targetDiv">Take Away</b>
                     </a>
@@ -248,7 +248,7 @@
                         <p onclick="changeText('Take Away')" class="p-2 m-0">Take Away</p>
                         <p onclick="changeText('Dine In')" class="p-2 m-0">Dine In</p>
                     </div>
-                </li>
+                </li> --}}
                 <div class="border-top border-secondary overflow-auto" style="width:98%; min-height:60%;">
                     <div class="d-flex justify-content-between mx-4 my-2 text-dark">
                         <p class="m-0">Lensa</p>
@@ -274,7 +274,7 @@
                         <p class="m-0">Frame</p>
                         <p class="m-0">Rp 900.000</p>
                     </div>
-                    
+
                 </div>
                 <div class="border-top border-secondary" style="width:98%">
                     <div class="d-flex justify-content-between mx-4 my-2 text-dark">
@@ -288,22 +288,22 @@
                 </div>
                 <a href="" class="btn btn-outline-secondary btn-outline-top btn-outline-bottom mx-2" style="width:98%" role="button" aria-pressed="true">
                     Clear Sale
-                </a>    
+                </a>
             </div>
         </div>
-        
-        <div class="d-flex flex-column">    
+
+        <div class="d-flex flex-column">
             <div class="d-flex flex-row w-100 justify-content-center align-items-between">
                 <a href="" class="btn btn-secondary btn-lg w-50 rounded-0" role="button" style="margin:3px" aria-pressed="true">
                     Save Bill
                 </a>
                 <a href="" class="btn btn-secondary btn-lg w-50 rounded-0" role="button" style="margin:3px" aria-pressed="true">
                     Print Bill
-                </a>  
+                </a>
             </div>
             <a href="" class="btn btn-primary btn-lg w-95 rounded-0" style="margin-right:3px; margin-left:3px;" type="button" role="button" aria-pressed="true" data-toggle="modal" data-target="#payment">
                 Charge Rp 1.200.000
-            </a> 
+            </a>
             <!-- Nested Modal New Customer-->
             <div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="createNewCustomer" aria-hidden="true">
                 <div class="modal-dialog" role="document" style="max-width:70%; max-height:60%">
@@ -347,11 +347,11 @@
                                     <button type="button" class="btn btn-outline-secondary" style="min-width:20vh; margin-right:5vh; margin-bottom:2vh;">Other EDC</button>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary">Charge</button>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>

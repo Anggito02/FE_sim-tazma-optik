@@ -179,7 +179,7 @@ Route::group([], function(){
         return view('error_page.505');
     });
 
-    Route::get('/test', function () {
+    Route::get('/sales/kasir', function () {
         return view('addcart');
     });
 });
