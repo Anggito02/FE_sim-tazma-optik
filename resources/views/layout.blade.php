@@ -30,13 +30,11 @@
 
     <!-- datatables bootstrap 4 -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-    <!-- <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet"> -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
+    <!-- Menambahkan CSS Chosen -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
 
-    <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    {{-- <!-- <link href="{{ asset('bootstrap/css/bootstrap.css')}}" rel="stylesheet"> --> --}}
-
+    <!-- Menambahkan JavaScript Chosen -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 
 
 </head>
@@ -69,11 +67,6 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            {{-- <div class="sidebar-heading">
-                Interface
-            </div> --}}
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item active">
@@ -114,8 +107,8 @@
                         <!-- <a class="collapse-item" href="/receive-order">RO (Receive Order)</a> -->
                         {{-- <a class="collapse-item" href="">Inventory Information</a>
                         <a class="collapse-item" href="">Invoice Information</a> --}}
-                        <a class="collapse-item" href="">QR Code Generator</a>
-                        <a class="collapse-item" href="">Monitoring Purchase</a>
+                        {{-- <a class="collapse-item" href="">QR Code Generator</a>
+                        <a class="collapse-item" href="">Monitoring Purchase</a> --}}
                     </div>
                 </div>
             </li>
@@ -132,21 +125,7 @@
                         <h6 class="collapse-header">Inventory Sheet:</h6>
                         <a class="collapse-item" href="/item-outgoing">Item Outgoing</a>
                         <a class="collapse-item" href="/branch-item">Branch Item</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item active">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiestest"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fa-solid fa-file-lines"></i>
-                    <span>TESTING</span>
-                </a>
-                <div id="collapseUtilitiestest" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Testing Sheet:</h6>
-                        <a class="collapse-item" href="/coa">COA</a>
+                        <a class="collapse-item" href="/stock-opname-master/all">Stock Opname</a>
                     </div>
                 </div>
             </li>
@@ -162,56 +141,13 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Sales Sheet:</h6>
-                        <a class="collapse-item" href="/sales">SALES</a>
+                        <a class="collapse-item" href="/sales/kasir">Kasir</a>
                     </div>
                 </div>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item active">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item active">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -264,56 +200,9 @@
                             <h5>ITEM OUTGOING SHEET INFORMATION</h5>
                         @endif
                     </div>
-                    <!-- Sidebar Toggle (Topbar) -->
-                    {{-- <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </form> --}}
-
-                    <!-- Topbar Search -->
-                    {{-- <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> --}}
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        {{-- <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <span> Nama Menu </span>
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li> --}}
-                        {{-- <div class='d-none d-sm-block'><span>asdsadasd</span></div>
-                        <div class="topbar-divider d-none d-sm-block"></div> --}}
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -354,6 +243,7 @@
                 @yield('content')
 
             <!-- Footer -->
+            @if (url('/sales/kasir') != url()->current())
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -361,6 +251,7 @@
                     </div>
                 </div>
             </footer>
+            @endif
             <!-- End of Footer -->
 
         </div>
@@ -394,7 +285,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
     <!-- <script src="{{ asset('vendor\jquery\jquery.min.js')}}"></script> -->
 
     <script src="{{ asset('vendor\bootstrap\js\bootstrap.bundle.min.js')}}"></script>

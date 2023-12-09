@@ -126,8 +126,8 @@ Route::controller(CoaController::class)->middleware('isTokenValid')->group(funct
 Route::controller(ItemController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/item','getAllItem');
     Route::post('/item/add', 'addItem');
-    Route::put('/item/edit', 'updateItem');
-    Route::delete('/item/delete', 'deleteItem');
+    Route::post('/item/edit', 'updateItem');
+    Route::post('/item/delete', 'deleteItem');
     Route::post('/item/loadDataMaster', 'loadDataMaster');
     Route::post('/item/loadDataDetailOnly', 'loadDataDetailOnly');
 });
@@ -179,8 +179,8 @@ Route::group([], function(){
         return view('error_page.505');
     });
 
-    Route::get('/sales', function () {
-        return view('sales.sales');
+    Route::get('/sales/kasir', function () {
+        return view('addcart');
     });
 });
 
