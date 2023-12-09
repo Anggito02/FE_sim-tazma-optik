@@ -127,10 +127,10 @@
                     $('#tambah_info').hide();
                     location.reload();
                 },3000)
-            }
-        },
-    });
-}
+                }
+            },
+        });
+    }
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
     });
@@ -386,7 +386,7 @@
 	  </div>
 	</div>
 </div>
-<!-- Modal ADD UPDATE DATA -->
+
 <!-- Modal Add Data -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">

@@ -85,7 +85,15 @@ class ItemController extends Controller
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
         $response_color = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/color/all', $api_request);
         $response_Category = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/category/all', $api_request);
-        return view('master.itemEdit',['vals'=>$response['data'],'index' => $response_index['data'],'brand' => $response_brand['data'],'vendor' => $response_vendor['data'],'color' => $response_color['data'],'category' => $response_Category['data']]);
+        return view(
+            'master.itemEdit',
+            ['vals'=>$response['data'],
+            'index' => $response_index['data'],
+            'brand' => $response_brand['data'],
+            'vendor' => $response_vendor['data'],
+            'color' => $response_color['data'],
+            'category' => $response_Category['data']]
+        );
     }
     public function loadDataMaster(Request $request)
     {

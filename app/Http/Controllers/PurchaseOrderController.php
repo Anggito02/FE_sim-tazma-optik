@@ -63,46 +63,42 @@ class PurchaseOrderController extends Controller
             "page" => 1,
             "limit" => 10000
         ];
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-orderWith/info/all', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/one', $data)->json();
+        $response_withInfo = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-orderWith/info/all', $api_request);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
-        return view('master.poEdit',['vals'=>$response['data'],'employee' => $response_employee['data'],'vendor' => $response_vendor['data']]);
+        return view(
+            'master.poEdit',
+            [
+            'vals'=>$response['data'],
+            'withInfo' => $response_withInfo['data'],
+            'employee' => $response_employee['data'],
+            'vendor' => $response_vendor['data']
+            ]
+        );
     }
 
     public function loadDataMaster(Request $request)
     {
         $token = $_COOKIE['token'];
-
-        // $page = 1;
-        // $limit = 100;
-
         $headers = [
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
         $data = $request->all(); // Retrieve all input data from the request
-        // $data['jenis_item'] ="frame";
-        // $api_request = [
-        //     "jenis_item" => $jenis_item,
-        //     "page" => $page,
-        //     "limit" => $limit
-        // ];
-        // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/allWithJenis', $data);
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/po/filtered', $data);
-        // $response = ['data' => 'Berhasil']; // Replace 'data' with whatever key you want
-        $item = $response->json();
-
-        return response()->json($item);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/all', $data);
+        $po = $response->json();
+        return response()->json($po);
     }
 
     public function addPO(Request $request) {
+        $row="";
         $token = $_COOKIE['token'];
-
         $headers = [
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
-        // dd($request->all());
+        $row=$request;
         $status_penerimaan = $request->status_penerimaan;
         $status_pembayaran = $request->status_pembayaran;
         $status_po = $request->status_po;
@@ -144,12 +140,11 @@ class PurchaseOrderController extends Controller
         // dd($result);
 
         if($result['status'] == 'success'){
-            toastr()->info('Purchase order added successfully!', 'Purchase Order', ['timeOut' => 3000]);
-            return redirect('/PO');
+            $row['message']="Data has been successfully inserted";
         }else{
-            toastr()->error($result['message'], 'Purchase Order', ['timeOut' => 3000]);
-            return redirect('/PO');
+            $row['message']="Insert data failed ";
         }
+        return response()->json($result);
     }
 
     public function updatePO(Request $request){
