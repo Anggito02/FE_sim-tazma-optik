@@ -57,7 +57,9 @@ class ItemController extends Controller
                 'category' => $category['data'],
                 'jenis_item' => $jenis_item,
                 'kode_item' => $request->kode_item,
-                'aksesoris_nama_item' => $request->aksesoris_nama_item
+                'aksesoris_nama_item' => $request->aksesoris_nama_item,
+                'harga_jual_from' => $request->harga_jual_from,
+                'harga_jual_until' => $request->harga_jual_until,
             ]);
         // } else {
             // return redirect('/dashboard');

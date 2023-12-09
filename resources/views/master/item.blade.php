@@ -204,7 +204,7 @@
                 type  : 'ajax',
                 url   : settings.data_url,
                 data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'jenis_item':settings.jenis_item,'kode_item':settings.kode_item,
-                'aksesoris_nama_item':settings.aksesoris_nama_item,'harga_jual':settings.harga_jual,},
+                'aksesoris_nama_item':settings.aksesoris_nama_item,'harga_jual_from':settings.harga_jual_from,'harga_jual_until':settings.harga_jual_until},
                 async : true,
                 dataType : 'json',
                 error: function (request, error) {
@@ -273,7 +273,8 @@
             jenis_item      : document.getElementById('jenis_item').value, //initial page
             kode_item      : document.getElementById('kode_item').value, //initial page
             aksesoris_nama_item      : document.getElementById('aksesoris_nama_item').value, //initial page
-            harga_jual      : document.getElementById('harga_jual').value, //initial page
+            harga_jual_from      : document.getElementById('harga_jual_from').value, //initial page
+            harga_jual_until      : document.getElementById('harga_jual_until').value, //initial page
         });
         loading  = false;
 	    end_record = false;
