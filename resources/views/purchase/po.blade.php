@@ -207,8 +207,7 @@
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title"
-                                                                                    id="exampleModalLongTitle">Are You
-                                                                                    Sure?</h5>
+                                                                                    id="exampleModalLongTitle">Are You Sure?</h5>
                                                                                 <button type="button" class="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close">
@@ -325,9 +324,9 @@
 
                                 <div class="mb-3">
                                     <label for="InputVendor" class="form-label">Vendor</label>
-                                    <select type="vendor" name="vendor_id" class="form-control" id="">
+                                    <select type="vendor" name="vendor_id" class="form-control chosen-select">
+                                        <option value="" >Choose...</option>
                                         @foreach ($vendor as $val)
-                                        <option value="" disabled selected hidden>Choose...</option>
                                         <option value="{{$val['id']}}" name="vendor_id">{{$val['nama_vendor']}}</option>
                                         @endforeach
                                     </select>
@@ -336,20 +335,16 @@
 
                                 <div class="mb-3">
                                     <label for="InputMade" class="form-label">Made by</label>
-                                    <select type="made-by" name="made_by" class="form-control" name="made_by" id="">
-                                        @foreach ($employee as $val)
-                                        <option value="" disabled selected hidden>Choose...</option>
-                                        <option value="{{$val['id']}}" name="made_by">{{$val['employee_name']}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" class="form-control" value="{{$user_info['employee_name']}}" disabled />
+                                    <input type="hidden" class="form-control" value="{{$user_info['id']}}" name="made_by"  />
                                 </div>
 
 
                                 <div class="mb-3">
                                     <label for="InputApprove" class="form-label">Approved by</label>
-                                    <select type="approved-by" name="approved_by" class="form-control" id="">
-                                        @foreach ($employee as $val)
+                                    <select type="approved-by" name="approved_by" class="form-control chosen-select" >
                                         <option value="" disabled selected hidden>Choose...</option>
+                                        @foreach ($employee as $val)
                                         <option value="{{$val['id']}}" name="approved_by">{{$val['employee_name']}}
                                         </option>
                                         @endforeach
@@ -368,9 +363,9 @@
                                 <div class="mb-3">
                                     <label for="InputCheck" class="form-label">Check by</label>
 
-                                    <select type="check-by" name="checked_by" class="form-control" id="">
-                                        @foreach ($employee as $val)
+                                    <select type="check-by" name="checked_by" class="form-control chosen-select" >
                                         <option value="" disabled selected hidden>Choose...</option>
+                                        @foreach ($employee as $val)
                                         <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
                                         @endforeach
                                     </select>
@@ -384,9 +379,8 @@
 
                                 <div class="mb-3">
                                     <label for="InputStatus" class="form-label">Status Pembayaran</label>
-                                    <select type="status-pembayaran" name="status_pembayaran" class="form-control"
-                                        id="">
-                                        <option value="" disabled selected hidden>Choose...</option>
+                                    <option value="" disabled selected hidden>Choose...</option>
+                                    <select type="status-pembayaran" name="status_pembayaran" class="form-control chosen-select">
                                         <option value="Sudah Dibayar">Sudah Dibayar</option>
                                         <option value="Belum Dibayar">Belum Dibayar</option>
                                     </select>
@@ -407,4 +401,9 @@
     </div>
 
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
+    });
+</script>
 @endsection

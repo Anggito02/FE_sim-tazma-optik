@@ -13,6 +13,17 @@ use App\Utils\GetUserInfo;
 class PurchaseOrderController extends Controller
 {
     //
+    protected $response_user_info;
+    public function __construct(){
+        // $token = $_COOKIE['token'];
+        // $headers = [
+        //     'Accept' => 'application/json',
+        //     'Authorization' => 'Bearer '.$token
+        // ];
+        // $api_request = NULL;
+        // $response_user_info_ = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/user/info')->json();
+        // $this->response_user_info=$response_user_info_;
+    }
     public function getAllPO () {
         $token = $_COOKIE['token'];
 
@@ -32,19 +43,18 @@ class PurchaseOrderController extends Controller
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-orderWith/info/all', $api_request);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
-
+        
         $po = $response->json();
         $employee = $response_employee->json();
         $vendor = $response_vendor->json();
-
         $user = GetUserInfo::getUserInfo();
-
         if ($po['status'] == 'success'){
             return view('purchase.po', [
                 'po' => $po['data'],
                 'data' => $user['data'],
                 'employee' => $employee['data'],
-                'vendor' => $vendor['data']
+                'vendor' => $vendor['data'],
+                'user_info' => $user['data']
             ]);
         }else{
             return redirect('/dashboard');
