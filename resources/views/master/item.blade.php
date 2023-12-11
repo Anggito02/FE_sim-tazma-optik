@@ -50,6 +50,22 @@
                     <label for="harga_jual_until" class="form-label">Harga Jual Until</label>
                     <input type="number" name="harga_jual_until" id="harga_jual_until" class="form-control" value="{{$harga_jual_until}}">
                 </div>
+                <div class="form-group col-md-2">
+                    <label for="harga_beli_from" class="form-label">Harga Beli From</label>
+                    <input type="number" name="harga_beli_from" id="harga_beli_from" class="form-control" value="{{$harga_beli_from}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="harga_beli_until" class="form-label">Harga Beli Until</label>
+                    <input type="number" name="harga_beli_until" id="harga_beli_until" class="form-control" value="{{$harga_beli_until}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="diskon_from" class="form-label">Diskon From</label>
+                    <input type="number" name="diskon_from" id="diskon_from" class="form-control" value="{{$diskon_from}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="diskon_until" class="form-label">Diskon Until</label>
+                    <input type="number" name="diskon_until" id="diskon_until" class="form-control" value="{{$diskon_until}}">
+                </div>
                 <div class="form-group col-md-3">
                     <br/>
                     <button type="submit" class="btn btn-primary">Search</button>
@@ -204,7 +220,8 @@
                 type  : 'ajax',
                 url   : settings.data_url,
                 data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'jenis_item':settings.jenis_item,'kode_item':settings.kode_item,
-                'aksesoris_nama_item':settings.aksesoris_nama_item,'harga_jual_from':settings.harga_jual_from,'harga_jual_until':settings.harga_jual_until},
+                'aksesoris_nama_item':settings.aksesoris_nama_item,'harga_jual_from':settings.harga_jual_from,'harga_jual_until':settings.harga_jual_until,'harga_beli_from':settings.harga_beli_from,'harga_beli_until':settings.harga_beli_until,
+                'diskon_from':settings.diskon_from,'diskon_until':settings.diskon_until},
                 async : true,
                 dataType : 'json',
                 error: function (request, error) {
@@ -275,6 +292,10 @@
             aksesoris_nama_item      : document.getElementById('aksesoris_nama_item').value, //initial page
             harga_jual_from      : document.getElementById('harga_jual_from').value, //initial page
             harga_jual_until      : document.getElementById('harga_jual_until').value, //initial page
+            harga_beli_from      : document.getElementById('harga_beli_from').value, //initial page
+            harga_beli_until      : document.getElementById('harga_beli_until').value, //initial page
+            diskon_from      : document.getElementById('diskon_from').value, //initial page
+            diskon_until      : document.getElementById('diskon_until').value, //initial page
         });
         loading  = false;
 	    end_record = false;
@@ -538,3 +559,7 @@
 </div>
 
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/item.js') }}"></script>
+@endpush

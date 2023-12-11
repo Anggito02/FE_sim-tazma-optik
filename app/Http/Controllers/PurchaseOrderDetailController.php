@@ -50,9 +50,10 @@ class PurchaseOrderDetailController extends Controller
         $pod = $response_pod->json();
         // dd($pod);
         $employee = $response_employee->json();
+        // dd($employee);
         $vendor = $response_vendor->json();
         $item = $response_item->json();
-        
+
 
         $user = GetUserInfo::getUserInfo();
         if ($employee['status'] == 'success' && $vendor['status'] == 'success'){

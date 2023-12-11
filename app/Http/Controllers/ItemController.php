@@ -60,6 +60,10 @@ class ItemController extends Controller
                 'aksesoris_nama_item' => $request->aksesoris_nama_item,
                 'harga_jual_from' => $request->harga_jual_from,
                 'harga_jual_until' => $request->harga_jual_until,
+                'harga_beli_from' => $request->harga_beli_from,
+                'harga_beli_until' => $request->harga_beli_until,
+                'diskon_from' => $request->diskon_from,
+                'diskon_until' => $request->diskon_until,
             ]);
         // } else {
             // return redirect('/dashboard');

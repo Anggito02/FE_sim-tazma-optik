@@ -34,6 +34,7 @@ class PurchaseOrderController extends Controller
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
 
         $po = $response->json();
+        // dd($po);
         $employee = $response_employee->json();
         $vendor = $response_vendor->json();
 
@@ -47,6 +48,7 @@ class PurchaseOrderController extends Controller
                 'vendor' => $vendor['data']
             ]);
         }else{
+            toastr()->error($po['status'], 'Purchase Order', ['timeOut' => 3000]);
             return redirect('/dashboard');
         }
     }
