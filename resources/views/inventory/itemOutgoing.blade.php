@@ -115,7 +115,7 @@
                                                             <input type="hidden" name="id" value="{{$vals['id']}}">
                                                             <div class="mb-3">
                                                                 <label class="form-label">Tanggal Pengiriman</label>          
-                                                                <input type="date" name="tanggal_pengiriman" class="form-control" value="{{ date('Y-m-d', strtotime($vals['tanggal_pengiriman'])) }}">
+                                                                <input type="datetime-local" name="tanggal_pengiriman" class="form-control" value="{{ $vals['tanggal_pengiriman']}}">
                                                                 
                                                             </div>
                                                             
@@ -284,7 +284,7 @@
                                     {{-- <label for="InputTanggal" class="form-label">Tanggal Pengiriman</label>
                                     <input type="text" id="id" name="tanggal_pengiriman" class="form-control" placeholder="YYYY-MM-DD"> --}}
                                     <label for="InputLastDateSupply" class="form-label">Tanggal Pengiriman</label>
-                                    <div><input type="date" id="id" name="tanggal_pengiriman" class="form-control" value="">
+                                    <div><input type="datetime-local" id="id" name="tanggal_pengiriman" class="form-control" value="">
                                     </div>
                                 </div>
 

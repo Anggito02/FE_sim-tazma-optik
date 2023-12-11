@@ -126,8 +126,10 @@ Route::controller(CoaController::class)->middleware('isTokenValid')->group(funct
 Route::controller(ItemController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/item','getAllItem');
     Route::post('/item/add', 'addItem');
-    Route::put('/item/edit', 'updateItem');
-    Route::delete('/item/delete', 'deleteItem');
+    Route::post('/item/edit', 'updateItem');
+    Route::post('/item/delete', 'deleteItem');
+    Route::post('/item/loadDataMaster', 'loadDataMaster');
+    Route::post('/item/loadDataDetailOnly', 'loadDataDetailOnly');
 });
 
 Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->group(function(){
@@ -138,7 +140,6 @@ Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->gr
 
 Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/branch-item','getAllBranchItem');
-    Route::post('/branch-item/add', 'addBranchItem');
 });
 
 Route::controller(ItemOutgoingController::class)->middleware('isTokenValid')->group(function(){
@@ -156,6 +157,11 @@ Route::controller(ItemOutgoingDetailController::class)->middleware('isTokenValid
     Route::delete('/item-outgoing/detail/delete', 'deleteItemOutgoingDetail');
 });
 
+Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch-item','getAllBranchItem');
+    Route::post('/branch-item/add', 'addBranchItem');
+});
+
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
 // });
@@ -171,6 +177,10 @@ Route::group([], function(){
 
     Route::get('/505', function () {
         return view('error_page.505');
+    });
+
+    Route::get('/sales/kasir', function () {
+        return view('addcart');
     });
 });
 

@@ -46,16 +46,24 @@ a:visited {
     text-align: right;
 }
 
-.frame-detail {
-    display: none;
+/* .vr {
+    display: inline-block;
+    align-self: stretch;
+    width: 1.5px;
+    min-height: 1em;
+    background-color: #FFEEBB;
+    opacity: .25;
 }
 
-.lensa-detail {
-    display: none;
+.page-top {
+    background-color: #9AC5F4;
+    color: #FFEEBB;
 }
 
-.aksesoris-detail {
-    display: none;
-}
+.break-line {
+    background-color: #A7ECEE;
+    height: 5px;
+} */
+
 
 
