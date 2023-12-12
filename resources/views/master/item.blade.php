@@ -17,7 +17,7 @@
                 @csrf
                 @method("GET")
                 <div class="form-group col-md-2">
-                    <label for="jenis_item" class="form-label">Jenis Item</label>
+                    <label for="jenis_item" class="form-label black-text">Jenis Item</label>
                     <select id="jenis_item" width="100%" name="jenis_item" class="form-control chosen-select">
                         <option value="0" {{ $jenis_item == '0' ? 'selected' : '' }}>-- Pilih Jenis Item --</option>
                         <option value="frame" {{ $jenis_item == 'frame' ? 'selected' : '' }}>Frame</option>
@@ -26,7 +26,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="jenis_item" class="form-label">Vendor</label>
+                    <label for="jenis_item" class="form-label black-text">Vendor</label>
                     <select name="vendor_id" class="form-control chosen-select">
                         <option value="0"selected>Choose...</option>
                         @foreach ($vendor as $val)
@@ -35,35 +35,35 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="kode_item" class="form-label">Kode Item (SKU)</label>
+                    <label for="kode_item" class="form-label black-text">Kode Item (SKU)</label>
                     <input type="text" name="kode_item" id="kode_item" class="form-control" value="{{$kode_item}}">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="aksesoris_nama_item" class="form-label">Nama Item</label>
+                    <label for="aksesoris_nama_item" class="form-label black-text">Nama Item</label>
                     <input type="text" name="aksesoris_nama_item" id="aksesoris_nama_item" class="form-control" value="{{$aksesoris_nama_item}}">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="harga_jual_from" class="form-label">Harga Jual From</label>
+                    <label for="harga_jual_from" class="form-label black-text">Harga Jual From</label>
                     <input type="number" name="harga_jual_from" id="harga_jual_from" class="form-control" value="{{$harga_jual_from}}">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="harga_jual_until" class="form-label">Harga Jual Until</label>
+                    <label for="harga_jual_until" class="form-label black-text">Harga Jual Until</label>
                     <input type="number" name="harga_jual_until" id="harga_jual_until" class="form-control" value="{{$harga_jual_until}}">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="harga_beli_from" class="form-label">Harga Beli From</label>
+                    <label for="harga_beli_from" class="form-label black-text">Harga Beli From</label>
                     <input type="number" name="harga_beli_from" id="harga_beli_from" class="form-control" value="{{$harga_beli_from}}">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="harga_beli_until" class="form-label">Harga Beli Until</label>
+                    <label for="harga_beli_until" class="form-label black-text">Harga Beli Until</label>
                     <input type="number" name="harga_beli_until" id="harga_beli_until" class="form-control" value="{{$harga_beli_until}}">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="diskon_from" class="form-label">Diskon From</label>
+                    <label for="diskon_from" class="form-label black-text">Diskon From</label>
                     <input type="number" name="diskon_from" id="diskon_from" class="form-control" value="{{$diskon_from}}">
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="diskon_until" class="form-label">Diskon Until</label>
+                    <label for="diskon_until" class="form-label black-text">Diskon Until</label>
                     <input type="number" name="diskon_until" id="diskon_until" class="form-control" value="{{$diskon_until}}">
                 </div>
                 <div class="form-group col-md-3">

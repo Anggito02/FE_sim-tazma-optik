@@ -84,6 +84,7 @@ class AuthController extends Controller{
             'password' => $request->password,
             'username' => $request->username,
             'nik' => $request->nik,
+            'nip' => $request->nip,
             'employee_name' => $request->employee_name,
             'gender' => $request->gender,
             'address' => $request->address,
@@ -92,10 +93,10 @@ class AuthController extends Controller{
             'section' => $request->section,
             'position' => $request->position,
             'role' => $request->role,
-            'plant' => $request->plant,
             'status' => $request->status,
             'group' => $request->group,
-            'domicile' => $request->domicile
+            'domicile' => $request->domicile,
+            'branch_id' => $request->branch_id
         ];
 
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
