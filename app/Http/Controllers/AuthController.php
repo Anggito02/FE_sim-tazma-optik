@@ -28,8 +28,6 @@ class AuthController extends Controller{
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
             $data = $response->json();
 
-            dd($data);
-
 
             if ($data['status'] == 'success'){
                 setcookie('token', $data['data']['token'], time() + 60*60*24, '/', '', false, true);
