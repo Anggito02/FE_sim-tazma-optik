@@ -203,8 +203,16 @@
                 method: "POST",
                 type  : 'ajax',
                 url   : settings.data_url,
-                data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'jenis_item':settings.jenis_item,'kode_item':settings.kode_item,
-                'aksesoris_nama_item':settings.aksesoris_nama_item,'harga_jual_from':settings.harga_jual_from,'harga_jual_until':settings.harga_jual_until},
+                data  : { 
+                    'limit':settings.limit,
+                    'page':(settings.limit*settings.start_page),
+                    '_token':csrfToken,
+                    'jenis_item':settings.jenis_item,
+                    'kode_item':settings.kode_item,
+                    'aksesoris_nama_item':settings.aksesoris_nama_item,
+                    'harga_jual_from':settings.harga_jual_from,
+                    'harga_jual_until':settings.harga_jual_until
+                },
                 async : true,
                 dataType : 'json',
                 error: function (request, error) {

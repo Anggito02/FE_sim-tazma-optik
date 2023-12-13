@@ -7,25 +7,111 @@
         For more information about DataTables, please visit the <a target="_blank"
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <span id="tambah_info"></span>
-        <div class="card-body black-text">
-            <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
-                data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
-                New Purchase Order
-            </button>
-        </div>
+        <form id="POForm" action="/PO" method="POST" class="col-md-12 form-horizontal">
+            <div class="card-body">
+                <div class="row">
+                <!-- Add the form inside the row -->
+                @csrf
+                @method("GET")
+                <div class="form-group col-md-3">
+                    <label for="vendor_id" class="form-label">Vendor</label>
+                    <select name="vendor_id" id="vendor_id" class="form-control chosen-select">
+                        <option value="0"selected disabled hidden>Choose...</option>
+                        @foreach ($vendor as $val)
+                            <option value="{{$val['id']}}">{{$val['nama_vendor']}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="bulan" class="form-label">Bulan</label>
+                    <select id="bulan" width="100%" name="bulan" class="form-control chosen-select">
+                        <option value="" selected disabled hidden>-- Pilih Bulan --</option>
+                        <option value="1">Januari</option>
+                        <option value="2">Februari</option>
+                        <option value="3">Maret</option>
+                        <option value="4">April</option>
+                        <option value="5">Mei</option>
+                        <option value="6">Juni</option>
+                        <option value="7">Juli</option>
+                        <option value="8">Agustus</option>
+                        <option value="9">September</option>
+                        <option value="10">Oktober</option>
+                        <option value="11">November</option>
+                        <option value="12">Desember</option>
+                    </select>
+
+                    
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="tahun" class="form-label">Tahun</label>
+                    <input type="number" name="tahun" id="tahun" class="form-control">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="stauts_po" class="form-label">Status PO</label>
+                    <select name="status_po" id="status_po" class="form-control chosen-select">
+                        <option value="" selected disabled hidden>-- Pilih Status PO --</option>
+                        <option value="1">OPEN</option>
+                        <option value="0">CLOSED</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="status_penerimaan" class="form-label">Status Penerimaan</label>
+                    <select name="status_penerimaan" id="status_penerimaan" class="form-control chosen-select">
+                        <option value="" selected disabled hidden>-- Pilih Status Penerimaan --</option>
+                        <option value="0">Belum Diterima</option>
+                        <option value="1">Sudah Diterima</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="status_pembayaran" class="form-label">Status Pembayaran</label>
+                    <select name="status_pembayaran" id="status_pembayaran" class="form-control chosen-select">
+                        <option value="" selected disabled hidden>-- Pilih Status Pembayaran --</option>
+                        <option value="0">Belum Dibayar</option>
+                        <option value="1">Sudah Dibayar</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="made_by" class="form-label">Dibuat oleh</label>
+                    <select name="made_by" id="made_by" class="form-control chosen-select">
+                        <option value="" selected disabled hidden>-- Pilih Dibuat oleh --</option>
+                        @foreach ($employee as $val)
+                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="checked_by" class="form-label">Diperiksa oleh</label>
+                    <select name="checked_by" id="checked_by" class="form-control chosen-select">
+                        <option value="" selected disabled hidden>-- Pilih Diperiksa oleh --</option>
+                        @foreach ($employee as $val)
+                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="approved_by" class="form-label">Disetujui oleh</label>
+                    <select name="approved_by" id="approved_by" class="form-control chosen-select">
+                        <option value="" selected disabled hidden>-- Pilih Disetujui oleh --</option>
+                        @foreach ($employee as $val)
+                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Item</button>
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="card shadow mb-4">
-        <!-- <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
-        </div> -->
-
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="data_item_table_1" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="data_PO_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr style="white-space: nowrap;">
                             <th class="thead-text"><span class="nowrap">No</span></th>
@@ -37,7 +123,6 @@
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Edit</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
-
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap;">
@@ -132,7 +217,16 @@
                 data  : { 
                     'limit':settings.limit,
                     'page':(settings.limit*settings.start_page),
-                    '_token':csrfToken
+                    '_token':csrfToken,
+                    'vendor_id':settings.vendor_id,
+                    'bulan':settings.bulan,
+                    'tahun':settings.tahun,
+                    'status_po':settings.status_po,
+                    'status_penerimaan':settings.status_penerimaan,
+                    'status_pembayaran':settings.status_pembayaran,
+                    'made_by':settings.made_by,
+                    'checked_by':settings.checked_by,
+                    'approved_by':settings.approved_by,
                 },
                 async : true,
                 dataType : 'json',
@@ -141,7 +235,7 @@
 			    },
                 success : function(result){
                     console.log(result.data);
-					var table = $('#data_item_table_1').DataTable();
+					var table = $('#data_PO_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
@@ -191,6 +285,15 @@
             limit		    : 50, //initial page
             htmldata        : '', //initial page
             lastScroll      : 0, //initial page
+            vendor_id       : document.getElementById('vendor_id').value,
+            bulan           : document.getElementById('bulan').value,
+            tahun           : document.getElementById('tahun').value,
+            status_po       : document.getElementById('status_po').value,
+            status_penerimaan : document.getElementById('status_penerimaan').value,
+            status_pembayaran : document.getElementById('status_pembayaran').value,
+            made_by         : document.getElementById('made_by').value,
+            checked_by      : document.getElementById('checked_by').value,
+            approved_by     : document.getElementById('approved_by').value,
         });
         loading  = false;
 	    end_record = false;
@@ -203,7 +306,7 @@
     });
 
     $(document).ready(function(){
-        var table = $('#data_item_table_1').DataTable( {
+        var table = $('#data_PO_table_1').DataTable( {
 				        fixedHeader: {
 				            header: true
 				        },

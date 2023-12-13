@@ -29,26 +29,22 @@ class PurchaseOrderController extends Controller
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-orderWith/info/all', $api_request);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
-
-        $po = $response->json();
         $employee = $response_employee->json();
         $vendor = $response_vendor->json();
 
         $user = GetUserInfo::getUserInfo();
 
-        if ($po['status'] == 'success'){
+        // if ($po['status'] == 'success'){
             return view('purchase.po', [
-                'po' => $po['data'],
                 'data' => $user['data'],
                 'employee' => $employee['data'],
                 'vendor' => $vendor['data']
             ]);
-        }else{
-            return redirect('/dashboard');
-        }
+        // }else{
+        //     return redirect('/dashboard');
+        // }
     }
 
     public function loadDataDetailOnly(Request $request)
@@ -68,7 +64,7 @@ class PurchaseOrderController extends Controller
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
         return view(
-            'master.poEdit',
+            'purchase.poEdit',
             [
             'vals'=>$response['data'],
             'withInfo' => $response_withInfo['data'],
