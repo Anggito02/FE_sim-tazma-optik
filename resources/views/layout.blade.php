@@ -125,7 +125,8 @@
                         <h6 class="collapse-header">Inventory Sheet:</h6>
                         <a class="collapse-item" href="/item-outgoing">Item Outgoing</a>
                         <a class="collapse-item" href="/branch-item">Branch Item</a>
-                        <a class="collapse-item" href="/stock-opname-master/all">Stock Opname</a>
+                        <a class="collapse-item" href="/stockopname">Stock Opname</a>
+                        <a class="collapse-item" href="/stockopnameDetail">Stock Opname Detail</a>
                     </div>
                 </div>
             </li>
