@@ -12,7 +12,7 @@
         <span id="tambah_info"></span>
         <form id="itemForm" action="/item" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
-                <div class="row">
+                <div class="row align-items-end">
                 <!-- Add the form inside the row -->
                 @csrf
                 @method("GET")

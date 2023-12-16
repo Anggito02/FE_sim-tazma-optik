@@ -182,6 +182,14 @@ Route::group([], function(){
     Route::get('/sales/kasir', function () {
         return view('addcart');
     });
+
+    Route::get('/stokopname', function () {
+        return view('inventory.stokop');
+    });
+
+    Route::get('/stokopnameDetail', function () {
+        return view('inventory.stokopDetail');
+    });
 });
 
 
