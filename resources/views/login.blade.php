@@ -36,7 +36,7 @@
                             <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">TAZMA OPTIK 1.0</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">TAZMA OPTIK</h1>
                                     </div>
                                     <form method="post" class="user" action="/login">
                                         @csrf
