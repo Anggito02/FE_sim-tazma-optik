@@ -28,12 +28,12 @@ class StockOpnameMasterController extends Controller
             "page" => $page,
             "limit" => $limit
         ];
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock_opname_master/all', $api_request);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-master/all', $api_request);
         $stock_opname_master = $response->json();
         
         $user = GetUserInfo::getUserInfo();
         // if ($item['status'] == 'success'){
-            return view('master.item', [
+            return view('inventory.stokop', [
                 'data' => $user['data'],
                 'stock_opname_master' => $stock_opname_master['data']
             ]);
@@ -58,11 +58,13 @@ class StockOpnameMasterController extends Controller
     }
     public function addStockOpnameMaster(Request $request)
     {
+        $row = "";
         $token = $_COOKIE['token'];
         $headers = [
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
+        $row = $request;
         
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-master/add');
 
