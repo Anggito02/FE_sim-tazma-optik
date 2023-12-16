@@ -21,6 +21,7 @@ use App\Http\Controllers\ReceiveOrderController;
 use App\Http\Controllers\BranchItemController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
+use App\Http\Controllers\StockOpnameMasterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,6 +163,10 @@ Route::controller(BranchItemController::class)->middleware('isTokenValid')->grou
     Route::post('/branch-item/add', 'addBranchItem');
 });
 
+Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/stockOpname','getAllStockOpnameMaster');
+});
+
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
 // });
@@ -181,10 +186,6 @@ Route::group([], function(){
 
     Route::get('/sales/kasir', function () {
         return view('addcart');
-    });
-
-    Route::get('/stokopname', function () {
-        return view('inventory.stokop');
     });
 
     Route::get('/stokopnameDetail', function () {
