@@ -16,15 +16,6 @@
                 @csrf
                 @method("GET")
                 <div class="form-group col-md-3">
-                    <label for="vendor_id" class="form-label">Vendor</label>
-                    <select name="vendor_id" id="vendor_id" class="form-control chosen-select">
-                        <option value="0"selected disabled hidden>Choose...</option>
-                        @foreach ($vendor as $val)
-                            <option value="{{$val['id']}}">{{$val['nama_vendor']}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
                     <label for="bulan" class="form-label">Bulan</label>
                     <select id="bulan" width="100%" name="bulan" class="form-control chosen-select">
                         <option value="" selected disabled hidden>-- Pilih Bulan --</option>
@@ -153,7 +144,7 @@
 		    method	: "POST",
         error: function (request, error) {
                 console.log(error);
-                alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+                alert("Bad Connection, Cannot Reload the data!!, Please Refresh your browser");
         },
         success: function(result) {
             // console.log(result);
@@ -187,6 +178,9 @@
 			return '0';
 		}
 	}
+    function handleButtonDetailClick(id) {
+        window.location.href = "{{ url('/PO/detail') }}/"+id;
+    }
     function handleButtonClick(id) {
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
         $("#panelUpdateData").html(load_img);
@@ -218,7 +212,6 @@
                     'limit':settings.limit,
                     'page':(settings.limit*settings.start_page),
                     '_token':csrfToken,
-                    'vendor_id':settings.vendor_id,
                     'bulan':settings.bulan,
                     'tahun':settings.tahun,
                     'status_po':settings.status_po,
@@ -231,7 +224,7 @@
                 async : true,
                 dataType : 'json',
                 error: function (request, error) {
-	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refresh your browser");
 			    },
                 success : function(result){
                     console.log(result.data);
@@ -239,10 +232,29 @@
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
+
+                        if(currentItem.status_po === true) {
+                            currentItem.status_po = '<span class="badge badge-success">Open</span>';
+                        } else {
+                            currentItem.status_po = '<span class="badge badge-danger">Close</span>';
+                        }
+
+                        if(currentItem.status_pembayaran === true) {
+                           currentItem.status_pembayaran = '<span class="badge badge-success">Sudah Dibayar</span>'; 
+                        } else {
+                           currentItem.status_pembayaran = '<span class="badge badge-danger">Belum Dibayar</span>';
+                        }
+
+                        if(currentItem.status_penerimaan === true) {
+                           currentItem.status_penerimaan = '<span class="badge badge-success">Sudah Diterima</span>';
+                        } else {
+                           currentItem.status_penerimaan = '<span class="badge badge-danger">Belum Diterima</span>';
+                        }
+
 						offsetN0++;
                         button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
                         button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
-                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary"><i class="fa fa-eye"></i></button>';
+                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary onclick="handleButtonDetailClick(\'' + currentItem.id + '\')"><i class="fa fa-eye"></i>Detail</button>';
                         rowData.push([
 							offsetN0,
                             currentItem.nomor_po,
@@ -285,7 +297,6 @@
             limit		    : 50, //initial page
             htmldata        : '', //initial page
             lastScroll      : 0, //initial page
-            vendor_id       : document.getElementById('vendor_id').value,
             bulan           : document.getElementById('bulan').value,
             tahun           : document.getElementById('tahun').value,
             status_po       : document.getElementById('status_po').value,

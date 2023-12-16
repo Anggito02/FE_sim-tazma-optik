@@ -84,6 +84,7 @@ class PurchaseOrderController extends Controller
         $data = $request->all(); // Retrieve all input data from the request
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/all', $data);
         $po = $response->json();
+        
         return response()->json($po);
     }
 
