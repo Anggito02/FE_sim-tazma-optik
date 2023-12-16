@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>TAZMA</title>
+    <title>TAZMA 1.0</title>
     <script type="text/javascript" src="{{ asset('vendor/jquery/jquery.js')}}"></script>
     <script type="text/javascript" src="{{ asset('vendor/jquery/jquery-3.6.4.min.js')}}"></script>
 
