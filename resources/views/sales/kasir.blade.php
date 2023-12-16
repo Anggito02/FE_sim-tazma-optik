@@ -2,7 +2,19 @@
 @section('content')
 <div class="d-flex flex-row" style="height: 85vh">
     <div class="d-flex flex-column align-items-center bg-white m-2 shadow p-3" style="width:70%">
-        <div class="form-control rounded-0" style="width: 96%; margin-bottom:5%">Anandito</div>
+        <div style="width: 100%; margin-bottom:5%">
+            <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
+                <input type="text" {{ empty($kas) ? 'disabled' : '' }} name="qrcode" autofocus=true class="form-control" />
+            </form>
+            @if(empty($kas))
+                <span><font color="red" >Silahkan Generate Kas Tanggal {{date("d-m-Y")}} Terlebih Dahulu Pada Cabang {{$response_employee_one[0]['nama_branch']}} </font></span>
+            @endif
+        </div>
+        <hr/>
+        <div style="width: 100%; margin-bottom:5%">
+            <button type="button" class="btn btn-primary" style="width: 49%;">Open Kas</button>
+            <span class="pull-right">Amount Kas : Rp.50.000.000.000.000</span>
+        </div>
         <div class="table-responsive" style="max-height: 75%; width:100%">
             <table class="table w-100" style="overflow-x: hidden;">
                 <thead style="position: sticky; top: 0; background-color: #fff;">
@@ -15,6 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for($i=0;$i<=100;$i++)
                     <tr>
                         <td>Lensa</td>
                         <td>Rp. 300.000</td>
@@ -29,54 +42,40 @@
                         <td>Rp. 900.000</td>
                         <td><button type="button" class="btn btn-primary">+</button></td>
                     </tr>
-                    <tr>
-                        <td>Lensa</td>
-                        <td>Rp. 300.000</td>
-                        <td><input type="number" id="quantity" name="quantity" min="0" value="0" style="max-width:50%;"></td>
-                        <td>Rp. 900.000</td>
-                        <td><button type="button" class="btn btn-primary">+</button></td>
-                    </tr>
-                    <tr>
-                        <td>Frame</td>
-                        <td>Rp. 900.000</td>
-                        <td><input type="number" id="quantity" name="quantity" min="0" value="0" style="max-width:50%;"></td>
-                        <td>Rp. 900.000</td>
-                        <td><button type="button" class="btn btn-primary">+</button></td>
-                    </tr>
-                    <tr>
-                        <td>Lensa</td>
-                        <td>Rp. 300.000</td>
-                        <td><input type="number" id="quantity" name="quantity" min="0" value="0" style="max-width:50%;"></td>
-                        <td>Rp. 900.000</td>
-                        <td><button type="button" class="btn btn-primary">+</button></td>
-                    </tr>
-                    <tr>
-                        <td>Frame</td>
-                        <td>Rp. 900.000</td>
-                        <td><input type="number" id="quantity" name="quantity" min="0" value="0" style="max-width:50%;"></td>
-                        <td>Rp. 900.000</td>
-                        <td><button type="button" class="btn btn-primary">+</button></td>
-                    </tr>
-                    <tr>
-                        <td>Lensa</td>
-                        <td>Rp. 300.000</td>
-                        <td><input type="number" id="quantity" name="quantity" min="0" value="0" style="max-width:50%;"></td>
-                        <td>Rp. 900.000</td>
-                        <td><button type="button" class="btn btn-primary">+</button></td>
-                    </tr>
-                    <tr>
-                        <td>Frame</td>
-                        <td>Rp. 900.000</td>
-                        <td><input type="number" id="quantity" name="quantity" min="0" value="0" style="max-width:50%;"></td>
-                        <td>Rp. 900.000</td>
-                        <td><button type="button" class="btn btn-primary">+</button></td>
-                    </tr>
+                   @endfor
                 </tbody>
             </table>
         </div>
         <div class="d-flex flex-row justify-content-between w-100" style="margin-top: 5vh">
             <button type="button" class="btn btn-primary" style="width: 49%;">Primary</button>
             <button type="button" class="btn btn-primary" style="width: 49%;">Primary</button>
+        </div>
+        <hr/>
+        <div class="table-responsive" style="max-height: 25%; width:100%">
+            <table class="table w-100" style="overflow-x: hidden;">
+                <thead style="position: sticky; top: 0; background-color: #fff;">
+                    <tr>
+                        <th scope="col" style="width: 20%;">Coa</th>
+                        <th scope="col" style="width: 20%;">Jenis Kas</th>
+                        <th scope="col" style="width: 20%;">Transaksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for($i=0;$i<=100;$i++)
+                    <tr>
+                        <td>COA001</td>
+                        <td><font color="green">Masukan</font></td>
+                        <td><font color="green">+Rp. 300.000</font></td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>COA002</td>
+                        <td>Keluaran</td>
+                        <td>-Rp. 300.000</td>
+                    </tr>
+                    @endfor
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="m-2 shadow d-flex flex-column justify-content-between" style="width:30%">

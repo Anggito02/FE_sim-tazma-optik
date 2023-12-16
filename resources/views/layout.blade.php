@@ -39,13 +39,13 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="sidebar-collapsed">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
@@ -140,7 +140,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Sales Sheet:</h6>
-                        <a class="collapse-item" href="/sales/kasir">Kasir</a>
+                        <a class="collapse-item" href="/sales/index">Kasir</a>
                     </div>
                 </div>
             </li>
