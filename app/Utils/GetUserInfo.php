@@ -13,6 +13,8 @@ class GetUserInfo {
             'Authorization' => 'Bearer '.$token
         ];
 
+        dd($headers);
+
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/user/info');
 
         $user = $response->json();
