@@ -180,6 +180,7 @@
 	}
     function handleButtonDetailClick(id) {
         window.location.href = "{{ url('/PO/detail') }}/"+id;
+        
     }
     function handleButtonClick(id) {
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
@@ -254,7 +255,7 @@
 						offsetN0++;
                         button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
                         button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
-                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary onclick="handleButtonDetailClick(\'' + currentItem.id + '\')"><i class="fa fa-eye"></i>Detail</button>';
+                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonDetailClick(\'' + currentItem.id + '\')">Detail</button>';                        
                         rowData.push([
 							offsetN0,
                             currentItem.nomor_po,

@@ -104,8 +104,8 @@ Route::controller(VendorsController::class)->middleware('isTokenValid')->group(f
 Route::controller(PurchaseOrderController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/PO','getAllPO');
     Route::post('/PO/add', 'addPO');
-    Route::put('/PO/edit', 'updatePO');
-    Route::delete('/PO/delete', 'deletePO');
+    Route::post('/PO/edit', 'updatePO');
+    Route::post('/PO/delete', 'deletePO');
     Route::post('/PO/loadDataMaster', 'loadDataMaster');
     Route::post('/PO/loadDataDetailOnly', 'loadDataDetailOnly');
 });
