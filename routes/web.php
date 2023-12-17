@@ -190,6 +190,11 @@ Route::group([], function(){
     Route::get('/stokopnameDetail', function () {
         return view('inventory.stokopDetail');
     });
+
+    Route::get('/customer', function () {
+        return view('sales.customer');
+    });
+
 });
 
 
