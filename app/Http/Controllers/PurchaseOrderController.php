@@ -35,7 +35,6 @@ class PurchaseOrderController extends Controller
         $vendor = $response_vendor->json();
 
         $user = GetUserInfo::getUserInfo();
-
         // if ($po['status'] == 'success'){
             return view('purchase.po', [
                 'data' => $user['data'],
@@ -79,7 +78,7 @@ class PurchaseOrderController extends Controller
         ];
         $data = $request->all(); // Retrieve all input data from the request
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/all', $data);
-        $po = $response->json(); 
+        $po = $response->json();
         return response()->json($po);
     }
 
