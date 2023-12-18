@@ -10,7 +10,7 @@
 
     <div class="card shadow mb-4">
         <span id="tambah_info"></span>
-        <form id="itemForm" action="/item" method="POST" class="col-md-12 form-horizontal">
+        <form id="itemForm" action="/stock-opname" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row align-items-end">
                 <!-- Add the form inside the row -->
@@ -18,7 +18,7 @@
                 @method("GET")
                 <div class="form-group col-md-6">
                     <label for="bulan" class="form-label black-text">Bulan</label>
-                    <select name="bulan" class="form-control chosen-select">
+                    <select id="bulan" name="bulan" class="form-control chosen-select">
                         <option value=""selected>--Pilih Bulan--</option>
                         <option value="januari"  >Januari</option>
                         <option value="februari"  >Februari</option>
@@ -49,7 +49,7 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="table-responsive" >
+            <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="data_opname_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr style="white-space: nowrap;">
@@ -88,19 +88,7 @@
 		}
 	}
     function handleButtonClick(id) {
-        var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
-        $("#panelUpdateData").html(load_img);
-        $.ajax({
-		    url   	: "{{ url('/item/loadDataDetailOnly') }}",
-		    data 	:{'id':id},
-		    method	: "POST",
-		    success : function(data){
-		    	$('#panelUpdateData').html(data);
-                $('#add-update-data').modal('show');
-		    }
-		});
-        $('#spin_update').hide();
-		$('#spin_update_table').show();
+        window.location.href = "/stock-opname/detail/"+id;
     }
     function addContent(settings) {
         var load_img = $('<img/>').attr('src',settings.loading_gif_url).addClass('loading-image');
@@ -165,7 +153,7 @@
     function masterContent() {
 		var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
-            data_url: "{{ url('/stokopname/loadDataMaster') }}",
+            data_url: "{{ url('/stock-opname/loadDataMaster') }}",
             end_record_text : 'No more records found!', //no more records to load
             start_page      : 0, //initial page
             limit		    : 50, //initial page
@@ -214,7 +202,7 @@
 
         var formData = new FormData(form);
 	    $.ajax({
-            url   : "{{ url('/stock-opname-master/add') }}",
+            url   : "{{ url('/stock-opname/add') }}",
             type: 'POST',
             data: formData,
             async: false,

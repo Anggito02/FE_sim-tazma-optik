@@ -22,6 +22,7 @@ use App\Http\Controllers\BranchItemController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
 use App\Http\Controllers\StockOpnameMasterController;
+use App\Http\Controllers\StockOpnameDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,8 +165,21 @@ Route::controller(BranchItemController::class)->middleware('isTokenValid')->grou
 });
 
 Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/stockOpname','getAllStockOpnameMaster');
+    Route::get('/stock-opname','getAllStockOpnameMaster');
+    Route::post('/stock-opname/add', 'addStockOpnameMaster');
+    Route::post('/stock-opname/loadDataMaster', 'loadDataMaster');
+    Route::post('/stock-opname/loadDataDetailOnly', 'loadDataDetailOnly');
 });
+
+Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/stock-opname/detail/{id}','getAllStockOpnameDetail');
+    Route::post('/stock-opname/detail/add','addStockOpnameDetail');
+    Route::post('/stock-opname/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/stock-opname/detail/{id}/loadDataMaster', 'loadDataMaster');
+    Route::put('/stock-opname/detail/edit', 'updateStockOpnameDetail');
+    Route::delete('/stock-opname/detail/delete', 'deleteStockOpnameDetail');
+});
+
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
@@ -188,9 +202,6 @@ Route::group([], function(){
         return view('addcart');
     });
 
-    Route::get('/stokopnameDetail', function () {
-        return view('inventory.stokopDetail');
-    });
 });
 
 

@@ -52,9 +52,9 @@ class StockOpnameMasterController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
         $data = $request->all(); // Retrieve all input data from the request
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $data);
-        $item = $response->json();
-        return response()->json($item);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-master/all', $data);
+        $so = $response->json();
+        return response()->json($so);
     }
     public function addStockOpnameMaster(Request $request)
     {
