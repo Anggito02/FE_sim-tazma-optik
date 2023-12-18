@@ -81,4 +81,24 @@ class StockOpnameDetailController extends Controller {
         }
         return response()->json($result);
     }
+
+    public function loadDataMaster(Request $request, int $id)
+    {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $page = 1;
+        $limit = 50;
+
+        $api_request = [
+            "page" => $page,
+            "limit" => $limit,
+            'stock_opname_id' => $id,
+        ];
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all', $api_request);
+        $stock_opname_detail = $response->json();
+        return response()->json($stock_opname_detail);
+    }    
 }

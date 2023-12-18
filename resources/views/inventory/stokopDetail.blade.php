@@ -106,6 +106,7 @@
                             <th class="thead-text"><span class="nowrap">Close by</span></th>
                             <th class="thead-text"><span class="nowrap">SO Start</span></th>
                             <th class="thead-text"><span class="nowrap">SO End</span></th>
+                            <th class="thead-text"><span class="nowrap">SO Duration</span></th>
                             <th class="thead-text"><span class="nowrap">Actual QTY</span></th>
                             <th class="thead-text"><span class="nowrap">SYS QTY</span></th>
                             <th class="thead-text"><span class="nowrap">Diff QTY</span></th>
@@ -149,10 +150,11 @@
 		}
 	}
     function handleButtonClick(id) {
+        var stock_opname_id = "{{ $stock_opname_id }}";
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
         $("#panelUpdateData").html(load_img);
         $.ajax({
-		    url   	: "{{ url('/stock-opname/detail/{id}/loadDataDetailOnly') }}",
+		    url   	: "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataDetailOnly",
 		    data 	:{'id':id},
 		    method	: "POST",
 		    success : function(data){
@@ -202,15 +204,16 @@
                         let currentItem = result.data[i];
 						offsetN0++;
                         button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
-                        button_draft_2 = ' <button type="button" class="btn-sm btn-prmiary" onclick="handleButtonClick(\'' + currentItem.id + '\')">Adjust</button>';
+                        button_draft_2 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')">Adjust</button>';
                         rowData.push([
 							offsetN0,
                             currentItem.kode_item,
                             currentItem.jenis_item,
-                            currentItem.open_by,
-                            currentItem.close_by,
+                            currentItem.open_by_name,
+                            currentItem.close_by_name,
                             currentItem.so_start,
                             currentItem.so_end,
+                            currentItem.so_duration,
                             currentItem.actual_qty,
                             currentItem.system_qty,
                             currentItem.diff_qty,
@@ -218,7 +221,7 @@
                             currentItem.negative_diff_qty,
                             currentItem.adjustment_type,
                             currentItem.adjustment_status,
-                            currentItem.adjustment_by,
+                            currentItem.adjustment_by_name,
                             currentItem.adjustment_date,
                             currentItem.adjustment_followup_note,
                             button_draft_1,
@@ -247,9 +250,11 @@
         }
     }
     function masterContent() {
+        var stock_opname_id = "{{ $stock_opname_id }}";
 		var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
-            data_url: "{{ url('/stock-opname/detail/{id}/loadDataMaster') }}",
+            data_url: "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataMaster",
+            // data_url: "{{ url('/stock-opname/detail/loadDataMaster') }}",
             end_record_text : 'No more records found!', //no more records to load
             start_page      : 0, //initial page
             limit		    : 50, //initial page
@@ -260,8 +265,7 @@
             adjustment_type      : document.getElementById('adjustment_type').value, //initial page
             adjustment_date_from      : document.getElementById('adjustment_date_from').value, //initial page
             adjustment_date_until      : document.getElementById('adjustment_date_until').value, //initial page
-            adjustment_date_status      : document.getElementById('adjustment_date_status').value, //initial page
-            harga_beli_until      : document.getElementById('harga_beli_until').value, //initial page
+            adjustment_status      : document.getElementById('adjustment_status').value, //initial page
             jenis_item      : document.getElementById('jenis_item').value, //initial page
             open_by      : document.getElementById('open_by').value, //initial page
             close_by      : document.getElementById('close_by').value, //initial page
