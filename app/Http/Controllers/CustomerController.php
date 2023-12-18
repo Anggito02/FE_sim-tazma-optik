@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Utils\GetUserInfo;
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -90,14 +91,30 @@ class CustomerController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
 
+        $tanggal_lahir = Carbon::createFromFormat('Y-m-d', $request->tanggal_lahir);
+        $usia = $tanggal_lahir->diffInYears(Carbon::now());
+
         $api_request = [
-            "name" => $request->name,
-            "address" => $request->address,
-            "phone" => $request->phone,
-            "branch_id" => $request->branch_id,
-            "kabkota_id" => $request->kabkota_id,
-            "created_by" => $request->created_by,
-            "updated_by" => $request->updated_by
+            'nama_depan' => $request->nama_depan,
+            'nama_belakang' => $request->nama_belakang,
+            'email' => $request->email,
+            'nomor_telepon' => $request->nomor_telepon,
+            'alamat' => $request->alamat,
+            'usia' => $usia,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'gender' => $request->gender,
+            'branch_id' => $request->branch_id,
+            'kabkota_id' => $request->kabkota_id,
         ];
+
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/customer/add', $api_request);
+
+        $result = $response->json();
+        if($result['status'] == 'success'){
+            $row['message']="Data has been successfully inserted";
+        }else{
+            $row['message']="Insert data failed ";
+        }
+        return response()->json($result);
     }
 }

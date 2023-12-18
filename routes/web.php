@@ -167,6 +167,7 @@ Route::controller(BranchItemController::class)->middleware('isTokenValid')->grou
 
 Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/customer','getAllCustomer');
+    Route::post('/customer/add', 'addCustomer');
     Route::post('/customer/loadDataMaster', 'loadDataMaster');
     Route::post('/customer/loadDataDetailOnly', 'loadDataDetailOnly');
 });

@@ -206,6 +206,9 @@
                     '_token':csrfToken,
                     'nama_depan':settings.nama_depan,
                     'nama_belakang':settings.nama_belakang,
+                    'usia_from':settings.usia_from,
+                    'usia_until':settings.usia_until,
+                    'gender':settings.gender,
                     'kabkota_id':settings.kabkota_id,
                     'branch_id':settings.branch_id
                 },
@@ -271,6 +274,9 @@
             lastScroll      : 0, //initial page
             nama_depan      : document.getElementById('nama_depan').value, //initial page
             nama_belakang      : document.getElementById('nama_belakang').value, //initial page
+            usia_from      : document.getElementById('usia_from').value, //initial page
+            usia_until      : document.getElementById('usia_until').value, //initial page
+            gender      : document.getElementById('gender').value, //initial page
             kabkota_id      : document.getElementById('kabkota_id').value, //initial page
             branch_id      : document.getElementById('branch_id').value, //initial page
         });
@@ -390,7 +396,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">New Customer</h5>
+                <h5 class="modal-title black-text bold-text" id="exampleModalLongTitle">New Customer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -399,47 +405,47 @@
             <div class="modal-body">
                 <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
                     @csrf
-                    <!-- @method("POST") -->
+                    @method("POST")
                     <div class="row">
                         <div class="col">
 
-                            <div class="form-add-item " id="namaItemAksesoris">
-                                <div class="mb-3">
+                            <div class="form-add-item" id="namaItemAksesoris">
+                                <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Nama Depan</label>
                                     <input type="text" name="nama_depan" class="form-control">
                                 </div>
                             </div>
                             <div class="form-add-item " id="namaItemAksesoris">
-                                <div class="mb-3">
+                                <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Nama Belakang</label>
                                     <input type="text" name="nama_belakang" class="form-control">
                                 </div>
                             </div>
                             <div class="form-add-item " id="namaItemAksesoris">
-                                <div class="mb-3">
+                                <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Email</label>
                                     <input type="text" name="email" class="form-control">
                                 </div>
                             </div>
                             <div class="form-add-item " id="namaItemAksesoris">
-                                <div class="mb-3">
+                                <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">No Telepon</label>
                                     <input type="text" name="nomor_telepon" class="form-control">
                                 </div>
                             </div>
                             <div class="form-add-item " id="namaItemAksesoris">
-                                <div class="mb-3">
+                                <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Alamat</label>
                                     <input type="text" name="alamat" class="form-control">
                                 </div>
                             </div>
                             <div class="form-add-item " id="namaItemAksesoris">
-                                <div class="mb-3">
+                                <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Tanggal Lahir</label>
                                     <input type="date" name="tanggal_lahir" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2 black-text">
                                 <label for="jenis_item" class="form-label black-text">Gender</label>
                                 <select name="gender" class="form-control chosen-select">
                                     <option value="0"selected>Choose...</option>
@@ -447,7 +453,7 @@
                                     <option name="gender" value="Wanita">Wanita</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2 black-text">
                                 <label for="jenis_item" class="form-label black-text">Branch</label>
                                 <select name="branch_id" class="form-control chosen-select">
                                     <option value="0"selected>Choose...</option>
@@ -456,7 +462,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-2 black-text">
                                 <label for="jenis_item" class="form-label black-text">Kab. Kota</label>
                                 <select name="kabkota_id" class="form-control chosen-select">
                                     <option value="0"selected>Choose...</option>
@@ -464,6 +470,9 @@
                                     <option name="kabkota_id" value="{{$kakot['ID_KK']}}">{{$kakot['nama_kabkota']}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mt-5 float-right">
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </div>
                     </div>
