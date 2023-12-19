@@ -21,6 +21,8 @@ use App\Http\Controllers\ReceiveOrderController;
 use App\Http\Controllers\BranchItemController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
+use App\Http\Controllers\StockOpnameMasterController;
+use App\Http\Controllers\StockOpnameDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,6 +166,24 @@ Route::controller(BranchItemController::class)->middleware('isTokenValid')->grou
     Route::post('/branch-item/add', 'addBranchItem');
 });
 
+Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/stock-opname','getAllStockOpnameMaster');
+    Route::post('/stock-opname/add', 'addStockOpnameMaster');
+    Route::post('/stock-opname/loadDataMaster', 'loadDataMaster');
+    Route::post('/stock-opname/loadDataDetailOnly', 'loadDataDetailOnly');
+});
+
+Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/stock-opname/detail/{id}','getAllStockOpnameDetail');
+    Route::post('/stock-opname/detail/add','addStockOpnameDetail');
+    route::post('/stock-opname/detail/{id}/init-adjustment', 'initAdjustment');
+    Route::post('/stock-opname/detail/{id}/make-adjustment', 'makeAdjustment');
+    Route::post('/stock-opname/detail/{id}/loadDataMaster', 'loadDataMaster');
+    Route::post('/stock-opname/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/stock-opname/detail/edit', 'updateStockOpnameDetail');
+});
+
+
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
 // });
@@ -185,13 +205,6 @@ Route::group([], function(){
         return view('addcart');
     });
 
-    Route::get('/stokopname', function () {
-        return view('inventory.stokop');
-    });
-
-    Route::get('/stokopnameDetail', function () {
-        return view('inventory.stokopDetail');
-    });
 });
 
 

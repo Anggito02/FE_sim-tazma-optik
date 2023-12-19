@@ -1,148 +1,255 @@
 @extends('layout')
 @section('content')
-<!-- Begin Page Content -->
+
 <div class="container-fluid">
-
     <!-- Page Heading -->
+    {{-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+            href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="row">
-                <div class="col mb-2">
-                    <div>
-                        <label for="InputTahun" class="form-label">Tahun</label>
-                        <input type="tahun" class="form-control" id="InputTahun">
-                    </div>
+        <span id="tambah_info"></span>
+        <form id="itemForm" action="/stock-opname" method="POST" class="col-md-12 form-horizontal">
+            <div class="card-body">
+                <div class="row align-items-end">
+                <!-- Add the form inside the row -->
+                @csrf
+                @method("GET")
+                <div class="form-group col-md-6">
+                    <label for="bulan" class="form-label black-text">Bulan</label>
+                    <select id="bulan" name="bulan" class="form-control chosen-select">
+                        <option value=""selected>--Pilih Bulan--</option>
+                        <option value="januari"  >Januari</option>
+                        <option value="februari"  >Februari</option>
+                        <option value="maret"  >Maret</option>
+                        <option value="april"  >April</option>
+                        <option value="mei" >Mei</option>
+                        <option value="juni"  >Juni</option>
+                        <option value="juli"  >Juli</option>
+                        <option value="agustus"  >Agustus</option>
+                        <option value="september" >September</option>
+                        <option value="oktober"  >Oktober</option>
+                        <option value="november"  >November</option>
+                        <option value="desember"  >Desember</option>
+                    </select>
                 </div>
-                <div class="col mb-2">
-                    <div>
-                        <label for="InputBulan" class="form-label">Bulan</label>
-                        <input type="bulan" class="form-control" id="InputBulan">
-                    </div>
+                <div class="form-group col-md-6">
+                    <label for="tahun" class="form-label black-text">Tahun</label>
+                    <input type="number" name="tahun" id="tahun" class="form-control" value="">
+                </div>
+                <div class="form-group col-md-12">
+                    <br/>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
+                    <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn-sm btn-primary bold-text mt-4"><i
-                            class="fa-solid fa-magnifying-glass"></i>
-                        Search
-                    </button>
-                    <button type="button" class="btn-sm btn-warning bold-text mt-4"><i class="fa-solid fa-eye"></i>
-                        Show All
-                    </button>
-                    <button type="button" class="btn-sm btn-success bold-text mt-4" data-toggle="modal"
-                        data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
-                        New SO
-                    </button>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
-
     <div class="card shadow mb-4">
-        <!-- <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">BRANCH INFORMATION SHEET</h6>
-        </div> -->
-
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="data_opname_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
-                        <tr>
+                        <tr style="white-space: nowrap;">
                             <th class="thead-text"><span class="nowrap">No</span></th>
                             <th class="thead-text"><span class="nowrap">Tahun</span></th>
                             <th class="thead-text"><span class="nowrap">Bulan</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                         </tr>
                     </thead>
-
-                    <tbody>
-                        <div class="d-none">
-                            {{ $iterator = 1 }}
-                        </div>
-                        <tr>
-                            <td class="txt-center">1</td>
-                            <td class="txt-center"><span class="nowrap">1</span></td>
-                            <td class="txt-center"><span class="nowrap">1</span></td>
-                            <td class="txt-center">
-                                <!-- Button trigger modal Edit -->
-                                <button type="button" class="btn-sm btn-warning" data-toggle="modal"
-                                    data-target="">
-                                    Detail
-                                </button>
-                            </td>
-                        </tr>
-                        <div class="d-none">
-                            {{ $iterator = $iterator + 1}}
-                        </div>
+                    <tbody style="white-space: nowrap;">
 
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="box-body">
+      		<div id="forLoad"></div>
+       		<div id="forNOmore"></div>
+    	</div>
     </div>
-
 </div>
+<!-- Your script using jQuery -->
+<script type="text/javascript">
 
-<!-- Modal -->
+    $(document).ready(function() {
+        $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
+    });
+    $('#add-update-data').on('shown.bs.modal', function (e) {
+        $(".select2").select2();
+    });
+    function formatNumber(number) {
+		if(number!==null && number!=="null"){
+			return new Intl.NumberFormat('de-DE').format(parseFloat(number));
+		}else{
+			return '0';
+		}
+	}
+    function handleButtonClick(id) {
+        window.location.href = "/stock-opname/detail/"+id;
+    }
+    function addContent(settings) {
+        var load_img = $('<img/>').attr('src',settings.loading_gif_url).addClass('loading-image');
+        var record_end_txt = $('<div/>').text(settings.end_record_text).addClass('end-record-info');
+        offsetN0=settings.start_page*settings.limit;
+        if(loading == false && end_record == false){
+            loading = true;
+            $("#forLoad").append(load_img);
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                method: "POST",
+                type  : 'ajax',
+                url   : settings.data_url,
+                data  : { 
+                    'limit':settings.limit,
+                    'page':(settings.limit*settings.start_page),
+                    '_token':csrfToken,
+                    'bulan':settings.bulan,
+                    'tahun':settings.tahun,
+                },
+                async : true,
+                dataType : 'json',
+                error: function (request, error) {
+	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+			    },
+                success : function(result){
+                    console.log(result.data);
+					var table = $('#data_opname_table_1').DataTable();
+                    let rowData = [];
+                    for(let i=0; i<result.data.length; i++){
+                        let currentItem = result.data[i];
+						offsetN0++;
+                        button_draft = ' <button type="button" class="btn-sm btn-warning" onclick="handleButtonClick(\'' + currentItem.id + '\')">Detail</button>';
+                        rowData.push([
+							offsetN0,
+                            currentItem.tahun,
+                            currentItem.bulan,
+                            button_draft
+                        ]);
+                    }
+                    table.rows.add(rowData).draw();
+                    if(result.data.length < settings.limit){
+                    	$("#forNOmore").html(record_end_txt);
+                        load_img.remove();
+                        end_record = true;
+                    }else{
+                    	load_img.remove();
+                        loading = false;
+                        settings.start_page++; //page increment
+                    }
+                    $('.dataTables_scrollBody').scrollTop(settings.lastScroll+25);
+			        $('div.dataTables_scrollBody').scroll( function(el){
+					    if($(this).scrollTop() + $(this).height() >= ($(this)[0] .scrollHeight+ $('.odd').height()/2)-40) {
+					      settings.lastScroll=$(this).scrollTop();
+					      addContent(settings);
+					  	}
+					});
+                }
+            });
+        }
+    }
+    function masterContent() {
+		var settings = $.extend({
+            loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
+            data_url: "{{ url('/stock-opname/loadDataMaster') }}",
+            end_record_text : 'No more records found!', //no more records to load
+            start_page      : 0, //initial page
+            limit		    : 50, //initial page
+            htmldata        : '', //initial page
+            lastScroll      : 0, //initial page
+            tahun      : document.getElementById('tahun').value, //initial page
+            bulan      : document.getElementById('bulan').value, //initial page
+        });
+        loading  = false;
+	    end_record = false;
+	    addContent(settings);
+	}
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(document).ready(function(){
+        var table = $('#data_opname_table_1').DataTable( {
+				        fixedHeader: {
+				            header: true
+				        },
+				        scrollY			:$(window).height()-350,
+				        scrollX			:true,
+				        scrollCollapse	:true,
+				        paging			:false,
+						searching		:false,
+						info 			:false,
+						ordering		: false,
+				        // fixedColumns:   {
+				        //     leftColumns:4},
+		// 				// dom: 'Bfrtip',
+		// 				// buttons: [
+		// 				// 	// 'copy', 'csv', 'excel', 'pdf', 'print'
+		// 				// 	'csv', 'excel', 'print'
+		// 				// ],
+		});
+        masterContent();
+    });
+    function submitForm(event){
+		$('#btn_submit').hide();
+		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
+	    event.preventDefault();
+        var form = document.getElementById('add_info');
+
+        var formData = new FormData(form);
+	    $.ajax({
+            url   : "{{ url('/stock-opname/add') }}",
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (result) {
+                console.log(result);
+            if(result.message=="The data has been successfully updated"){
+				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				  	setTimeout(function(){
+					 $('#tambah_info').hide();
+                     location.reload();
+					},3500);
+			}else{
+				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				setTimeout(function(){
+					$('#tambah_info').hide();
+                    location.reload();
+				},3000)
+			}
+            $('#btn_submit').show();
+		}
+	  });
+	  return false;
+    }
+</script>
+<!-- Modal Add Data -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Branch</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">New Stock Opname</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <form method="POST" action="/branch/add">
-                            @csrf
-                            @method("POST")
-                            <div class="row black-text">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="InputKode" class="form-label">Kode</label>
-                                        <input type="text" id="kode_branch" name="kode_branch" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputNama" class="form-label">Nama</label>
-                                        <input type="text" id="nama_branch" name="nama_branch" class="form-control">
-                                    </div>
-
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="InputAlamat" class="form-label">Alamat</label>
-                                        <div>
-                                            <input type="text" id="alamat_branch" name="alamat_branch"
-                                            class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputGender" class="form-label">Employee Name</label>
-                                        <select type="employee_name" class="form-select form-control" id="InputGender"
-                                            name="employee_id_branch">
-                                            <option value="" disabled selected hidden>Choose...</option>
-                                            <option value="" name="employee_id_branch"></option>
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-3 float-right">
-                                        <button type="sumbit" class="btn btn-success">Submit</button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
+                    @csrf
+                    <!-- @method("POST") -->
+                        <p>Apakah anda yakin ingin menambahkan stock untuk hari ini?</p>
+                        <button type="submit" class="btn btn-success float-right">Add new</button>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -150,4 +257,5 @@
         </div>
     </div>
 </div>
+
 @endsection
