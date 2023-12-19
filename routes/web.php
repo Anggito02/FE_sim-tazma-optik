@@ -19,6 +19,7 @@ use App\Http\Controllers\PurchaseOrderDetailController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ReceiveOrderController;
 use App\Http\Controllers\BranchItemController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
 use App\Http\Controllers\StockOpnameMasterController;
@@ -183,6 +184,13 @@ Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid'
     Route::post('/stock-opname/detail/edit', 'updateStockOpnameDetail');
 });
 
+
+Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/customer','getAllCustomer');
+    Route::post('/customer/add', 'addCustomer');
+    Route::post('/customer/loadDataMaster', 'loadDataMaster');
+    Route::post('/customer/loadDataDetailOnly', 'loadDataDetailOnly');
+});
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
 //     Route::get('/404','PageError404');
