@@ -119,6 +119,7 @@
                             <th class="thead-text"><span class="nowrap">Adjustment Note</span></th>
                             <th class="thead-text"><span class="nowrap">Add Adjust Note</span></th>
                             <th class="thead-text"><span class="nowrap">Adjust</span></th>
+                            <th class="thead-text"><span class="nowrap">Edit</span></th>
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap">
@@ -138,6 +139,7 @@
     
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
+        $('#datetime-local-adjustment').val(new Date().toISOString().slice(0, 16));
     });
     $('#add-update-data').on('shown.bs.modal', function (e) {
         $(".select2").select2();
@@ -149,12 +151,28 @@
 			return '0';
 		}
 	}
-    function handleButtonClick(id) {
+    function handleButtonClickAdjustNote(id) {
+        var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust-note"]');
+        console.log(button);
+        button.setAttribute('data-toggle', 'modal');
+        button.setAttribute('data-target', '#modalAddAdjustment' + id );
+        $('#modalAddAdjustment' + id).modal('show');
+    }
+
+    function handleButtonClickAdjust(id) {
+        var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust"]');
+        console.log(button);
+        button.setAttribute('data-toggle', 'modal');
+        button.setAttribute('data-target', '#modalAdjust' + id );
+        $('#modalAdjust' + id).modal('show');
+    }
+
+    function handleButtonClickEdit(id) {
         var stock_opname_id = "{{ $stock_opname_id }}";
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
         $("#panelUpdateData").html(load_img);
         $.ajax({
-		    url   	: "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataDetailOnly",
+		    url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataDetailOnly",
 		    data 	:{'id':id},
 		    method	: "POST",
 		    success : function(data){
@@ -165,6 +183,11 @@
         $('#spin_update').hide();
 		$('#spin_update_table').show();
     }
+
+    function closeModal() {
+       $('.modal').modal('hide');
+    }
+
     function addContent(settings) {
         var load_img = $('<img/>').attr('src',settings.loading_gif_url).addClass('loading-image');
         var record_end_txt = $('<div/>').text(settings.end_record_text).addClass('end-record-info');
@@ -203,8 +226,20 @@
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
 						offsetN0++;
-                        button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
-                        button_draft_2 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')">Adjust</button>';
+                        
+                        if(currentItem.adjustment_by != null) {
+                            button_draft_1 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust-note disabled">Add Adjustment Note</button>';
+                        } else {
+                            button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonClickAdjustNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
+                        }
+
+                        if(currentItem.adjustment_by === null) {
+                            button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
+                        } else if(currentItem.adjustment_by) {
+                            button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonClickAdjust(\'' + currentItem.id + '\')">Adjust</button>';
+                        }
+                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
+
                         rowData.push([
 							offsetN0,
                             currentItem.kode_item,
@@ -226,6 +261,7 @@
                             currentItem.adjustment_followup_note,
                             button_draft_1,
                             button_draft_2,
+                            button_draft_3
                         ]);
                     }
                     table.rows.add(rowData).draw();
@@ -305,6 +341,81 @@
 		});
         masterContent();
     });
+
+    function submitFormAdjustmentNote(event){
+		$('#btn_submit').hide();
+		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
+	    event.preventDefault();
+        var stock_opname_id = "{{ $stock_opname_id }}";
+        var form = document.getElementById('add_info_adjustnote');
+        var formData = new FormData(form);
+	    $.ajax({
+            url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/init-adjustment",
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (result) {
+                console.log(result);
+            if(result.message=="The data has been successfully updated"){
+				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				  	setTimeout(function(){
+					 $('#tambah_info').hide();
+                     location.reload();
+					},3500);
+			}else{
+				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				setTimeout(function(){
+					$('#tambah_info').hide();
+                    location.reload();
+				},3000)
+			}
+            $('#btn_submit').show();
+		}
+	  });
+	  return false;
+    }
+
+    function submitFormMakeAdjustment(event){
+		$('#btn_submit').hide();
+		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
+	    event.preventDefault();
+        var stock_opname_id = "{{ $stock_opname_id }}";
+        var form = document.getElementById('add_info_make_adjustment');
+        var formData = new FormData(form);
+	    $.ajax({
+            url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/make-adjustment",
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (result) {
+                console.log(result);
+            if(result.message=="The data has been successfully updated"){
+				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				  	setTimeout(function(){
+					 $('#tambah_info').hide();
+                     location.reload();
+					},3500);
+			}else{
+				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				setTimeout(function(){
+					$('#tambah_info').hide();
+                    location.reload();
+				},3000)
+			}
+            $('#btn_submit').show();
+		}
+	  });
+	  return false;
+    }
+
     function submitForm(event){
 		$('#btn_submit').hide();
 		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
@@ -341,6 +452,16 @@
 	  });
 	  return false;
     }
+
+    $(document).ready(function() {
+    function insertCurrentDate() {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().substring(0, 10);
+      $("#date-now").text(formattedDate);
+    }
+
+    insertCurrentDate();
+    });
 </script>
 
 <!-- Modal -->
@@ -356,7 +477,7 @@
                 <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
-                <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
+                <form id="add_info_adjustnote" class="form-horizontal" onsubmit="submitForm(event)">
                     @csrf
                     <!-- @method("POST") -->
                     <div class="row black-text">
@@ -426,4 +547,96 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Adjust-->
+@foreach ($stock_opname_detail as $sod)
+<div class="modal fade" id="modalAdjust{{ $sod['id'] }}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Buat Adjustment</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add_info_make_adjustment" method="post" onsubmit="submitFormMakeAdjustment(event)">
+                    @csrf
+                    <!-- @method("POST") -->
+                    <div class="d-flex flex-row">
+                        <p>Adjust Type : </p>
+                        <p style="margin-left:1%;" id="set_adjust_type">{{ $sod['adjustment_type'] }}</p>
+                        <input type="hidden" value="{{$sod['adjustment_type']}}" name="adjustment_type">
+                    </div>
+                    <div class="d-flex flex-row">
+                        <p>Adjustment by : </p>
+                        <p style="margin-left:1%;" id="set_adjust_by">{{ $data['username'] }}</p>
+                        <input type="hidden" value="{{$data['username']}}" name="adjustment_by">
+                    </div>
+                    <div class="d-flex flex-row">
+                        <p>Kode Item - jenis Item : </p>
+                        <p style="margin-left:1%;" id="set_item">{{ $sod['kode_item'] }} - {{ $sod['jenis_item'] }}</p>
+                        <input type="hidden" value="{{$sod['id']}}" name="item_id">
+                    </div>
+                    <div class="d-flex flex-row">
+                        <p>Adjustment QTY : </p>
+                        <p style="margin-left:1%;" id="set_adjust_qty">{{ $sod['diff_qty'] }}</p>
+                        <input type="hidden" value="{{$sod['diff_qty']}}" name="in_out_qty">
+                    </div>
+                    <div class="float-right">
+                        <button type="button right" class="btn btn-primary px-4" data-dismiss="">Add</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-center alert alert-danger rounded-0" role="alert">
+                <p>Can't be undone</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+<!-- Modal Adjustment Note -->
+@foreach($stock_opname_detail as $sod)
+<div class="modal fade" id="modalAddAdjustment{{ $sod['id'] }}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Buat Adjustment Note</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add_info" class="form-horizontal" onsubmit="submitFormAdjustmentNote(event)">
+                    @csrf
+                    <!-- @method("POST") -->
+                    <div class="d-flex flex-row">
+                        <p>Employee name : </p>
+                        <p style="margin-left:1%;">{{$data['username']}}</p>
+                        <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
+                    </div>
+                    <div class="d-flex flex-row">
+                        <p>Adjustment date : </p>
+                        <p style="margin-left:1%;" id="date-now"></p>
+                        <input type="hidden" id="datetime-local-adjustment" name="adjustment_date" value="">
+                    </div>
+                    <div class="d-flex flex-column align-items-start">
+                        <label class="m-0">Adjusment note :</label>
+                        <input type="textarea" class="form-control" name="adjustment_note">
+                    </div>
+                    <div class="mt-3 float-right">
+                        <button type="submit" class="btn btn-primary px-4" data-dismiss="">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @endsection

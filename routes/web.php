@@ -176,10 +176,11 @@ Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid'
 Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/stock-opname/detail/{id}','getAllStockOpnameDetail');
     Route::post('/stock-opname/detail/add','addStockOpnameDetail');
-    Route::post('/stock-opname/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
+    route::post('/stock-opname/detail/{id}/init-adjustment', 'initAdjustment');
+    Route::post('/stock-opname/detail/{id}/make-adjustment', 'makeAdjustment');
     Route::post('/stock-opname/detail/{id}/loadDataMaster', 'loadDataMaster');
-    Route::put('/stock-opname/detail/edit', 'updateStockOpnameDetail');
-    Route::delete('/stock-opname/detail/delete', 'deleteStockOpnameDetail');
+    Route::post('/stock-opname/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/stock-opname/detail/edit', 'updateStockOpnameDetail');
 });
 
 

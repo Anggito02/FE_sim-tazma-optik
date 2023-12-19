@@ -11,7 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Utils\GetUserInfo;
 
 class StockOpnameDetailController extends Controller {
-    public function getAllStockOpnameDetail (Request $request, int $id) {
+    public function getAllStockOpnameDetail (Request $request, int $soid) {
         $token = $_COOKIE['token'];
 
         $page = 1;
@@ -30,7 +30,7 @@ class StockOpnameDetailController extends Controller {
         $api_request_so = [
             "page" => $page,
             "limit" => $limit,
-            "stock_opname_id" => $id
+            "stock_opname_id" => $soid
         ];
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all/', $api_request_so);
@@ -43,12 +43,13 @@ class StockOpnameDetailController extends Controller {
         // dd($employee);
         
         $user = GetUserInfo::getUserInfo();
+        // dd($user['data']);
         return view('inventory.stokopdetail', [
             'data' => $user['data'],
             'stock_opname_detail' => $stock_opname_detail['data'],
             'item' => $item['data'],
             'employee' => $employee['data'],
-            'stock_opname_id' => $id
+            'stock_opname_id' => $soid
         ]);
     }
 
@@ -82,7 +83,7 @@ class StockOpnameDetailController extends Controller {
         return response()->json($result);
     }
 
-    public function loadDataMaster(Request $request, int $id)
+    public function loadDataMaster(Request $request, int $soid)
     {
         $token = $_COOKIE['token'];
         $headers = [
@@ -95,10 +96,130 @@ class StockOpnameDetailController extends Controller {
         $api_request = [
             "page" => $page,
             "limit" => $limit,
-            'stock_opname_id' => $id,
+            'stock_opname_id' => $soid,
         ];
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all', $api_request);
         $stock_opname_detail = $response->json();
         return response()->json($stock_opname_detail);
-    }    
+    }
+
+    public function loadDataDetailOnly(Request $request, int $soid)
+    {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all();
+        
+        $api_request_so = [
+            "page" => 1,
+            "limit" => 10000,
+            'stock_opname_id' => $soid
+        ];
+
+        $api_request = [
+            "page" => 1,
+            "limit" => 10000
+        ];
+
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all', $api_request_so);
+        $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $api_request);
+        $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
+
+        $stock_opname_detail = $response->json();
+        $item = $response_item->json();
+        $employee = $response_employee->json();
+        return view('inventory.stokopDetailEdit', [
+            'stock_opname_detail' => $stock_opname_detail['data'],
+            'item' => $item['data'],
+            'employee' => $employee['data']
+        ]);
+    }
+
+    public function updateStockOpnameDetail(Request $request, $soid) {
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $row=$request;
+
+        $api_request = [
+            'id' => $request->id,
+            'so_start' => $request->so_start,
+            'so_end' => $request->so_end,
+            'actual_qty' => $request->actual_qty,
+            'item_id' => $request->item_id,
+            'open_by' => $request->open_by,
+            'close_by' => $request->close_by,
+            'stock_opname_id' => $soid
+        ];
+
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/edit', $api_request);
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            $row['message']="The data has been successfully updated";
+        }else{
+            $row['message']="Update data failed ";
+        }
+        return response()->json($result);
+    }
+
+    public function initAdjustment(Request $request) {
+        $row ="";
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $row=$request;
+        $api_request = [
+            'id' => $request->id,
+            'adjustment_date' => $request->adjustment_date,
+            'adjustment_followup_note' => $request->adjustment_followup_note,
+            "adjustment_by" => $request->adjustment_by
+        ];
+        
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/init-adjustment', $api_request);
+
+        $result = $response->json();
+        if($result['status'] == 'success'){
+            $row['message']="The data has been successfully updated";
+        }else{
+            $row['message']="Update data failed ";
+        }
+        return response()->json($result);
+    }
+    
+    public function makeAdjustment(Request $request) {
+        $row ="";
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $row=$request;
+        $api_request = [
+            'adjustment_type' => $request->adjustment_type,
+            'adjustment_by' => $request->adjustment_by,
+            'item_id' => $request->item_id,
+            'in_out_qty' => $request->in_out_qty
+        ];
+
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/make-adjustment', $api_request);
+        // dd($response);
+        
+        $result = $response->json();
+
+        if($result['status'] == 'success'){
+            $row['message']="The data has been successfully updated";
+        } else {
+            $row['message']="Update data failed ";
+        }
+        return response()->json($result);
+    }
 }
