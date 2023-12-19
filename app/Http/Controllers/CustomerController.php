@@ -26,8 +26,10 @@ class CustomerController extends Controller
             "limit" => $limit
         ];
 
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/customer/all', $api_request);
         $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
         $response_kabkota = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kabkota/all', $api_request);
+        $customer = $response->json();
         $branch = $response_branch->json();
         $kabkota = $response_kabkota->json();
 
@@ -37,6 +39,7 @@ class CustomerController extends Controller
             'data' => $user['data'],
             'branch' => $branch['data'],
             'kabkota' => $kabkota['data'],
+            'customer' => $customer['data'],
             'nama_depan' => $request->nama_depan,
             'nama_belakang' => $request->nama_belakang,
             'usia_from' => $request->usia_from,

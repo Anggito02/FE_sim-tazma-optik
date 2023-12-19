@@ -5,55 +5,55 @@
 
     <div class="card shadow mb-4">
         <span id="tambah_info"></span>
-        <form id="itemForm" action="/item" method="POST" class="col-md-12 form-horizontal">
+        <form id="itemForm" action="/customer" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row align-items-end">
                 <!-- Add the form inside the row -->
                 @csrf
                 @method("GET")
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="nama_depan" class="form-label black-text">First Name</label>
                     <input type="text" name="nama_depan" id="nama_depan" class="form-control" value="{{$nama_depan}}">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="nama_belakang" class="form-label black-text">Last Name</label>
                     <input type="text" name="nama_belakang" id="nama_belakang" class="form-control" value="{{$nama_belakang}}">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="usia_from" class="form-label black-text">Age From</label>
                     <input type="number" name="usia_from" id="usia_from" class="form-control" value="{{$usia_from}}">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="usia_until" class="form-label black-text">Age Until</label>
                     <input type="number" name="usia_until" id="usia_until" class="form-control" value="{{$usia_until}}">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="jenis_item" class="form-label black-text">Gender</label>
-                    <select name="gender" class="form-control chosen-select">
-                        <option value="0"selected>Choose...</option>
-                        <option name="gender" value="Pria">Pria</option>
-                        <option name="gender" value="Wanita">Wanita</option>
+                    <select name="gender" id="gender" class="form-control chosen-select">
+                        <option value=""selected>Choose...</option>
+                        <option name="gender" value="laki-laki">Laki-laki</option>
+                        <option name="gender" value="perempuan">Perempuan</option>
                     </select>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="jenis_item" class="form-label black-text">Branch</label>
-                    <select name="branch_id" class="form-control chosen-select">
-                        <option value="0"selected>Choose...</option>
+                    <select name="branch_id" id="branch_id" class="form-control chosen-select">
+                        <option value=""selected>Choose...</option>
                         @foreach ($branch as $cabang)
                         <option name="branch_id" value="{{$cabang['id']}}">{{$cabang['nama_branch']}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="jenis_item" class="form-label black-text">Kab. Kota</label>
-                    <select name="kabkota_id" class="form-control chosen-select">
-                        <option value="0"selected>Choose...</option>
+                    <select name="kabkota_id" id="kabkota_id" class="form-control chosen-select">
+                        <option value=""selected>Choose...</option>
                         @foreach ($kabkota as $kakot)
                         <option name="kabkota_id" value="{{$kakot['ID_KK']}}">{{$kakot['nama_kabkota']}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-12">
                     <br/>
                     <button type="submit" class="btn btn-primary">Search</button>
                     <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Customer</button>
@@ -64,7 +64,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="data_item_table_1" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="data_customer_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr style="white-space: nowrap;">
                             <th class="thead-text"><span class="nowrap">No</span></th>
@@ -131,38 +131,7 @@
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
     });
-    // function formChange() {
-    //     var value_id=document.getElementById("jenis_item_id").value;
-    //     console.log(value_id);
-    //     if(value_id=="frame"){
-    //         var frameKategoriElements = document.querySelectorAll('.frameKategori');
-    //         frameKategoriElements.forEach(function(element) {
-    //             element.style.display = 'block';
-    //         });
-    //         var frameKategoriElements = document.querySelectorAll('.lensaKategori');
-    //         frameKategoriElements.forEach(function(element) {
-    //             element.style.display = 'none';
-    //         });
-    //     }else if(value_id=="lensa"){
-    //         var frameKategoriElements = document.querySelectorAll('.frameKategori');
-    //         frameKategoriElements.forEach(function(element) {
-    //                 element.style.display = 'none';
-    //         });
-    //         var frameKategoriElements = document.querySelectorAll('.lensaKategori');
-    //         frameKategoriElements.forEach(function(element) {
-    //                 element.style.display = 'block';
-    //         });
-    //     }else{
-    //         var frameKategoriElements = document.querySelectorAll('.frameKategori');
-    //         frameKategoriElements.forEach(function(element) {
-    //                 element.style.display = 'none';
-    //         });
-    //         var frameKategoriElements = document.querySelectorAll('.lensaKategori');
-    //         frameKategoriElements.forEach(function(element) {
-    //                 element.style.display = 'none';
-    //         });
-    //     }
-    // }
+    
     $('#add-update-data').on('shown.bs.modal', function (e) {
         $(".select2").select2();
     });
@@ -209,8 +178,8 @@
                     'usia_from':settings.usia_from,
                     'usia_until':settings.usia_until,
                     'gender':settings.gender,
-                    'kabkota_id':settings.kabkota_id,
-                    'branch_id':settings.branch_id
+                    'branch_id':settings.branch_id,
+                    'kabkota_id':settings.kabkota_id
                 },
                 async : true,
                 dataType : 'json',
@@ -219,13 +188,12 @@
 			    },
                 success : function(result){
                     console.log(result.data);
-					var table = $('#data_item_table_1').DataTable();
+					var table = $('#data_customer_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
 						offsetN0++;
                         button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
-                        //button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
                         rowData.push([
 							offsetN0,
                             currentItem.nama_depan,
@@ -236,10 +204,9 @@
                             currentItem.usia,
                             currentItem.tanggal_lahir,
                             currentItem.gender,
-                            currentItem.branch_id,
-                            currentItem.kabkota_id,
+                            currentItem.branch_nama,
+                            currentItem.nama_kabkota,
                             button_draft_1,
-                            //button_draft_2,
                         ]);
                     }
                     table.rows.add(rowData).draw();
@@ -277,8 +244,8 @@
             usia_from      : document.getElementById('usia_from').value, //initial page
             usia_until      : document.getElementById('usia_until').value, //initial page
             gender      : document.getElementById('gender').value, //initial page
-            kabkota_id      : document.getElementById('kabkota_id').value, //initial page
             branch_id      : document.getElementById('branch_id').value, //initial page
+            kabkota_id      : document.getElementById('kabkota_id').value //initial page
         });
         loading  = false;
 	    end_record = false;
@@ -291,7 +258,7 @@
     });
 
     $(document).ready(function(){
-        var table = $('#data_item_table_1').DataTable( {
+        var table = $('#data_customer_table_1').DataTable( {
 				        fixedHeader: {
 				            header: true
 				        },
@@ -309,29 +276,6 @@
 		// 				// 	// 'copy', 'csv', 'excel', 'pdf', 'print'
 		// 				// 	'csv', 'excel', 'print'
 		// 				// ],
-						columnDefs: [
-                            {
-								'targets': 7,
-								'createdCell':  function (td, cellData, rowData, row, col) {
-									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right');
-								}
-							},
-                            {
-								'targets': 8,
-								'createdCell':  function (td, cellData, rowData, row, col) {
-									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right');
-								}
-							},
-                            {
-								'targets': 9,
-								'createdCell':  function (td, cellData, rowData, row, col) {
-									var rowNumber = (table.page() * table.page.len()) + (row + 1);
-									$(td).attr('align', 'right');
-								}
-							},
-						]
 
 		});
         masterContent();
@@ -373,22 +317,6 @@
 	  return false;
     }
 </script>
-<!-- Modal ADD UPDATE DATA-->
-<div class="modal fade" id="add-update-data" tabindex="-1"  data-backdrop="static" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-	  <div class="modal-content">
-      <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Customer</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-	    <div class="modal-body" id="panelUpdateData">
-
-	    </div>
-	  </div>
-	</div>
-</div>
 
 <!-- Modal Add Data -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -409,51 +337,53 @@
                     <div class="row">
                         <div class="col">
 
-                            <div class="form-add-item" id="namaItemAksesoris">
+                            <div class="form-add-item">
                                 <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Nama Depan</label>
                                     <input type="text" name="nama_depan" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-add-item " id="namaItemAksesoris">
+                            <div class="form-add-item ">
                                 <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Nama Belakang</label>
                                     <input type="text" name="nama_belakang" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-add-item " id="namaItemAksesoris">
+                            <div class="form-add-item ">
                                 <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Email</label>
                                     <input type="text" name="email" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-add-item " id="namaItemAksesoris">
+                            <div class="form-add-item ">
                                 <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">No Telepon</label>
                                     <input type="text" name="nomor_telepon" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-add-item " id="namaItemAksesoris">
+                            <div class="form-add-item ">
                                 <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Alamat</label>
                                     <input type="text" name="alamat" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-add-item " id="namaItemAksesoris">
+                        </div>
+                        <div class="col">
+                            <div class="form-add-item ">
                                 <div class="mb-3 black-text">
                                     <label for="InputItemAksesoris" class="form-label">Tanggal Lahir</label>
                                     <input type="date" name="tanggal_lahir" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group col-md-2 black-text">
+                            <div class="form-group mb-3 black-text">
                                 <label for="jenis_item" class="form-label black-text">Gender</label>
                                 <select name="gender" class="form-control chosen-select">
                                     <option value="0"selected>Choose...</option>
-                                    <option name="gender" value="Pria">Pria</option>
-                                    <option name="gender" value="Wanita">Wanita</option>
+                                    <option name="gender" value="laki-laki">laki-laki</option>
+                                    <option name="gender" value="perempuan">perempuan</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-2 black-text">
+                            <div class="form-group mb-3 black-text">
                                 <label for="jenis_item" class="form-label black-text">Branch</label>
                                 <select name="branch_id" class="form-control chosen-select">
                                     <option value="0"selected>Choose...</option>
@@ -462,7 +392,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-2 black-text">
+                            <div class="form-group mb-3 black-text">
                                 <label for="jenis_item" class="form-label black-text">Kab. Kota</label>
                                 <select name="kabkota_id" class="form-control chosen-select">
                                     <option value="0"selected>Choose...</option>
@@ -474,6 +404,7 @@
                             <div class="mt-5 float-right">
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
+
                         </div>
                     </div>
                 </form>
@@ -486,7 +417,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('js/item.js') }}"></script>
-@endpush
