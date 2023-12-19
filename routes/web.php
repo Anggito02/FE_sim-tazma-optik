@@ -24,6 +24,9 @@ use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
 use App\Http\Controllers\StockOpnameMasterController;
 use App\Http\Controllers\StockOpnameDetailController;
+use App\Http\Controllers\StockOpnameBranchController;
+use App\Http\Controllers\StockOpnameBranchDetailController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -184,6 +187,22 @@ Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid'
     Route::post('/stock-opname/detail/edit', 'updateStockOpnameDetail');
 });
 
+Route::controller(StockOpnameBranchController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/stock-opname-branch','getAllStockOpnameBranch');
+    Route::post('/stock-opname-branch/add', 'addStockOpnameBranch');
+    Route::post('/stock-opname-branch/loadDataMaster', 'loadDataMaster');
+    Route::post('/stock-opname-branch/loadDataDetailOnly', 'loadDataDetailOnly');
+});
+
+Route::controller(StockOpnameBranchDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/stock-opname-branch/detail/{id}','getAllStockOpnameBranchDetail');
+    Route::post('/stock-opname-branch/detail/add','addStockOpnameBranchDetail');
+    route::post('/stock-opname-branch/detail/{id}/init-adjustment', 'initAdjustment');
+    Route::post('/stock-opname-branch/detail/{id}/make-adjustment', 'makeAdjustment');
+    Route::post('/stock-opname-branch/detail/{id}/loadDataMaster', 'loadDataMaster');
+    Route::post('/stock-opname-branch/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/stock-opname-branch/detail/edit', 'updateStockOpnameBranchDetail');    
+});
 
 Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/customer','getAllCustomer');

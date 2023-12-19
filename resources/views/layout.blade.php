@@ -126,6 +126,7 @@
                         <a class="collapse-item" href="/item-outgoing">Item Outgoing</a>
                         <a class="collapse-item" href="/branch-item">Branch Item</a>
                         <a class="collapse-item" href="/stock-opname">Stock Opname</a>
+                        <a class="collapse-item" href="/stock-opname-branch">Stock Opname Branch</a>
                     </div>
                 </div>
             </li>

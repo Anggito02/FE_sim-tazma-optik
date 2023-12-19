@@ -167,13 +167,13 @@
         $('#modalAdjust' + id).modal('show');
     }
 
-    function handleButtonClickEdit(id) {
+    function handleButtonClickEdit(detail_id) {
         var stock_opname_id = "{{ $stock_opname_id }}";
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
         $("#panelUpdateData").html(load_img);
         $.ajax({
 		    url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataDetailOnly",
-		    data 	:{'id':id},
+		    data 	:{'id':detail_id},
 		    method	: "POST",
 		    success : function(data){
 		    	$('#panelUpdateData').html(data);
@@ -477,7 +477,7 @@
                 <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
-                <form id="add_info_adjustnote" class="form-horizontal" onsubmit="submitForm(event)">
+                <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
                     @csrf
                     <!-- @method("POST") -->
                     <div class="row black-text">
@@ -573,12 +573,12 @@
                     <div class="d-flex flex-row">
                         <p>Adjustment by : </p>
                         <p style="margin-left:1%;" id="set_adjust_by">{{ $data['username'] }}</p>
-                        <input type="hidden" value="{{$data['username']}}" name="adjustment_by">
+                        <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
                     </div>
                     <div class="d-flex flex-row">
                         <p>Kode Item - jenis Item : </p>
                         <p style="margin-left:1%;" id="set_item">{{ $sod['kode_item'] }} - {{ $sod['jenis_item'] }}</p>
-                        <input type="hidden" value="{{$sod['id']}}" name="item_id">
+                        <input type="hidden" value="{{$sod['item_id']}}" name="item_id">
                     </div>
                     <div class="d-flex flex-row">
                         <p>Adjustment QTY : </p>
@@ -612,22 +612,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add_info" class="form-horizontal" onsubmit="submitFormAdjustmentNote(event)">
+                <form id="add_info_adjustnote" class="form-horizontal" onsubmit="submitFormAdjustmentNote(event)">
                     @csrf
                     <!-- @method("POST") -->
-                    <div class="d-flex flex-row">
-                        <p>Employee name : </p>
-                        <p style="margin-left:1%;">{{$data['username']}}</p>
-                        <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
-                    </div>
-                    <div class="d-flex flex-row">
-                        <p>Adjustment date : </p>
-                        <p style="margin-left:1%;" id="date-now"></p>
-                        <input type="hidden" id="datetime-local-adjustment" name="adjustment_date" value="">
-                    </div>
-                    <div class="d-flex flex-column align-items-start">
-                        <label class="m-0">Adjusment note :</label>
-                        <input type="textarea" class="form-control" name="adjustment_note">
+                    <div class="d-flex flex-column">
+                        <div class="mb-3">
+                            <p>Employee name : {{$data['username']}}</p>
+                            <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
+                        </div>
+                        <div class="mb-3">
+                            <label for="adjustment_date" class="form-label">Adjustment Date : </label>
+                            <input type="datetime-local" id="datetime-local-adjustment" name="adjustment_date" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="m-0">Adjusment note :</label>
+                            <input type="textarea" class="form-control" name="adjustment_followup_note">
+                        </div>
                     </div>
                     <div class="mt-3 float-right">
                         <button type="submit" class="btn btn-primary px-4" data-dismiss="">Add</button>
