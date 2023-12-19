@@ -61,6 +61,7 @@ class PurchaseOrderController extends Controller
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/one', $data)->json();
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
+        // print_r($response['data']);
         return view(
             'purchase.poEdit',
             ['vals'=>$response['data'],
@@ -146,23 +147,36 @@ class PurchaseOrderController extends Controller
             'Authorization' => 'Bearer '.$token
         ];
         $row=$request;
+        $status_po = $request->status_po;
+        $status_pembayaran = $request->status_pembayaran;
+
+        if($status_po == true){
+            $status_po = 1;
+        }elseif($status_po == false){
+            $status_po = 0;
+        }
+        if($status_pembayaran == true){
+            $status_pembayaran = 1;
+        }elseif($status_pembayaran == false){
+            $status_pembayaran = 0;
+        }
+
         $api_request = [
             'id' => $request->id,
             'status_penerimaan' => $request->status_penerimaan,
-            'status_pembayaran' => $request->status_pembayaran,
-            'status_po' => $request->status_po,
+            'status_pembayaran' => intval($status_pembayaran),
+            'status_po' => intval($status_po),
             'checked_by' => $request->checked_by,
             'made_by' => $request->made_by,
             'approved_by' => $request->approved_by,
             'vendor_id' => $request->vendor_id
         ];
-        // dd($api_request);
+        // print_r($api_request);
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order/edit', $api_request);
-
         $result = $response->json();
 
-        if($result['status'] == 'success'){
+        if($result['message'] == 'success'){
             $row['message']="Data has been successfully updated";
         }else{
             $row['message']="Update data failed ";
