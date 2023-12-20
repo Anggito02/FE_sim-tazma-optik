@@ -26,16 +26,14 @@ class AuthController extends Controller{
             ];
             
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
-            // dd($response);
             
             $data = $response->json();
 
 
-            if ($data && $data['status'] == 'success'){
-                // Access the array index only if the array is not null
+            if ($data['status'] == 'success'){
                 setcookie('token', $data['data']['token'], time() + 60*60*24, '/', '', false, true);
                 toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
-            
+
                 return redirect('/dashboard');
             }else{
                 toastr()->error('Invalid email or password!', 'Authentication', ['timeOut' => 3000]);
