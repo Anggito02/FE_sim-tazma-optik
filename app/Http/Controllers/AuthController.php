@@ -31,10 +31,11 @@ class AuthController extends Controller{
             $data = $response->json();
 
 
-            if ($data['status'] == 'success'){
+            if ($data && $data['status'] == 'success'){
+                // Access the array index only if the array is not null
                 setcookie('token', $data['data']['token'], time() + 60*60*24, '/', '', false, true);
                 toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
-
+            
                 return redirect('/dashboard');
             }else{
                 toastr()->error('Invalid email or password!', 'Authentication', ['timeOut' => 3000]);
