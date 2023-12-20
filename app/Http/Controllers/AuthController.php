@@ -24,6 +24,7 @@ class AuthController extends Controller{
                 'email' => $email,
                 'password' => $password
             ];
+            dd($api_request);
 
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
 
