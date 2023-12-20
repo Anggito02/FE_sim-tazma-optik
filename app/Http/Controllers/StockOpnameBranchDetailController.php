@@ -33,17 +33,15 @@ class StockOpnameBranchDetailController extends Controller {
             "stock_opname_branch_id" => $soid
         ];
 
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-branch-detail/all/', $api_request_so);
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-branch-detail/all', $api_request_so);
         $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $api_request);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
 
         $stock_opname_branch_detail = $response->json();
         $item = $response_item->json();
         $employee = $response_employee->json();
-        // dd($employee);
         
         $user = GetUserInfo::getUserInfo();
-        // dd($user['data']);
         return view('inventory.stokopBranchDetail', [
             'data' => $user['data'],
             'stock_opname_branch_detail' => $stock_opname_branch_detail['data'],
@@ -62,20 +60,23 @@ class StockOpnameBranchDetailController extends Controller {
             'Authorization' => 'Bearer '.$token
         ];
         $row=$request;
+        $so_start = new \DateTime($request->so_start);
+        $so_end = new \DateTime($request->so_end);
         $api_request = [
-            'stock_opname_branch_id' => $request->stock_opname_branch_id,
+            'stock_opname_id' => $request->stock_opname_branch_id,
             'item_id' => $request->item_id,
             'actual_qty' => $request->actual_qty,
-            'so_start' => $request->so_start,
-            'so_end' => $request->so_end,
+            'so_start' => $so_start->format('Y-m-d H:i:s'),
+            'so_end' => $so_end->format('Y-m-d H:i:s'),
             'open_by' => $request->open_by,
-            'close_by' => $request->close_by
+            'close_by' => $request->close_by,
+            'branch_id' => $request->branch_id
         ];
-        // dd($api_request);
+        print_r($api_request);
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-branch-detail/add', $api_request);
 
         $result = $response->json();
-        if($result['status'] == 'success'){
+        if($result['message'] == 'success'){
             $row['message']="The data has been successfully added";
         }else{
             $row['message']="Add data failed ";

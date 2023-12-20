@@ -97,7 +97,8 @@
 			return '0';
 		}
 	}
-    function handleButtonClick(id) {
+    function handleButtonClick(id, branch_id) {
+        console.log(id, branch_id);
         window.location.href = "/stock-opname-branch/detail/"+id;
     }
     function addContent(settings) {
@@ -132,7 +133,7 @@
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
 						offsetN0++;
-                        button_draft = ' <button type="button" class="btn-sm btn-warning" onclick="handleButtonClick(\'' + currentItem.id + '\')">Detail</button>';
+                        button_draft = ' <button type="button" class="btn-sm btn-warning" onclick="handleButtonClick(\'' + currentItem.id + '\',\'' + currentItem.branch_id + '\')">Detail</button>';
                         rowData.push([
 							offsetN0,
                             currentItem.tahun,
