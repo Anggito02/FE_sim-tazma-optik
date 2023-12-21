@@ -164,7 +164,10 @@ Route::controller(BranchItemController::class)->middleware('isTokenValid')->grou
 });
 Route::controller(SalesController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/sales','index');
-    // Route::post('/sales/add', 'addBranchItem');
+    Route::post('/sales/addCustomer', 'addCustomer');
+    Route::post('/sales/findCustomer', 'findCustomer');
+    Route::post('/sales/addSalesMaster', 'addSalesMaster');
+    Route::post('/sales/findSalesMaster', 'findSalesMaster');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){

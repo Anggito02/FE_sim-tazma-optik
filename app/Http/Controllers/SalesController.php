@@ -32,17 +32,23 @@ class SalesController extends Controller
             return redirect('/dashboard');
         }
     }
-    public function index () {
+    public function index (Request $request) {
         $api_request = [
             "page" => 0,
-            "limit" => 100
+            "limit" => 100,
+            "branch_id" => $this->response_user_info['data']['branch_id']
         ];
+        $sales_master['id']=0;
+        if(isset($request->sales_master_id)){
+            $sales_master['id']=$request->sales_master_id;
+        }
         $api_request_employee_one['id']=$this->response_user_info['data']['id'];
         // print_r($this->response_user_info['data']['id']);
         // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-orderWith/info/all', $api_request);
         // $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
         $response_employee_one = Http::withHeaders($this->headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/one', $api_request_employee_one);
-        // $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
+        $response_sales_master =Http::withHeaders($this->headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/one/id', $sales_master);
+        // $response_kas = Http::withHeaders($this->headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request);
         
         // $po = $response->json();
         // $employee = $response_employee->json();
@@ -55,9 +61,92 @@ class SalesController extends Controller
             // 'data' => $user['data'],
             // 'employee' => $employee['data'],
             'response_employee_one' => $response_employee_one['data'],
+            'response_sales' => $response_sales_master,
+            // 'response_kas' => $response_kas['data'],
             'kas' => $kas['data'],
             'user_info' => $this->response_user_info,
         ]);
+    }
+    public function findCustomer(Request $request)
+    {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all();
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/customer/one', $data);
+        $customer = $response->json();
+        return response()->json($customer);
+    }
+    public function findSalesMaster(Request $request)
+    {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        if($request->nomor_transaksi!=0){
+            $data_fillter=[
+                "page"=> 1,
+                "limit"=> 10,
+                "nomor_transaksi"=> $request->nomor_transaksi
+            ];
+        }else{
+            $data_fillter=[
+                "page"=> 1,
+                "limit"=> 10,
+            ];
+        }
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/all', $data_fillter);
+        return response()->json($response->json());
+    }
+    public function addCustomer(Request $request)
+    {
+        $row['message']="-";
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $api_request = [
+            'nama_depan' =>$request->nama_depan,
+            'nama_belakang' =>$request->nama_belakang,
+            'email' =>$request->email,
+            'nomor_telepon' =>$request->nomor_telepon,
+            'alamat' =>$request->alamat,
+            'kabkota_id' =>$request->kabkota_id,
+            'tanggal_lahir' =>$request->tanggal_lahir,
+            'gender' =>$request->gender,
+            'branch_id' =>$this->response_user_info['data']['branch_id'],
+        ];
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/customer/add', $api_request);
+
+        $result = $response->json();
+        if($result['status'] == 'success'){
+            $row['message']="Data has been successfully inserted";
+        }else{
+            $row['message']="Insert data failed ".$result['data'];
+        }
+        return response()->json($row);
+    }
+    public function addSalesMaster(Request $request)
+    {
+        $row['message']="-";
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $api_request = [
+            'ref_sales_id' =>$request->ref_sales_id,
+            'branch_id' =>$request->branch_id,
+            'employee_id' =>$request->employee_id,
+            'customer_id' =>$request->customer_id,
+        ];
+        // print_r($api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/add', $api_request);
+        return response()->json($response->json());
     }
 
     // public function addPO(Request $request) {
