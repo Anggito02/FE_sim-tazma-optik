@@ -33,7 +33,7 @@
                         <option value="12">Desember</option>
                     </select>
 
-                    
+
                 </div>
                 <div class="form-group col-md-3">
                     <label for="tahun" class="form-label">Tahun</label>
@@ -167,7 +167,7 @@
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
     });
-    
+
     $('#add-update-data').on('shown.bs.modal', function (e) {
         $(".select2").select2();
     });
@@ -180,7 +180,7 @@
 	}
     function handleButtonDetailClick(id) {
         window.location.href = "{{ url('/PO/detail') }}/"+id;
-        
+
     }
     function handleButtonClick(id) {
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
@@ -209,7 +209,7 @@
                 method: "POST",
                 type  : 'ajax',
                 url   : settings.data_url,
-                data  : { 
+                data  : {
                     'limit':settings.limit,
                     'page':(settings.limit*settings.start_page),
                     '_token':csrfToken,
@@ -241,7 +241,7 @@
                         }
 
                         if(currentItem.status_pembayaran === true) {
-                           currentItem.status_pembayaran = '<span class="badge badge-success">Sudah Dibayar</span>'; 
+                           currentItem.status_pembayaran = '<span class="badge badge-success">Sudah Dibayar</span>';
                         } else {
                            currentItem.status_pembayaran = '<span class="badge badge-danger">Belum Dibayar</span>';
                         }
@@ -255,7 +255,7 @@
 						offsetN0++;
                         button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
                         button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
-                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonDetailClick(\'' + currentItem.id + '\')">Detail</button>';                        
+                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonDetailClick(\'' + currentItem.id + '\')">Detail</button>';
                         rowData.push([
 							offsetN0,
                             currentItem.nomor_po,
@@ -467,7 +467,7 @@
 
                             </div>
 
-                            
+
                             <div class="mb-3">
                                 <label for="InputStatus" class="form-label">Status Pembayaran</label>
                                 <select type="status-pembayaran" name="status_pembayaran" required class="form-control chosen-select"
@@ -477,7 +477,7 @@
                                     <option value="Belum Dibayar">Belum Dibayar</option>
                                 </select>
                             </div>
-                        
+
                             <div class="mb-3">
                                 <label for="InputStatus" class="form-label">StatusPO</label>
                                 <input type="text" name="status_po" class="form-control" value="OPEN" readonly="readonly">

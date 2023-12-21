@@ -33,13 +33,13 @@ class PurchaseOrderController extends Controller
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
         $employee = $response_employee->json();
         $vendor = $response_vendor->json();
-
         $user = GetUserInfo::getUserInfo();
         // if ($po['status'] == 'success'){
             return view('purchase.po', [
                 'data' => $user['data'],
                 'employee' => $employee['data'],
-                'vendor' => $vendor['data']
+                'vendor' => $vendor['data'],
+                'user_info' => $user['data']
             ]);
         // }else{
         //     return redirect('/dashboard');
