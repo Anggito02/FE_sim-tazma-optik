@@ -175,6 +175,7 @@ Route::controller(SalesController::class)->middleware('isTokenValid')->group(fun
     Route::post('/sales/addCustomer', 'addCustomer');
     Route::post('/sales/findCustomer', 'findCustomer');
     Route::post('/sales/addSalesMaster', 'addSalesMaster');
+    Route::post('/sales/addSalesDetail', 'addSalesDetail');
     Route::post('/sales/findSalesMaster', 'findSalesMaster');
 });
 

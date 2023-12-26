@@ -4,7 +4,9 @@
     <div class="d-flex flex-column align-items-center bg-white m-2 shadow p-3" style="width:70%">
         <div style="width: 100%; margin-bottom:5%">
             <span>Scan Barang</span>
-            <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
+            <form id="add_qr_code" class="form-horizontal" onsubmit="submitFormQr(event)">
+                @csrf
+                <input type="hidden" name="sales_master_id" id="sales_master_id" value="{{$response_sales['data']['id']}}">
                 <input type="text"  name="qrcode" autofocus=true class="form-control" />
             </form>
             @if(empty($kas))
@@ -12,6 +14,7 @@
             @endif
         </div>
         <div style="width: 100%; margin-bottom:5%">
+            <span id="tambah_info_sales_detail"></span>
             <hr/>
         </div>
         <div style="max-height: 75%; width:100%">
@@ -271,6 +274,38 @@
             }
         });
 
+    }
+    function submitFormQr(event){   
+		// $('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
+	    event.preventDefault();
+        var form = document.getElementById('add_qr_code');
+
+        var formData = new FormData(form);
+	    $.ajax({ 
+            url   : "{{ url('/sales/addSalesDetail') }}",
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (result) {
+                console.log(result);
+            if(result.message=="Data has been successfully inserted"){ 
+				  	$('#tambah_info_sales_detail').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				  	setTimeout(function(){  
+					 $('#tambah_info_sales_detail').hide(); 
+					},2500);
+			}else{
+				$('#tambah_info_sales_detail').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show(); 
+				setTimeout(function(){
+					$('#tambah_info').hide(); 
+				},2500)
+			}
+		    }
+	    });
+	  return false;
     }
     function submitFormCustomer(event){   
 		$('#btn_submit').hide();

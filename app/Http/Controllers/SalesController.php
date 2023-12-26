@@ -130,6 +130,29 @@ class SalesController extends Controller
         }
         return response()->json($row);
     }
+    public function addSalesDetail(Request $request)
+    {
+        $row['message']="-";
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $api_request = [
+            'kode_qr_po_detail' =>strval($request->qrcode),
+            'sales_master_id' =>intval($request->sales_master_id),
+            'branch_id' =>intval($this->response_user_info['data']['branch_id']),
+        ];
+        print_r($api_request);
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/sales-detail/add', $api_request);
+        $result = $response->json();
+        if($result['status'] == 'success'){
+            $row['message']="Data has been successfully inserted";
+        }else{
+            // $row['message']="Insert data failed ".$result['data'];
+        }
+        return response()->json($result);
+    }
     public function addSalesMaster(Request $request)
     {
         $row['message']="-";
