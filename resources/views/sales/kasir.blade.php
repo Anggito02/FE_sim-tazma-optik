@@ -3,10 +3,12 @@
 <div class="d-flex flex-row" style="height: 85vh">
     <div class="d-flex flex-column align-items-center bg-white m-2 shadow p-3" style="width:70%">
         <div style="width: 100%; margin-bottom:5%">
-            <span>Scan Barang</span>
+            <span>Scan Barang cekk berhasil pull atau tidak</span>
             <form id="add_qr_code" class="form-horizontal" onsubmit="submitFormQr(event)">
                 @csrf
+                @if(isset($response_sales['data']))
                 <input type="hidden" name="sales_master_id" id="sales_master_id" value="{{$response_sales['data']['id']}}">
+                @endif
                 <input type="text"  name="qrcode" autofocus=true class="form-control" />
             </form>
             @if(empty($kas))
