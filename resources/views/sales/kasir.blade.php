@@ -3,15 +3,13 @@
 <div class="d-flex flex-row" style="height: 85vh">
     <div class="d-flex flex-column align-items-center bg-white m-2 shadow p-3" style="width:60%">
         <div style="width: 100%; margin-bottom:5%">
-            <span>Scan Barang</span>
-            <span id="tambah_info_scan"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
-            <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
+            <span>Scan Barang cekk berhasil pull atau tidak</span>
+            <form id="add_qr_code" class="form-horizontal" onsubmit="submitFormQr(event)">
                 @csrf
-                <input type="text"  name="qrcode" autofocus=true class="form-control" <?php if(isset($response_sales['data'])){ echo ""; }else{echo "disabled"; } ?> />
                 @if(isset($response_sales['data']))
-                <input type="hidden" name="sales_master_id" value="{{$response_sales['data']['id']}}" >
-                <input type="hidden" name="branch_id" value="{{$response_sales['data']['branch_id']}}" >
+                <input type="hidden" name="sales_master_id" id="sales_master_id" value="{{$response_sales['data']['id']}}">
                 @endif
+                <input type="text"  name="qrcode" autofocus=true class="form-control" />
             </form>
             @if(empty($kas))
                 <span><font color="red" >Silahkan Generate Kas Tanggal {{date("d-m-Y")}} Terlebih Dahulu Pada Cabang {{$response_employee_one[0]['nama_branch']}} </font></span>
