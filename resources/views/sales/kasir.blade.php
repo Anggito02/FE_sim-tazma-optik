@@ -3,10 +3,12 @@
 <div class="d-flex flex-row" style="height: 85vh">
     <div class="d-flex flex-column align-items-center bg-white m-2 shadow p-3" style="width:70%">
         <div style="width: 100%; margin-bottom:5%">
-            <span>Scan Barang</span>
+            <div class="black-text bold-text">
+                <span>Scan Barang</span>
+            </div>
             <form id="add_qr_code" class="form-horizontal" onsubmit="submitFormQr(event)">
                 @csrf
-                <input type="hidden" name="sales_master_id" id="sales_master_id" value="{{$response_sales['data']['id']}}">
+                {{-- <input type="hidden" name="sales_master_id" id="sales_master_id" value="{{$response_sales['data']['id']}}"> --}}
                 <input type="text"  name="qrcode" autofocus=true class="form-control" />
             </form>
             @if(empty($kas))
@@ -18,7 +20,9 @@
             <hr/>
         </div>
         <div style="max-height: 75%; width:100%">
-            <span>Transaksi Penjualan</span>
+            <div class="black-text bold-text">
+                <span>Transaksi Penjualan</span>
+            </div>
             <form id="find_sales_master" class="form-horizontal" onsubmit="submitFormMasterSales(event)">
                 @csrf
                     <input type="text" class="form-control" name="nomor_transaksi" id="nomor_transaksi" placeholder="Search Sales By Transaction Number " aria-label="nomor_transaksi" aria-describedby="basic-addon1"><button type="submit" class="btn btn-primary"> <i class="fa fa-search" aria-hidden="true"></i> Cari </button>
@@ -48,7 +52,7 @@
             <button href="" class="btn btn-primary btn-lg w-100 border-bottom-0 rounded-0" type="button" role="button" aria-pressed="true" data-toggle="modal" data-target="#addMasterSales">
                 + New Sales
             </button>
-            <div class="d-flex flex-column" style="height:25%;">
+            <div class="d-flex flex-column black-text" style="height:25%;">
                 @if(isset($response_sales['data']))
                 <table>
                     <tr>
@@ -214,7 +218,7 @@
     function getSalesDetail(setting){
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            method: "POST", 
+            method: "POST",
             type  : 'ajax',
             url   : "{{ url('/sales/detail') }}",
             data  : { 'limit':setting.limit,'page':(setting.limit*setting.start_page),'_token':csrfToken,'sales_master_id':setting.sales_master_id},
@@ -246,7 +250,7 @@
     function getSalesMasterAll(settings){
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-                method: "POST", 
+                method: "POST",
                 type  : 'ajax',
                 url   : "{{ url('/sales/findSalesMaster') }}",
                 data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'nomor_transaksi':settings.nomor_transaksi},
@@ -274,7 +278,7 @@
                     }
                     $("#bodySalesMaster").html(html_view);
                 }
-                
+
         });
     }
     function submitFormSeacrhCustomer(event){
@@ -282,7 +286,7 @@
         var form = document.getElementById('find_customer');
 
         var formData = new FormData(form);
-        $.ajax({ 
+        $.ajax({
             url   : "{{ url('/sales/findCustomer') }}",
             type: 'POST',
             data: formData,
@@ -307,13 +311,13 @@
         });
 
     }
-    function submitFormQr(event){   
+    function submitFormQr(event){
 		// $('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
 	    event.preventDefault();
         var form = document.getElementById('add_qr_code');
 
         var formData = new FormData(form);
-	    $.ajax({ 
+	    $.ajax({
             url   : "{{ url('/sales/addSalesDetail') }}",
             type: 'POST',
             data: formData,
@@ -324,29 +328,29 @@
             dataType: 'json',
             success: function (result) {
                 console.log(result);
-            if(result.message=="Data has been successfully inserted"){ 
+            if(result.message=="Data has been successfully inserted"){
 				  	$('#tambah_info_sales_detail').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){  
-					 $('#tambah_info_sales_detail').hide(); 
+				  	setTimeout(function(){
+					 $('#tambah_info_sales_detail').hide();
 					},2500);
 			}else{
-				$('#tambah_info_sales_detail').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show(); 
+				$('#tambah_info_sales_detail').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				setTimeout(function(){
-					$('#tambah_info').hide(); 
+					$('#tambah_info').hide();
 				},2500)
 			}
 		    }
 	    });
 	  return false;
     }
-    function submitFormCustomer(event){   
+    function submitFormCustomer(event){
 		$('#btn_submit').hide();
 		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
 	    event.preventDefault();
         var form = document.getElementById('add_customer');
 
         var formData = new FormData(form);
-	    $.ajax({ 
+	    $.ajax({
             url   : "{{ url('/sales/addCustomer') }}",
             type: 'POST',
             data: formData,
@@ -356,16 +360,16 @@
             processData: false,
             dataType: 'json',
             success: function (result) {
-            if(result.message=="Data has been successfully inserted"){ 
+            if(result.message=="Data has been successfully inserted"){
 				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){  
-					 $('#tambah_info').hide(); 
+				  	setTimeout(function(){
+					 $('#tambah_info').hide();
                      location.reload();
 					},2500);
 			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show(); 
+				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				setTimeout(function(){
-					$('#tambah_info').hide(); 
+					$('#tambah_info').hide();
                     // location.reload();
 				},5000)
 			}
@@ -377,14 +381,14 @@
     function confirmDelete(sales_master_id){
         window.location.href = "{{ url('/sales/?sales_master_id=') }}"+sales_master_id;
     }
-    function submitFormSalesMaster(event){   
+    function submitFormSalesMaster(event){
 		$('#btn_submit').hide();
 		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
 	    event.preventDefault();
         var form = document.getElementById('add_sales_master');
 
         var formData = new FormData(form);
-	    $.ajax({ 
+	    $.ajax({
             url   : "{{ url('/sales/addSalesMaster') }}",
             type: 'POST',
             data: formData,
@@ -396,19 +400,19 @@
             success: function (result) {
                 console.log(result);
                 console.log(result.data.id);
-            if(result.status=="success"){  
+            if(result.status=="success"){
 				  	$('#tambah_info_master').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.status+'</b></div>').show();
-				  	setTimeout(function(){  
-					    $('#tambah_info').hide(); 
+				  	setTimeout(function(){
+					    $('#tambah_info').hide();
                     //  location.reload();
                         // window.location.href = 'http://yourdomain.com/tujuan?paramKey=paramValue';
                         // sales_master_id=result.data.id;
                         window.location.href = "{{ url('/sales/?sales_master_id=') }}"+result.data.id;
 					},2500);
 			}else{
-				$('#tambah_info_master').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.status+'</b></div>').show(); 
+				$('#tambah_info_master').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.status+'</b></div>').show();
 				setTimeout(function(){
-					$('#tambah_info').hide(); 
+					$('#tambah_info').hide();
                     // location.reload();
 				},5000)
 			}
@@ -417,14 +421,14 @@
 	    });
 	  return false;
     }
-    function submitFormMasterSales(event){   
+    function submitFormMasterSales(event){
         event.preventDefault();
         var form = document.getElementById('add_customer');
         var formData = new FormData(form);
         masterContent();
     }
     function masterContent() {
-		var settings = $.extend({ 
+		var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
             data_url: "{{ url('/item/loadDataMaster') }}",
             end_record_text : 'No more records found!', //no more records to load
@@ -434,13 +438,13 @@
             lastScroll      : 0, //initial page
             nomor_transaksi      : document.getElementById('nomor_transaksi').value, //initial page
         });
-        loading  = false; 
+        loading  = false;
 	    end_record = false;
 	    getSalesMasterAll(settings);
 	}
     function masterContentDetail() {
         var sales_master_id = <?php echo isset($response_sales['data']) ? $response_sales['data']['id'] : 0; ?>;
-		var setting = $.extend({ 
+		var setting = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
             end_record_text : 'No more records found!', //no more records to load
             start_page      : 0, //initial page
@@ -448,7 +452,7 @@
             lastScroll      : 0, //initial page
             sales_master_id :sales_master_id, //initial page
         });
-        loading  = false; 
+        loading  = false;
 	    end_record = false;
 	    getSalesDetail(setting);
 	}
@@ -497,8 +501,8 @@
                     @csrf
                     <input type="hidden" id="branch_id" name="branch_id" value="{{$user_info['data']['branch_id']}}">
                     <input type="hidden" id="employee_id" name="employee_id" value="{{$user_info['data']['id']}}">
-                    <input type="hidden" id="ref_sales_id" name="ref_sales_id" value="0">  
-                    <input type="hidden" id="customer_id" name="customer_id" value="0">  
+                    <input type="hidden" id="ref_sales_id" name="ref_sales_id" value="0">
+                    <input type="hidden" id="customer_id" name="customer_id" value="0">
                     <div class="mb-3">
                         <label for="nama_customer" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="nama_customer" aria-describedby="basic-addon1" readonly>
@@ -515,7 +519,7 @@
                         <label for="alamat" class="form-label">Alamat</label>
                         <input type="text" class="form-control" id="alamat" aria-describedby="basic-addon1" readonly>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">
