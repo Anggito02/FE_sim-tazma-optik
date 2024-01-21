@@ -94,42 +94,36 @@
                 </table>
                 @endif
             </div>
-            <div class="d-flex flex-column align-items-center" style="height:75%;">
-                <div class="border-top border-secondary overflow-auto" style="width:98%; min-height:90%;">
-                    <div class="d-flex justify-content-between mx-4 my-2 text-dark">
-                        <p class="m-0">Lensa</p>
-                        <p class="m-0">Rp 300.000</p>
-                    </div>
-                    <div class="d-flex justify-content-between mx-4 my-2 text-dark">
-                        <p class="m-0">Frame</p>
-                        <p class="m-0">Rp 900.000</p>
-                    </div>
-                    <div class="d-flex justify-content-between mx-4 my-2 text-dark">
-                        <p class="m-0">Lensa</p>
-                        <p class="m-0">Rp 300.000</p>
-                    </div>
-                    <div class="d-flex justify-content-between mx-4 my-2 text-dark">
-                        <p class="m-0">Frame</p>
-                        <p class="m-0">Rp 900.000</p>
-                    </div>
-                    <div class="d-flex justify-content-between mx-4 my-2 text-dark">
-                        <p class="m-0">Lensa</p>
-                        <p class="m-0">Rp 300.000</p>
-                    </div>
-                    <div class="d-flex justify-content-between mx-4 my-2 text-dark">
-                        <p class="m-0">Frame</p>
-                        <p class="m-0">Rp 900.000</p>
-                    </div>
+            <br/>
+            <br/>
+            <div class="d-flex flex-column align-items-center" style="height:75%; background-color:white; ">
+                <div class="border-top border-secondary overflow-auto" style="width:98%; min-height:75%; background-color:white;">
+                    <table class="table">
+                        <thead>
+                            <th>Item Name</th>
+                            <th>Price</th>
+                            <th>QTY</th>
+                            <th>Amount</th>
+                        </thead>
+                        <tbody  id="data_barang">
 
+                        </tbody>
+                    </table>
                 </div>
+                <br/>
+                <br/>
                 <div class="border-top border-secondary" style="width:98%">
                     <div class="d-flex justify-content-between mx-4 my-2 text-dark">
                         <p class="m-0"><b>Subtotal</b></p>
-                        <p class="m-0">Rp 1.200.000</p>
+                        <p class="m-0" id="subtotal_item">Rp. Loading ...</p>
+                    </div>
+                    <div class="d-flex justify-content-between mx-4 my-2 text-dark">
+                        <p class="m-0"><b>Discount (Loading ... %)</b></p>
+                        <p class="m-0">Rp. Loading ...</p>
                     </div>
                     <div class="d-flex justify-content-between mx-4 my-2 text-dark">
                         <p class="m-0"><b>Total</b></p>
-                        <p class="m-0">Rp 1.200.000</p>
+                        <p class="m-0">Rp. Loading ...</p>
                     </div>
                 </div>
                 <a href="" class="btn btn-outline-secondary btn-outline-top btn-outline-bottom mx-2" style="width:98%" role="button" aria-pressed="true">
@@ -147,7 +141,7 @@
                 </a>
             </div>
             <a href="" class="btn btn-primary btn-lg w-95 rounded-0" style="margin-right:3px; margin-left:3px;" type="button" role="button" aria-pressed="true" data-toggle="modal" data-target="#payment">
-                Charge Rp 1.200.000
+                Charge Rp Loading ...
             </a>
             <!-- Nested Modal New Customer-->
             <div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="createNewCustomer" aria-hidden="true">
@@ -169,17 +163,17 @@
                             <div class="d-flex flex-row align-items-center" style="margin-bottom: 2%">
                                 <div class="text-center" style="width:30%"><b>E-Wallet</b></div>
                                 <div style="width:70%">
-                                    <div class="d-flex flex-row flex-wrap justify-content-start">
+                                    <!-- <div class="d-flex flex-row flex-wrap justify-content-start">
                                         <button type="button" class="btn btn-outline-secondary" style="margin-right:5vh; margin-bottom:2vh;"><img style="max-width: 20vh;" src="https://drive.google.com/uc?id=1fyMAEV-Qycp8e8CpTIhYzTHVTiRa79yj" alt="OVO"></button>
                                         <button type="button" class="btn btn-outline-secondary" style="margin-right:5vh; margin-bottom:2vh;"><img style="max-width: 20vh;" src="https://drive.google.com/uc?id=1mbdz3InFb94ekbsjAqMMODhuGLB4g67h" alt="GOPAY"></button>
                                         <button type="button" class="btn btn-outline-secondary" style="margin-right:5vh; margin-bottom:2vh;"><img style="max-width: 20vh;" src="https://drive.google.com/uc?id=1qTv2GVJ_methWiIQMHeCJ8UEGCW67IMQ" alt="ShopeePay"></button>
                                         <button type="button" class="btn btn-outline-secondary" style="margin-right:5vh; margin-bottom:2vh;"><img style="max-width: 20vh;" src="https://drive.google.com/uc?id=1fyMAEV-Qycp8e8CpTIhYzTHVTiRa79yj" alt="OVO"></button>
                                         <button type="button" class="btn btn-outline-secondary" style="margin-right:5vh; margin-bottom:2vh;"><img style="max-width: 20vh;" src="https://drive.google.com/uc?id=1mbdz3InFb94ekbsjAqMMODhuGLB4g67h" alt="GOPAY"></button>
                                         <button type="button" class="btn btn-outline-secondary" style="margin-right:5vh; margin-bottom:2vh;"><img style="max-width: 20vh;" src="https://drive.google.com/uc?id=1qTv2GVJ_methWiIQMHeCJ8UEGCW67IMQ" alt="ShopeePay"></button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
-                            <div class="d-flex flex-row align-items-center" style="margin-bottom: 2%">
+                            <!-- <div class="d-flex flex-row align-items-center" style="margin-bottom: 2%">
                                 <div for="inputCash" class="text-center" style="width:30%"><b>EDC</b></div>
                                 <div class="d-flex flex-row flex-wrap justify-content-start" style="width:70%;">
                                     <button type="button" class="btn btn-outline-secondary" style="min-width:20vh; margin-right:5vh; margin-bottom:2vh;">BCA</button>
@@ -191,7 +185,7 @@
                                     <button type="button" class="btn btn-outline-secondary" style="min-width:20vh; margin-right:5vh; margin-bottom:2vh;">Permata Bank</button>
                                     <button type="button" class="btn btn-outline-secondary" style="min-width:20vh; margin-right:5vh; margin-bottom:2vh;">Other EDC</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -204,9 +198,47 @@
     </div>
 </div>
 <script>
-
+    function formatNumber(number) {
+		if(number!==null && number!=="null"){
+			return new Intl.NumberFormat('de-DE').format(parseFloat(number));
+		}else{
+			return '0';
+		}
+	}
     function changeText(newText) {
         document.getElementById('targetDiv').innerText = newText;
+    }
+    function getSalesDetail(setting){
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            method: "POST", 
+            type  : 'ajax',
+            url   : "{{ url('/sales/detail') }}",
+            data  : { 'limit':setting.limit,'page':(setting.limit*setting.start_page),'_token':csrfToken,'sales_master_id':setting.sales_master_id},
+            async : true,
+            dataType : 'json',
+            error: function (request, error) {
+                alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+            },
+            success : function(result){
+                console.log(result);
+                // var table = $('#data_sales_master').DataTable();
+                // offsetN0=0;
+                html_view="";
+                let subtotalItem=0;
+                for(let i=0; i<result.data.length; i++){
+                    let currentItem = result.data[i];
+                    subtotalItem=parseFloat(currentItem.qty)*parseFloat(currentItem.harga);
+                    html_view+="<tr>"+
+                                "<td>"+currentItem.kode_item+"</td>"+
+                                "<td>"+formatNumber(currentItem.harga)+"</td>"+
+                                "<td>"+formatNumber(currentItem.qty)+"</td>"+
+                                "<td>"+formatNumber(parseFloat(currentItem.qty)*parseFloat(currentItem.harga))+"</td>";
+                }
+                $("#data_barang").html(html_view);
+                $("#subtotal_item").html("Rp. "+formatNumber(subtotalItem));
+            }
+        });
     }
     function getSalesMasterAll(settings){
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -371,6 +403,20 @@
 	    end_record = false;
 	    getSalesMasterAll(settings);
 	}
+    function masterContentDetail() {
+        var sales_master_id = <?php echo isset($response_sales['data']) ? $response_sales['data']['id'] : 0; ?>;
+		var setting = $.extend({ 
+            loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
+            end_record_text : 'No more records found!', //no more records to load
+            start_page      : 0, //initial page
+            limit		    : 1000, //initial page
+            lastScroll      : 0, //initial page
+            sales_master_id :sales_master_id, //initial page
+        });
+        loading  = false; 
+	    end_record = false;
+	    getSalesDetail(setting);
+	}
     $(document).ready(function(){
         var table = $('#data_sales_master').DataTable( {
         //     fixedHeader: {
@@ -386,6 +432,7 @@
             ordering		: false,
         });
         masterContent();
+        masterContentDetail();
     });
 </script>
 <!-- Modal New Customer-->

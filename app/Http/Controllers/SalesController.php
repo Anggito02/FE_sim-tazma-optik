@@ -79,6 +79,16 @@ class SalesController extends Controller
         $customer = $response->json();
         return response()->json($customer);
     }
+    public function detail(Request $request){
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-detail/all', $request);
+        // print_r($request);
+        return response()->json($response->json());
+    }
     public function findSalesMaster(Request $request)
     {
         $token = $_COOKIE['token'];
