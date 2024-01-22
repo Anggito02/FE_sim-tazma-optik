@@ -4,8 +4,14 @@
     <div class="d-flex flex-column align-items-center bg-white m-2 shadow p-3" style="width:70%">
         <div style="width: 100%; margin-bottom:5%">
             <span>Scan Barang</span>
+            <span id="tambah_info_scan"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
             <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
-                <input type="text"  name="qrcode" autofocus=true class="form-control" />
+                @csrf
+                <input type="text"  name="qrcode" autofocus=true class="form-control" <?php if(isset($response_sales['data'])){ echo ""; }else{echo "disabled"; } ?> />
+                @if(isset($response_sales['data']))
+                <input type="hidden" name="sales_master_id" value="{{$response_sales['data']['id']}}" >
+                <input type="hidden" name="branch_id" value="{{$response_sales['data']['branch_id']}}" >
+                @endif
             </form>
             @if(empty($kas))
                 <span><font color="red" >Silahkan Generate Kas Tanggal {{date("d-m-Y")}} Terlebih Dahulu Pada Cabang {{$response_employee_one[0]['nama_branch']}} </font></span>
@@ -304,6 +310,39 @@
         });
 
     }
+    function submitForm(event){
+        $('#tambah_info_scan').show();
+        event.preventDefault();
+        var form = document.getElementById('add_info');
+        var formData = new FormData(form);
+        $.ajax({ 
+            url   : "{{ url('/sales/addScanItem') }}",
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (result) {
+            console.log(result);
+            if(result.message=="Data has been successfully inserted"){ 
+				  	$('#tambah_info_scan').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				  	setTimeout(function(){  
+					 $('#tambah_info_scan').hide(); 
+					},2500);
+                    masterContentDetail();
+			}else{
+				$('#tambah_info_scan').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show(); 
+				setTimeout(function(){
+					$('#tambah_info_scan').hide(); 
+				},5000)
+			}
+            $('#btn_submit').show();
+		    }
+	    });
+	    return false;
+    }
     function submitFormCustomer(event){   
 		$('#btn_submit').hide();
 		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
@@ -433,6 +472,7 @@
         });
         masterContent();
         masterContentDetail();
+        $('#tambah_info_scan').hide(); 
     });
 </script>
 <!-- Modal New Customer-->
