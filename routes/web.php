@@ -178,6 +178,7 @@ Route::controller(SalesController::class)->middleware('isTokenValid')->group(fun
     Route::post('/sales/addSalesDetail', 'addSalesDetail');
     Route::post('/sales/findSalesMaster', 'findSalesMaster');
     Route::post('/sales/detail', 'detail');
+    Route::post('/sales/addScanItem', 'addScanItem');
 });
 
 Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid')->group(function(){
