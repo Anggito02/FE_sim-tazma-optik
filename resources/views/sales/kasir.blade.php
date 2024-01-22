@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 <div class="d-flex flex-row" style="height: 85vh">
-    <div class="d-flex flex-column align-items-center bg-white m-2 shadow p-3" style="width:70%">
+    <div class="d-flex flex-column align-items-center bg-white m-2 shadow p-3" style="width:60%">
         <div style="width: 100%; margin-bottom:5%">
             <span>Scan Barang</span>
             <span id="tambah_info_scan"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
@@ -49,7 +49,7 @@
             </table>
         </div>
     </div>
-    <div class="m-2 shadow d-flex flex-column justify-content-between" style="width:30%">
+    <div class="m-2 shadow d-flex flex-column justify-content-between" style="width:40%">
         <div>
             <button href="" class="btn btn-primary btn-lg w-100 border-bottom-0 rounded-0" type="button" role="button" aria-pressed="true" data-toggle="modal" data-target="#addMasterSales">
                 + New Sales
