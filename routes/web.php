@@ -278,6 +278,13 @@ Route::group([], function(){
         return view('error_page.505');
     });
 
+    Route::get('/test', function() {
+        return view('temporary');
+    });
+
+    Route::get('/test2', function() {
+        return view('temporary2');
+    })->name('test2');
     // Route::get('/sales/kasir', function () {
     //     return view('addcart');
     // });
