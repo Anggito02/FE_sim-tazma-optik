@@ -22,6 +22,7 @@ use App\Http\Controllers\BranchItemController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
+use App\Http\Controllers\KasController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\StockOpnameMasterController;
 use App\Http\Controllers\StockOpnameDetailController;
@@ -261,6 +262,14 @@ Route::controller(CustomerController::class)->middleware('isTokenValid')->group(
     Route::post('/customer/add', 'addCustomer');
     Route::post('/customer/loadDataMaster', 'loadDataMaster');
     Route::post('/customer/loadDataDetailOnly', 'loadDataDetailOnly');
+});
+
+Route::controller(KasController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/kas','prosesKasBranch');
+    Route::get('/kas/all','getAllKas');
+    Route::post('/kas/add', 'addKas');
+    Route::post('/kas/{id}/loadDataMaster', 'loadDataMaster');
+    Route::post('/kas/loadDataDetailOnly', 'loadDataDetailOnly');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){

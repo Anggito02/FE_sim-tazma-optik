@@ -13,7 +13,7 @@ use App\Utils\GetUserInfo;
 
 
 class KasController extends Controller {
-    public function getAllStockOpnameDetail (Request $request, int $soid) {
+    public function prosesKasBranch (Request $request) {
         $token = $_COOKIE['token'];
 
         $page = 1;
@@ -29,30 +29,79 @@ class KasController extends Controller {
             "limit" => $limit
         ];
 
-        $api_request_so = [
-            "page" => $page,
-            "limit" => $limit,
-            "stock_opname_id" => $soid
-        ];
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
 
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all/', $api_request_so);
-        $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $api_request);
-        $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
-
-        $stock_opname_detail = $response->json();
-        $item = $response_item->json();
-        $employee = $response_employee->json();
-        // dd($employee);
+        $branch_all = $response_branch->json();
 
         $user = GetUserInfo::getUserInfo();
-        // dd($user['data']);
+
         return view('dito', [
             'data' => $user['data'],
-            'stock_opname_detail' => $stock_opname_detail['data'],
-            'item' => $item['data'],
-            'employee' => $employee['data'],
-            'stock_opname_id' => $soid
+            'branch_all' => $branch_all['data']
         ]);
+    }
+
+
+    public function getAllKas (Request $request) {
+        $token = $_COOKIE['token'];
+
+        $page = 1;
+        $limit = 50;
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request_kas = [
+            "page" => $page,
+            "limit" => $limit,
+            "branch_id" => $request->branch_id,
+        ];
+
+        $api_request = [
+            "page" => $page,
+            "limit" => $limit,
+        ];
+
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
+        $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request_kas);
+
+        $branch_all = $response_branch->json();
+        $kas_all = $response_kas->json();
+
+        // dd($kas_all, $branch_all, $request->branch_id);
+        $user = GetUserInfo::getUserInfo();
+
+        return view('dito', [
+            'data' => $user['data'],
+            'kas_all' => $kas_all['data'],
+            'branch_all' => $branch_all['data'],
+            'idx_branch' => $request->branch_id
+        ]);
+    }
+
+    public function loadDataMaster(Request $request, int $branch_id)
+    {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $page = 1;
+        $limit = 50;
+
+        $api_request = [
+            "page" => $page,
+            "limit" => $limit,
+            "branch_id" => $branch_id,
+        ];
+
+        $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request);
+
+        $kas = $response_kas->json();
+        dd($kas);
+        return response()->json($kas);
     }
 
     public function addStockOpnameDetail(Request $request) {
@@ -84,26 +133,6 @@ class KasController extends Controller {
             $row['message']="Add data failed ";
         }
         return response()->json($result);
-    }
-
-    public function loadDataMaster(Request $request, int $soid)
-    {
-        $token = $_COOKIE['token'];
-        $headers = [
-            'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.$token
-        ];
-        $page = 1;
-        $limit = 50;
-
-        $api_request = [
-            "page" => $page,
-            "limit" => $limit,
-            'stock_opname_id' => $soid,
-        ];
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all', $api_request);
-        $stock_opname_detail = $response->json();
-        return response()->json($stock_opname_detail);
     }
 
     public function loadDataDetailOnly(Request $request, int $soid)

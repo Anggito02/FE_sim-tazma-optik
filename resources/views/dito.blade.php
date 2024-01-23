@@ -4,84 +4,37 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <span id="tambah_info"></span>
-        <form id="itemForm" action="/stock-opname/detail/" method="POST" class="col-md-12 form-horizontal">
+        <form id="itemForm" action="/kas/all" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row align-items-end">
                 <!-- Add the form inside the row -->
                 @csrf
                 @method("GET")
                 <div class="form-group col-md-3">
-                    <label for="tanggal_so_from" class="form-label black-text">Tanggal SO From</label>
-                    <input type="date" name="tanggal_so_from" id="tanggal_so_from" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="tanggal_so_until" class="form-label black-text">Tanggal SO Until</label>
-                    <input type="date" name="tanggal_so_until" id="tanggal_so_until" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_type" class="form-label black-text">Adjustment Type</label>
-                    <select type="text" name="adjustment_type" id="adjustment_type" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="IN">IN</option>
-                        <option value="OUT">OUT</option>
-                        <option value="NONE">NONE</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_date_from" class="form-label black-text">Adjustment Date From</label>
-                    <input type="date" name="adjustment_date_from" id="adjustment_date_from" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_date_until" class="form-label black-text">Adjustment Date Until</label>
-                    <input type="date" name="adjustment_date_until" id="adjustment_date_until" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_status" class="form-label black-text">Adjustment Status</label>
-                    <select type="text" name="adjustment_status" id="adjustment_status" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="OPEN">OPEN</option>
-                        <option value="CLOSE">CLOSE</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="jenis_item" class="form-label black-text">Jenis Item</label>
-                    <select name="jenis_item" id="jenis_item" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="frame">Frame</option>
-                        <option value="lensa">Lensa</option>
-                        <option value="aksesoris">Aksesoris</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="open_by" class="form-label black-text">Open By</label>
-                    <select name="open_by" id="open_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        {{-- @foreach($employee as $emp)
-                            <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach --}}
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="close_by" class="form-label black-text">Closed By</label>
-                    <select name="close_by" id="close_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        {{-- @foreach($employee as $emp)
-                            <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach --}}
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_by" class="form-label black-text">Adjustment By</label>
-                    <select name="adjustment_by" id="adjustment_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        {{-- @foreach($employee as $emp)
-                        <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach --}}
-                    </select>
+                    <label for="branches" class="form-label black-text">Branches</label>
+                    <div class="d-flex">
+                        @if (isset($kas_all))
+                        <select type="text" name="branch_id" id="branches" class="form-control chosen-select" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                            <option value="" disabled selected hidden>{{$branch_all[(int)$idx_branch-1]['nama_branch']}}</option>
+                            @foreach ($branch_all as $branch)
+                            <option value="{{$branch['id']}}">{{$branch['nama_branch']}}</option>
+                            @endforeach
+                        </select>
+                        @else
+                        <select type="text" name="branch_id" id="branches" class="form-control chosen-select" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                            <option value="" disabled selected hidden>Choose...</option>
+                            @foreach ($branch_all as $branch)
+                            <option value="{{$branch['id']}}">{{$branch['nama_branch']}}</option>
+                            @endforeach
+                        </select>
+                        @endif
+                        <button type="submit" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <br/>
@@ -92,35 +45,24 @@
             </div>
         </form>
     </div>
-
+    @if(isset($kas_all))
     <div class="card shadow mb-4">
+
         <div class="card-body mb-3">
             <div class="table-responsive">
                 <h3 class="text-center black-text bold-text">CASH OUT</h3>
-                <table class="table table-bordered table-striped" id="data_stockopDetail_table_1" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="data_cashout_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Kode Item</span></th>
-                            <th class="thead-text"><span class="nowrap">Jenis Item</span></th>
-                            <th class="thead-text"><span class="nowrap">Open by</span></th>
-                            <th class="thead-text"><span class="nowrap">Close by</span></th>
-                            <th class="thead-text"><span class="nowrap">SO Start</span></th>
-                            <th class="thead-text"><span class="nowrap">SO End</span></th>
-                            <th class="thead-text"><span class="nowrap">SO Duration</span></th>
-                            <th class="thead-text"><span class="nowrap">Actual QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">SYS QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">Diff QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">Positif Diff QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">Neg Diff QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment Type</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment Status</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment by</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment Date</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment Note</span></th>
-                            <th class="thead-text"><span class="nowrap">Add Adjust Note</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjust</span></th>
-                            <th class="thead-text"><span class="nowrap">Edit</span></th>
+                            <th class="thead-text"><span class="nowrap">Open Kas Date</span></th>
+                            <th class="thead-text"><span class="nowrap">Close Kas Date</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Additional Capital</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Initial Cash</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Final Cash</span></th>
+                            <th class="thead-text"><span class="nowrap">Employee Name</span></th>
+                            {{-- <th class="thead-text"><span class="nowrap">Adjust</span></th>
+                            <th class="thead-text"><span class="nowrap">Edit</span></th> --}}
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap">
@@ -129,31 +71,20 @@
                 </table>
             </div>
         </div>
+
         <div class="card-body">
             <div class="table-responsive">
                 <h3 class="text-center black-text bold-text">CASH IN</h3>
-                <table class="table table-bordered table-striped" id="data_stockopDetail_table_1" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="data_cashin_table_2" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Kode Item</span></th>
-                            <th class="thead-text"><span class="nowrap">Jenis Item</span></th>
-                            <th class="thead-text"><span class="nowrap">Open by</span></th>
-                            <th class="thead-text"><span class="nowrap">Close by</span></th>
-                            <th class="thead-text"><span class="nowrap">SO Start</span></th>
-                            <th class="thead-text"><span class="nowrap">SO End</span></th>
-                            <th class="thead-text"><span class="nowrap">SO Duration</span></th>
-                            <th class="thead-text"><span class="nowrap">Actual QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">SYS QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">Diff QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">Positif Diff QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">Neg Diff QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment Type</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment Status</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment by</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment Date</span></th>
-                            <th class="thead-text"><span class="nowrap">Adjustment Note</span></th>
-                            <th class="thead-text"><span class="nowrap">Add Adjust Note</span></th>
+                            <th class="thead-text"><span class="nowrap">Open Kas Date</span></th>
+                            <th class="thead-text"><span class="nowrap">Close Kas Date</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Additional Capital</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Initial Cash</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Final Cash</span></th>
+                            <th class="thead-text"><span class="nowrap">Employee Name</span></th>
                             <th class="thead-text"><span class="nowrap">Adjust</span></th>
                             <th class="thead-text"><span class="nowrap">Edit</span></th>
                         </tr>
@@ -164,14 +95,18 @@
                 </table>
             </div>
         </div>
+
         <div class="box-body">
       		<div id="forLoad"></div>
        		<div id="forNOmore"></div>
     	</div>
+
     </div>
+    @endif
 </div>
 
-{{-- <script type="text/javascript">
+@if(isset($kas_all))
+<script type="text/javascript">
 
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
@@ -187,36 +122,36 @@
 			return '0';
 		}
 	}
-    function handleButtonClickAdjustNote(id) {
-        var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust-note"]');
-        console.log(button);
-        button.setAttribute('data-toggle', 'modal');
-        button.setAttribute('data-target', '#modalAddAdjustment' + id );
-        $('#modalAddAdjustment' + id).modal('show');
-    }
+    // function handleButtonClickAdjustNote(id) {
+    //     var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust-note"]');
+    //     console.log(button);
+    //     button.setAttribute('data-toggle', 'modal');
+    //     button.setAttribute('data-target', '#modalAddAdjustment' + id );
+    //     $('#modalAddAdjustment' + id).modal('show');
+    // }
 
-    function handleButtonClickAdjust(id) {
-        var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust"]');
-        console.log(button);
-        button.setAttribute('data-toggle', 'modal');
-        button.setAttribute('data-target', '#modalAdjust' + id );
-        $('#modalAdjust' + id).modal('show');
-    }
+    // function handleButtonClickAdjust(id) {
+    //     var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust"]');
+    //     console.log(button);
+    //     button.setAttribute('data-toggle', 'modal');
+    //     button.setAttribute('data-target', '#modalAdjust' + id );
+    //     $('#modalAdjust' + id).modal('show');
+    // }
 
-    function handleButtonClickEdit(detail_id) {
-        $("#panelUpdateData").html(load_img);
-        $.ajax({
-		    url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataDetailOnly",
-		    data 	:{'id':detail_id},
-		    method	: "POST",
-		    success : function(data){
-		    	$('#panelUpdateData').html(data);
-                $('#add-update-data').modal('show');
-		    }
-		});
-        $('#spin_update').hide();
-		$('#spin_update_table').show();
-    }
+    // function handleButtonClickEdit(detail_id) {
+    //     $("#panelUpdateData").html(load_img);
+    //     $.ajax({
+	// 	    url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataDetailOnly",
+	// 	    data 	:{'id':detail_id},
+	// 	    method	: "POST",
+	// 	    success : function(data){
+	// 	    	$('#panelUpdateData').html(data);
+    //             $('#add-update-data').modal('show');
+	// 	    }
+	// 	});
+    //     $('#spin_update').hide();
+	// 	$('#spin_update_table').show();
+    // }
 
     function closeModal() {
        $('.modal').modal('hide');
@@ -238,15 +173,13 @@
                     'limit':settings.limit,
                     'page':(settings.limit*settings.start_page),
                     '_token':csrfToken,
-                    'tanggal_so_from':settings.tanggal_so_from,
-                    'tanggal_so_until':settings.tanggal_so_until,
-                    'adjustment_type':settings.adjustment_type,
-                    'adjustment_date_from':settings.adjustment_date_from,
-                    'adjustment_date_until':settings.adjustment_date_until,
-                    'jenis_item':settings.jenis_item,
-                    'open_by':settings.open_by,
-                    'close_by':settings.close_by,
-                    'adjustment_by':settings.adjustment_by
+                    'tanggal_buka_kas':settings.tanggal_buka_kas,
+                    'tanggal_tutup_kas':settings.tanggal_tutup_kas,
+                    'modal_tambahan_harian':settings.modal_tambahan_harian,
+                    'kas_awal_harian':settings.kas_awal_harian,
+                    'kas_akhir_harian':settings.kas_akhir_harian,
+                    'employee_name':settings.employee_name,
+
                 },
                 async : true,
                 dataType : 'json',
@@ -255,47 +188,36 @@
 			    },
                 success : function(result){
                     console.log(result.data);
-					var table = $('#data_stockopDetail_table_1').DataTable();
+					var table = $('#data_cashout_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
 						offsetN0++;
 
-                        if(currentItem.adjustment_by != null) {
-                            button_draft_1 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust-note disabled">Add Adjustment Note</button>';
-                        } else {
-                            button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonClickAdjustNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
-                        }
+                        // if(currentItem.adjustment_by != null) {
+                        //     button_draft_1 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust-note disabled">Add Adjustment Note</button>';
+                        // } else {
+                        //     button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonClickAdjustNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
+                        // }
 
-                        if(currentItem.adjustment_by === null) {
-                            button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
-                        } else if(currentItem.adjustment_by) {
-                            button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonClickAdjust(\'' + currentItem.id + '\')">Adjust</button>';
-                        }
-                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
+                        // if(currentItem.adjustment_by === null) {
+                        //     button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
+                        // } else if(currentItem.adjustment_by) {
+                        //     button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonClickAdjust(\'' + currentItem.id + '\')">Adjust</button>';
+                        // }
+                        // button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
 
                         rowData.push([
 							offsetN0,
-                            currentItem.kode_item,
-                            currentItem.jenis_item,
-                            currentItem.open_by_name,
-                            currentItem.close_by_name,
-                            currentItem.so_start,
-                            currentItem.so_end,
-                            currentItem.so_duration,
-                            currentItem.actual_qty,
-                            currentItem.system_qty,
-                            currentItem.diff_qty,
-                            currentItem.positive_diff_qty,
-                            currentItem.negative_diff_qty,
-                            currentItem.adjustment_type,
-                            currentItem.adjustment_status,
-                            currentItem.adjustment_by_name,
-                            currentItem.adjustment_date,
-                            currentItem.adjustment_followup_note,
-                            button_draft_1,
-                            button_draft_2,
-                            button_draft_3
+                            currentItem.tanggal_buka_kas,
+                            currentItem.tanggal_tutup_kas,
+                            formatNumber(currentItem.modal_tambahan_harian),
+                            formatNumber(currentItem.kas_awal_harian),
+                            formatNumber(currentItem.kas_akhir_harian),
+                            currentItem.employee_name,
+                            // button_draft_1,
+                            // button_draft_2,
+                            // button_draft_3
                         ]);
                     }
                     table.rows.add(rowData).draw();
@@ -320,25 +242,23 @@
         }
     }
     function masterContent() {
+        var branch = "{{ (int)$idx_branch }}";
 		var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
-            data_url: "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataMaster",
+            data_url: "{{ url('kas/') }}/" + branch-1 + "/loadDataMaster",
             // data_url: "{{ url('/stock-opname/detail/loadDataMaster') }}",
             end_record_text : 'No more records found!', //no more records to load
             start_page      : 0, //initial page
             limit		    : 50, //initial page
             htmldata        : '', //initial page
             lastScroll      : 0, //initial page
-            tanggal_so_from      : document.getElementById('tanggal_so_from').value, //initial page
-            tanggal_so_until      : document.getElementById('tanggal_so_until').value, //initial page
-            adjustment_type      : document.getElementById('adjustment_type').value, //initial page
-            adjustment_date_from      : document.getElementById('adjustment_date_from').value, //initial page
-            adjustment_date_until      : document.getElementById('adjustment_date_until').value, //initial page
-            adjustment_status      : document.getElementById('adjustment_status').value, //initial page
-            jenis_item      : document.getElementById('jenis_item').value, //initial page
-            open_by      : document.getElementById('open_by').value, //initial page
-            close_by      : document.getElementById('close_by').value, //initial page
-            adjustment_by      : document.getElementById('adjustment_by').value, //initial page
+            tanggal_buka_kas      : document.getElementById('tanggal_buka_kas').value, //initial page
+            tanggal_tutup_kas      : document.getElementById('tanggal_tutup_kas').value, //initial page
+            modal_tambahan_harian      : document.getElementById('modal_tambahan_harian').value, //initial page
+            kas_awal_harian      : document.getElementById('kas_awal_harian').value, //initial page
+            kas_akhir_harian      : document.getElementById('kas_akhir_harian').value, //initial page
+            employee_name      : document.getElementById('employee_name').value, //initial page
+
 
         });
         loading  = false;
@@ -352,7 +272,7 @@
     });
 
     $(document).ready(function(){
-        var table = $('#data_stockopDetail_table_1').DataTable( {
+        var table = $('#data_cashout_table_1').DataTable( {
 				        fixedHeader: {
 				            header: true
 				        },
@@ -375,115 +295,115 @@
         masterContent();
     });
 
-    function submitFormAdjustmentNote(event){
-		$('#btn_submit').hide();
-		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-	    event.preventDefault();
-        var form = document.getElementById('add_info_adjustnote');
-        var formData = new FormData(form);
-	    $.ajax({
-            url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/init-adjustment",
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-            if(result.message=="The data has been successfully updated"){
-				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){
-					 $('#tambah_info').hide();
-                     location.reload();
-					},3500);
-			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				setTimeout(function(){
-					$('#tambah_info').hide();
-                    location.reload();
-				},3000)
-			}
-            $('#btn_submit').show();
-		}
-	  });
-	  return false;
-    }
+    // function submitFormAdjustmentNote(event){
+	// 	$('#btn_submit').hide();
+	// 	$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
+	//     event.preventDefault();
+    //     var form = document.getElementById('add_info_adjustnote');
+    //     var formData = new FormData(form);
+	//     $.ajax({
+    //         url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/init-adjustment",
+    //         type: 'POST',
+    //         data: formData,
+    //         async: false,
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //         dataType: 'json',
+    //         success: function (result) {
+    //             console.log(result);
+    //         if(result.message=="The data has been successfully updated"){
+	// 			  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+	// 			  	setTimeout(function(){
+	// 				 $('#tambah_info').hide();
+    //                  location.reload();
+	// 				},3500);
+	// 		}else{
+	// 			$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+	// 			setTimeout(function(){
+	// 				$('#tambah_info').hide();
+    //                 location.reload();
+	// 			},3000)
+	// 		}
+    //         $('#btn_submit').show();
+	// 	}
+	//   });
+	//   return false;
+    // }
 
-    function submitFormMakeAdjustment(event){
-		$('#btn_submit').hide();
-		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-	    event.preventDefault();
-        var stock_opname_id = "{{ $stock_opname_id }}";
-        var form = document.getElementById('add_info_make_adjustment');
-        var formData = new FormData(form);
-	    $.ajax({
-            url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/make-adjustment",
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-            if(result.message=="The data has been successfully updated"){
-				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){
-					 $('#tambah_info').hide();
-                     location.reload();
-					},3500);
-			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				setTimeout(function(){
-					$('#tambah_info').hide();
-                    location.reload();
-				},3000)
-			}
-            $('#btn_submit').show();
-		}
-	  });
-	  return false;
-    }
+    // function submitFormMakeAdjustment(event){
+	// 	$('#btn_submit').hide();
+	// 	$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
+	//     event.preventDefault();
 
-    function submitForm(event){
-		$('#btn_submit').hide();
-		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-	    event.preventDefault();
-        var form = document.getElementById('add_info');
+    //     var form = document.getElementById('add_info_make_adjustment');
+    //     var formData = new FormData(form);
+	//     $.ajax({
+    //         url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/make-adjustment",
+    //         type: 'POST',
+    //         data: formData,
+    //         async: false,
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //         dataType: 'json',
+    //         success: function (result) {
+    //             console.log(result);
+    //         if(result.message=="The data has been successfully updated"){
+	// 			  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+	// 			  	setTimeout(function(){
+	// 				 $('#tambah_info').hide();
+    //                  location.reload();
+	// 				},3500);
+	// 		}else{
+	// 			$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+	// 			setTimeout(function(){
+	// 				$('#tambah_info').hide();
+    //                 location.reload();
+	// 			},3000)
+	// 		}
+    //         $('#btn_submit').show();
+	// 	}
+	//   });
+	//   return false;
+    // }
 
-        var formData = new FormData(form);
-	    $.ajax({
-            url   : "{{ url('/stock-opname/detail/add') }}",
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-            if(result.message=="The data has been successfully updated"){
-				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){
-					 $('#tambah_info').hide();
-                     location.reload();
-					},3500);
-			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				setTimeout(function(){
-					$('#tambah_info').hide();
-                    location.reload();
-				},3000)
-			}
-            $('#btn_submit').show();
-		}
-	  });
-	  return false;
-    }
+    // function submitForm(event){
+	// 	$('#btn_submit').hide();
+	// 	$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
+	//     event.preventDefault();
+    //     var form = document.getElementById('add_info');
+
+    //     var formData = new FormData(form);
+	//     $.ajax({
+    //         url   : "{{ url('/stock-opname/detail/add') }}",
+    //         type: 'POST',
+    //         data: formData,
+    //         async: false,
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //         dataType: 'json',
+    //         success: function (result) {
+    //             console.log(result);
+    //         if(result.message=="The data has been successfully updated"){
+	// 			  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+	// 			  	setTimeout(function(){
+	// 				 $('#tambah_info').hide();
+    //                  location.reload();
+	// 				},3500);
+	// 		}else{
+	// 			$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+	// 			setTimeout(function(){
+	// 				$('#tambah_info').hide();
+    //                 location.reload();
+	// 			},3000)
+	// 		}
+    //         $('#btn_submit').show();
+	// 	}
+	//   });
+	//   return false;
+    // }
 
     $(document).ready(function() {
     function insertCurrentDate() {
@@ -494,7 +414,8 @@
 
     insertCurrentDate();
     });
-</script> --}}
+</script>
+@endif
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
