@@ -67,6 +67,27 @@ class SalesController extends Controller
             'user_info' => $this->response_user_info,
         ]);
     }
+    function print_invoice(Request $request){
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $sales_master['id']=0;
+        $sales_master_s['sales_master_id']=0;
+        if(isset($request->sales_master_id)){
+            $sales_master['id']=$request->sales_master_id;
+            $sales_master_s['sales_master_id']=$request->sales_master_id;
+            $sales_master_s['page']=1;
+            $sales_master_s['limit']=10000;
+        }
+        $response_sales_master =Http::withHeaders($this->headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/one/id', $sales_master);
+        $responses = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-detail/all', $sales_master_s);
+        return view('sales.invoice', [
+            'response_sales_detail' => $responses,
+            'response_sales' => $response_sales_master,
+        ]);
+    }
     public function findCustomer(Request $request)
     {
         $token = $_COOKIE['token'];
@@ -184,6 +205,42 @@ class SalesController extends Controller
         }
         return response()->json($result);
     }
+    public function verifyMaster(Request $request)
+    {
+        $row['message']="-";
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $api_request = [
+            "id"=>$request->id,
+        ];
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/verify', $api_request);
+        return response()->json($response->json());
+    }
+    public function addPayment(Request $request)
+    {
+        $row['message']="-";
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $api_request = [
+            "id"=>$request->id,
+            'ref_sales_id' =>$request->ref_sales_id,
+            "sistem_pembayaran"=>$request->sistem_pembayaran,
+            "nomor_kartu"=>$request->nomor_kartu,
+            "nomor_referensi"=>$request->nomor_referensi,
+            "dp"=>$request->dp,
+            'branch_id' =>$request->branch_id,
+            'employee_id' =>$request->employee_id,
+            'customer_id' =>$request->customer_id,
+        ];
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/edit', $api_request);
+        return response()->json($response->json());
+    }
     public function addSalesMaster(Request $request)
     {
         $row['message']="-";
@@ -198,7 +255,6 @@ class SalesController extends Controller
             'employee_id' =>$request->employee_id,
             'customer_id' =>$request->customer_id,
         ];
-        // print_r($api_request);
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/add', $api_request);
         return response()->json($response->json());
     }
