@@ -93,15 +93,23 @@
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Amount of Expenditure</span></th>
-                            <th class="thead-text"><span class="nowrap">Form of Expenditure</span></th>
+                            <th class="thead-text"><span class="nowrap">Date of Cost Expenditure</span></th>
+                            <th class="thead-text"><span class="nowrap">Total Cost Expenditure</span></th>
+                            <th class="thead-text"><span class="nowrap">COA Code</span></th>
+                            <th class="thead-text"><span class="nowrap">Branch Code</span></th>
+                            <th class="thead-text"><span class="nowrap">Branch Name</span></th>
                             <th class="thead-text"><span class="nowrap">Made By</span></th>
+                            <th class="thead-text"><span class="nowrap">Description</span></th>
+
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap">
-
                     </tbody>
                 </table>
+            </div>
+            <div class="box-body1">
+                <div id="forLoad1"></div>
+                <div id="forNOmore1"></div>
             </div>
         </div>
 
@@ -229,6 +237,71 @@
         }
     }
 
+    function addContentCashOut(settings) {
+        console.log(settings.idx_branch);
+        var load_img = $('<img/>').attr('src', settings.loading_gif_url).addClass('loading-image');
+        var record_end_txt = $('<div/>').text(settings.end_record_text).addClass('end-record-info');
+        offsetN0 = settings.start_page * settings.limit;
+        if (loading == false && end_record == false) {
+            loading = true;
+            $("#forLoad1").append(load_img);
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                method: "POST",
+                type: 'ajax',
+                url: settings.data_url,
+                data: {
+                    'limit': settings.limit,
+                    'page': (settings.limit * settings.start_page),
+                    '_token': csrfToken,
+                    'branch_id': settings.idx_branch
+                },
+                async: true,
+                dataType: 'json',
+                error: function (request, error) {
+                    alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+                },
+                success: function (result) {
+                    console.log(result);
+                    var table = $('#data_cashin_table_2').DataTable();
+                    let rowData = [];
+                    for (let i = 0; i < result.data.length; i++) {
+                        let currentItem = result.data[i];
+                        offsetN0++;
+                        rowData.push([
+                            offsetN0,
+                            currentItem.tannggal_pengeluaran,
+                            formatNumber(currentItem.jumlah_pengeluaran),
+                            currentItem.kode_coa,
+                            currentItem.kode_branch,
+                            currentItem.nama_branch,
+                            currentItem.made_by_name,
+                            currentItem.deskripsi,
+                        ]);
+                    }
+                    table.rows.add(rowData).draw();
+                    if (result.data.length < settings.limit) {
+                        $("#forNOmore1").html(record_end_txt);
+                        load_img.remove();
+                        end_record = true;
+                    } else {
+                        load_img.remove();
+                        loading = false;
+                        settings.start_page++; //page increment
+                    }
+                    $('.dataTables_scrollBody').scrollTop(settings.lastScroll + 25);
+                    $('div.dataTables_scrollBody').scroll(function (el) {
+                        if ($(this).scrollTop() + $(this).height() >= ($(this)[0].scrollHeight + $(
+                                '.odd').height() / 2) - 40) {
+                            settings.lastScroll = $(this).scrollTop();
+                            addContent(settings);
+                        }
+                    });
+                }
+            });
+        }
+    }
+
     function masterContent() {
         var branch = "<?php echo $idx_branch; ?>";
         branch = parseFloat(branch);
@@ -249,6 +322,28 @@
         end_record = false;
         addContent(settings);
     }
+
+    function masterContentCashOut() {
+        var branch = "<?php echo $idx_branch; ?>";
+        branch = parseFloat(branch);
+        console.log(branch);
+        var settings = $.extend({
+            loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
+            data_url: "{{ url('/pengeluaran/loadDataMasterCashOut/') }}",
+            // data_url: "{{ url('/stock-opname/detail/loadDataMaster') }}",
+            end_record_text: 'No more records found!', //no more records to load
+            start_page: 0, //initial page
+            limit: 50, //initial page
+            htmldata: '', //initial page
+            lastScroll: 0, //initial page
+            idx_branch: <?php echo $idx_branch; ?> , //initial page
+
+        });
+        loading = false;
+        end_record = false;
+        addContentCashOut(settings);
+    }
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -276,7 +371,29 @@
             // 				// ],
 
         });
+
+        var tableCashOut = $('#data_cashin_table_2').DataTable({
+            fixedHeader: {
+                header: true
+            },
+            scrollY: $(window).height() - 350,
+            scrollX: true,
+            scrollCollapse: true,
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            // fixedColumns:   {
+            //     leftColumns:4},
+            // 				// dom: 'Bfrtip',
+            // 				// buttons: [
+            // 				// 	// 'copy', 'csv', 'excel', 'pdf', 'print'
+            // 				// 	'csv', 'excel', 'print'
+            // 				// ],
+
+        });
         masterContent();
+        masterContentCashOut();
     });
 
     // function submitFormAdjustmentNote(event){
@@ -401,8 +518,6 @@
 
 </script>
 @endif
-
-// Modal Add
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
