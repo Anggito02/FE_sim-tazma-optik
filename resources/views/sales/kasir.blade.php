@@ -183,7 +183,7 @@
                         <!-- Print Bill -->
                     <!-- </a> -->
                 </div>
-                <a href="javascript:void(0);" onclick="submitVeirfy()" class="btn btn-primary btn-lg w-95 rounded-0  <?php if($response_sales['data']['verified']=='true'){ echo 'disabled'; } ?>" style="margin-right:3px; margin-left:3px;" type="button" id="subtotal_item_button" role="button" aria-pressed="true" >
+                <a href="javascript:void(0);" onclick="submitVeirfy($response_sales['data']['id'],$response_sales['data']['branch_id'])" class="btn btn-primary btn-lg w-95 rounded-0  <?php if($response_sales['data']['verified']=='true'){ echo 'disabled'; } ?>" style="margin-right:3px; margin-left:3px;" type="button" id="subtotal_item_button" role="button" aria-pressed="true" >
                     Charge Rp Loading ...
                 </a>
             @endif
@@ -334,10 +334,10 @@
 	    });
 	    return false;
     }
-    function submitVeirfy(){
+    function submitVeirfy(id,branch_id){
         $('#tambah_info_scan').show();
-        var id=<?php  echo $response_sales['data']['id'] ?> ;
-        var branch_id=<?php  echo $response_sales['data']['branch_id'] ?> ;
+        // var id=<?php //  echo $response_sales['data']['id'] ?> ;
+        // var branch_id=<?php //  echo $response_sales['data']['branch_id'] ?> ;
         $.ajax({
             url   : "{{ url('/sales/verifyMaster') }}",
             method: "POST",
@@ -349,14 +349,15 @@
             async : true,
             dataType : 'json',
             success: function (result) {
-                if(result.message=="Data has been successfully inserted"){
+                if(result.status=="success"){
                         $('#tambah_info_scan').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.status+'</b></div>').show();
                         setTimeout(function(){
                             $('#tambah_info_scan').hide();
+                            location.reload();
                         },2500);
                         masterContentDetail();
                 }else{
-                    $('#tambah_info_scan').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.status+'</b></div>').show();
+                    $('#tambah_info_scan').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
                     setTimeout(function(){
                         $('#tambah_info_scan').hide();
                     },5000)
@@ -380,18 +381,20 @@
             processData: false,
             dataType: 'json',
             success: function (result) {
-            console.log(result);
+            // console.log(result);
             if(result.message=="Data has been successfully inserted"){
 				  	$('#tambah_info_payment').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.status+'</b></div>').show();
 				  	setTimeout(function(){
 					 $('#tambah_info_payment').hide();
+                     location.reload();
 					},2500);
                     masterContentDetail();
 			}else{
 				$('#tambah_info_payment').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.status+'</b></div>').show();
 				setTimeout(function(){
 					$('#tambah_info_payment').hide();
-				},5000)
+				},5000);
+                location.reload();
 			}
             $('#btn_submit').show();
 		    }
@@ -486,8 +489,8 @@
             processData: false,
             dataType: 'json',
             success: function (result) {
-                console.log(result);
-                console.log(result.data.id);
+                // console.log(result);
+                // console.log(result.data.id);
             if(result.status=="success"){
 				  	$('#tambah_info_master').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.status+'</b></div>').show();
 				  	setTimeout(function(){
@@ -763,6 +766,7 @@
                             </div>
                         </div>
                     @else 
+                        <span id="tambah_info_payment">Processs <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>
                         <span style="color: red;">No Transaction Number Chosen</span>
                     @endif
                 </div>
