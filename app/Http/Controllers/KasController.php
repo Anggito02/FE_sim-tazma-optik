@@ -66,18 +66,21 @@ class KasController extends Controller {
 
         $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
         $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request_kas);
+        $response_pengeluaran = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/all', $api_request_kas);
+        $employee_all = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
 
         $branch_all = $response_branch->json();
         $kas_all = $response_kas->json();
+        $pengeluaran_all = $response_pengeluaran->json();
 
-        // dd($kas_all, $branch_all, $request->branch_id);
         $user = GetUserInfo::getUserInfo();
 
         return view('dito', [
             'data' => $user['data'],
             'kas_all' => $kas_all['data'],
             'branch_all' => $branch_all['data'],
-            'idx_branch' => $request->branch_id
+            'idx_branch' => $request->branch_id,
+            'pengeluaran_all' => $pengeluaran_all['data'],
         ]);
     }
 
@@ -100,11 +103,11 @@ class KasController extends Controller {
         $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request);
 
         $kas = $response_kas->json();
-        // dd($kas);
+
         return response()->json($kas);
     }
 
-    public function addStockOpnameDetail(Request $request) {
+    public function addKasOut(Request $request) {
         $row ="";
         $token = $_COOKIE['token'];
 
@@ -113,26 +116,25 @@ class KasController extends Controller {
             'Authorization' => 'Bearer '.$token
         ];
         $row=$request;
-        $so_start = new \DateTime($request->so_start);
-        $so_end = new \DateTime($request->so_end);
+
         $api_request = [
-            'stock_opname_id' => $request->stock_opname_id,
-            'item_id' => $request->item_id,
-            'actual_qty' => $request->actual_qty,
-            'so_start' => $so_start->format('Y-m-d H:i:s'),
-            'so_end' => $so_end->format('Y-m-d H:i:s'),
-            'open_by' => $request->open_by,
-            'close_by' => $request->close_by
+            'deskripsi' => $request->deskripsi,
+            'jumlah_pengeluaran' => $request->jumlah_pengeluaran,
+            'bentuk_pengeluaran' => $request->bentuk_pengeluaran,
+            'branch_id' => $request->branch_id,
+            'made_by' => $request->made_by,
         ];
-        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/add', $api_request);
+
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/add', $api_request);
 
         $result = $response->json();
+
         if($result['message'] == 'success'){
             $row['message']="The data has been successfully added";
         }else{
             $row['message']="Add data failed ";
         }
-        return response()->json($result);
+        return redirect('/kas/all/'.$request->branch_id);
     }
 
     public function loadDataDetailOnly(Request $request, int $soid)

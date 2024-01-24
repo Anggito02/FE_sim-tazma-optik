@@ -237,7 +237,7 @@
                     $("#subtotal_item").html("Rp. "+formatNumber(subtotalItem));
                     document.getElementById('subtotal_item_button').textContent = 'Charge Rp. '+formatNumber(subtotalItem);
                     hideElementsByClass('forDelete','hide');
-                    
+
                 }
             }
         });
@@ -326,7 +326,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            async : true,   
+            async : true,
             dataType : 'json',
             success: function (result) {
                 location.reload();
@@ -573,7 +573,7 @@
     function togglePaymentMethod(paymentType) {
         var cardNumberInput = document.getElementById('nomor_kartu');
         var referenceNumberInput = document.getElementById('nomor_referensi');
-        
+
         if (paymentType === 'TUNAI') {
             cardNumberInput.style.display = 'none';
             referenceNumberInput.style.display = 'none';
@@ -762,7 +762,7 @@
                                 <input type="number" id="dp" name="dp" require class="form-control w-100 rounded" placeholder="100" max="100" min="10"  value="100" aria-describedby="basic-addon1" style="width:70%;">
                             </div>
                         </div>
-                    @else 
+                    @else
                         <span style="color: red;">No Transaction Number Chosen</span>
                     @endif
                 </div>

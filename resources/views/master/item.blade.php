@@ -219,7 +219,7 @@
                 method: "POST",
                 type  : 'ajax',
                 url   : settings.data_url,
-                data  : { 
+                data  : {
                     'limit':settings.limit,
                     'page':(settings.limit*settings.start_page),
                     '_token':csrfToken,
