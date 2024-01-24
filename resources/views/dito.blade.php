@@ -18,9 +18,9 @@
                     <div class="d-flex">
                         @if (isset($kas_all))
                         <select type="text" name="branch_id" id="branches" class="form-control chosen-select" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                            <option value="" disabled selected hidden>{{$branch_all[(int)$idx_branch-1]['nama_branch']}}</option>
+                            {{-- <option value="" disabled selected hidden>{{$branch_all[(int)$idx_branch-1]['nama_branch']}}</option> --}}
                             @foreach ($branch_all as $branch)
-                            <option value="{{$branch['id']}}">{{$branch['nama_branch']}}</option>
+                            <option value="{{$branch['id']}}" <?php if($idx_branch==$branch['id']){ echo "selected"; } ?> >{{$branch['nama_branch']}}</option>
                             @endforeach
                         </select>
                         @else
@@ -70,6 +70,10 @@
                     </tbody>
                 </table>
             </div>
+            <div class="box-body">
+                <div id="forLoad"></div>
+                 <div id="forNOmore"></div>
+            </div>
         </div>
 
         <div class="card-body">
@@ -96,10 +100,7 @@
             </div>
         </div>
 
-        <div class="box-body">
-      		<div id="forLoad"></div>
-       		<div id="forNOmore"></div>
-    	</div>
+
 
     </div>
     @endif
@@ -158,6 +159,7 @@
     }
 
     function addContent(settings) {
+        console.log(settings.idx_branch);
         var load_img = $('<img/>').attr('src',settings.loading_gif_url).addClass('loading-image');
         var record_end_txt = $('<div/>').text(settings.end_record_text).addClass('end-record-info');
         offsetN0=settings.start_page*settings.limit;
@@ -169,43 +171,32 @@
                 method: "POST",
                 type  : 'ajax',
                 url   : settings.data_url,
-                data  : {
-                    'limit':settings.limit,
-                    'page':(settings.limit*settings.start_page),
-                    '_token':csrfToken,
-                    'tanggal_buka_kas':settings.tanggal_buka_kas,
-                    'tanggal_tutup_kas':settings.tanggal_tutup_kas,
-                    'modal_tambahan_harian':settings.modal_tambahan_harian,
-                    'kas_awal_harian':settings.kas_awal_harian,
-                    'kas_akhir_harian':settings.kas_akhir_harian,
-                    'employee_name':settings.employee_name,
-
-                },
+                data  : {'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'branch_id':settings.idx_branch},
                 async : true,
                 dataType : 'json',
                 error: function (request, error) {
 	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
 			    },
                 success : function(result){
-                    console.log(result.data);
+                    console.log(result);
 					var table = $('#data_cashout_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
 						offsetN0++;
 
-                        // if(currentItem.adjustment_by != null) {
-                        //     button_draft_1 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust-note disabled">Add Adjustment Note</button>';
-                        // } else {
-                        //     button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonClickAdjustNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
-                        // }
+        //                 // if(currentItem.adjustment_by != null) {
+        //                 //     button_draft_1 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust-note disabled">Add Adjustment Note</button>';
+        //                 // } else {
+        //                 //     button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonClickAdjustNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
+        //                 // }
 
-                        // if(currentItem.adjustment_by === null) {
-                        //     button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
-                        // } else if(currentItem.adjustment_by) {
-                        //     button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonClickAdjust(\'' + currentItem.id + '\')">Adjust</button>';
-                        // }
-                        // button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
+        //                 // if(currentItem.adjustment_by === null) {
+        //                 //     button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
+        //                 // } else if(currentItem.adjustment_by) {
+        //                 //     button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonClickAdjust(\'' + currentItem.id + '\')">Adjust</button>';
+        //                 // }
+        //                 // button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
 
                         rowData.push([
 							offsetN0,
@@ -215,9 +206,9 @@
                             formatNumber(currentItem.kas_awal_harian),
                             formatNumber(currentItem.kas_akhir_harian),
                             currentItem.employee_name,
-                            // button_draft_1,
-                            // button_draft_2,
-                            // button_draft_3
+        //                     // button_draft_1,
+        //                     // button_draft_2,
+        //                     // button_draft_3
                         ]);
                     }
                     table.rows.add(rowData).draw();
@@ -242,22 +233,24 @@
         }
     }
     function masterContent() {
-        var branch = "{{ (int)$idx_branch }}";
+        var branch = "<?php echo $idx_branch; ?>";
+        branch=parseFloat(branch);
+        console.log(branch);
 		var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
-            data_url: "{{ url('kas/') }}/" + branch-1 + "/loadDataMaster",
+            data_url: "{{ url('/kas/loadDataMaster/') }}",
             // data_url: "{{ url('/stock-opname/detail/loadDataMaster') }}",
             end_record_text : 'No more records found!', //no more records to load
             start_page      : 0, //initial page
             limit		    : 50, //initial page
             htmldata        : '', //initial page
             lastScroll      : 0, //initial page
-            tanggal_buka_kas      : document.getElementById('tanggal_buka_kas').value, //initial page
-            tanggal_tutup_kas      : document.getElementById('tanggal_tutup_kas').value, //initial page
-            modal_tambahan_harian      : document.getElementById('modal_tambahan_harian').value, //initial page
-            kas_awal_harian      : document.getElementById('kas_awal_harian').value, //initial page
-            kas_akhir_harian      : document.getElementById('kas_akhir_harian').value, //initial page
-            employee_name      : document.getElementById('employee_name').value, //initial page
+            idx_branch      : <?php echo $idx_branch;?>, //initial page
+            // tanggal_tutup_kas      : document.getElementById('tanggal_tutup_kas').value, //initial page
+            // modal_tambahan_harian      : document.getElementById('modal_tambahan_harian').value, //initial page
+            // kas_awal_harian      : document.getElementById('kas_awal_harian').value, //initial page
+            // kas_akhir_harian      : document.getElementById('kas_akhir_harian').value, //initial page
+            // employee_name      : document.getElementById('employee_name').value, //initial page
 
 
         });

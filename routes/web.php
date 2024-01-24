@@ -268,7 +268,7 @@ Route::controller(KasController::class)->middleware('isTokenValid')->group(funct
     Route::get('/kas','prosesKasBranch');
     Route::get('/kas/all','getAllKas');
     Route::post('/kas/add', 'addKas');
-    Route::post('/kas/{id}/loadDataMaster', 'loadDataMaster');
+    Route::post('/kas/loadDataMaster', 'loadDataMaster');
     Route::post('/kas/loadDataDetailOnly', 'loadDataDetailOnly');
 });
 

@@ -81,26 +81,26 @@ class KasController extends Controller {
         ]);
     }
 
-    public function loadDataMaster(Request $request, int $branch_id)
+    public function loadDataMaster(Request $request)
     {
         $token = $_COOKIE['token'];
         $headers = [
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        $page = 1;
-        $limit = 50;
+        // $page = 1;
+        // $limit = 50;
 
         $api_request = [
-            "page" => $page,
-            "limit" => $limit,
-            "branch_id" => $branch_id,
+            "page" => $request->page,
+            "limit" => $request->limit,
+            "branch_id" => $request->branch_id,
         ];
 
         $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request);
 
         $kas = $response_kas->json();
-        dd($kas);
+        // dd($kas);
         return response()->json($kas);
     }
 
