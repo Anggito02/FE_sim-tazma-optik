@@ -140,11 +140,12 @@
                     <table class="table">
                         <thead>
                             <th>Item Name</th>
-                            <th>Price</th>
-                            <th>Discount</th>
-                            <th>After Discount</th>
-                            <th>QTY</th>
-                            <th>Amount</th>
+                            <th class="text-right">Price</th>
+                            <th class="text-right">Discount</th>
+                            <th class="text-right">After Discount</th>
+                            <th class="text-right">QTY</th>
+                            <th class="text-right">Amount</th>
+                            <th class='forDelete text-right' >Void</th>
                         </thead>
                         <tbody  id="data_barang">
 
@@ -160,7 +161,7 @@
                     </div>
                 </div>
                 @if(isset($response_sales['data']))
-                <a href="" class="btn btn-outline-secondary btn-outline-top btn-outline-bottom mx-2 <?php if($response_sales['data']['verified']=='true' || $response_sales['data']['dp'] >0){ echo 'disabled'; } ?>" style="width:98%" role="button" aria-pressed="true">
+                <a href="#" onclick="hideElementsByClass('forDelete','show');" class="btn btn-outline-secondary btn-outline-top btn-outline-bottom mx-2 <?php if($response_sales['data']['verified']=='true' || $response_sales['data']['dp'] >0){ echo 'disabled'; } ?>" style="width:98%" role="button" aria-pressed="true">
                     Clear Sale
                 </a>
                 @endif
@@ -222,18 +223,21 @@
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
                         subtotalItem=parseFloat(currentItem.qty)*parseFloat(currentItem.harga);
+
                         html_view+="<tr>"+
                                     "<td>"+currentItem.kode_item+"</td>"+
                                     "<td align='right' >"+formatNumber(parseFloat(currentItem.harga)/(100-parseFloat(currentItem.diskon))*100)+"</td>"+
                                     "<td align='right' >"+formatNumber(currentItem.diskon)+" %</td>"+
                                     "<td align='right' >"+formatNumber(currentItem.harga)+"</td>"+
                                     "<td align='right' >"+formatNumber(currentItem.qty)+"</td>"+
-                                    "<td align='right' >"+formatNumber(parseFloat(currentItem.qty)*parseFloat(currentItem.harga))+"</td>";
+                                    "<td align='right' >"+formatNumber(parseFloat(currentItem.qty)*parseFloat(currentItem.harga))+"</td>"+
+                                    "<td align='right' class='forDelete' ><a href='javascript:void(0);' onclick='delete_detail("+currentItem.id+","+currentItem.sales_master_id+")'><i class='fa fa-trash' aria-hidden='true'></i></a></td>";
                     }
                     $("#data_barang").html(html_view);
                     $("#subtotal_item").html("Rp. "+formatNumber(subtotalItem));
                     document.getElementById('subtotal_item_button').textContent = 'Charge Rp. '+formatNumber(subtotalItem);
-
+                    hideElementsByClass('forDelete','hide');
+                    
                 }
             }
         });
@@ -312,6 +316,23 @@
             }
         });
 
+    }
+    function delete_detail(id,sales_master_id){
+        $.ajax({
+            url   : "{{ url('/sales/delete_detail') }}",
+            method: "POST",
+            type  : 'ajax',
+            data: {"id":id, "sales_master_id":sales_master_id},
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            async : true,   
+            dataType : 'json',
+            success: function (result) {
+                location.reload();
+		    }
+	    });
+	    return false;
     }
     function submitVeirfy(){
         $('#tambah_info_scan').show();
@@ -542,6 +563,13 @@
         $('#tambah_info_scan').hide();
         $('#tambah_info_payment').hide();
     });
+    function hideElementsByClass(className,action) {
+        var elements = document.querySelectorAll('.' + className);
+        var displayStyle = (action === 'show') ? 'table-cell' : 'none'; // 'table-cell' untuk <td>, 'block' untuk elemen lain
+        elements.forEach(function(element) {
+            element.style.display = displayStyle;
+        });
+    }
     function togglePaymentMethod(paymentType) {
         var cardNumberInput = document.getElementById('nomor_kartu');
         var referenceNumberInput = document.getElementById('nomor_referensi');

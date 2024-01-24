@@ -205,6 +205,21 @@ class SalesController extends Controller
         }
         return response()->json($result);
     }
+    public function delete_detail(Request $request)
+    {
+        $row['message']="-";
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application\json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $api_request = [
+            "id"=>$request->id,
+            "sales_master_id"=>$request->sales_master_id,
+        ];
+        $response = Http::withHeaders($headers)->DELETE($_ENV['BACKEND_API_ENDPOINT'].'/sales-detail/delete', $api_request);
+        return response()->json($response->json());
+    }
     public function verifyMaster(Request $request)
     {
         $row['message']="-";

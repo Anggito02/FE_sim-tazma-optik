@@ -182,6 +182,7 @@ Route::controller(SalesController::class)->middleware('isTokenValid')->group(fun
     Route::post('/sales/addPayment', 'addPayment');
     Route::post('/sales/verifyMaster', 'verifyMaster');
     Route::post('/sales/print_invoice', 'print_invoice');
+    Route::post('/sales/delete_detail', 'delete_detail');
 });
 
 Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid')->group(function(){
