@@ -329,7 +329,7 @@
         console.log(branch);
         var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
-            data_url: "{{ url('/pengeluaran/loadDataMasterCashOut/') }}",
+            data_url: "{{ url('/kas/loadDataMasterCashOut/') }}",
             // data_url: "{{ url('/stock-opname/detail/loadDataMaster') }}",
             end_record_text: 'No more records found!', //no more records to load
             start_page: 0, //initial page

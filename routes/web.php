@@ -273,7 +273,7 @@ Route::controller(KasController::class)->middleware('isTokenValid')->group(funct
     Route::get('/kas/all','getAllKas');
     Route::post('/kas/add', 'addKasOut');
     Route::post('/kas/loadDataMaster', 'loadDataMaster');
-    Route::post('/pengeluaran/loadDataMaster', 'loadDataMasterCashOut');
+    Route::post('/kas/loadDataMasterCashOut', 'loadDataMasterCashOut');
 });
 
 // Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
