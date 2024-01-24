@@ -242,7 +242,7 @@
             limit: 50, //initial page
             htmldata: '', //initial page
             lastScroll: 0, //initial page
-            idx_branch: < ? php echo $idx_branch; ? > , //initial page
+            idx_branch: <?php echo $idx_branch; ?> , //initial page
 
         });
         loading = false;

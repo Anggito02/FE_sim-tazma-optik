@@ -270,7 +270,7 @@ Route::controller(CustomerController::class)->middleware('isTokenValid')->group(
 
 Route::controller(KasController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/kas','prosesKasBranch');
-    Route::get('/kas/all/{id}','getAllKas');
+    Route::get('/kas/all','getAllKas');
     Route::post('/kas/add', 'addKasOut');
     Route::post('/kas/loadDataMaster', 'loadDataMaster');
 });
