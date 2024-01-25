@@ -70,33 +70,53 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-6 black-text bold-text">
+        <div class="col-md-6 black-text bold-text d-flex justify-content-end">
             <br/>
             <table>
                 <tr style="white-space: nowrap;">
                     <td>Payment Method</td>
                     <td>:</td>
-                    <td>{{$response_sales['data']['dp']}}</td>
+                    @if ($response_sales['data']['dp'] != "null")
+                        <td>{{$response_sales['data']['dp']}}</td>
+                    @else
+                        <td></td>
+                    @endif
                 </tr>
                 <tr style="white-space: nowrap;">
                     <td>Term Payment</td>
                     <td>:</td>
-                    <td>{{$response_sales['data']['dp']}}</td>
+                    @if ($response_sales['data']['dp'] != "null")
+                        <td>{{$response_sales['data']['dp']}}</td>
+                    @else
+                        <td></td>
+                    @endif
                 </tr>
                 <tr style="white-space: nowrap;">
                     <td>Reference No</td>
                     <td>:</td>
-                    <td>{{$response_sales['data']['nomor_referensi']}}</td>
+                    @if($response_sales['data']['nomor_referensi'] != "null")
+                        <td>{{$response_sales['data']['nomor_referensi']}}</td>
+                    @else  
+                        <td></td>
+                    @endif    
                 </tr>
                 <tr style="white-space: nowrap;">
                     <td>Term Payment</td>
                     <td>:</td>
-                    <td>{{$response_sales['data']['dp']}}</td>
+                    @if ($response_sales['data']['dp'] != "null")
+                        <td>{{$response_sales['data']['dp']}}</td>
+                    @else
+                        <td></td>
+                    @endif
                 </tr>
                 <tr style="white-space: nowrap;">
                     <td>Kasir</td>
                     <td>:</td>
-                    <td>{{$response_sales['data']['employee_name']}}</td>
+                    @if ($response_sales['data']['employee_name'] != "null")
+                        <td>{{$response_sales['data']['employee_name']}}</td>
+                    @else
+                        <td></td>
+                    @endif
                 </tr>
             </table>
         </div>
