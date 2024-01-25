@@ -154,30 +154,31 @@
                 </div>
                 <br/>
                 <br/>
-                <div class="border-top border-secondary" style="width:98%">
-                    <div class="d-flex justify-content-between mx-4 my-2 text-dark">
-                        <p class="m-0"><b>Total</b></p>
-                        <p class="m-0" id="subtotal_item">Rp. Loading ...</p>
-                    </div>
-                </div>
-                @if(isset($response_sales['data']))
-                <a href="#" onclick="hideElementsByClass('forDelete','show');" class="btn btn-outline-secondary btn-outline-top btn-outline-bottom mx-2 <?php if($response_sales['data']['verified']=='true' || $response_sales['data']['dp'] >0){ echo 'disabled'; } ?>" style="width:98%" role="button" aria-pressed="true">
-                    Clear Sale
-                </a>
-                @endif
+                
             </div>
         </div>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column w-98">
+            <div class="border-top border-secondary" style="width:98%">
+                <div class="d-flex justify-content-between mx-4 my-2 text-dark">
+                    <p class="m-0"><b>Total</b></p>
+                    <p class="m-0" id="subtotal_item">Rp. Loading ...</p>
+                </div>
+            </div>
             @if(isset($response_sales['data']))
-                <div class="d-flex flex-row w-100 justify-content-center align-items-between">
+            <a href="#" onclick="hideElementsByClass('forDelete','show');" class="btn btn-outline-secondary btn-outline-top btn-outline-bottom mx-2 <?php if($response_sales['data']['verified']=='true' || $response_sales['data']['dp'] >0){ echo 'disabled'; } ?>" style="width:98%" role="button" aria-pressed="true">
+                Clear Sale
+            </a>
+            @endif
+            @if(isset($response_sales['data']))
+                <div style="width:99%" class="d-flex flex-row justify-content-center align-items-between">
                     <a href="" class="btn btn-secondary btn-lg w-50 rounded-0 <?php if($response_sales['data']['verified']=='true' || $response_sales['data']['dp'] >0 ){ echo 'disabled'; } ?>" role="button" style="margin:3px" aria-pressed="true" data-toggle="modal" data-target="#payment">
                         Save Bill
                     </a>
-                    <form method="post" action="/sales/print_invoice" target="_blank" >
+                    <form method="post" action="/sales/print_invoice" target="_blank" class="w-50">
                         @csrf
                         @method("POST")
                         <input type="hidden" name="sales_master_id" value="{{$response_sales['data']['id']}}">
-                        <button type="submit" class="btn btn-secondary btn-lg w-50 rounded-0 <?php if($response_sales['data']['verified']=='true'){ echo ''; }else{ echo 'disabled'; } ?>" role="button" style="margin:3px" aria-pressed="true" >Print Bill</button>
+                        <button type="submit" class="btn btn-secondary btn-lg w-100 rounded-0 <?php if($response_sales['data']['verified']=='true'){ echo ''; }else{ echo 'disabled'; } ?>" role="button" style="margin:3px" aria-pressed="true" >Print Bill</button>
                     </form>
                     <!-- <a href="{{ url('/sales/print_invoice') }}" target="_blank" class="btn btn-secondary btn-lg w-50 rounded-0 <?php // if($response_sales['data']['verified']=='true'){ echo ''; }else{ echo 'disabled'; } ?>" role="button" style="margin:3px" aria-pressed="true"> -->
                         <!-- Print Bill -->
