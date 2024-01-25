@@ -241,7 +241,7 @@
         console.log(settings.idx_branch);
         var load_img = $('<img/>').attr('src', settings.loading_gif_url).addClass('loading-image');
         var record_end_txt = $('<div/>').text(settings.end_record_text).addClass('end-record-info');
-        offsetN0 = settings.start_page * settings.limit;
+        offsetN1 = settings.start_page * settings.limit;
         if (loading == false && end_record == false) {
             loading = true;
             $("#forLoad1").append(load_img);
@@ -263,13 +263,13 @@
                 },
                 success: function (result) {
                     console.log(result);
-                    var table = $('#data_cashin_table_2').DataTable();
+                    var table1 = $('#data_cashin_table_2').DataTable();
                     let rowData = [];
                     for (let i = 0; i < result.data.length; i++) {
                         let currentItem = result.data[i];
-                        offsetN0++;
+                        offsetN1++;
                         rowData.push([
-                            offsetN0,
+                            offsetN1,
                             currentItem.tannggal_pengeluaran,
                             formatNumber(currentItem.jumlah_pengeluaran),
                             currentItem.kode_coa,
@@ -279,7 +279,7 @@
                             currentItem.deskripsi,
                         ]);
                     }
-                    table.rows.add(rowData).draw();
+                    table1.rows.add(rowData).draw();
                     if (result.data.length < settings.limit) {
                         $("#forNOmore1").html(record_end_txt);
                         load_img.remove();
