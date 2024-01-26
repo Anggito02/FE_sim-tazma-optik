@@ -67,12 +67,13 @@
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Open Kas Date</span></th>
-                            <th class="thead-text"><span class="nowrap">Close Kas Date</span></th>
-                            <th class="thead-text"><span class="nowrap">Daily Additional Capital</span></th>
-                            <th class="thead-text"><span class="nowrap">Daily Initial Cash</span></th>
-                            <th class="thead-text"><span class="nowrap">Daily Final Cash</span></th>
-                            <th class="thead-text"><span class="nowrap">Employee Name</span></th>
+                            <th class="thead-text"><span class="nowrap">Date of Cost Expenditure</span></th>
+                            <th class="thead-text"><span class="nowrap">Total Cost Expenditure</span></th>
+                            <th class="thead-text"><span class="nowrap">COA Code</span></th>
+                            <th class="thead-text"><span class="nowrap">Branch Code</span></th>
+                            <th class="thead-text"><span class="nowrap">Branch Name</span></th>
+                            <th class="thead-text"><span class="nowrap">Made By</span></th>
+                            <th class="thead-text"><span class="nowrap">Description</span></th>
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap">
@@ -93,14 +94,12 @@
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Date of Cost Expenditure</span></th>
-                            <th class="thead-text"><span class="nowrap">Total Cost Expenditure</span></th>
-                            <th class="thead-text"><span class="nowrap">COA Code</span></th>
-                            <th class="thead-text"><span class="nowrap">Branch Code</span></th>
-                            <th class="thead-text"><span class="nowrap">Branch Name</span></th>
-                            <th class="thead-text"><span class="nowrap">Made By</span></th>
-                            <th class="thead-text"><span class="nowrap">Description</span></th>
-
+                            <th class="thead-text"><span class="nowrap">Open Kas Date</span></th>
+                            <th class="thead-text"><span class="nowrap">Close Kas Date</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Additional Capital</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Initial Cash</span></th>
+                            <th class="thead-text"><span class="nowrap">Daily Final Cash</span></th>
+                            <th class="thead-text"><span class="nowrap">Employee Name</span></th>
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap">
@@ -180,7 +179,7 @@
         offsetN0 = settings.start_page * settings.limit;
         if (loading == false && end_record == false) {
             loading = true;
-            $("#forLoad").append(load_img);
+            $("#forLoad1").append(load_img);
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 method: "POST",
@@ -199,7 +198,7 @@
                 },
                 success: function (result) {
                     console.log(result);
-                    var table = $('#data_cashout_table_1').DataTable();
+                    var table = $('#data_cashin_table_2').DataTable();
                     let rowData = [];
                     for (let i = 0; i < result.data.length; i++) {
                         let currentItem = result.data[i];
@@ -216,7 +215,7 @@
                     }
                     table.rows.add(rowData).draw();
                     if (result.data.length < settings.limit) {
-                        $("#forNOmore").html(record_end_txt);
+                        $("#forNOmore1").html(record_end_txt);
                         load_img.remove();
                         end_record = true;
                     } else {
@@ -244,7 +243,7 @@
         offsetN1 = settings.start_page * settings.limit;
         if (loading == false && end_record == false) {
             loading = true;
-            $("#forLoad1").append(load_img);
+            $("#forLoad").append(load_img);
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 method: "POST",
@@ -263,7 +262,7 @@
                 },
                 success: function (result) {
                     console.log(result);
-                    var table1 = $('#data_cashin_table_2').DataTable();
+                    var table1 = $('#data_cashout_table_1').DataTable();
                     let rowData = [];
                     for (let i = 0; i < result.data.length; i++) {
                         let currentItem = result.data[i];
@@ -281,7 +280,7 @@
                     }
                     table1.rows.add(rowData).draw();
                     if (result.data.length < settings.limit) {
-                        $("#forNOmore1").html(record_end_txt);
+                        $("#forNOmore").html(record_end_txt);
                         load_img.remove();
                         end_record = true;
                     } else {
@@ -294,7 +293,7 @@
                         if ($(this).scrollTop() + $(this).height() >= ($(this)[0].scrollHeight + $(
                                 '.odd').height() / 2) - 40) {
                             settings.lastScroll = $(this).scrollTop();
-                            addContent(settings);
+                            addContentCashOut(settings);
                         }
                     });
                 }
@@ -352,7 +351,7 @@
 
     $(document).ready(function () {
         var table = $('#data_cashout_table_1').DataTable({
-            fixedHeader: {
+        fixedHeader: {
                 header: true
             },
             scrollY: $(window).height() - 350,
