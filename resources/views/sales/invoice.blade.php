@@ -56,37 +56,40 @@
                 <tr style="white-space: nowrap;">
                     <td>Address</td>
                     <td>:</td>
-                    <td>{{$response_sales['data']['customer_nama_depan']}} {{$response_sales['data']['customer_nama_belakang']}}</td>
+                    <td>{{$response_sales['data']['customer_alamat']}}</td>
                 </tr>
                 <tr style="white-space: nowrap;">
                     <td>Phone</td>
                     <td>:</td>
-                    <td>{{$response_sales['data']['customer_nama_depan']}} {{$response_sales['data']['customer_nama_belakang']}}</td>
+                    <td>{{$response_sales['data']['customer_nomor_telepon']}}</td>
                 </tr>
                 <tr style="white-space: nowrap;">
                     <td>Email</td>
                     <td>:</td>
-                    <td>{{$response_sales['data']['customer_nama_depan']}} {{$response_sales['data']['customer_nama_belakang']}}</td>
+                    <td>{{$response_sales['data']['customer_email']}}</td>
                 </tr>
             </table>
         </div>
-        <div class="col-md-6 black-text bold-text d-flex justify-content-end">
+        <div class="col-md-3 black-text bold-text">
+            &nbsp;
+        </div>
+        <div class="col-md-3 black-text bold-text d-flex ">
             <br/>
             <table>
                 <tr style="white-space: nowrap;">
                     <td>Payment Method</td>
                     <td>:</td>
-                    @if ($response_sales['data']['dp'] != "null")
-                        <td>{{$response_sales['data']['dp']}}</td>
+                    @if ($response_sales['data']['sistem_pembayaran'] != "null")
+                        <td>{{$response_sales['data']['sistem_pembayaran']}}</td>
                     @else
                         <td></td>
                     @endif
                 </tr>
                 <tr style="white-space: nowrap;">
-                    <td>Term Payment</td>
+                    <td>Payment Status</td>
                     <td>:</td>
-                    @if ($response_sales['data']['dp'] != "null")
-                        <td>{{$response_sales['data']['dp']}}</td>
+                    @if ($response_sales['data']['status'] != "null")
+                        <td>{{$response_sales['data']['status']}}</td>
                     @else
                         <td></td>
                     @endif

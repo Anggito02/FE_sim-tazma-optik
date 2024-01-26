@@ -10,17 +10,6 @@
         <span id="tambah_info"></span>
         <form id="itemForm" action="/stock-opname/detail/{{$stock_opname_id}}" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
-                <div class="form-group">
-                    <span>Scan Barang</span>
-                    <div class="d-flex flex-row">
-                        <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
-                            <input type="text"  name="qrcode" autofocus=true class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" />
-                        </form>
-                        <button type="submit" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
                 <div class="row align-items-end">
                 <!-- Add the form inside the row -->
                 @csrf
@@ -488,6 +477,10 @@
                 <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
+                <form id="add_info_item" class="form-horizontal" onsubmit="submitFormItem(event)">
+                    <input type="text"  name="qrcode" autofocus=true class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" />
+                    <button type="submit" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;"><i class="fas fa-search"></i></button>
+                </form>
                 <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
                     @csrf
                     <!-- @method("POST") -->
