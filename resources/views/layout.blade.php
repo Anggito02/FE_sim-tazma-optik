@@ -143,6 +143,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Sales Sheet:</h6>
                         <a class="collapse-item" href="/customer">Customer</a>
+                        <a class="collapse-item" href="/kas">Kas</a>
                         <a class="collapse-item" href="/sales">Kasir</a>
                     </div>
                 </div>

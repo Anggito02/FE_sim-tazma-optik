@@ -46,12 +46,18 @@
                     <div class="form-group col-md-12">
                         <br/>
                         <button type="submit" class="btn btn-primary"><i
-                                class="fa-solid fa-magnifying-glass"></i>Search</button>
-                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
+                                class="fa-solid fa-magnifying-glass"></i> Search</button>
+                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i> Show All</button>
                         <button type="button" class="btn btn-success btn-new-item" data-toggle="modal"
-                            data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Cash Out</button>
+                        data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Cash Out</button>
                         <button type="button" class="btn btn-secondary btn-new-item" data-toggle="modal"
-                            data-target="#exampleModalCenterDailyCash"><i class="fa-solid fa-file"></i> New Daily Cash</button>
+                        data-target="#exampleModalCenterDailyCash"><i class="fa-solid fa-file"></i> New Daily Cash</button>
+                        {{-- <form action="/kas/exist" method="POST">
+                            @csrf
+                            @method("POST")
+                            <input hidden name="branch_id" class="form-control" value="{{$idx_branch}}">
+                            <button type="submit" class="btn btn-info"><i class="fa-solid fa-circle-info"></i> Check Cash Opened</button>
+                        </form> --}}
                     </div>
                     @endif
 

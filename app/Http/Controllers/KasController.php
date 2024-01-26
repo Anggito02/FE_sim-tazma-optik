@@ -206,7 +206,7 @@ class KasController extends Controller {
             "limit" => $limit,
         ];
 
-        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request_def);
         $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request_kas);
         $response_pengeluaran = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/all', $api_request_kas);
         $response_add_daily_kas = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/kas/add', $api_request);
@@ -216,6 +216,54 @@ class KasController extends Controller {
         $branch_all = $response_branch->json();
         $kas_all = $response_kas->json();
         $pengeluaran_all = $response_pengeluaran->json();
+
+        $user = GetUserInfo::getUserInfo();
+
+        return view('dito', [
+            'data' => $user['data'],
+            'kas_all' => $kas_all['data'],
+            'branch_all' => $branch_all['data'],
+            'idx_branch' => $request->branch_id,
+            'pengeluaran_all' => $pengeluaran_all['data'],
+        ]);
+    }
+    public function checkKasIfExist(Request $request) {
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $page = 1;
+        $limit = 50;
+
+        $api_request = [
+            'branch_id' => $request->branch_id,
+        ];
+
+        $api_request_kas = [
+            "page" => $page,
+            "limit" => $limit,
+            "branch_id" => $request->branch_id,
+        ];
+
+        $api_request_def = [
+            "page" => $page,
+            "limit" => $limit,
+        ];
+
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request_def);
+        $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request_kas);
+        $response_pengeluaran = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/all', $api_request_kas);
+        $response_check_exist = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/kas/exist', $api_request);
+
+        $check_exist = $response_check_exist->json();
+        $branch_all = $response_branch->json();
+        $kas_all = $response_kas->json();
+        $pengeluaran_all = $response_pengeluaran->json();
+
+        dd($check_exist);
 
         $user = GetUserInfo::getUserInfo();
 
