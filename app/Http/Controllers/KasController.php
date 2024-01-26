@@ -41,7 +41,6 @@ class KasController extends Controller {
         ]);
     }
 
-
     public function getAllKas (Request $request) {
         $token = $_COOKIE['token'];
 
@@ -73,7 +72,7 @@ class KasController extends Controller {
         $pengeluaran_all = $response_pengeluaran->json();
 
         $user = GetUserInfo::getUserInfo();
-        // dd($pengeluaran_all['data']);
+
         return view('dito', [
             'data' => $user['data'],
             'kas_all' => $kas_all['data'],
@@ -90,8 +89,6 @@ class KasController extends Controller {
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        // $page = 1;
-        // $limit = 50;
 
         $api_request = [
             "page" => $request->page,
@@ -137,6 +134,9 @@ class KasController extends Controller {
         ];
         $row=$request;
 
+        $page = 1;
+        $limit = 50;
+
         $api_request = [
             'deskripsi' => $request->deskripsi,
             'jumlah_pengeluaran' => $request->jumlah_pengeluaran,
@@ -145,16 +145,87 @@ class KasController extends Controller {
             'made_by' => $request->made_by,
         ];
 
+        $api_request_kas = [
+            "page" => $page,
+            "limit" => $limit,
+            "branch_id" => $request->branch_id,
+        ];
+
+        $api_request_def = [
+            "page" => $page,
+            "limit" => $limit,
+        ];
+
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request_def);
+        $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request_kas);
+        $response_pengeluaran = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/all', $api_request_kas);
+
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/add', $api_request);
 
         $result = $response->json();
+        $branch_all = $response_branch->json();
+        $kas_all = $response_kas->json();
+        $pengeluaran_all = $response_pengeluaran->json();
 
-        if($result['message'] == 'success'){
-            $row['message']="The data has been successfully added";
-        }else{
-            $row['message']="Add data failed ";
-        }
-        return redirect('/kas/all/'.$request->branch_id);
+        $user = GetUserInfo::getUserInfo();
+
+        return view('dito', [
+            'data' => $user['data'],
+            'kas_all' => $kas_all['data'],
+            'branch_all' => $branch_all['data'],
+            'idx_branch' => $request->branch_id,
+            'pengeluaran_all' => $pengeluaran_all['data'],
+        ]);
+    }
+
+    public function addNewDailyKas(Request $request) {
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $page = 1;
+        $limit = 50;
+
+        $api_request = [
+            'modal_tambahan_harian' => $request->modal_tambahan_harian,
+            'branch_id' => $request->branch_id,
+            'employee_id' => $request->employee_id,
+        ];
+
+        $api_request_kas = [
+            "page" => $page,
+            "limit" => $limit,
+            "branch_id" => $request->branch_id,
+        ];
+
+        $api_request_def = [
+            "page" => $page,
+            "limit" => $limit,
+        ];
+
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
+        $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request_kas);
+        $response_pengeluaran = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/all', $api_request_kas);
+        $response_add_daily_kas = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/kas/add', $api_request);
+
+
+        $add_daily_kas = $response_add_daily_kas->json();
+        $branch_all = $response_branch->json();
+        $kas_all = $response_kas->json();
+        $pengeluaran_all = $response_pengeluaran->json();
+
+        $user = GetUserInfo::getUserInfo();
+
+        return view('dito', [
+            'data' => $user['data'],
+            'kas_all' => $kas_all['data'],
+            'branch_all' => $branch_all['data'],
+            'idx_branch' => $request->branch_id,
+            'pengeluaran_all' => $pengeluaran_all['data'],
+        ]);
     }
 
     // public function loadDataDetailOnly(Request $request, int $soid){

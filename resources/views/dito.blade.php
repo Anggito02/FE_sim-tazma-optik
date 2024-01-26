@@ -50,6 +50,8 @@
                         <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
                         <button type="button" class="btn btn-success btn-new-item" data-toggle="modal"
                             data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Cash Out</button>
+                        <button type="button" class="btn btn-secondary btn-new-item" data-toggle="modal"
+                            data-target="#exampleModalCenterDailyCash"><i class="fa-solid fa-file"></i> New Daily Cash</button>
                     </div>
                     @endif
 
@@ -549,7 +551,7 @@
                             <div class="form-add-item " id="namaItemAksesorisclass=">
                                 <div class="mb-3">
                                     <label for="bentuk_pengeluaranr" class="form-label black-text">Form of Expenditure</label>
-                                    <select type="employee_name" class="form-control select2" name="bentuk_pengeluaran">
+                                    <select type="employee_name" class="form-control chosen-select" name="bentuk_pengeluaran">
                                         <option value="" disabled selected hidden>Choosee..</option>
                                         <option value="TARIK_MODAL">TARIK MODAL</option>
                                         <option value="LAINNYA">LAINNYA</option>
@@ -577,6 +579,46 @@
     </div>
 </div>
 
+<div class="modal fade" id="exampleModalCenterDailyCash" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Daily Cash</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span id="tambah_info"></span>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" action="/kas/newDaily">
+                    @csrf
+                    @method("POST")
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-add-item " id="namaItemAksesoris">
+                                <div class="mb-3">
+                                    <label for="modal_tambahan_harian" class="form-label black-text">Additional Daily Capital</label>
+                                    <input type="number" name="modal_tambahan_harian" class="form-control">
+                                    @if (isset($kas_all))
+                                    <input hidden name="branch_id" class="form-control" value="{{$idx_branch}}">
+                                    <input hidden name="employee_id" class="form-control" value="{{$data['id']}}">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {{-- @foreach ($stock_opname_detail as $sod)
 // <div class="modal fade" id="modalAdjust{{ $sod['id'] }}" tabindex="-1" role="dialog"
