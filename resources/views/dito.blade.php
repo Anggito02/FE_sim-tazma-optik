@@ -270,7 +270,7 @@
                         offsetN1++;
                         rowData.push([
                             offsetN1,
-                            currentItem.tannggal_pengeluaran,
+                            currentItem.tanggal_pengeluaran,
                             formatNumber(currentItem.jumlah_pengeluaran),
                             currentItem.kode_coa,
                             currentItem.kode_branch,
