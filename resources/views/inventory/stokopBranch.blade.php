@@ -59,14 +59,14 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="data_opname_branch_table_1" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" style="table-layout:fixed; width:100%; border-collapse:collapse;" id="data_opname_branch_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr style="white-space: nowrap;">
-                            <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Tahun</span></th>
-                            <th class="thead-text"><span class="nowrap">Bulan</span></th>
-                            <th class="thead-text"><span class="nowrap">Cabang</span></th>
-                            <th class="thead-text"><span class="nowrap">Detail</span></th>
+                            <th class="thead-text" style="width: 5%;"><span class="nowrap">No</span></th>
+                            <th class="thead-text" style="width: auto;"><span class="nowrap">Tahun</span></th>
+                            <th class="thead-text" style="width: auto;"><span class="nowrap">Bulan</span></th>
+                            <th class="thead-text" style="width: auto;"><span class="nowrap">Cabang</span></th>
+                            <th class="thead-text" style="width: auto;"><span class="nowrap">Detail</span></th>
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap;">
