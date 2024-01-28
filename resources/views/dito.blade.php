@@ -69,6 +69,31 @@
     @if(isset($kas_all))
     <div class="card shadow mb-4">
 
+        <div class="card-body mb-3">
+            <div class="table-responsive">
+                <h3 class="text-center black-text bold-text">KAS</h3>
+                <table class="table table-bordered table-striped" id="data_cashin_table_2" width="100%" style="table-layout: fixed; width:100%;" cellspacing="0">
+                    <thead class="thead-color txt-center">
+                        <tr>
+                            <th class="thead-text" style="width:10%;"><span class="nowrap">No</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Open Kas Date</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Close Kas Date</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Daily Additional Capital</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Daily Initial Cash</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Daily Final Cash</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Employee Name</span></th>
+                        </tr>
+                    </thead>
+                    <tbody style="white-space: nowrap">
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-body1">
+                <div id="forLoad1"></div>
+                <div id="forNOmore1"></div>
+            </div>
+        </div>
+
         <div class="card-body mb-3" style="width:100%">
             <div class="table-responsive">
                 <h3 class="text-center black-text bold-text">CASH OUT</h3>
@@ -99,36 +124,18 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <h3 class="text-center black-text bold-text">KAS</h3>
-                <table class="table table-bordered table-striped" id="data_cashin_table_2" width="100%" style="table-layout: fixed; width:100%;" cellspacing="0">
-                    <thead class="thead-color txt-center">
-                        <tr>
-                            <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Open Kas Date</span></th>
-                            <th class="thead-text"><span class="nowrap">Close Kas Date</span></th>
-                            <th class="thead-text"><span class="nowrap">Daily Additional Capital</span></th>
-                            <th class="thead-text"><span class="nowrap">Daily Initial Cash</span></th>
-                            <th class="thead-text"><span class="nowrap">Daily Final Cash</span></th>
-                            <th class="thead-text"><span class="nowrap">Employee Name</span></th>
-                        </tr>
-                    </thead>
-                    <tbody style="white-space: nowrap">
-                    </tbody>
-                </table>
-            </div>
-            <div class="box-body1">
-                <div id="forLoad1"></div>
-                <div id="forNOmore1"></div>
-            </div>
-        </div>
-
-        <div class="card-body">
-            <div class="table-responsive">
                 <h3 class="text-center black-text bold-text">CASH IN</h3>
-                <table class="table table-bordered table-striped" id="data_cashin_table_2" style="table-layout: fixed; width:100%;" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="data_cashin_table_3" style="table-layout: fixed; width:100%;" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr>
-                            <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text" style="width:10%;"><span class="nowrap">No</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Transaction Number</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Transaction Date</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Amount of Income</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Branch Code</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Branch Name</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">COA Code</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Sales Name</span></th>
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap">
@@ -330,6 +337,71 @@
         }
     }
 
+    function addContentCashIn(settings) {
+        console.log(settings.idx_branch);
+        var load_img = $('<img/>').attr('src', settings.loading_gif_url).addClass('loading-image');
+        var record_end_txt = $('<div/>').text(settings.end_record_text).addClass('end-record-info');
+        offsetN2 = settings.start_page * settings.limit;
+        if (loading == false && end_record == false) {
+            loading = true;
+            $("#forLoad2").append(load_img);
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                method: "POST",
+                type: 'ajax',
+                url: settings.data_url,
+                data: {
+                    'limit': settings.limit,
+                    'page': (settings.limit * settings.start_page),
+                    '_token': csrfToken,
+                    'branch_id': settings.idx_branch
+                },
+                async: true,
+                dataType: 'json',
+                error: function (request, error) {
+                    alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+                },
+                success: function (result) {
+                    console.log(result);
+                    var table1 = $('#data_cashin_table_3').DataTable();
+                    let rowData = [];
+                    for (let i = 0; i < result.data.length; i++) {
+                        let currentItem = result.data[i];
+                        offsetN2++;
+                        rowData.push([
+                            offsetN2,
+                            currentItem.nomor_transaksi,
+                            currentItem.tanggal_transaksi,
+                            formatNumber(currentItem.jumlah_pemasukan),
+                            currentItem.kode_branch,
+                            currentItem.nama_branch,
+                            currentItem.kode_coa,
+                            currentItem.sales_by_name,
+                        ]);
+                    }
+                    table1.rows.add(rowData).draw();
+                    if (result.data.length < settings.limit) {
+                        $("#forNOmore2").html(record_end_txt);
+                        load_img.remove();
+                        end_record = true;
+                    } else {
+                        load_img.remove();
+                        loading = false;
+                        settings.start_page++; //page increment
+                    }
+                    $('.dataTables_scrollBody').scrollTop(settings.lastScroll + 25);
+                    $('div.dataTables_scrollBody').scroll(function (el) {
+                        if ($(this).scrollTop() + $(this).height() >= ($(this)[0].scrollHeight + $(
+                                '.odd').height() / 2) - 40) {
+                            settings.lastScroll = $(this).scrollTop();
+                            addContentCashOut(settings);
+                        }
+                    });
+                }
+            });
+        }
+    }
+
     function masterContent() {
         var branch = "<?php echo $idx_branch; ?>";
         branch = parseFloat(branch);
@@ -372,6 +444,27 @@
         addContentCashOut(settings);
     }
 
+    function masterContentCashIn() {
+        var branch = "<?php echo $idx_branch; ?>";
+        branch = parseFloat(branch);
+        console.log(branch);
+        var settings = $.extend({
+            loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
+            data_url: "{{ url('/kas/loadDataMasterCashIn/') }}",
+            // data_url: "{{ url('/stock-opname/detail/loadDataMaster') }}",
+            end_record_text: 'No more records found!', //no more records to load
+            start_page: 0, //initial page
+            limit: 50, //initial page
+            htmldata: '', //initial page
+            lastScroll: 0, //initial page
+            idx_branch: <?php echo $idx_branch; ?> , //initial page
+
+        });
+        loading = false;
+        end_record = false;
+        addContentCashIn(settings);
+    }
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -379,6 +472,27 @@
     });
 
     $(document).ready(function () {
+        var tableCashOut = $('#data_cashin_table_2').DataTable({
+            fixedHeader: {
+                header: true
+            },
+            scrollY: $(window).height() - 350,
+            scrollX: true,
+            scrollCollapse: true,
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            // fixedColumns:   {
+            //     leftColumns:4},
+            // 				// dom: 'Bfrtip',
+            // 				// buttons: [
+            // 				// 	// 'copy', 'csv', 'excel', 'pdf', 'print'
+            // 				// 	'csv', 'excel', 'print'
+            // 				// ],
+
+        });
+
         var table = $('#data_cashout_table_1').DataTable({
         fixedHeader: {
                 header: true
@@ -400,8 +514,8 @@
 
         });
 
-        var tableCashOut = $('#data_cashin_table_2').DataTable({
-            fixedHeader: {
+        var table = $('#data_cashin_table_3').DataTable({
+        fixedHeader: {
                 header: true
             },
             scrollY: $(window).height() - 350,
@@ -422,6 +536,7 @@
         });
         masterContent();
         masterContentCashOut();
+        masterContentCashIn();
     });
 
     $(document).ready(function () {

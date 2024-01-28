@@ -66,10 +66,12 @@ class KasController extends Controller {
         $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
         $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request_kas);
         $response_pengeluaran = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/all', $api_request_kas);
+        $response_pengeluaran_in = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/kas-in/all', $api_request_kas);
 
         $branch_all = $response_branch->json();
         $kas_all = $response_kas->json();
         $pengeluaran_all = $response_pengeluaran->json();
+        $pengeluaran_in = $response_pengeluaran_in->json();
 
         $user = GetUserInfo::getUserInfo();
 
@@ -79,11 +81,11 @@ class KasController extends Controller {
             'branch_all' => $branch_all['data'],
             'idx_branch' => $request->branch_id,
             'pengeluaran_all' => $pengeluaran_all['data'],
+            'pengeluaran_in' => $pengeluaran_in['data'],
         ]);
     }
 
-    public function loadDataMaster(Request $request)
-    {
+    public function loadDataMaster(Request $request){
         $token = $_COOKIE['token'];
         $headers = [
             'Accept' => 'application/json',
@@ -124,7 +126,82 @@ class KasController extends Controller {
         return response()->json($pengeluaran);
     }
 
+    public function loadDataMasterCashIn(Request $request){
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request = [
+            "page" => $request->page,
+            "limit" => $request->limit,
+            "branch_id" => $request->branch_id,
+        ];
+
+        $response_pengeluaran_in = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/kas-in/all', $api_request);
+
+        $pengeluaran_in = $response_pengeluaran_in->json();
+
+        return response()->json($pengeluaran_in);
+    }
+
     public function addKasOut(Request $request) {
+        $row ="";
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $row=$request;
+
+        $page = 1;
+        $limit = 50;
+
+        $api_request = [
+            'deskripsi' => $request->deskripsi,
+            'jumlah_pengeluaran' => $request->jumlah_pengeluaran,
+            'bentuk_pengeluaran' => $request->bentuk_pengeluaran,
+            'branch_id' => $request->branch_id,
+            'made_by' => $request->made_by,
+        ];
+
+        $api_request_kas = [
+            "page" => $page,
+            "limit" => $limit,
+            "branch_id" => $request->branch_id,
+        ];
+
+        $api_request_def = [
+            "page" => $page,
+            "limit" => $limit,
+        ];
+
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request_def);
+        $response_kas = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kas/all', $api_request_kas);
+        $response_pengeluaran = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/all', $api_request_kas);
+
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/pengeluaran/add', $api_request);
+
+        $result = $response->json();
+        $branch_all = $response_branch->json();
+        $kas_all = $response_kas->json();
+        $pengeluaran_all = $response_pengeluaran->json();
+
+        $user = GetUserInfo::getUserInfo();
+
+        return view('dito', [
+            'data' => $user['data'],
+            'kas_all' => $kas_all['data'],
+            'branch_all' => $branch_all['data'],
+            'idx_branch' => $request->branch_id,
+            'pengeluaran_all' => $pengeluaran_all['data'],
+        ]);
+    }
+
+    public function addKasIn(Request $request) {
         $row ="";
         $token = $_COOKIE['token'];
 
