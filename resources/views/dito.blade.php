@@ -7,40 +7,41 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <span id="tambah_info"></span>
-        <form id="itemForm" action="/kas/all" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row align-items-end">
                     <!-- Add the form inside the row -->
-                    @csrf
-                    @method("GET")
                     <div class="form-group col-md-3">
                         <label for="branches" class="form-label black-text">Branches</label>
-                        <div class="d-flex">
-                            @if (isset($kas_all))
-                            <select type="text" name="branch_id" id="branches" class="form-control chosen-select"
-                                style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                {{-- <option value="" disabled selected hidden>{{$branch_all[(int)$idx_branch-1]['nama_branch']}}
-                                </option> --}}
-                                @foreach ($branch_all as $branch)
-                                <option value="{{$branch['id']}}"
-                                    <?php if($idx_branch==$branch['id']){ echo "selected"; } ?>>
-                                    {{$branch['nama_branch']}}</option>
-                                @endforeach
-                            </select>
-                            @else
-                            <select type="text" name="branch_id" id="branches" class="form-control chosen-select"
-                                style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                <option value="" disabled selected hidden>Choose...</option>
-                                @foreach ($branch_all as $branch)
-                                <option value="{{$branch['id']}}">{{$branch['nama_branch']}}</option>
-                                @endforeach
-                            </select>
-                            @endif
-                            <button type="submit" class="btn btn-primary shadow-0"
-                                style="border-radius: 0% 20% 20% 0%;">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
+                        <form id="itemForm" action="/kas/all" method="POST" class=" form-horizontal">
+                            @csrf
+                            @method("GET")
+                            <div class="d-flex">
+
+                                @if (isset($kas_all))
+                                <select type="text" name="branch_id" id="branches" class="form-control chosen-select"
+                                    style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                    @foreach ($branch_all as $branch)
+                                    <option value="{{$branch['id']}}"
+                                        <?php if($idx_branch==$branch['id']){ echo "selected"; } ?>>
+                                        {{$branch['nama_branch']}}</option>
+                                    @endforeach
+                                </select>
+                                @else
+                                <select type="text" name="branch_id" id="branches" class="form-control chosen-select"
+                                    style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                    <option value="" disabled selected hidden>Choose...</option>
+                                    @foreach ($branch_all as $branch)
+                                    <option value="{{$branch['id']}}">{{$branch['nama_branch']}}</option>
+                                    @endforeach
+                                </select>
+                                @endif
+
+                                <button type="submit" class="btn btn-primary shadow-0"
+                                    style="border-radius: 0% 20% 20% 0%;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                     @if (isset($kas_all))
                     <div class="form-group col-md-12">
@@ -62,7 +63,8 @@
                     @endif
 
                 </div>
-        </form>
+            </div>
+
     </div>
     @if(isset($kas_all))
     <div class="card shadow mb-4">
@@ -123,11 +125,10 @@
         <div class="card-body">
             <div class="table-responsive">
                 <h3 class="text-center black-text bold-text">CASH IN</h3>
-                <table class="table table-bordered table-striped" id="data_cashin_table_2" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="data_cashin_table_2" style="table-layout: fixed; width:100%;" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-
                         </tr>
                     </thead>
                     <tbody style="white-space: nowrap">
@@ -423,116 +424,6 @@
         masterContentCashOut();
     });
 
-    // function submitFormAdjustmentNote(event){
-    // 	$('#btn_submit').hide();
-    // 	$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-    //     event.preventDefault();
-    //     var form = document.getElementById('add_info_adjustnote');
-    //     var formData = new FormData(form);
-    //     $.ajax({
-    //         url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/init-adjustment",
-    //         type: 'POST',
-    //         data: formData,
-    //         async: false,
-    //         cache: false,
-    //         contentType: false,
-    //         processData: false,
-    //         dataType: 'json',
-    //         success: function (result) {
-    //             console.log(result);
-    //         if(result.message=="The data has been successfully updated"){
-    // 			  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-    // 			  	setTimeout(function(){
-    // 				 $('#tambah_info').hide();
-    //                  location.reload();
-    // 				},3500);
-    // 		}else{
-    // 			$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-    // 			setTimeout(function(){
-    // 				$('#tambah_info').hide();
-    //                 location.reload();
-    // 			},3000)
-    // 		}
-    //         $('#btn_submit').show();
-    // 	}
-    //   });
-    //   return false;
-    // }
-
-    // function submitFormMakeAdjustment(event){
-    // 	$('#btn_submit').hide();
-    // 	$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-    //     event.preventDefault();
-
-    //     var form = document.getElementById('add_info_make_adjustment');
-    //     var formData = new FormData(form);
-    //     $.ajax({
-    //         url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/make-adjustment",
-    //         type: 'POST',
-    //         data: formData,
-    //         async: false,
-    //         cache: false,
-    //         contentType: false,
-    //         processData: false,
-    //         dataType: 'json',
-    //         success: function (result) {
-    //             console.log(result);
-    //         if(result.message=="The data has been successfully updated"){
-    // 			  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-    // 			  	setTimeout(function(){
-    // 				 $('#tambah_info').hide();
-    //                  location.reload();
-    // 				},3500);
-    // 		}else{
-    // 			$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-    // 			setTimeout(function(){
-    // 				$('#tambah_info').hide();
-    //                 location.reload();
-    // 			},3000)
-    // 		}
-    //         $('#btn_submit').show();
-    // 	}
-    //   });
-    //   return false;
-    // }
-
-    // function submitForm(event){
-    // 	$('#btn_submit').hide();
-    // 	$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-    //     event.preventDefault();
-    //     var form = document.getElementById('add_info');
-
-    //     var formData = new FormData(form);
-    //     $.ajax({
-    //         url   : "{{ url('/stock-opname/detail/add') }}",
-    //         type: 'POST',
-    //         data: formData,
-    //         async: false,
-    //         cache: false,
-    //         contentType: false,
-    //         processData: false,
-    //         dataType: 'json',
-    //         success: function (result) {
-    //             console.log(result);
-    //         if(result.message=="The data has been successfully updated"){
-    // 			  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-    // 			  	setTimeout(function(){
-    // 				 $('#tambah_info').hide();
-    //                  location.reload();
-    // 				},3500);
-    // 		}else{
-    // 			$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-    // 			setTimeout(function(){
-    // 				$('#tambah_info').hide();
-    //                 location.reload();
-    // 			},3000)
-    // 		}
-    //         $('#btn_submit').show();
-    // 	}
-    //   });
-    //   return false;
-    // }
-
     $(document).ready(function () {
         function insertCurrentDate() {
             const currentDate = new Date();
@@ -558,7 +449,7 @@
                 <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
-                <form method="post" action="/kas/add">
+                <form method="POST" action="/kas/addCashOut">
                     @csrf
                     @method("POST")
                     <div class="row">
@@ -646,92 +537,5 @@
     </div>
 </div>
 
-{{-- @foreach ($stock_opname_detail as $sod)
-// <div class="modal fade" id="modalAdjust{{ $sod['id'] }}" tabindex="-1" role="dialog"
-// aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-// <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-//     <div class="modal-content">
-//         <div class="modal-header">
-//             <h5 class="modal-title text-center" id="exampleModalLongTitle">Buat Adjustment</h5>
-//             <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
-//                 <span aria-hidden="true">&times;</span>
-//             </button>
-//         </div>
-//         <div class="modal-body">
-//             <form id="add_info_make_adjustment" method="post" onsubmit="submitFormMakeAdjustment(event)">
-//                 @csrf
-//                 <!-- @method("POST") -->
-//                 <div class="d-flex flex-row">
-//                     <p>Adjust Type : </p>
-//                     <p style="margin-left:1%;" id="set_adjust_type">{{ $sod['adjustment_type'] }}</p>
-//                     <input type="hidden" value="{{$sod['adjustment_type']}}" name="adjustment_type">
-//                 </div>
-//                 <div class="d-flex flex-row">
-//                     <p>Adjustment by : </p>
-//                     <p style="margin-left:1%;" id="set_adjust_by">{{ $data['username'] }}</p>
-//                     <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
-//                 </div>
-//                 <div class="d-flex flex-row">
-//                     <p>Kode Item - jenis Item : </p>
-//                     <p style="margin-left:1%;" id="set_item">{{ $sod['kode_item'] }} - {{ $sod['jenis_item'] }}</p>
-//                     <input type="hidden" value="{{$sod['item_id']}}" name="item_id">
-//                 </div>
-//                 <div class="d-flex flex-row">
-//                     <p>Adjustment QTY : </p>
-//                     <p style="margin-left:1%;" id="set_adjust_qty">{{ $sod['diff_qty'] }}</p>
-//                     <input type="hidden" value="{{$sod['diff_qty']}}" name="in_out_qty">
-//                 </div>
-//                 <div class="float-right">
-//                     <button type="button right" class="btn btn-primary px-4" data-dismiss="">Add</button>
-//                 </div>
-//             </form>
-//         </div>
-//         <div class="modal-footer justify-content-center alert alert-danger rounded-0" role="alert">
-//             <p>Can't be undone</p>
-//         </div>
-//     </div>
-// </div>
-// </div>
-// @endforeach --}}
-
-{{-- @foreach($stock_opname_detail as $sod)
-// <div class="modal fade" id="modalAddAdjustment{{ $sod['id'] }}" tabindex="-1" role="dialog"
-// aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-// <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-//     <div class="modal-content">
-//         <div class="modal-header">
-//             <h5 class="modal-title text-center" id="exampleModalLongTitle">Buat Adjustment Note</h5>
-//             <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
-//                 <span aria-hidden="true">&times;</span>
-//             </button>
-//         </div>
-//         <div class="modal-body">
-//             <form id="add_info_adjustnote" class="form-horizontal" onsubmit="submitFormAdjustmentNote(event)">
-//                 @csrf
-//                 <!-- @method("POST") -->
-//                 <div class="d-flex flex-column">
-//                     <div class="mb-3">
-//                         <p>Employee name : {{$data['username']}}</p>
-//                         <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
-//                     </div>
-//                     <div class="mb-3">
-//                         <label for="adjustment_date" class="form-label">Adjustment Date : </label>
-//                         <input type="datetime-local" id="datetime-local-adjustment" name="adjustment_date"
-//                             class="form-control">
-//                     </div>
-//                     <div class="mb-3">
-//                         <label class="m-0">Adjusment note :</label>
-//                         <input type="textarea" class="form-control" name="adjustment_followup_note">
-//                     </div>
-//                 </div>
-//                 <div class="mt-3 float-right">
-//                     <button type="submit" class="btn btn-primary px-4" data-dismiss="">Add</button>
-//                 </div>
-//             </form>
-//         </div>
-//     </div>
-// </div>
-// </div>
-// @endforeach --}}
 
 @endsection
