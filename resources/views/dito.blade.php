@@ -70,21 +70,21 @@
         <div class="card-body mb-3" style="width:100%">
             <div class="table-responsive">
                 <h3 class="text-center black-text bold-text">CASH OUT</h3>
-                <table class="table table-bordered table-striped" width="100%" id="data_cashout_table_1"
+                <table class="table table-bordered table-striped" width="100%" style="table-layout:fixed; width:100%; border-collapse:collapse;" id="data_cashout_table_1"
                     cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr>
-                            <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Date of Cost Expenditure</span></th>
-                            <th class="thead-text"><span class="nowrap">Total Cost Expenditure</span></th>
-                            <th class="thead-text"><span class="nowrap">COA Code</span></th>
-                            <th class="thead-text"><span class="nowrap">Branch Code</span></th>
-                            <th class="thead-text"><span class="nowrap">Branch Name</span></th>
-                            <th class="thead-text"><span class="nowrap">Made By</span></th>
-                            <th class="thead-text"><span class="nowrap">Description</span></th>
+                            <th class="thead-text" style="width:10%;"><span class="nowrap">No</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Date of Cost Expenditure</span></th>
+                            <th class="thead-text" style="width:80%;"><span class="nowrap">Total Cost Expenditure</span></th>
+                            <th class="thead-text" style="width:50%;"><span class="nowrap">COA Code</span></th>
+                            <th class="thead-text" style="width:50%;"><span class="nowrap">Branch Code</span></th>
+                            <th class="thead-text" style="width:80%;"><span class="nowrap">Branch Name</span></th>
+                            <th class="thead-text" style="width:50%;"><span class="nowrap">Made By</span></th>
+                            <th class="thead-text" style="width:100%;"><span class="nowrap">Description</span></th>
                         </tr>
                     </thead>
-                    <tbody style="white-space: nowrap">
+                    <tbody style="white-space: normal">
 
                     </tbody>
                 </table>
@@ -97,8 +97,8 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <h3 class="text-center black-text bold-text">CASH IN</h3>
-                <table class="table table-bordered table-striped" id="data_cashin_table_2" width="100%" cellspacing="0">
+                <h3 class="text-center black-text bold-text">KAS</h3>
+                <table class="table table-bordered table-striped" id="data_cashin_table_2" width="100%" style="table-layout: fixed; width:100%;" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
@@ -117,6 +117,26 @@
             <div class="box-body1">
                 <div id="forLoad1"></div>
                 <div id="forNOmore1"></div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <h3 class="text-center black-text bold-text">CASH IN</h3>
+                <table class="table table-bordered table-striped" id="data_cashin_table_2" width="100%" cellspacing="0">
+                    <thead class="thead-color txt-center">
+                        <tr>
+                            <th class="thead-text"><span class="nowrap">No</span></th>
+
+                        </tr>
+                    </thead>
+                    <tbody style="white-space: nowrap">
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-body2">
+                <div id="forLoad2"></div>
+                <div id="forNOmore2"></div>
             </div>
         </div>
 
