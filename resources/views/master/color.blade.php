@@ -47,8 +47,8 @@
                                   {{ $id = $val['id'] }}
                                 </div>
                             <td class="txt-center">{{ $iterator }}</td>
-                            <td>{{ ucwords(str_replace('_', ' ',$val['color_name'])) }}</td>
-                            <td>
+                            <td class="txt-center">{{ ucwords(str_replace('_', ' ',$val['color_name'])) }}</td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">
