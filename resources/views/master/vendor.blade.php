@@ -354,7 +354,6 @@
                                     <div class="mb-3">
                                         <label for="InputPIC" class="form-label">PIC</label>
                                         <input type="text" id="pic_vendor" name="pic_vendor" class="form-control">
-
                                     </div>
 
 
