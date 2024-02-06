@@ -84,8 +84,7 @@
                         <h6 class="collapse-header">Master Sheet:</h6>
                         <a class="collapse-item" href="/brand">Brands Information</a>
                         <a class="collapse-item" href="/color">Colors Information</a>
-                        <a class="collapse-item" href="/lens-category">Lens Information</a>
-                        <a class="collapse-item" href="/frame-category">Frame Information</a>
+                        <a class="collapse-item" href="/category">Category Information</a>
                         <a class="collapse-item" href="/index">Index Information</a>
                         <a class="collapse-item" href="/item">Item Information</a>
                     </div>
