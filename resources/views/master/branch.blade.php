@@ -137,13 +137,14 @@
                                                                         <label for="InputGender"
                                                                             class="form-label">Employee Name</label>
                                                                         <select type="employee_name"
-                                                                            class="form-control select2"
-                                                                            name="employee_id_branch">
+                                                                            class="form-control form-select"
+                                                                            name="employee_id_pic_branch">
+                                                                            <option value="{{$vals['employee_id_pic_branch']}}" selected hidden name="employee_id_pic_branch">{{$vals['employee_name']}}</option>
                                                                             @foreach ($employee as $val)
-                                                                            <option value="" disabled selected hidden>{{$vals['employee_name']}}</option>
-                                                                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
+                                                                            <option value="{{$val['id']}}" name="employee_id_pic_branch">{{$val['employee_name']}}</option>
                                                                             @endforeach
                                                                         </select>
+
                                                                     </div>
 
                                                                     <div class="mb-3 float-right">

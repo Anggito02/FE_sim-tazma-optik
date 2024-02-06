@@ -91,7 +91,7 @@ class BranchController extends Controller
             'kode_branch' => $request->kode_branch,
             'nama_branch' => $request->nama_branch,
             'alamat' => $request->alamat_branch,
-            'employee_id_pic_branch' => $request->employee_id_branch
+            'employee_id_pic_branch' => $request->employee_id_pic_branch
         ];
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/branch/edit', $api_request);
