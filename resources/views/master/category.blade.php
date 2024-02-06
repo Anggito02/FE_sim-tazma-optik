@@ -14,15 +14,12 @@
         <div class="card-body">
             <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
                 data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
-                New LensaCategory
+                New Category
             </button>
         </div>
     </div>
 
     <div class="card shadow mb-4">
-        <!-- <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
-        </div> -->
 
         <div class="card-body">
             <div class="table-responsive">
@@ -30,7 +27,7 @@
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Nama</span></th>
+                            <th class="thead-text"><span class="nowrap">Kategori</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
@@ -39,16 +36,16 @@
                         <div class="d-none">
                             {{ $iterator = 1 }}
                         </div>
-                        @foreach ($lens as $val)
+                        @foreach ($category as $val)
                             <tr>
-                                <input type="hidden" id="id" name="lens_id" class="form-control"
+                                <input type="hidden" id="id" name="category_id" class="form-control"
                                     value="{{ $val['id'] }}">
                                 <div class="d-none">
                                   {{ $id = $val['id'] }}
                                 </div>
                             <td class="txt-center">{{ $iterator }}</td>
-                            <td>{{ ucwords($val['nama_kategori']) }}</td>
-                            <td>
+                            <td class="txt-center">{{ ucwords($val['nama_kategori']) }}</td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
@@ -61,22 +58,22 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Lensa</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Category</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post" action="/lens-category/edit">
+                                                <form method="post" action="/category/edit">
                                                     @csrf
                                                     @method("put")
 
                                                     <div class="mb-3">
-                                                        <input type="hidden" id="id" name="lens_id"
+                                                        <input type="hidden" id="id" name="category_id"
                                                             class="form-control" value="{{ $val['id'] }}">
-                                                        <label for="InputWarna" class="form-label">Nama Lensa</label>
-                                                        <input type="text" id="id" name="lens_nama"
+                                                        <label for="InputWarna" class="form-label">Nama</label>
+                                                        <input type="text" id="id" name="nama_kategori"
                                                             class="form-control" value="{{ $val['nama_kategori'] }}">
                                                     </div>
 
@@ -93,7 +90,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">
@@ -106,7 +103,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Lensa</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data Category</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -118,11 +115,11 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <form method="post" action="/lens-category/delete">
+                                                <form method="post" action="/category/delete">
                                                     @csrf
                                                     @method("DELETE")
 
-                                                    <input type="hidden" id="id" name="lens_id" class="form-control"
+                                                    <input type="hidden" id="id" name="category_id" class="form-control"
                                                         value="{{ $val['id'] }}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
@@ -150,19 +147,19 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Lensa</h5>
+                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Category</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/lens-category/add">
+                <form method="post" action="/category/add">
                     @csrf
                     @method("POST")
 
                     <div class="mb-3 black-text">
-                        <label for="InputWarna" class="form-label">Nama Lensa</label>
-                        <input type="text" id="lens_nama" name="lens_nama" class="form-control">
+                        <label for="InputWarna" class="form-label">Kategori</label>
+                        <input type="text" name="nama_kategori" class="form-control">
                     </div>
 
                     <button type="submit" class="btn btn-success float-right">Submit</button>
