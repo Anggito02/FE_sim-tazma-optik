@@ -10,7 +10,7 @@ use App\Http\Controllers\CoaController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ErrorPageController;
-use App\Http\Controllers\FrameController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
 use App\Http\Controllers\VendorsController;
@@ -81,18 +81,11 @@ Route::controller(EmployeeController::class)->middleware('isTokenValid')->group(
     Route::delete('/employee/delete', 'deleteEmployee');
 });
 
-Route::controller(FrameController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/frame-category','getAllFrameCategory');
-    Route::post('/frame-category/add', 'addFrameCategory');
-    Route::put('/frame-category/edit', 'updateFrameCategory');
-    Route::delete('/frame-category/delete', 'deleteFrameCategory');
-});
-
-Route::controller(LensController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/lens-category','getAllLensCategory');
-    Route::post('/lens-category/add', 'addLensCategory');
-    Route::put('/lens-category/edit', 'updateLensCategory');
-    Route::delete('/lens-category/delete', 'deleteLensCategory');
+Route::controller(CategoryController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/category','getAllCategory');
+    Route::post('/category/add', 'addCategory');
+    Route::put('/category/edit', 'updateCategory');
+    Route::delete('/category/delete', 'deleteCategory');
 });
 
 Route::controller(IndexController::class)->middleware('isTokenValid')->group(function(){
