@@ -264,16 +264,14 @@ Route::controller(CustomerController::class)->middleware('isTokenValid')->group(
 Route::controller(KasController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/kas','prosesKasBranch');
     Route::get('/kas/all','getAllKas');
-    Route::post('/kas/add', 'addKasOut');
+    Route::post('/kas/addCashOut', 'addKasOut');
+    Route::post('/kas/addCashIn', 'addKasIn');
     Route::post('/kas/newDaily', 'addNewDailyKas');
     Route::post('/kas/exist', 'checkKasIfExist');
     Route::post('/kas/loadDataMaster', 'loadDataMaster');
     Route::post('/kas/loadDataMasterCashOut', 'loadDataMasterCashOut');
+    Route::post('/kas/loadDataMasterCashIn', 'loadDataMasterCashIn');
 });
-
-// Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
-//     Route::get('/404','PageError404');
-// });
 
 Route::group([], function(){
     Route::get('/login', function () {
