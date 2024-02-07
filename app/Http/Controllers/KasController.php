@@ -35,7 +35,7 @@ class KasController extends Controller {
 
         $user = GetUserInfo::getUserInfo();
 
-        return view('dito', [
+        return view('sales.kas', [
             'data' => $user['data'],
             'branch_all' => $branch_all['data']
         ]);
@@ -75,7 +75,7 @@ class KasController extends Controller {
 
         $user = GetUserInfo::getUserInfo();
 
-        return view('dito', [
+        return view('sales.kas', [
             'data' => $user['data'],
             'kas_all' => $kas_all['data'],
             'branch_all' => $branch_all['data'],
@@ -192,7 +192,7 @@ class KasController extends Controller {
 
         $user = GetUserInfo::getUserInfo();
 
-        return view('dito', [
+        return view('sales.kas', [
             'data' => $user['data'],
             'kas_all' => $kas_all['data'],
             'branch_all' => $branch_all['data'],
@@ -246,7 +246,7 @@ class KasController extends Controller {
 
         $user = GetUserInfo::getUserInfo();
 
-        return view('dito', [
+        return view('sales.kas', [
             'data' => $user['data'],
             'kas_all' => $kas_all['data'],
             'branch_all' => $branch_all['data'],
@@ -295,7 +295,7 @@ class KasController extends Controller {
 
         $user = GetUserInfo::getUserInfo();
 
-        return view('dito', [
+        return view('sales.kas', [
             'data' => $user['data'],
             'kas_all' => $kas_all['data'],
             'branch_all' => $branch_all['data'],
@@ -344,7 +344,7 @@ class KasController extends Controller {
 
         $user = GetUserInfo::getUserInfo();
 
-        return view('dito', [
+        return view('sales.kas', [
             'data' => $user['data'],
             'kas_all' => $kas_all['data'],
             'branch_all' => $branch_all['data'],
