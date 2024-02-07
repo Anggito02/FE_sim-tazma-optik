@@ -69,7 +69,7 @@
                             <th class="thead-text" style="width: auto;"><span class="nowrap">Detail</span></th>
                         </tr>
                     </thead>
-                    <tbody style="white-space: nowrap;">
+                    <tbody class="txt-center" style="white-space: nowrap;">
 
                     </tbody>
                 </table>

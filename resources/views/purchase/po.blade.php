@@ -11,7 +11,7 @@
         <span id="tambah_info"></span>
         <form id="POForm" action="/PO" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
-                <div class="row">
+                <div class="row black-text">
                 <!-- Add the form inside the row -->
                 @csrf
                 @method("GET")
@@ -102,21 +102,21 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="data_PO_table_1" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" style="table-layout: fixed; width: 100%; border-collapse: collapse;" id="data_PO_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr style="white-space: nowrap;">
-                            <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Nomor PO</span></th>
-                            <th class="thead-text"><span class="nowrap">Tanggal Dibuat</span></th>
-                            <th class="thead-text"><span class="nowrap">Status PO</span></th>
-                            <th class="thead-text"><span class="nowrap">Status Pembayaran</span></th>
-                            <th class="thead-text"><span class="nowrap">Status Penerimaan</span></th>
-                            <th class="thead-text"><span class="nowrap">Detail</span></th>
-                            <th class="thead-text"><span class="nowrap">Edit</span></th>
-                            <th class="thead-text"><span class="nowrap">Delete</span></th>
+                            <th class="thead-text" style="width: 5%"><span class="nowrap">No</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Nomor PO</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Tanggal Dibuat</span></th>
+                            <th class="thead-text" style="width: auto"><span class="nowrap">Status PO</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Status Pembayaran</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Status Penerimaan</span></th>
+                            <th class="thead-text" style="width: auto"><span class="nowrap">Detail</span></th>
+                            <th class="thead-text" style="width: auto"><span class="nowrap">Edit</span></th>
+                            <th class="thead-text" style="width: auto"><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
-                    <tbody style="white-space: nowrap;">
+                    <tbody class="text-center" style="white-space: nowrap;">
 
                     </tbody>
                 </table>

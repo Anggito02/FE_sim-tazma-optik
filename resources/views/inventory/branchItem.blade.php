@@ -38,12 +38,12 @@
                                 {{ $branch_id = $vals['branch_id']}}
                             </div>
                             <td class="txt-center">{{ $iterator }}</td>
-                            <td class="nowrap">{{ $vals['jenis_item']}}</td>
-                            <td class="nowrap">{{ $vals['kode_item']}}</td>
+                            <td class="txt-center nowrap">{{ $vals['jenis_item']}}</td>
+                            <td class="txt-center nowrap">{{ $vals['kode_item']}}</td>
                             <td class="nowrap text-right">{{ $vals['stok_global']}}</td>
                             <td class="nowrap text-right">{{ $vals['stok_branch']}}</td>
-                            <td class="nowrap">{{ $vals['kode_branch']}}</td>
-                            <td class="nowrap">{{ $vals['nama_branch']}}</td>
+                            <td class="txt-center nowrap">{{ $vals['kode_branch']}}</td>
+                            <td class="txt-center nowrap">{{ $vals['nama_branch']}}</td>
                         </tr>
                         <div class="d-none">
                             {{ $iterator++}}
