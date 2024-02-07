@@ -12,7 +12,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="row">
+            <div class="row black-text">
                 <div class="col mb-2">
                     <div>
                         <label for="InputEmployee" class="form-label">Employee Name</label>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row black-text">
                 <div class="col">
                     <div>
                         <label for="InputPosition" class="form-label">Position</label>
@@ -66,7 +66,7 @@
                 <div class="col">
                     <div>
                         <label for="InputDomisili" class="form-label">Domisili Kerja</label>
-                        <input type="domisili" class="form-control" id="InputDomisili">
+                        <input type="text" class="form-control" id="InputDomisili">
                     </div>
                 </div>
                 <div class="col">
@@ -97,15 +97,16 @@
                     <thead class="thead-color txt-center">
                         <tr>
                             <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text"><span class="nowrap">Name</span></th>
                             <th class="thead-text"><span class="nowrap">Username</span></th>
                             <th class="thead-text"><span class="nowrap">NIK</span></th>
-                            <th class="thead-text"><span class="nowrap">Name</span></th>
+                            <th class="thead-text"><span class="nowrap">NIP</span></th>
                             <th class="thead-text"><span class="nowrap">Department</span></th>
                             <th class="thead-text"><span class="nowrap">Section</span></th>
                             <th class="thead-text"><span class="nowrap">Position</span></th>
                             <th class="thead-text"><span class="nowrap">Role</span></th>
-                            <th class="thead-text"><span class="nowrap">Plant</span></th>
-                            <!-- <th class="thead-text"><span class="nowrap">Status</span></th> -->
+                            <th class="thead-text"><span class="nowrap">Domisili</span></th>
+                            <th class="thead-text"><span class="nowrap">Status</span></th>
                             <th class="thead-text"><span class="nowrap">Detail</span></th>
                             <th class="thead-text"><span class="nowrap">Delete</span></th>
                         </tr>
@@ -121,21 +122,22 @@
                                 {{ $id = $val['id'] }}
                             </div>
                             <td class="txt-center"><span class="nowrap">{{$iterator}}</span></td>
+                            <td><span class="nowrap">{{ucwords($val['employee_name'])}}</span></td>
                             <td><span class="nowrap">{{$val['username']}}</span></td>
                             <td><span class="nowrap">{{$val['nik']}}</span></td>
-                            <td><span class="nowrap">{{ucwords($val['employee_name'])}}</span></td>
+                            <td><span class="nowrap">{{$val['nip']}}</span></td>
                             <td><span class="nowrap">{{ucwords($val['department'])}}</span></td>
                             <td><span class="nowrap">{{ucwords($val['section'])}}</span></td>
                             <td><span class="nowrap">{{$val['position']}}</span></td>
                             <td><span class="nowrap">{{ucwords($val['role'])}}</span></td>
-                            <td><span class="nowrap">{{ucwords($val['plant'])}}</span></td>
-                            @if ($val['status'] == 'active')
+                            <td><span class="nowrap">{{ucwords($val['domicile'])}}</span></td>
+                            @if ($val['status'] == '1')
                             <td>
-                                <span class="nowrap text-success">{{ucwords($val['status'])}}</span>
+                                <span class="nowrap text-success">Active</span>
                             </td>
-                            @elseif ($val['status'] == 'inactive')
+                            @elseif ($val['status'] == '0')
                             <td>
-                                <span class="nowrap text-white text-danger">{{ucwords($val['status'])}}</span>
+                                <span class="nowrap text-white text-danger">Inactive</span>
                             </td>
                             @endif
 
@@ -166,8 +168,13 @@
                                                             @csrf
                                                             @method("put")
                                                             <div class="row">
-                                                                <input type="hidden" id="id" name="employee_id"
-                                                                    class="form-control" value="{{ $val['id'] }}">
+                                                                <input type="hidden" id="id" name="employee_id" class="form-control" value="{{ $val['id'] }}">
+                                                                <input type="hidden" name="email" value="{{ $val['email']}}">
+                                                                <input type="hidden" name="nip" value="{{ $val['nip']}}">
+                                                                <input type="hidden" name="nik" value="{{ $val['nik']}}">
+                                                                <input type="hidden" name="phone" value="{{ $val['phone']}}">
+                                                                <input type="hidden" name="address" value="{{ $val['address']}}">
+                                                                <input type="hidden" name="gender" value="{{ $val['gender']}}">
                                                                 <div class="col">
                                                                     <div class="mb-3">
                                                                         <label for="InputUsername"
@@ -204,15 +211,17 @@
                                                                             id="InputRole" name="role">
                                                                             @if ($val['role'] == 'administrator')
                                                                             <option value="administrator" selected>
-                                                                                administrator
+                                                                                Administrator
                                                                             </option>
-                                                                            <option value="user">user
+                                                                            <option value="user">
+                                                                                User
                                                                             </option>
                                                                             @elseif ($val['role'] == 'user')
                                                                             <option value="administrator">
-                                                                                administrator
+                                                                                Administrator
                                                                             </option>
-                                                                            <option value="user" selected>user
+                                                                            <option value="user" selected>
+                                                                                User
                                                                             </option>
                                                                             @endif
                                                                         </select>
@@ -224,19 +233,19 @@
                                                                         <select type="status"
                                                                             class="form-select form-control"
                                                                             id="InputStatus" name="status">
-                                                                            @if ($val['status'] == 'active')
-                                                                            <option value="active" selected>
-                                                                                active
+                                                                            @if ($val['status'] == '1')
+                                                                            <option value="1" selected>
+                                                                                Active
                                                                             </option>
-                                                                            <option value="inactive">
-                                                                                inactive
+                                                                            <option value="0">
+                                                                                Inactive
                                                                             </option>
-                                                                            @elseif ($val['status'] == 'inactive')
-                                                                            <option value="active">
-                                                                                active
+                                                                            @elseif ($val['status'] == '0')
+                                                                            <option value="1">
+                                                                                Active
                                                                             </option>
-                                                                            <option value="inactive" selected>
-                                                                                inactive
+                                                                            <option value="0" selected>
+                                                                                Inactive
                                                                             </option>
                                                                             @endif
                                                                         </select>
@@ -273,11 +282,11 @@
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="InputPlant"
-                                                                            class="form-label">Plant</label>
-                                                                        <div><input type="text" id="plant" name="plant"
+                                                                        <label for="InputDomisili"
+                                                                            class="form-label">Domisili</label>
+                                                                        <div><input type="text" id="domisili" name="domicile"
                                                                                 class="form-control"
-                                                                                value="{{ $val['plant']}}">
+                                                                                value="{{ $val['domicile']}}">
                                                                         </div>
                                                                     </div>
 
@@ -367,328 +376,108 @@
             <div class="modal-body">
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form method="post" action="/register/add" enctype="multipart/form-data">
+                        <form method="post" action="/employee/add" enctype="multipart/form-data">
                             @csrf
                             @method("POST")
-                            <!-- <div class="row black-text">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="InputUsername" class="form-label">Email</label>
-                                        <input type="email" id="username" name="email" class="form-control">
-                                    </div>
 
-                                    <div class="mb-3">
-                                        <label for="InputEmployee" class="form-label">Username</label>
-                                        <input type="text" id="username" name="username" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputNik" class="form-label">Employee Name</label>
-                                        <input type="text" id="employee_name" name="employee_name" class="form-control">
-                                    </div>
-
-
-
-                                    <div class="mb-3">
-                                        <label for="InputPhoto" class="form-label">Photo</label>
-                                        <div><input type="file" id="photo" name="photo" class="form-control" accept=".png, .jpg, .jpeg">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                    </div>
-
-                                    <div class="mb-3">
-
-
-
-
+                            <div class="row mb-5">
+                                <div class="col-md-12">
+                                    <p>Akun</p>
                                 </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="InputPhoto" class="form-label">Password</label>
-                                        <div><input type="text" name="password" class="form-control" minlength="8" maxlength="20">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="InputNik" class="form-label">NIK</label>
-                                        <input type="number" id="nik" name="nik" class="form-control">
-                                    </div>
-
-
-
-
-
-                                    <div class="mb-3">
-                                        <label for="InputEmployee" class="form-label">Gender</label>
-                                        <select type="gender" name="gender" class="form-control" id="">
-                                            <option value="" disabled selected hidden>Choose...</option>
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="mb-3">
-
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                    </div>
-
-                                    <div class="mb-3">
-
-
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                    </div>
-
-                                    <div class="mb-3">
-
-
-
-                                    <div class="mt-5 float-right">
-                                        <button type="submit" class="btn btn-success">Submit</button>
-                                    </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputUsername" class="form-label">Email</label>
+                                    <input type="email" id="username" name="email" class="form-control">
                                 </div>
-                            </div> -->
+                                <div class="col-md-4 black-text">
+                                    <label for="InputUsername" class="form-label">Username</label>
+                                    <input type="text" id="username" name="username" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputPassword" class="form-label">Password</label>
+                                    <input type="text" name="password" class="form-control" minlength="8"
+                                    maxlength="20">
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-md-12">
+                                    <p>Data Diri</p>
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputName" class="form-label">Nama</label>
+                                    <input type="text" id="name" name="employee_name" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputNIK" class="form-label">NIK</label>
+                                    <input type="number" id="nik" name="nik" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputNIP" class="form-label">NIP</label>
+                                    <input type="number" id="nip" name="nip" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputGender" class="form-label">Gender</label>
+                                    <select type="gender" name="gender" class="form-control" id="">
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="laki-laki">Laki-laki</option>
+                                        <option value="perempuan">Perempuan</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputAddress" class="form-label">Alamat</label>
+                                    <input type="text" id="address" name="address" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputPhone" class="form-label">Nomor Telpon</label>
+                                    <input type="text" id="phone" name="phone" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputDomicile" class="form-label">Domisili</label>
+                                    <input type="text" id="domicile" name="domicile" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <p>Bagian Pekerjaan, Posisi, dan lain-lain</p>
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputDepartment" class="form-label">Department</label>
+                                    <input type="text" id="department" name="department" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputSection" class="form-label">Section</label>
+                                    <input type="text" id="section" name="section" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputPosition" class="form-label">Jabatan</label>
+                                    <input type="text" id="position" name="position" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputGroup" class="form-label">Group</label>
+                                    <input type="text" id="group" name="group" class="form-control">
+                                </div>
+                                <div class="col-md-4 black-text">
+                                    <label for="InputBranch" class="form-label">Cabang</label>
+                                    <select name="branch_id" class="form-select form-control">
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        @foreach ($branch as $val)
+                                        <option value="{{ $val['id'] }}">{{ $val['nama_branch'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <input type="hidden" id="status" name="status" value="1">
+                                <input type="hidden" id="role" name="role" value="User">
+                            </div>
 
                             <div class="row black-text">
+                                
                                 <div class="col">
-                                    <div class="mb-3">
-
-                                        <label for="InputUsername" class="form-label">Email</label>
-                                        <input type="email" id="username" name="email" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="Inputnik" class="form-label">NIK</label>
-                                        <input type="text" id="nik" name="nik" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-
-                                        <label for="InputEmployee" class="form-label">Gender</label>
-                                        <select type="gender" name="gender" class="form-control" id="">
-                                            <option value="" disabled selected hidden>Choose...</option>
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-
-                                        <label for="InputSection" class="form-label">Department</label>
-                                        <input type="text" id="department" name="department" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-
-                                        <label for="InputRole" class="form-label">Role</label>
-                                        <input type="text" id="role" name="role" class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-
-                                        <label for="InputPlant" class="form-label">Group</label>
-                                        <input type="text" id="group" name="group" class="form-control">
-                                    </div>
-
-                                </div>
-
-                                <div class="col">
-                                    <div class="mb-3">
-
-                                        <label for="InputEmployee" class="form-label">Username</label>
-                                        <input type="text" id="username" name="username" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="InputEmployee" class="form-label">Name</label>
-                                        <input type="text" id="employee_name" name="employee_name" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="InputSection" class="form-label">Address</label>
-                                        <input type="text" id="address" name="address" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="InputPosition" class="form-label">Section</label>
-                                        <input type="text" id="section" name="section" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="InputPlant" class="form-label">Plant</label>
-                                        <input type="text" id="plant" name="plant" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="InputSection" class="form-label">Domicile</label>
-                                        <input type="text" id="domicile" name="domicile" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <div class="mb-3">
-
-                                        <label for="InputPassword" class="form-label">Password</label>
-                                        <input type="text" name="password" class="form-control" minlength="8"
-                                            maxlength="20">
-                                    </div>
-
-                                    {{-- <div class="mb-3">
-
-                                        <label for="InputPhoto" class="form-label">Photo</label>
-                                        <input type="file" id="photo" name="photo" class="form-control"
-                                            accept=".png, .jpg, .jpeg">
-                                    </div> --}}
-
-                                    <div class="mb-3">
-
-                                        <label for="InputDepartment" class="form-label">Phone</label>
-                                        <input type="number" id="phone" name="phone" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="">Position</label>
-                                        <input type="text" id="position" name="position" class="form-control">
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="InputSection" class="form-label">Status</label>
-                                        <input type="text" id="status" name="status" class="form-control">
-                                    </div>
-
                                     <div class="mt-4 float-right">
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
 
                                 </div>
                             </div>
-
-                            <!-- <div class="row black-text">
-                                <div class="col d-flex justify-content-between">
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <!-- <div class="row black-text">
-                                <div class="col d-flex justify-content-between">
-                                    <div>
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row black-text">
-                                <div class="col d-flex justify-content-between">
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row black-text">
-                                <div class="col d-flex justify-content-between">
-
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row black-text">
-                                <div class="col d-flex justify-content-between">
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row black-text">
-                                <div class="col d-flex justify-content-between">
-
-                                    <div>
-
-                                    </div>
-
-                                    <div>
-
-                                    </div>
-
-
-
-                                </div>
-                            </div> -->
-
-
-
                         </form>
                     </div>
                 </div>

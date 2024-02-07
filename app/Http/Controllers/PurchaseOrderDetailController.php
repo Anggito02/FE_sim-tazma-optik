@@ -153,6 +153,7 @@ class PurchaseOrderDetailController extends Controller
 
         if($result['status'] == 'success'){
             toastr()->info('Purchase Order Detail deleted successfully!', 'Purchase Order Detail', ['timeOut' => 3000]);
+            // dd($request->purchase_order_id);
             return redirect('/PO/detail/'.$request->purchase_order_id);
         }else{
             toastr()->error($result['data'], 'Purchase Order Detail', ['timeOut' => 3000]);

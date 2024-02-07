@@ -195,7 +195,7 @@
                                                             </div>
 
                                                             <div class="mt-3 float-right">
-                                                                <button type="sumbit"
+                                                                <button type="submit"
                                                                     class="btn btn-primary">Update</button>
                                                             </div>
                                                         </div>
@@ -243,6 +243,7 @@
                                                     @csrf
                                                     @method("DELETE")
 
+                                                    <input type="hidden" name="purchase_order_id" value="{{$valPod['purchase_order_id']}}">
                                                     <input type="hidden" name="po_detail_id" class="form-control"
                                                         value="{{ $valPod['id'] }}">
                                                     <button type="submit" class="btn btn-primary">Yes</button>

@@ -30,13 +30,15 @@ class EmployeeController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
+        $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
 
         $employee = $response->json();
+        $branch = $response_branch->json();
         
         $user = GetUserInfo::getUserInfo();
 
         if ($employee['status'] == 'success'){
-            return view('master.employee', ['employee' => $employee['data'], 'data' => $user['data']]);
+            return view('master.employee', ['employee' => $employee['data'], 'data' => $user['data'], 'branch' => $branch['data']]);
         }else{
             return redirect('/dashboard');
         }
@@ -50,21 +52,27 @@ class EmployeeController extends Controller
             'Accept' => 'application\json',
             'Authorization' => 'Bearer '.$token
         ];
-        //semua di tolower, symbol dihilanhin, whitespace ganti _
         $api_request = [
+            'email' => $request->email,
             'username' => $request->username,
-            'nik' => $request->nik,
+            'password' => $request->password,
             'employee_name' => $request->employee_name,
+            'nik' => $request->nik,
+            'nip' => $request->nip,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'domicile' => $request->domicile,
             'department' => $request->department,
             'section' => $request->section,
             'position' => $request->position,
-            'role' => $request->role,
-            'plant' => $request->plant,
-            'status' => $request->status
+            'group' => $request->group,
+            'branch_id' => $request->branch_id,
+            'status' => $request->status,
+            'role' => $request->role
         ];
 
-        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/employee/add', $api_request);
-
+        $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
         $result = $response->json();
 
         if($result['status'] == 'success'){
@@ -93,9 +101,10 @@ class EmployeeController extends Controller
             'section' => $request->section,
             'position' => $request->position,
             'role' => $request->role,
-            'plant' => $request->plant,
+            'domicile' => $request->domicile,
             'status' => $request->status
         ];
+        dd($api_request);
         
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/employee/edit', $api_request);
