@@ -286,13 +286,6 @@ Route::group([], function(){
         return view('error_page.505');
     });
 
-    Route::get('/dito', function () {
-        return view('dito');
-    });
-
-    // Route::get('/sales/kasir', function () {
-    //     return view('addcart');
-    // });
 });
 
 
