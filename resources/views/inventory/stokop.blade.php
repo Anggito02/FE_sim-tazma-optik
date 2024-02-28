@@ -122,6 +122,32 @@
                         let currentItem = result.data[i];
 						offsetN0++;
                         button_draft = ' <button type="button" class="btn-sm btn-warning" onclick="handleButtonClick(\'' + currentItem.id + '\')">Detail</button>';
+                        if(currentItem.bulan == 1) {
+                            currentItem.bulan = 'Januari';
+                        } else if(currentItem.bulan == 2) {
+                            currentItem.bulan = 'Februari';
+                        } else if(currentItem.bulan == 3) {
+                            currentItem.bulan = 'Maret';
+                        } else if(currentItem.bulan == 4) {
+                            currentItem.bulan = 'April';
+                        } else if(currentItem.bulan == 5) {
+                            currentItem.bulan = 'Mei';
+                        } else if(currentItem.bulan == 6) {
+                            currentItem.bulan = 'Juni';
+                        } else if(currentItem.bulan == 7) {
+                            currentItem.bulan = 'Juli';
+                        } else if(currentItem.bulan == 8) {
+                            currentItem.bulan = 'Agustus';
+                        } else if(currentItem.bulan == 9) {
+                            currentItem.bulan = 'September';
+                        } else if(currentItem.bulan == 10) {
+                            currentItem.bulan = 'Oktober';
+                        } else if(currentItem.bulan == 11) {
+                            currentItem.bulan = 'November';
+                        } else if(currentItem.bulan == 12) {
+                            currentItem.bulan = 'Desember';
+                        }
+                        
                         rowData.push([
 							offsetN0,
                             currentItem.tahun,
