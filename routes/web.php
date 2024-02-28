@@ -235,6 +235,7 @@ Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid'
     Route::post('/stock-opname/detail/{id}/loadDataMaster', 'loadDataMaster');
     Route::post('/stock-opname/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname/detail/edit', 'updateStockOpnameDetail');
+    Route::post('/stock-opname/detail/check-qr-code', 'checkQRCode');
 });
 
 Route::controller(StockOpnameBranchController::class)->middleware('isTokenValid')->group(function(){

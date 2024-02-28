@@ -190,7 +190,7 @@ class StockOpnameDetailController extends Controller {
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/init-adjustment', $api_request);
 
         $result = $response->json();
-        if($result['status'] == 'success'){
+        if($result['message'] == 'success'){
             $row['message']="The data has been successfully updated";
         }else{
             $row['message']="Update data failed ";
@@ -211,9 +211,9 @@ class StockOpnameDetailController extends Controller {
             'adjustment_type' => $request->adjustment_type,
             'adjustment_by' => $request->adjustment_by,
             'item_id' => $request->item_id,
-            'in_out_qty' => $request->in_out_qty
+            'in_out_qty' => abs($request->in_out_qty)
         ];
-        print_r($api_request);
+        // print_r($api_request);
 
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/make-adjustment', $api_request);
         // dd($response);
@@ -225,6 +225,20 @@ class StockOpnameDetailController extends Controller {
         } else {
             $row['message']="Update data failed ";
         }
+        return response()->json($result);
+    }
+
+    public function checkQRCode(Request $request) {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $api_request = [
+            'kode_qr_po_detail' => $request->kode_qr_po_detail
+        ];
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/one/qr', $api_request);
+        $result = $response->json();
         return response()->json($result);
     }
 }

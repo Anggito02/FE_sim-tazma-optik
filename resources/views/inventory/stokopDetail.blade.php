@@ -11,83 +11,84 @@
         <form id="itemForm" action="/stock-opname/detail/{{$stock_opname_id}}" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row align-items-end">
-                <!-- Add the form inside the row -->
-                @csrf
-                @method("GET")
-                <div class="form-group col-md-3">
-                    <label for="tanggal_so_from" class="form-label black-text">Tanggal SO From</label>
-                    <input type="date" name="tanggal_so_from" id="tanggal_so_from" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="tanggal_so_until" class="form-label black-text">Tanggal SO Until</label>
-                    <input type="date" name="tanggal_so_until" id="tanggal_so_until" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_type" class="form-label black-text">Adjustment Type</label>
-                    <select type="text" name="adjustment_type" id="adjustment_type" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="IN">IN</option>
-                        <option value="OUT">OUT</option>
-                        <option value="NONE">NONE</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_date_from" class="form-label black-text">Adjustment Date From</label>
-                    <input type="date" name="adjustment_date_from" id="adjustment_date_from" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_date_until" class="form-label black-text">Adjustment Date Until</label>
-                    <input type="date" name="adjustment_date_until" id="adjustment_date_until" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_status" class="form-label black-text">Adjustment Status</label>
-                    <select type="text" name="adjustment_status" id="adjustment_status" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="OPEN">OPEN</option>
-                        <option value="CLOSE">CLOSE</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="jenis_item" class="form-label black-text">Jenis Item</label>
-                    <select name="jenis_item" id="jenis_item" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="frame">Frame</option>
-                        <option value="lensa">Lensa</option>
-                        <option value="aksesoris">Aksesoris</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="open_by" class="form-label black-text">Open By</label>
-                    <select name="open_by" id="open_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        @foreach($employee as $emp)
+                    <!-- Add the form inside the row -->
+                    @csrf
+                    @method("GET")
+                    <div class="form-group col-md-3">
+                        <label for="tanggal_so_from" class="form-label black-text">Tanggal SO From</label>
+                        <input type="date" name="tanggal_so_from" id="tanggal_so_from" class="form-control" value="">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="tanggal_so_until" class="form-label black-text">Tanggal SO Until</label>
+                        <input type="date" name="tanggal_so_until" id="tanggal_so_until" class="form-control" value="">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_type" class="form-label black-text">Adjustment Type</label>
+                        <select type="text" name="adjustment_type" id="adjustment_type" class="form-control chosen-select">
+                            <option value="" selected>Choose...</option>
+                            <option value="IN">IN</option>
+                            <option value="OUT">OUT</option>
+                            <option value="NONE">NONE</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_date_from" class="form-label black-text">Adjustment Date From</label>
+                        <input type="date" name="adjustment_date_from" id="adjustment_date_from" class="form-control" value="">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_date_until" class="form-label black-text">Adjustment Date Until</label>
+                        <input type="date" name="adjustment_date_until" id="adjustment_date_until" class="form-control" value="">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_status" class="form-label black-text">Adjustment Status</label>
+                        <select type="text" name="adjustment_status" id="adjustment_status" class="form-control chosen-select">
+                            <option value="" selected>Choose...</option>
+                            <option value="OPEN">OPEN</option>
+                            <option value="CLOSE">CLOSE</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="jenis_item" class="form-label black-text">Jenis Item</label>
+                        <select name="jenis_item" id="jenis_item" class="form-control chosen-select">
+                            <option value="" selected>Choose...</option>
+                            <option value="frame">Frame</option>
+                            <option value="lensa">Lensa</option>
+                            <option value="aksesoris">Aksesoris</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="open_by" class="form-label black-text">Open By</label>
+                        <select name="open_by" id="open_by" class="form-control chosen-select">
+                            <option value="" selected>Choose...</option>
+                            @foreach($employee as $emp)
+                                <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="close_by" class="form-label black-text">Closed By</label>
+                        <select name="close_by" id="close_by" class="form-control chosen-select">
+                            <option value="" selected>Choose...</option>
+                            @foreach($employee as $emp)
+                                <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_by" class="form-label black-text">Adjustment By</label>
+                        <select name="adjustment_by" id="adjustment_by" class="form-control chosen-select">
+                            <option value="" selected>Choose...</option>
+                            @foreach($employee as $emp)
                             <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="close_by" class="form-label black-text">Closed By</label>
-                    <select name="close_by" id="close_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        @foreach($employee as $emp)
-                            <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_by" class="form-label black-text">Adjustment By</label>
-                    <select name="adjustment_by" id="adjustment_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        @foreach($employee as $emp)
-                        <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-12">
-                    <br/>
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
-                    <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <br/>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
+                        <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -139,7 +140,6 @@
     
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
-        $('#datetime-local-adjustment').val(new Date().toISOString().slice(0, 16));
     });
     $('#add-update-data').on('shown.bs.modal', function (e) {
         $(".select2").select2();
@@ -233,9 +233,9 @@
                             button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonClickAdjustNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
                         }
 
-                        if(currentItem.adjustment_by === null) {
+                        if(currentItem.adjustment_status == 'CLOSED') {
                             button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
-                        } else if(currentItem.adjustment_by) {
+                        } else {
                             button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonClickAdjust(\'' + currentItem.id + '\')">Adjust</button>';
                         }
                         button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
@@ -306,11 +306,12 @@
             open_by      : document.getElementById('open_by').value, //initial page
             close_by      : document.getElementById('close_by').value, //initial page
             adjustment_by      : document.getElementById('adjustment_by').value, //initial page
-
+            kode_qr_po_detail      : document.getElementById('kode_qr_po_detail').value, //initial page
         });
         loading  = false;
 	    end_record = false;
 	    addContent(settings);
+        checkQrCode(settings);
 	}
     $.ajaxSetup({
         headers: {
@@ -453,6 +454,49 @@
 	  return false;
     }
 
+    function checkQrCode(settings) {
+        var csrftoken = $('meta[name="csrf-token"]').attr('content');
+        //if event.target is undefined, then it will be null
+        // var inputValue = '';
+        if(event && event.target){
+            var inputValue = event.target.value;
+            console.log(inputValue);
+        }
+        $.ajax({
+            method: 'POST',
+            type: 'ajax',
+            url: "{{ url('/stock-opname/detail/check-qr-code') }}",
+            data: {
+                'limit' :settings.limit,
+                'page' : (settings.limit*settings.start_page),
+                '_token' : csrftoken,
+                'kode_qr_po_detail' : inputValue
+
+            },
+            async: true,
+            dataType: 'json',
+            error: function (request, error) {
+	      		alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+			},
+            success: function (result) {
+                console.log(result.data);
+                document.getElementById('item_id_onchange').value=result.data.id;
+                document.getElementById('kode_item_onchange').value=result.data.kode_item;
+                document.getElementById('jenis_item_onchange').value=result.data.jenis_item;
+            }
+        })
+    }
+
+    //prevent form submit on pressing enter in keyboard 
+    $(document).ready(function() {
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+            }
+        });
+    });
+
     $(document).ready(function() {
     function insertCurrentDate() {
       const currentDate = new Date();
@@ -477,9 +521,10 @@
                 <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
-                <form id="add_info_item" class="form-horizontal" onsubmit="submitFormItem(event)">
-                    <input type="text"  name="qrcode" autofocus=true class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" />
-                    <button type="submit" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;"><i class="fas fa-search"></i></button>
+                <form id="add_info_item" class="form-horizontal">
+                    @csrf
+                    <input type="text" name="kode_qr_po_detail" id="kode_qr_po_detail" autofocus=true class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" onchange="checkQrCode(event)"/>
+                    <button type="button" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;"><i class="fas fa-search"></i></button>
                 </form>
                 <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
                     @csrf
@@ -490,22 +535,24 @@
 
                             <div class="mb-3">
                                 <label for="InputSoStart" class="form-label">SO Start</label>
-                                <input type="datetime-local" name="so_start" class="form-control">
+                                <input type="datetime-local" value="{{Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->toDateTimeString()}}" name="so_start" class="form-control" readonly>
+                            </div>
+
+                            <!-- <div class="mb-3">
+                                <label for="InputSoEnd" class="form-label">SO End</label>
+                                <input type="datetime-local" name="so_end" class="form-control">
+                            </div> -->
+                            
+                            <div class="mb-3">
+                                <input type="hidden" id="item_id_onchange" name="item_id">
+
+                                <label for="InputItem" class="form-label">Item</label>
+                                <input type="text" id="kode_item_onchange" class="form-control" readonly>
                             </div>
 
                             <div class="mb-3">
-                                <label for="InputSoEnd" class="form-label">SO End</label>
-                                <input type="datetime-local" name="so_end" class="form-control">
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="InputGender" class="form-label">Item</label>
-                                <select name="item_id" class="form-control chosen-select">
-                                    <option value="" selected disabled>Choose...</option>
-                                    @foreach ($item as $items)
-                                    <option value="{{ $items['id'] }}">{{ $items['kode_item'] }} - {{ $items['jenis_item'] }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="InputJenis" class="form-label">Jenis Item</label>
+                                <input type="text" id="jenis_item_onchange" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="col">
@@ -626,7 +673,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="adjustment_date" class="form-label">Adjustment Date : </label>
-                            <input type="datetime-local" id="datetime-local-adjustment" name="adjustment_date" class="form-control">
+                            <input type="datetime-local" value="{{Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->toDateTimeString()}}" name="adjustment_date" class="form-control" readonly>
                         </div>
                         <div class="mb-3">
                             <label class="m-0">Adjusment note :</label>
