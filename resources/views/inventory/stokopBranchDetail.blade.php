@@ -108,7 +108,7 @@
                             <th class="thead-text"><span class="nowrap">SO End</span></th>
                             <th class="thead-text"><span class="nowrap">SO Duration</span></th>
                             <th class="thead-text"><span class="nowrap">Actual QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">SYS QTY</span></th>
+                            <th class="thead-text"><span class="nowrap">Inventory Cabang</span></th>
                             <th class="thead-text"><span class="nowrap">Diff QTY</span></th>
                             <th class="thead-text"><span class="nowrap">Positif Diff QTY</span></th>
                             <th class="thead-text"><span class="nowrap">Neg Diff QTY</span></th>
@@ -139,7 +139,6 @@
     
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
-        $('#datetime-local-adjustment').val(new Date().toISOString().slice(0, 16));
     });
     $('#add-update-data').on('shown.bs.modal', function (e) {
         $(".select2").select2();
@@ -151,29 +150,45 @@
 			return '0';
 		}
 	}
-    function handleButtonClickAdjustNote(id) {
-        var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust-note"]');
-        console.log(button);
-        button.setAttribute('data-toggle', 'modal');
-        button.setAttribute('data-target', '#modalAddAdjustment' + id );
-        $('#modalAddAdjustment' + id).modal('show');
+    function handleButtonAdjustmentNote(id) {
+        var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
+        $("#panelAdjustmentNote").html(load_img);
+        $.ajax({
+            url: "{{ url('/stock-opname-branch/detail/loadAdjustmentNote') }}",
+            data: {'sob_detail_id':id, 'sob_id': <?php echo $stock_opname_branch_id; ?> },
+            method: "POST",
+            success: function(data){
+                $("#panelAdjustmentNote").html(data);
+                $('#add-adjustment-note').modal('show');
+            }
+        });
+        $('#spin_update').hide();
+		$('#spin_update_table').show();
     }
 
-    function handleButtonClickAdjust(id) {
-        var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust"]');
-        console.log(button);
-        button.setAttribute('data-toggle', 'modal');
-        button.setAttribute('data-target', '#modalAdjust' + id );
-        $('#modalAdjust' + id).modal('show');
+    function handleButtonMakeAdjustment(id) {
+        var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
+        $("#panelMakeAdjustment").html(load_img);
+        $.ajax({
+            url: "{{ url('/stock-opname-branch/detail/loadMakeAdjustment') }}",
+            data: {'sob_detail_id':id, 'sob_id': <?php echo $stock_opname_branch_id; ?>},
+            method: "POST",
+            success: function(data){
+                $("#panelMakeAdjustment").html(data);
+                $('#make-adjustment').modal('show');
+            }
+        });
+        $('#spin_update').hide();
+		$('#spin_update_table').show();
     }
 
-    function handleButtonClickEdit(id) {
-        var stock_opname_branch_id = "{{ $stock_opname_branch_id }}";
+    function handleButtonClickEdit(detail_id) {
+        // var stock_opname_branch_id = "{{ $stock_opname_branch_id }}";
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
         $("#panelUpdateData").html(load_img);
         $.ajax({
-		    url   : "{{ url('/stock-opname-branch/detail/') }}/" + stock_opname_branch_id + "/loadDataDetailOnly",
-		    data 	:{'id':id},
+		    url   : "{{ url('/stock-opname-branch/detail/') }}/" + detail_id + "/loadDataDetailOnly",
+		    data 	:{'sob_id': <?php echo $stock_opname_branch_id ?>,'sob_detail_id':detail_id},
 		    method	: "POST",
 		    success : function(data){
 		    	$('#panelUpdateData').html(data);
@@ -227,18 +242,23 @@
                         let currentItem = result.data[i];
 						offsetN0++;
                         
-                        if(currentItem.adjustment_by != null) {
+                        if(currentItem.adjustment_followup_note != null) {
                             button_draft_1 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust-note disabled">Add Adjustment Note</button>';
-                        } else {
-                            button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonClickAdjustNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
+                        } else if(currentItem.adjustment_followup_note == null){
+                            button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonAdjustmentNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
                         }
 
-                        if(currentItem.adjustment_by === null) {
+                        if(currentItem.adjustment_status === "CLOSED") {
                             button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
-                        } else if(currentItem.adjustment_by) {
-                            button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonClickAdjust(\'' + currentItem.id + '\')">Adjust</button>';
+                        } else if (currentItem.adjustment_status === "OPEN") {
+                            button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonMakeAdjustment(\'' + currentItem.id + '\')">Adjust</button>';
                         }
-                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
+
+                        if(currentItem.adjustment_status === 'CLOSED') {
+                            button_draft_3 = ' <button type="button" class="btn-sm btn-secondary btn-edit disabled">Edit</button>';
+                        } else if(currentItem.adjustment_status === 'OPEN') {
+                            button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
+                        }
 
                         rowData.push([
 							offsetN0,
@@ -305,11 +325,13 @@
             open_by      : document.getElementById('open_by').value, //initial page
             close_by      : document.getElementById('close_by').value, //initial page
             adjustment_by      : document.getElementById('adjustment_by').value, //initial page
+            kode_qr_po_detail      : document.getElementById('kode_qr_po_detail').value, //initial page
 
         });
         loading  = false;
 	    end_record = false;
 	    addContent(settings);
+        checkQrCode(settings);
 	}
     $.ajaxSetup({
         headers: {
@@ -341,80 +363,6 @@
         masterContent();
     });
 
-    function submitFormAdjustmentNote(event){
-		$('#btn_submit').hide();
-		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-	    event.preventDefault();
-        var stock_opname_branch_id = "{{ $stock_opname_branch_id }}";
-        var form = document.getElementById('add_info_adjustnote');
-        var formData = new FormData(form);
-	    $.ajax({
-            url   : "{{ url('/stock_opname_branch/detail/') }}/" + stock_opname_branch_id + "/init-adjustment",
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-            if(result.message=="The data has been successfully updated"){
-				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){
-					 $('#tambah_info').hide();
-                     location.reload();
-					},3500);
-			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				setTimeout(function(){
-					$('#tambah_info').hide();
-                    location.reload();
-				},3000)
-			}
-            $('#btn_submit').show();
-		}
-	  });
-	  return false;
-    }
-
-    function submitFormMakeAdjustment(event){
-		$('#btn_submit').hide();
-		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-	    event.preventDefault();
-        var stock_opname_branch_id = "{{ $stock_opname_branch_id }}";
-        var form = document.getElementById('add_info_make_adjustment');
-        var formData = new FormData(form);
-	    $.ajax({
-            url   : "{{ url('/stock_opname_branch/detail/') }}/" + stock_opname_branch_id + "/make-adjustment",
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-            if(result.message=="The data has been successfully updated"){
-				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){
-					 $('#tambah_info').hide();
-                     location.reload();
-					},3500);
-			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				setTimeout(function(){
-					$('#tambah_info').hide();
-                    location.reload();
-				},3000)
-			}
-            $('#btn_submit').show();
-		}
-	  });
-	  return false;
-    }
-
     function submitForm(event){
 		$('#btn_submit').hide();
 		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
@@ -438,19 +386,61 @@
 				  	setTimeout(function(){
 					 $('#tambah_info').hide();
                      location.reload();
-					},3500);
+					},1000);
 			}else{
 				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				setTimeout(function(){
 					$('#tambah_info').hide();
                     location.reload();
-				},3000)
+				},1000)
 			}
             $('#btn_submit').show();
 		}
 	  });
 	  return false;
     }
+
+    function checkQrCode(settings) {
+        var csrftoken = $('meta[name="csrf-token"]').attr('content');
+        if(event && event.target){
+            var inputValue = event.target.value;
+            console.log(inputValue);
+        }
+        $.ajax({
+            method: "POST",
+            url: "{{ url('/stock-opname-branch/detail/check-qr-code') }}",
+            data: {
+                'limit' :settings.limit,
+                'page' :(settings.limit*settings.start_page),
+                '_token' : csrftoken,
+                'kode_qr_po_detail' : inputValue
+            },
+            async : true,
+            dataType : 'json',
+            error: function (request, error) {
+                alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+            },
+            success: function(result){
+                if(result.status != 'error'){
+                    console.log(result);
+                    document.getElementById('item_id_onchange').value = result.data.id;
+                    document.getElementById('kode_item_onchange').value = result.data.kode_item;
+                    document.getElementById('jenis_item_onchange').value = result.data.jenis_item;
+                    document.getElementById('stok_item_onchange').value = result.data.stok;
+                }
+            }
+        })
+    }
+
+    //prevent form submit on pressing enter in keyboard 
+    $(document).ready(function() {
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+            }
+        });
+    });
 
     $(document).ready(function() {
     function insertCurrentDate() {
@@ -476,66 +466,67 @@
                 <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
+                <form id="add_info_item" class="form-horizontal">
+                    @csrf
+                    <input type="text" name="kode_qr_po_detail" id="kode_qr_po_detail" autofocus=true class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" onchange="checkQrCode(event)"/>
+                    <button type="button" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;"><i class="fas fa-search"></i></button>
+                </form>
                 <form id="add_info" method="post" class="form-horizontal" onsubmit="submitForm(event)">
                     @csrf
                     <!-- @method("POST") -->
                     <div class="row black-text">
                         <div class="col">
                             <input type="hidden" name="stock_opname_branch_id" value="{{ $stock_opname_branch_id }}">
+                            <input type="hidden" name="branch_id" value="{{ $data['branch_id'] }}">
 
                             <div class="mb-3">
                                 <label for="InputSoStart" class="form-label">SO Start</label>
-                                <input type="datetime-local" name="so_start" class="form-control">
+                                <input type="datetime-local" value="{{Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->toDateTimeString()}}" name="so_start" class="form-control" readonly>
                             </div>
 
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="InputSoEnd" class="form-label">SO End</label>
                                 <input type="datetime-local" name="so_end" class="form-control">
+                            </div> -->
+
+                            <div class="mb-3">
+                                <input type="hidden" id="item_id_onchange" name="item_id">
+
+                                <label for="InputItem" class="form-label">Item</label>
+                                <input type="text" id="kode_item_onchange" class="form-control" readonly>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="InputGender" class="form-label">Item</label>
-                                <select name="item_id" class="form-control chosen-select">
-                                    <option value="" selected disabled>Choose...</option>
-                                    @foreach ($item as $items)
-                                    <option value="{{ $items['id'] }}">{{ $items['kode_item'] }} - {{ $items['jenis_item'] }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="InputJenis" class="form-label">Jenis Item</label>
+                                <input type="text" id="jenis_item_onchange" class="form-control" readonly>
                             </div>
+
                         </div>
                         <div class="col">
+
+                            <div class="mb-3">
+                                <label for="InputStok" class="form-label">Stok</label>
+                                <input type="text" id="stok_item_onchange" class="form-control" readonly>
+                            </div>
+
                             <div class="mb-3">
                                 <label for="InputActualQty" class="form-label">Actual Quantity</label>
                                 <input type="number" name="actual_qty" class="form-control">
                             </div>
 
-
                             <div class="mb-3">
-                                <label for="InputOpenBy" class="form-label">Open By</label>
-                                <select name="open_by" class="form-control chosen-select">
-                                    <option value="" selected disabled>Choose...</option>
-                                    @foreach ($employee as $emp)
-                                    <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="hidden" name="open_by" value="{{$data['id']}}">
                             </div>
 
                             <div class="mb-3">
-                                <label for="InputCloseBy" class="form-label">Close By</label>
-                                <select name="close_by" class="form-control chosen-select"><
-                                    <option value="" selected disabled>Choose...</option>
-                                    @foreach ($employee as $emp)
-                                    <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="hidden" name="close_by" value="{{$data['id']}}">
                             </div>
 
-                            <div class="mb-3 float-right">
+                            <div class="mt-5 float-right">
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
 
                         </div>
-
                     </div>
                 </form>
             </div>
@@ -548,8 +539,7 @@
 </div>
 
 <!-- Modal Adjust-->
-@foreach ($stock_opname_branch_detail as $sod)
-<div class="modal fade" id="modalAdjust{{ $sod['id'] }}" tabindex="-1" role="dialog"
+<div class="modal fade" id="make-adjustment" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -560,47 +550,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="add_info_make_adjustment" method="post" onsubmit="submitFormMakeAdjustment(event)">
-                    @csrf
-                    <!-- @method("POST") -->
-                    <div class="d-flex flex-row">
-                        <p>Adjust Type : </p>
-                        <p style="margin-left:1%;" id="set_adjust_type">{{ $sod['adjustment_type'] }}</p>
-                        <input type="hidden" value="{{$sod['adjustment_type']}}" name="adjustment_type">
-                    </div>
-                    <div class="d-flex flex-row">
-                        <p>Adjustment by : </p>
-                        <p style="margin-left:1%;" id="set_adjust_by">{{ $data['username'] }}</p>
-                        <input type="hidden" value="{{$data['username']}}" name="adjustment_by">
-                    </div>
-                    <div class="d-flex flex-row">
-                        <p>Kode Item - jenis Item : </p>
-                        <p style="margin-left:1%;" id="set_item">{{ $sod['kode_item'] }} - {{ $sod['jenis_item'] }}</p>
-                        <input type="hidden" value="{{$sod['id']}}" name="item_id">
-                    </div>
-                    <div class="d-flex flex-row">
-                        <p>Adjustment QTY : </p>
-                        <p style="margin-left:1%;" id="set_adjust_qty">{{ $sod['diff_qty'] }}</p>
-                        <input type="hidden" value="{{$sod['diff_qty']}}" name="in_out_qty">
-                    </div>
-                    <div class="float-right">
-                        <button type="button right" class="btn btn-primary px-4" data-dismiss="">Add</button>
-                    </div>
-                </form>
+            <div class="modal-body" id="panelMakeAdjustment">
+                
             </div>
             <div class="modal-footer justify-content-center alert alert-danger rounded-0" role="alert">
-                <p>Can't be undone</p>
+                <p>Anda tidak bisa kembali setelah melakukan Adjust</p>
             </div>
         </div>
     </div>
 </div>
-@endforeach
 
 <!-- Modal Adjustment Note -->
-@foreach($stock_opname_branch_detail as $sod)
-<div class="modal fade" id="modalAddAdjustment{{ $sod['id'] }}" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="add-adjustment-note" tabindex="-1" data-backdrop="static" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -610,32 +571,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="add_info_adjustnote" class="form-horizontal" onsubmit="submitFormAdjustmentNote(event)">
-                    @csrf
-                    <!-- @method("POST") -->
-                    <div class="d-flex flex-row">
-                        <p>Employee name : </p>
-                        <p style="margin-left:1%;">{{$data['username']}}</p>
-                        <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
-                    </div>
-                    <div class="d-flex flex-row">
-                        <p>Adjustment date : </p>
-                        <p style="margin-left:1%;" id="date-now"></p>
-                        <input type="hidden" id="datetime-local-adjustment" name="adjustment_date" value="">
-                    </div>
-                    <div class="d-flex flex-column align-items-start">
-                        <label class="m-0">Adjusment note :</label>
-                        <input type="textarea" class="form-control" name="adjustment_note">
-                    </div>
-                    <div class="mt-3 float-right">
-                        <button type="submit" class="btn btn-primary px-4" data-dismiss="">Add</button>
-                    </div>
-                </form>
+            <div class="modal-body" id="panelAdjustmentNote">
+                
             </div>
         </div>
     </div>
 </div>
-@endforeach
+
+<!-- Modal Update -->
+<div class="modal fade" id="add-update-data" tabindex="-1" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Edit Data</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="panelUpdateData">
+                
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection

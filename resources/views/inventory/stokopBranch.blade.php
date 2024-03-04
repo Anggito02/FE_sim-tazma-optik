@@ -134,6 +134,31 @@
                         let currentItem = result.data[i];
 						offsetN0++;
                         button_draft = ' <button type="button" class="btn-sm btn-warning" onclick="handleButtonClick(\'' + currentItem.id + '\',\'' + currentItem.branch_id + '\')">Detail</button>';
+                        if(currentItem.bulan == 1) {
+                            currentItem.bulan = 'Januari';
+                        } else if(currentItem.bulan == 2) {
+                            currentItem.bulan = 'Februari';
+                        } else if(currentItem.bulan == 3) {
+                            currentItem.bulan = 'Maret';
+                        } else if(currentItem.bulan == 4) {
+                            currentItem.bulan = 'April';
+                        } else if(currentItem.bulan == 5) {
+                            currentItem.bulan = 'Mei';
+                        } else if(currentItem.bulan == 6) {
+                            currentItem.bulan = 'Juni';
+                        } else if(currentItem.bulan == 7) {
+                            currentItem.bulan = 'Juli';
+                        } else if(currentItem.bulan == 8) {
+                            currentItem.bulan = 'Agustus';
+                        } else if(currentItem.bulan == 9) {
+                            currentItem.bulan = 'September';
+                        } else if(currentItem.bulan == 10) {
+                            currentItem.bulan = 'Oktober';
+                        } else if(currentItem.bulan == 11) {
+                            currentItem.bulan = 'November';
+                        } else if(currentItem.bulan == 12) {
+                            currentItem.bulan = 'Desember';
+                        }
                         rowData.push([
 							offsetN0,
                             currentItem.tahun,
@@ -262,13 +287,9 @@
                     @csrf
                     <!-- @method("POST") -->
                     <div class="form-group">
-                        <label for="input_branch" class="form-label">Pilih Cabang</label>
-                        <select name="branch_id" class="form-control chosen-select">
-                            <option value="">Pilih Cabang</option>
-                            @foreach ($branch as $branches)
-                            <option value="{{ $branches['id'] }}">{{ $branches['nama_branch'] }}</option>
-                        @endforeach
-                        </select>
+                        <label for="input_branch" class="form-label">Cabang anda</label>
+                        <input type="text" class="form-control" value="{{$data['nama_branch']}}" readonly>
+                        <input type="hidden" class="form-control" name="branch_id" value="{{$data['branch_id']}}">
                     </div>
                         <p>Apakah anda yakin ingin menambahkan stock untuk hari ini?</p>
                         <button type="submit" class="btn btn-success float-right">Add new</button>

@@ -40,7 +40,7 @@ class ItemOutgoingDetailController extends Controller
 
         $response_item_outgoing = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item-outgoing/one', $api_request_item_outgoing);
         $response_item_outgoing_detail = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/outgoing-detail/all', $api_request_item_outgoing_detail);
-        $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/all', $api_request);
+        $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $api_request);
         $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
 
@@ -62,7 +62,8 @@ class ItemOutgoingDetailController extends Controller
                 'employee' => $employee['data'],
                 'data' => $user['data']
             ]);
-        } else {
+        } 
+        else {
             return redirect('/dashboard');
         }
     }

@@ -57,7 +57,7 @@
         var formData = new FormData($(this)[0]);
 	    console.log(formData);
         $.ajax({ 
-            url   	: "{{ url('/stock-opname/detail/edit') }}",
+            url   	: "{{ url('/stock-opname-branch/detail/edit') }}",
             type: 'POST',
             data: formData,
             async: false,

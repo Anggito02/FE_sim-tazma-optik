@@ -194,6 +194,8 @@ Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid'
     Route::post('/stock-opname/detail/{id}/loadDataMaster', 'loadDataMaster');
     Route::post('/stock-opname/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname/detail/edit', 'updateStockOpnameDetail');
+    Route::post('/stock-opname/detail/loadAdjustmentNote', 'loadAdjustmentNote');
+    Route::post('/stock-opname/detail/loadMakeAdjustment', 'loadMakeAdjustment');
 });
 
 Route::controller(StockOpnameBranchController::class)->middleware('isTokenValid')->group(function(){
@@ -211,6 +213,8 @@ Route::controller(StockOpnameBranchDetailController::class)->middleware('isToken
     Route::post('/stock-opname-branch/detail/{id}/loadDataMaster', 'loadDataMaster');
     Route::post('/stock-opname-branch/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname-branch/detail/edit', 'updateStockOpnameBranchDetail');
+    Route::post('/stock-opname-branch/detail/loadAdjustmentNote', 'loadAdjustmentNote');
+    Route::post('/stock-opname-branch/detail/loadMakeAdjustment', 'loadMakeAdjustment');
 });
 
 Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){
@@ -253,6 +257,7 @@ Route::controller(StockOpnameBranchDetailController::class)->middleware('isToken
     Route::post('/stock-opname-branch/detail/{id}/loadDataMaster', 'loadDataMaster');
     Route::post('/stock-opname-branch/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname-branch/detail/edit', 'updateStockOpnameBranchDetail');
+    Route::post('/stock-opname-branch/detail/check-qr-code', 'checkQRCode');
 });
 
 Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){

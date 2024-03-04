@@ -200,13 +200,13 @@
                         setTimeout(function(){  
                         $('#tambah_info').hide(); 
                         location.reload();
-                        },3500);
+                        },1000);
                 }else{
                     $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show(); 
                     setTimeout(function(){
                         $('#tambah_info').hide(); 
                         location.reload();
-                    },3000)
+                    },1000)
                 }
             } 
 	    });
