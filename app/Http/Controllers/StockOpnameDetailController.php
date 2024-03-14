@@ -22,22 +22,33 @@ class StockOpnameDetailController extends Controller {
             'Authorization' => 'Bearer '.$token
         ];
 
+        $tanggal_so_from = $request->tanggal_so_from;
+        $tanggal_so_until = $request->tanggal_so_until;
+        $adjustment_type = $request->adjustment_type;
+        $adjustment_date_from = $request->adjustment_date_from;
+        $adjustment_date_until = $request->adjustment_date_until;
+        $adjustment_status = $request->adjustment_status;
+        $jenis_item = $request->jenis_item;
+        $closed_by = $request->closed_by;
+        $open_by = $request->open_by;
+        $adjustment_by = $request->adjustment_by;
+        
         $api_request = [
             "page" => $page,
-            "limit" => $limit
-        ];
-
-        $api_request_so = [
-            "page" => $page,
             "limit" => $limit,
-            "stock_opname_id" => $soid
         ];
 
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all/', $api_request_so);
+        // $api_request_so = [
+        //     "page" => $page,
+        //     "limit" => $limit,
+        //     "stock_opname_id" => $soid
+        // ];
+
+        // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all/', $api_request_so);
         $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $api_request);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
 
-        $stock_opname_detail = $response->json();
+        // $stock_opname_detail = $response->json();
         $item = $response_item->json();
         $employee = $response_employee->json();
         // dd($employee);
@@ -46,10 +57,19 @@ class StockOpnameDetailController extends Controller {
         // dd($user['data']);
         return view('inventory.stokopdetail', [
             'data' => $user['data'],
-            'stock_opname_detail' => $stock_opname_detail['data'],
+            // 'stock_opname_detail' => $stock_opname_detail['data'],
             'item' => $item['data'],
             'employee' => $employee['data'],
-            'stock_opname_id' => $soid
+            'stock_opname_id' => $soid,
+            'tanggal_so_from' => $request->tanggal_so_from,
+            'tanggal_so_until' => $request->tanggal_so_until,
+            'adjustment_type' => $request->adjustment_type,
+            'adjustment_date_from' => $request->adjustment_date_from,
+            'adjustment_date_until' => $request->adjustment_date_until,
+            'adjustment_status' => $request->adjustment_status,
+            'jenis_item' => $request->jenis_item,
+            'open_by' => $request->open_by,
+            'adjustment_by' => $request->adjustment_by
         ]);
     }
 
@@ -91,15 +111,8 @@ class StockOpnameDetailController extends Controller {
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        $page = 1;
-        $limit = 50;
-
-        $api_request = [
-            "page" => $page,
-            "limit" => $limit,
-            'stock_opname_id' => $soid,
-        ];
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all', $api_request);
+        $data = $request->all();
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all', $data);
         $stock_opname_detail = $response->json();
         return response()->json($stock_opname_detail);
     }
@@ -146,14 +159,13 @@ class StockOpnameDetailController extends Controller {
         $row=$request;
 
         $api_request = [
-            'id' => $request->so_id,
+            'id' => $request->so_detail_id,
             'so_start' => $request->so_start,
             'so_end' => $request->so_end,
             'actual_qty' => $request->actual_qty,
             'item_id' => $request->item_id,
             'open_by' => $request->open_by,
-            'close_by' => $request->close_by,
-            'stock_opname_id' => $request->so_detail_id
+            'close_by' => $request->close_by
         ];
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/edit', $api_request);
