@@ -19,33 +19,33 @@
                 <div class="form-group col-md-4">
                     <label for="bulan" class="form-label black-text">Bulan</label>
                     <select id="bulan" name="bulan" class="form-control chosen-select">
-                        <option value=""selected>--Pilih Bulan--</option>
-                        <option value="januari"  >Januari</option>
-                        <option value="februari"  >Februari</option>
-                        <option value="maret"  >Maret</option>
-                        <option value="april"  >April</option>
-                        <option value="mei" >Mei</option>
-                        <option value="juni"  >Juni</option>
-                        <option value="juli"  >Juli</option>
-                        <option value="agustus"  >Agustus</option>
-                        <option value="september" >September</option>
-                        <option value="oktober"  >Oktober</option>
-                        <option value="november"  >November</option>
-                        <option value="desember"  >Desember</option>
+                        <option value="" {{ $bulan == '' ? 'selected' : ''}}>--Pilih Bulan--</option>
+                        <option value="1" {{ $bulan == '1' ? 'selected' : ''}} >Januari</option>
+                        <option value="2" {{ $bulan == '2' ? 'selected' : ''}} >Februari</option>
+                        <option value="3" {{ $bulan == '3' ? 'selected' : ''}} >Maret</option>
+                        <option value="4" {{ $bulan == '4' ? 'selected' : ''}} >April</option>
+                        <option value="5" {{ $bulan == '5' ? 'selected' : ''}} >Mei</option>
+                        <option value="6" {{ $bulan == '6' ? 'selected' : ''}} >Juni</option>
+                        <option value="7" {{ $bulan == '7' ? 'selected' : ''}} >Juli</option>
+                        <option value="8" {{ $bulan == '8' ? 'selected' : ''}} >Agustus</option>
+                        <option value="9" {{ $bulan == '9' ? 'selected' : ''}} >September</option>
+                        <option value="10" {{ $bulan == '10' ? 'selected' : ''}} >Oktober</option>
+                        <option value="11" {{ $bulan == '11' ? 'selected' : ''}} >November</option>
+                        <option value="12" {{ $bulan == '12' ? 'selected' : ''}} >Desember</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="cabang" class="form-label black-text">Cabang</label>
                     <select name="branch_id" id="branch_id" class="form-control chosen-select">
-                        <option value=""selected>--Pilih Cabang--</option>
+                        <option value="" {{ $branch_id == '' ? 'selected' : ''}} >--Pilih Cabang--</option>
                         @foreach ($branch as $branches)
-                            <option value="{{ $branches['id'] }}">{{ $branches['nama_branch'] }}</option>
+                            <option value="{{ $branches['id'] }}" {{ $branch_id == $branches['id'] ? 'selected' : ''}}>{{ $branches['nama_branch'] }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="tahun" class="form-label black-text">Tahun</label>
-                    <input type="number" name="tahun" id="tahun" class="form-control" value="">
+                    <input type="number" name="tahun" id="tahun" class="form-control" value="{{ $tahun }}">
                 </div>
                 <div class="form-group col-md-12">
                     <br/>

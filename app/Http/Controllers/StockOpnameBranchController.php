@@ -23,22 +23,32 @@ class StockOpnameBranchController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
+
+        $branch_id = $request->branch_id;
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
         
         $api_request = [
             "page" => $page,
-            "limit" => $limit
+            "limit" => $limit,
+            "branch_id" => $branch_id,
+            "bulan" => $bulan,
+            "tahun" => $tahun
         ];
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-branch/all', $api_request);
-        $branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
+        $branch_res = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
         $stock_opname_branch = $response->json();
-        $branch = $branch->json();
+        $branch_res = $branch_res->json();
         
         $user = GetUserInfo::getUserInfo();
         // if ($item['status'] == 'success'){
             return view('inventory.stokopBranch', [
                 'data' => $user['data'],
                 'stock_opname_branch' => $stock_opname_branch['data'],
-                'branch' => $branch['data']
+                'branch' => $branch_res['data'],
+                'branch_id' => $branch_id,
+                'bulan' => $bulan,
+                'tahun' => $tahun
             ]);
         // } else {
             // return redirect('/dashboard');
