@@ -9,7 +9,6 @@
     <form id="edit_info" class="form-horizontal"> 
         @csrf
         <!-- @method("PUT") -->
-        <input type="hidden" value="{{$so_id}}" name="so_id">
         <input type="hidden" value="{{$stock_opname_detail['id']}}" name="so_detail_id">
         <input type="hidden" value="{{$stock_opname_detail['so_start']}}" name="so_start">
         <input type="hidden" value="{{$stock_opname_detail['so_end']}}" name="so_end">
@@ -48,7 +47,6 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-        formChange();
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
     });
     $("form#edit_info").submit(function(event){
