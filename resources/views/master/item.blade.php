@@ -19,7 +19,7 @@
                 <div class="form-group col-md-2">
                     <label for="jenis_item" class="form-label black-text">Jenis Item</label>
                     <select id="jenis_item" width="100%" name="jenis_item" class="form-control chosen-select">
-                        <option value="0" {{ $jenis_item == '0' ? 'selected' : '' }}>-- Pilih Jenis Item --</option>
+                        <option value="" {{ $jenis_item == '' ? 'selected' : '' }}>-- Pilih Jenis Item --</option>
                         <option value="frame" {{ $jenis_item == 'frame' ? 'selected' : '' }}>Frame</option>
                         <option value="lensa" {{ $jenis_item == 'lensa' ? 'selected' : '' }}>Lensa</option>
                         <option value="aksesoris" {{ $jenis_item == 'aksesoris' ? 'selected' : '' }}>Aksesoris</option>
@@ -27,10 +27,10 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="jenis_item" class="form-label black-text">Vendor</label>
-                    <select name="vendor_id" class="form-control chosen-select">
-                        <option value="0"selected>Choose...</option>
+                    <select name="vendor_id" id="vendor_id" class="form-control chosen-select">
+                        <option value="" {{ $vendor_id == '' ? 'selected' : ''}}>Choose...</option>
                         @foreach ($vendor as $val)
-                            <option value="{{$val['id']}}">{{$val['nama_vendor']}}</option>
+                            <option value="{{$val['id']}}" {{ $vendor_id == $val['id'] ? 'selected' : ''}}>{{$val['nama_vendor']}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -227,7 +227,8 @@
                     'kode_item':settings.kode_item,
                     'aksesoris_nama_item':settings.aksesoris_nama_item,
                     'harga_jual_from':settings.harga_jual_from,
-                    'harga_jual_until':settings.harga_jual_until
+                    'harga_jual_until':settings.harga_jual_until,
+                    'vendor_id':settings.vendor_id,
                 },
                 async : true,
                 dataType : 'json',
@@ -303,6 +304,7 @@
             harga_beli_until      : document.getElementById('harga_beli_until').value, //initial page
             diskon_from      : document.getElementById('diskon_from').value, //initial page
             diskon_until      : document.getElementById('diskon_until').value, //initial page
+            vendor_id      : document.getElementById('vendor_id').value, //initial page
         });
         loading  = false;
 	    end_record = false;

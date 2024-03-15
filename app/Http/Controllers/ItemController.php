@@ -23,15 +23,10 @@ class ItemController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        $jenis_item = null;
         $jenis_item = $request->jenis_item;
-
-        if ($request->jenis_item == null){
-            $jenis_item = '0';
-        };
+        $vendor_id = $request->vendor_id;
 
         $api_request = [
-            "jenis_item" => $jenis_item,
             "page" => $page,
             "limit" => $limit
         ];
@@ -64,6 +59,7 @@ class ItemController extends Controller
                 'harga_beli_until' => $request->harga_beli_until,
                 'diskon_from' => $request->diskon_from,
                 'diskon_until' => $request->diskon_until,
+                'vendor_id' => $vendor_id
             ]);
         // } else {
             // return redirect('/dashboard');
