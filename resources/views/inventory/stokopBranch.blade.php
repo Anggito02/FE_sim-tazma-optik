@@ -50,7 +50,9 @@
                 <div class="form-group col-md-12">
                     <br/>
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
+                    <a href="/stock-opname-branch">
+                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eraser"></i>Clear All</button>
+                    </a>
                     <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
                 </div>
             </div>

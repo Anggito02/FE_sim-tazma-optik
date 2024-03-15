@@ -4,11 +4,14 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
+    <div class="mb-4">
+        <a href="/stock-opname-branch"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
 
-    <!-- DataTales Example -->
+    <!-- Filter -->
     <div class="card shadow mb-4">
         <span id="tambah_info"></span>
-        <form id="itemForm" action="/stock_opname_branch/detail/{{$stock_opname_branch_id}}" method="POST" class="col-md-12 form-horizontal">
+        <form id="itemForm" action="/stock-opname-branch/detail/{{$stock_opname_branch_id}}" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row align-items-end">
                 <!-- Add the form inside the row -->
@@ -16,77 +19,73 @@
                 @method("GET")
                 <div class="form-group col-md-3">
                     <label for="tanggal_so_from" class="form-label black-text">Tanggal SO From</label>
-                    <input type="date" name="tanggal_so_from" id="tanggal_so_from" class="form-control" value="">
+                    <input type="date" name="tanggal_so_from" id="tanggal_so_from" class="form-control" value="{{$tanggal_so_from}}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="tanggal_so_until" class="form-label black-text">Tanggal SO Until</label>
-                    <input type="date" name="tanggal_so_until" id="tanggal_so_until" class="form-control" value="">
+                    <input type="date" name="tanggal_so_until" id="tanggal_so_until" class="form-control" value="{{$tanggal_so_until}}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="adjustment_date_from" class="form-label black-text">Adjustment Date From</label>
+                    <input type="date" name="adjustment_date_from" id="adjustment_date_from" class="form-control" value="{{$adjustment_date_from}}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="adjustment_date_until" class="form-label black-text">Adjustment Date Until</label>
+                    <input type="date" name="adjustment_date_until" id="adjustment_date_until" class="form-control" value="{{$adjustment_date_until}}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="adjustment_type" class="form-label black-text">Adjustment Type</label>
                     <select type="text" name="adjustment_type" id="adjustment_type" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="IN">IN</option>
-                        <option value="OUT">OUT</option>
-                        <option value="NONE">NONE</option>
+                        <option value="" {{ $adjustment_type == '' ? 'selected' : ''}}>Choose...</option>
+                        <option value="IN" {{ $adjustment_type == 'IN' ? 'selected' : ''}}>IN</option>
+                        <option value="OUT" {{ $adjustment_type == 'OUT' ? 'selected' : ''}}>OUT</option>
+                        <option value="NONE" {{ $adjustment_type == 'NONE' ? 'selected' : ''}}>NONE</option>
                     </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_date_from" class="form-label black-text">Adjustment Date From</label>
-                    <input type="date" name="adjustment_date_from" id="adjustment_date_from" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_date_until" class="form-label black-text">Adjustment Date Until</label>
-                    <input type="date" name="adjustment_date_until" id="adjustment_date_until" class="form-control" value="">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="adjustment_status" class="form-label black-text">Adjustment Status</label>
                     <select type="text" name="adjustment_status" id="adjustment_status" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="OPEN">OPEN</option>
-                        <option value="CLOSE">CLOSE</option>
+                        <option value="" {{ $adjustment_status == '' ? 'selected' : ''}}>Choose...</option>
+                        <option value="OPEN" {{ $adjustment_status == 'OPEN' ? 'selected' : ''}}>OPEN</option>
+                        <option value="CLOSED" {{ $adjustment_status == 'CLOSED' ? 'selected' : ''}}>CLOSED</option>
                     </select>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="jenis_item" class="form-label black-text">Jenis Item</label>
                     <select name="jenis_item" id="jenis_item" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="frame">Frame</option>
-                        <option value="lensa">Lensa</option>
-                        <option value="aksesoris">Aksesoris</option>
+                        <option value="" {{ $jenis_item == '' ? 'selected' : ''}}>Choose...</option>
+                        <option value="frame" {{ $jenis_item == 'frame' ? 'selected' : ''}}>Frame</option>
+                        <option value="lensa" {{ $jenis_item == 'lensa' ? 'selected' : ''}}>Lensa</option>
+                        <option value="aksesoris" {{ $jenis_item == 'aksesoris' ? 'selected' : ''}}>Aksesoris</option>
                     </select>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="open_by" class="form-label black-text">Open By</label>
                     <select name="open_by" id="open_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
+                        <option value="" {{ $open_by == '' ? 'selected' : ''}}>Choose...</option>
                         @foreach($employee as $emp)
-                            <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="close_by" class="form-label black-text">Closed By</label>
-                    <select name="close_by" id="close_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        @foreach($employee as $emp)
-                            <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
+                            <option value="{{ $emp['id'] }}" {{ $open_by == $emp['id'] ? 'selected' : ''}}>{{ $emp['employee_name'] }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="adjustment_by" class="form-label black-text">Adjustment By</label>
                     <select name="adjustment_by" id="adjustment_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
+                        <option value="" {{ $adjustment_by == '' ? 'selected' : ''}}>Choose...</option>
                         @foreach($employee as $emp)
-                        <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
+                        <option value="{{ $emp['id'] }}" {{ $adjustment_by == $emp['id'] ? 'selected' : ''}}>{{ $emp['employee_name'] }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" name="closed_by" id="close_by" class="form-control" value="" hidden>
                 </div>
                 <div class="form-group col-md-12">
                     <br/>
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
+                    <a href="/stock_opname_branch/detail/{{$stock_opname_branch_id}}">
+                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eraser"></i>Clear All</button>
+                    </a>
                     <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
                 </div>
             </div>
@@ -188,7 +187,7 @@
         $("#panelUpdateData").html(load_img);
         $.ajax({
 		    url   : "{{ url('/stock-opname-branch/detail/') }}/" + detail_id + "/loadDataDetailOnly",
-		    data 	:{'sob_id': <?php echo $stock_opname_branch_id ?>,'sob_detail_id':detail_id},
+		    data 	:{'sob_id': <?php echo $stock_opname_branch_id ?>,'sob_detail_id':detail_id, 'branch_id': <?php echo $data['branch_id']; ?>},
 		    method	: "POST",
 		    success : function(data){
 		    	$('#panelUpdateData').html(data);
@@ -219,6 +218,7 @@
                     'limit':settings.limit,
                     'page':(settings.limit*settings.start_page),
                     '_token':csrfToken,
+                    'stock_opname_branch_id':settings.stock_opname_branch_id,
                     'tanggal_so_from':settings.tanggal_so_from,
                     'tanggal_so_until':settings.tanggal_so_until,
                     'adjustment_type':settings.adjustment_type,
@@ -227,7 +227,8 @@
                     'jenis_item':settings.jenis_item,
                     'open_by':settings.open_by,
                     'close_by':settings.close_by,
-                    'adjustment_by':settings.adjustment_by
+                    'adjustment_by':settings.adjustment_by,
+                    'adjustment_status':settings.adjustment_status
                 },
                 async : true,
                 dataType : 'json',
@@ -248,9 +249,9 @@
                             button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonAdjustmentNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
                         }
 
-                        if(currentItem.adjustment_status === "CLOSED") {
+                        if(currentItem.adjustment_status === "CLOSED" || currentItem.adjustment_followup_note == null) {
                             button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
-                        } else if (currentItem.adjustment_status === "OPEN") {
+                        } else if (currentItem.adjustment_followup_note != null) {
                             button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonMakeAdjustment(\'' + currentItem.id + '\')">Adjust</button>';
                         }
 
@@ -315,6 +316,7 @@
             limit		    : 50, //initial page
             htmldata        : '', //initial page
             lastScroll      : 0, //initial page
+            stock_opname_branch_id      : stock_opname_branch_id, //initial page
             tanggal_so_from      : document.getElementById('tanggal_so_from').value, //initial page
             tanggal_so_until      : document.getElementById('tanggal_so_until').value, //initial page
             adjustment_type      : document.getElementById('adjustment_type').value, //initial page
@@ -323,7 +325,7 @@
             adjustment_status      : document.getElementById('adjustment_status').value, //initial page
             jenis_item      : document.getElementById('jenis_item').value, //initial page
             open_by      : document.getElementById('open_by').value, //initial page
-            close_by      : document.getElementById('close_by').value, //initial page
+            close_by      : document.getElementById('open_by').value, //initial page
             adjustment_by      : document.getElementById('adjustment_by').value, //initial page
             kode_qr_po_detail      : document.getElementById('kode_qr_po_detail').value, //initial page
 

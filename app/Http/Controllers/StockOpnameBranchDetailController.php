@@ -22,32 +22,42 @@ class StockOpnameBranchDetailController extends Controller {
             'Authorization' => 'Bearer '.$token
         ];
 
+        $tanggal_so_from = $request->tanggal_so_from;
+        $tanggal_so_until = $request->tanggal_so_until;
+        $adjustment_type = $request->adjustment_type;
+        $adjustment_date_from = $request->adjustment_date_from;
+        $adjustment_date_until = $request->adjustment_date_until;
+        $adjustment_status = $request->adjustment_status;
+        $jenis_item = $request->jenis_item;
+        $closed_by = $request->closed_by;
+        $open_by = $request->open_by;
+        $adjustment_by = $request->adjustment_by;
+
         $api_request = [
             "page" => $page,
             "limit" => $limit
         ];
-
-        $api_request_so = [
-            "page" => $page,
-            "limit" => $limit,
-            "stock_opname_branch_id" => $sobid
-        ];
-
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-branch-detail/all', $api_request_so);
         $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $api_request);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
 
-        $stock_opname_branch_detail = $response->json();
         $item = $response_item->json();
         $employee = $response_employee->json();
-        
         $user = GetUserInfo::getUserInfo();
+
         return view('inventory.stokopBranchDetail', [
             'data' => $user['data'],
-            'stock_opname_branch_detail' => $stock_opname_branch_detail['data'],
             'item' => $item['data'],
             'employee' => $employee['data'],
-            'stock_opname_branch_id' => $sobid
+            'stock_opname_branch_id' => $sobid,
+            'tanggal_so_from' => $request->tanggal_so_from,
+            'tanggal_so_until' => $request->tanggal_so_until,
+            'adjustment_type' => $request->adjustment_type,
+            'adjustment_date_from' => $request->adjustment_date_from,
+            'adjustment_date_until' => $request->adjustment_date_until,
+            'adjustment_status' => $request->adjustment_status,
+            'jenis_item' => $request->jenis_item,
+            'open_by' => $request->open_by,
+            'adjustment_by' => $request->adjustment_by
         ]);
     }
 
@@ -83,27 +93,20 @@ class StockOpnameBranchDetailController extends Controller {
         return response()->json($result);
     }
 
-    public function loadDataMaster(Request $request, int $sobid)
+    public function loadDataMaster(Request $request)
     {
         $token = $_COOKIE['token'];
         $headers = [
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        $page = 1;
-        $limit = 50;
-
-        $api_request = [
-            "page" => $page,
-            "limit" => $limit,
-            'stock_opname_branch_id' => $sobid,
-        ];
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-branch-detail/all', $api_request);
+        $data = $request->all();
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-branch-detail/all', $data);
         $stock_opname_branch_detail = $response->json();
         return response()->json($stock_opname_branch_detail);
     }
 
-    public function loadDataDetailOnly(Request $request, int $sobid)
+    public function loadDataDetailOnly(Request $request)
     {
         $token = $_COOKIE['token'];
         $headers = [
@@ -132,11 +135,11 @@ class StockOpnameBranchDetailController extends Controller {
             'stock_opname_branch_detail' => $stock_opname_branch_detail['data'],
             'items' => $item['data'],
             'sob_detail_id' => $data['sob_detail_id'],
-            'sob_id' => $data['sob_id']
+            'branch_id' => $data['branch_id']
         ]);
     }
 
-    public function updateStockOpnameBranchDetail(Request $request, $sobid) {
+    public function updateStockOpnameBranchDetail(Request $request) {
         $token = $_COOKIE['token'];
 
         $headers = [
@@ -146,14 +149,14 @@ class StockOpnameBranchDetailController extends Controller {
         $row=$request;
 
         $api_request = [
-            'id' => $request->id,
+            'id' => $request->sob_detail_id,
             'so_start' => $request->so_start,
             'so_end' => $request->so_end,
             'actual_qty' => $request->actual_qty,
             'item_id' => $request->item_id,
+            'branch_id' => $request->branch_id,
             'open_by' => $request->open_by,
-            'close_by' => $request->close_by,
-            'stock_opname_branch_id' => $sobid
+            'close_by' => $request->close_by
         ];
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-branch-detail/edit', $api_request);
