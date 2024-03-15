@@ -4,7 +4,9 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-
+    <div class="mb-4">
+        <a href="/stock-opname"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
     <!-- Filter -->
     <div class="card shadow mb-4">
         <span id="tambah_info"></span>
@@ -79,7 +81,9 @@
                     </div>
                     <div class="form-group col-md-12">
                         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
+                        <a href="/stock-opname/detail/{{$stock_opname_id}}">
+                            <button type="button" class="btn btn-warning"><i class="fa-solid fa-eraser"></i>Clear All</button>
+                        </a>
                         <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
                     </div>
                 </div>
