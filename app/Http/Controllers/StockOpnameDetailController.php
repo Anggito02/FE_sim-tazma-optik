@@ -37,27 +37,15 @@ class StockOpnameDetailController extends Controller {
             "page" => $page,
             "limit" => $limit,
         ];
-
-        // $api_request_so = [
-        //     "page" => $page,
-        //     "limit" => $limit,
-        //     "stock_opname_id" => $soid
-        // ];
-
-        // $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/stock-opname-detail/all/', $api_request_so);
         $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $api_request);
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
 
-        // $stock_opname_detail = $response->json();
         $item = $response_item->json();
         $employee = $response_employee->json();
-        // dd($employee);
-        
         $user = GetUserInfo::getUserInfo();
-        // dd($user['data']);
+
         return view('inventory.stokopdetail', [
             'data' => $user['data'],
-            // 'stock_opname_detail' => $stock_opname_detail['data'],
             'item' => $item['data'],
             'employee' => $employee['data'],
             'stock_opname_id' => $soid,
@@ -104,7 +92,7 @@ class StockOpnameDetailController extends Controller {
         return response()->json($result);
     }
 
-    public function loadDataMaster(Request $request, int $soid)
+    public function loadDataMaster(Request $request)
     {
         $token = $_COOKIE['token'];
         $headers = [
