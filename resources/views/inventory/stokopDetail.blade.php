@@ -59,7 +59,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="open_by" class="form-label black-text">Open By</label>
+                        <label for="open_by" class="form-label black-text">Open and Closed By</label>
                         <select name="open_by" id="open_by" class="form-control chosen-select" >
                             <option value="" {{ $open_by == null ? 'selected' : '' }}>Choose...</option>
                             @foreach($employee as $emp)

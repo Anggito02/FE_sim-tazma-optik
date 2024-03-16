@@ -60,7 +60,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="open_by" class="form-label black-text">Open By</label>
+                    <label for="open_by" class="form-label black-text">Open and Closed By</label>
                     <select name="open_by" id="open_by" class="form-control chosen-select">
                         <option value="" {{ $open_by == '' ? 'selected' : ''}}>Choose...</option>
                         @foreach($employee as $emp)
@@ -83,7 +83,7 @@
                 <div class="form-group col-md-12">
                     <br/>
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                    <a href="/stock_opname_branch/detail/{{$stock_opname_branch_id}}">
+                    <a href="/stock-opname-branch/detail/{{$stock_opname_branch_id}}">
                         <button type="button" class="btn btn-warning"><i class="fa-solid fa-eraser"></i>Clear All</button>
                     </a>
                     <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
