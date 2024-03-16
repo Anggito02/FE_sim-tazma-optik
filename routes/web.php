@@ -143,6 +143,7 @@ Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->gr
 
 Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/branch-item','getAllBranchItem');
+    Route::post('/branch-item/loadDataMaster', 'loadDataMaster');
 });
 
 Route::controller(ItemOutgoingController::class)->middleware('isTokenValid')->group(function(){
@@ -258,6 +259,7 @@ Route::controller(StockOpnameBranchDetailController::class)->middleware('isToken
     Route::post('/stock-opname-branch/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname-branch/detail/edit', 'updateStockOpnameBranchDetail');
     Route::post('/stock-opname-branch/detail/check-qr-code', 'checkQRCode');
+    Route::post('/stock-opname-branch/detail/check-qr-code-branch', 'checkQRCodeBranch');
 });
 
 Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){

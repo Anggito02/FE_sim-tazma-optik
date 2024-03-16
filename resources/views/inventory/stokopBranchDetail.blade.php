@@ -236,7 +236,7 @@
 	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
 			    },
                 success : function(result){
-                    console.log(result.data);
+                    // console.log(result.data);
 					var table = $('#data_stockopDetail_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
@@ -382,7 +382,7 @@
             processData: false,
             dataType: 'json',
             success: function (result) {
-                console.log(result);
+                // console.log(result);
             if(result.message=="The data has been successfully updated"){
 				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				  	setTimeout(function(){
@@ -406,7 +406,7 @@
         var csrftoken = $('meta[name="csrf-token"]').attr('content');
         if(event && event.target){
             var inputValue = event.target.value;
-            console.log(inputValue);
+            // console.log(inputValue);
         }
         $.ajax({
             method: "POST",
@@ -422,16 +422,34 @@
             error: function (request, error) {
                 alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
             },
-            success: function(result){
+            success: function(result, settings){
                 if(result.status != 'error'){
-                    console.log(result);
+                    // console.log(result);
                     document.getElementById('item_id_onchange').value = result.data.id;
                     document.getElementById('kode_item_onchange').value = result.data.kode_item;
                     document.getElementById('jenis_item_onchange').value = result.data.jenis_item;
-                    document.getElementById('stok_item_onchange').value = result.data.stok;
+                    // branch_id = settings.stock_opname_branch_id;
+                    // console.log (branch_id);
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ url('/stock-opname-branch/detail/check-qr-code-branch') }}",
+                        data: {
+                            'item_id' : result.data.id,
+                            'branch_id' : "{{ $stock_opname_branch_id }}"
+                        },
+                        async : true,
+                        dataType : 'json',
+                        error: function (request, error) {
+                            console.log("check-qr-code-branch error");
+                        },
+                        success: function(hasil){
+                            // console.log(hasil);
+                            document.getElementById('stok_item_onchange').value = hasil.data.stok_branch;                        
+                        }
+                    });
                 }
             }
-        })
+        });
     }
 
     //prevent form submit on pressing enter in keyboard 
@@ -507,7 +525,7 @@
                         <div class="col">
 
                             <div class="mb-3">
-                                <label for="InputStok" class="form-label">Stok</label>
+                                <label for="InputStok" class="form-label">Stok Cabang</label>
                                 <input type="text" id="stok_item_onchange" class="form-control" readonly>
                             </div>
 

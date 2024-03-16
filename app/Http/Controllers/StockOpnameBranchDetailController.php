@@ -241,6 +241,24 @@ class StockOpnameBranchDetailController extends Controller {
         return response()->json($result);
     }
 
+    public function checkQRCodeBranch(Request $request) {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request_stok_branch = [
+            'item_id' => $request->item_id,
+            'branch_id' => $request->branch_id
+        ];
+
+        $response_stok_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch-item/one', $api_request_stok_branch);
+        $result_stok_branch = $response_stok_branch->json();
+
+        return response()->json($result_stok_branch);
+    }
+
     public function loadAdjustmentNote(Request $request) {
         $token = $_COOKIE['token'];
         // $headers = [

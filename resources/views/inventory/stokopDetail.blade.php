@@ -151,7 +151,7 @@
     
     function handleButtonClickAdjust(id) {
         var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust"]');
-        console.log(button);
+        // console.log(button);
         button.setAttribute('data-toggle', 'modal');
         button.setAttribute('data-target', '#modalAdjust' + id );
         $('#modalAdjust' + id).modal('show');
@@ -212,7 +212,7 @@
 	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
 			    },
                 success : function(result){
-                    console.log(result.data);
+                    // console.log(result.data);
 					var table = $('#data_stockopDetail_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
@@ -390,23 +390,23 @@
             dataType: 'json',
             success: function (result) {
                 console.log(result);
-            if(result.message=="The data has been successfully updated"){
+                if(result.message=="The data has been successfully updated"){
 				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				  	setTimeout(function(){
 					 $('#tambah_info').hide();
-                    //  location.reload();
+                     location.reload();
 					},1000);
-			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				setTimeout(function(){
+			    }else{
+				    $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				    setTimeout(function(){
 					$('#tambah_info').hide();
-                    // location.reload();
-				},1000)
-			}
-            $('#btn_submit').show();
-		}
-	  });
-	  return false;
+                    location.reload();
+				    },1000)
+			    }
+                $('#btn_submit').show();
+		    }
+	    });
+	return false;
     }
 
     function submitForm(event){
@@ -426,7 +426,7 @@
             processData: false,
             dataType: 'json',
             success: function (result) {
-                console.log(result);
+                // console.log(result);
             if(result.message=="The data has been successfully updated"){
 				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				  	setTimeout(function(){
@@ -452,7 +452,7 @@
         // var inputValue = '';
         if(event && event.target){
             var inputValue = event.target.value;
-            console.log(inputValue);
+            // console.log(inputValue);
         }
         $.ajax({
             method: 'POST',
@@ -471,11 +471,13 @@
 	      		alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
 			},
             success: function (result) {
-                console.log(result.data);
-                document.getElementById('item_id_onchange').value=result.data.id;
-                document.getElementById('kode_item_onchange').value=result.data.kode_item;
-                document.getElementById('jenis_item_onchange').value=result.data.jenis_item;
-                document.getElementById('stok_item_onchange').value=result.data.stok;
+                if(result.status != 'error'){
+                    // console.log(result.data);
+                    document.getElementById('item_id_onchange').value=result.data.id;
+                    document.getElementById('kode_item_onchange').value=result.data.kode_item;
+                    document.getElementById('jenis_item_onchange').value=result.data.jenis_item;
+                    document.getElementById('stok_item_onchange').value=result.data.stok;
+                }
             }
         })
     }
