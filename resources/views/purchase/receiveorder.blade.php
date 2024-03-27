@@ -64,13 +64,13 @@
                             <td class="nowrap">{{ $valPod['kode_item'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['pre_order_qty'] }}</td>
                             <td class="nowrap">
-                                @if ($valPod['received_qty'] == null)
+                                @if ($valPod['received_qty'] == 0)
                                 <div class="text-danger">Item Not Received</div>
                                 @else
                                 <div class="text-right">{{ $valPod['received_qty'] }}</div>
                                 @endif</td>
                             <td class="nowrap">
-                                @if ($valPod['not_good_qty'] == null)
+                                @if ($valPod['not_good_qty'] == 0)
                                 <div class="text-danger">Item Not Received</div>
                                 @else
                                 <div class="text-right">{{ $valPod['not_good_qty'] }}</div>
@@ -78,12 +78,12 @@
                             <td class="nowrap ">{{ $valPod['unit'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['harga_beli_satuan'] }}</td>
                             <td>
-                                @if (($valPod['received_qty'] && $valPod['not_good_qty']) == null)
+                                @if (($valPod['received_qty'] && $valPod['not_good_qty']) == 0)
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$valPod['id']}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                @elseif (($valPod['received_qty'] || $valPod['not_good_qty']) != null) 
+                                @elseif (($valPod['received_qty'] || $valPod['not_good_qty']) != 0) 
                                 <button type="button" class="btn-sm btn-secondary" disabled>
                                     <i class="fa fa-edit"></i>
                                 </button>

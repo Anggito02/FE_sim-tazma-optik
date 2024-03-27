@@ -116,6 +116,7 @@ Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenVali
     Route::post('/PO/detail','getAllPODetail');
     Route::post('/PO/detail/add', 'addPODetail');
     Route::put('/PO/detail/edit', 'updatePODetail');
+    Route::post('/PO/detail/generate', 'generateQRCode');
     Route::delete('/PO/detail/delete', 'deletePODetail');
 });
 
@@ -297,10 +298,6 @@ Route::group([], function(){
     Route::get('/dito', function () {
         return view('dito');
     });
-
-    // Route::get('/sales/kasir', function () {
-    //     return view('addcart');
-    // });
 });
 
 
