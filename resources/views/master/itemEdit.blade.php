@@ -69,12 +69,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-add-item " id="frameSubKategori">
-                    <div class="mb-3">
-                        <label for="frame_sku_vendor" class="form-label">SKU Vendor</label>
-                        <input type="text" name="frame_sku_vendor" class="form-control" value="{{ $vals['frame_sku_vendor'] }}" >
-                    </div>
-                </div>
             </div>
             <div class="col">
                 <div class="form-add-item " id="colorItem">
@@ -88,6 +82,12 @@
                         </select>
                     </div>
                 </div>
+                <div class="frameKategori" style="display: none;" id="frameSubKategori">
+                    <div class="mb-3">
+                        <label for="frame_sku_vendor" class="form-label">Frame SKU Vendor</label>
+                        <input type="text" name="frame_sku_vendor" class="form-control" value="{{ $vals['frame_sku_vendor'] }}" >
+                    </div>
+                </div>
                 <div class="frameKategori" style="display: none;"  id="frameSubKategori">
                     <div class="mb-3">
                         <label for="InputFrameSub" class="form-label">Frame SUB Kategori</label>
@@ -97,7 +97,7 @@
                 <div class="frameKategori" style="display: none;"  id="frameSubKategori">
                     <div class="mb-3">
                         <label for="frame_kode" class="form-label">Frame Code</label>
-                        <input type="text" name="frame_kode" id="frame_kode" class="form-control" >
+                        <input type="text" name="frame_kode" id="frame_kode" class="form-control" value="{{ $vals['frame_kode'] }}" >
                     </div>
                 </div>
                 <div class="lensaKategori" style="display: none;"  id="indexLensa">

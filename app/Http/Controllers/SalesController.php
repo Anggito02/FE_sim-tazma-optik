@@ -46,11 +46,13 @@ class SalesController extends Controller
         $response_employee_one = Http::withHeaders($this->headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/one', $api_request_employee_one);
         $response_sales_master =Http::withHeaders($this->headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/one/id', $sales_master);
         $kas['data']="hallo";
+        $user = GetUserInfo::getUserInfo();
         return view('sales.kasir', [
             'response_employee_one' => $response_employee_one['data'],
             'response_sales' => $response_sales_master,
             'kas' => $kas['data'],
             'user_info' => $this->response_user_info,
+            'data' => $user['data']
         ]);
     }
     function print_invoice(Request $request){

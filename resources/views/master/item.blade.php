@@ -136,13 +136,13 @@
                     setTimeout(function(){
                     $('#tambah_info').hide();
                     location.reload();
-                    },3500);
+                    },1000);
             }else{
                 $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
                 setTimeout(function(){
                     $('#tambah_info').hide();
                     location.reload();
-                },3000)
+                },1000)
                 }
             },
         });
@@ -385,13 +385,13 @@
 				  	setTimeout(function(){
 					 $('#tambah_info').hide();
                      location.reload();
-					},3500);
+					},1000);
 			}else{
 				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				setTimeout(function(){
 					$('#tambah_info').hide();
                     location.reload();
-				},3000)
+				},1000)
 			}
             $('#btn_submit').show();
 		}
@@ -483,12 +483,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-add-item " id="frameSubKategori">
-                                <div class="mb-3">
-                                    <label for="frame_sku_vendor" class="form-label">SKU Vendor</label>
-                                    <input type="text" name="frame_sku_vendor" class="form-control">
-                                </div>
-                            </div>
+                            
                             <div class="form-add-item " id="colorItem">
                                 <div class="mb-3">
                                     <label for="InputColor" class="form-label">Warna</label>
@@ -503,6 +498,12 @@
                             </div>
                         </div>
                         <div class="col">
+                            <div class="frameKategori" style="display: none;"  id="frameSubKategori">
+                                <div class="mb-3">
+                                    <label for="InputFrameSku" class="form-label">Frame SKU Kategori</label>
+                                    <input type="text" name="frame_sku_vendor" id="frame_sku_vendor"  class="form-control"  >
+                                </div>
+                            </div>
                             <div class="frameKategori" style="display: none;"  id="frameSubKategori">
                                 <div class="mb-3">
                                     <label for="InputFrameSub" class="form-label">Frame SUB Kategori</label>

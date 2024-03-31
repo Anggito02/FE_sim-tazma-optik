@@ -39,6 +39,12 @@ class ItemController extends Controller
         $brand = $response_brand->json();
         $vendor = $response_vendor->json();
         $color = $response_color->json();
+        foreach ($color['data'] as $key => $value) {
+            $colorName = $value['color_name'];
+            $colorName = ucfirst(str_replace('_', ' ', $colorName));
+            $colorName = ucwords($colorName);
+            $color['data'][$key]['color_name'] = $colorName;
+        };
         $category = $response_Category->json();
 
         $user = GetUserInfo::getUserInfo();
@@ -105,6 +111,12 @@ class ItemController extends Controller
         $data = $request->all(); // Retrieve all input data from the request
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $data);
         $item = $response->json();
+        foreach ($item['data'] as $key => $value) {
+            $colorName = $value['frame_nama_warna'];
+            $colorName = ucfirst(str_replace('_', ' ', $colorName));
+            $colorName = ucwords($colorName);
+            $item['data'][$key]['frame_nama_warna'] = $colorName;
+        };
         return response()->json($item);
     }
     public function addItem(Request $request)

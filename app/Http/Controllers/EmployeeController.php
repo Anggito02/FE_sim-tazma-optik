@@ -104,7 +104,6 @@ class EmployeeController extends Controller
             'domicile' => $request->domicile,
             'status' => $request->status
         ];
-        dd($api_request);
         
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/employee/edit', $api_request);
