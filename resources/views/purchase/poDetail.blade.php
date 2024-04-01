@@ -462,7 +462,7 @@
 
 <script type="text/javascript">
     function handleButtonGenerate(id) {
-        var url = "{{ url('/PO/detail/generate-page') }}/" + id;
+        var url = "{{ url('/PO/detail/generate-qr') }}/" + id;
         window.open(url, '_blank');
     }
 
