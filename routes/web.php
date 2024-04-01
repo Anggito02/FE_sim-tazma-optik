@@ -116,7 +116,7 @@ Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenVali
     Route::post('/PO/detail','getAllPODetail');
     Route::post('/PO/detail/add', 'addPODetail');
     Route::put('/PO/detail/edit', 'updatePODetail');
-    Route::post('/PO/detail/generate', 'generateQRCode');
+    Route::get('/PO/detail/generate-page/{id}', 'generateQRCodePage');
     Route::delete('/PO/detail/delete', 'deletePODetail');
 });
 

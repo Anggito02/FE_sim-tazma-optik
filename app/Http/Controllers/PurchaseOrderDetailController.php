@@ -134,20 +134,21 @@ class PurchaseOrderDetailController extends Controller
         }
     }
 
-    public function generateQRCode(Request $request){
+    public function generateQRCodePage($id){
         $token = $_COOKIE['token'];
         $headers = [
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        $data = $request->all();
+        $data = ['id' => $id];
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/one', $data);
         $result = $response->json();
 
-        return view('purchase.poGenerate', [
-            'qr_pod' => $result['data']
+        $user = GetUserInfo::getUserInfo();
+    
+        return view('purchase.qrCodePage', [
+            'qr_pod' => $result['data'],
         ]);
-
     }
 
     public function deletePODetail(Request $request){

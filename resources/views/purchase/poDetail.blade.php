@@ -462,37 +462,9 @@
 
 <script type="text/javascript">
     function handleButtonGenerate(id) {
-        var csrfToken = $('meta[name="csrf-token"]').attr('content');
-        $.ajax({
-            url: "{{ url('/PO/detail/generate') }}",
-            type: 'POST',
-            data: {
-                '_token': csrfToken,
-                'id': id
-            },
-            success: function (data) {
-		    	$('#panelQrData').html(data);
-                $('#qr-data').modal('show');
-            }
-        });
+        var url = "{{ url('/PO/detail/generate-page') }}/" + id;
+        window.open(url, '_blank');
     }
 
 </script>
-
-<div class="modal fade" id="qr-data" tabindex="-1" data-backdrop="static" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLongTitle">Qr Code</h5>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close" onclick="closeModal()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="panelQrData">
-                
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
