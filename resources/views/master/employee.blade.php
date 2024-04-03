@@ -277,7 +277,7 @@
         
                                                                     <div class="mb-3">
                                                                         <label for="" class="form-label">Cabang</label>
-                                                                        <select name="branch_id" class="form-control" id="">
+                                                                        <select name="branch_id" class="form-control chosen-select" id="">
                                                                             <option value="{{$val['branch_id']}}" selected hidden disabled>{{$val['nama_branch']}}</option>
                                                                             @foreach ($branch as $cabang)
                                                                             <option value="{{ $cabang['id'] }}">{{ $cabang['nama_branch'] }}</option>
@@ -497,4 +497,10 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
+    });
+</script>
 @endsection
