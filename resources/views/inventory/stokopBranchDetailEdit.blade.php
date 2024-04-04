@@ -16,10 +16,10 @@
         <div class="d-flex flex-column">
             <div class="mb-3">
                 <label for="inputItem" class="form-label">Item</label>
-                <select name="item_id" id="inputItem" class="form-control chosen-select">
+                <select name="item_id" id="inputItem" class="form-control">
                     <option value="" disabled>Choose</option>
                     @foreach ($items as $item)
-                        <option value="{{$item['id']}}" {{$item['id'] == $stock_opname_branch_detail['item_id'] ? 'selected' : ''}} selected>{{$item['kode_item']}} - {{$item['jenis_item']}}</option>
+                        <option value="{{$item['id']}}" {{$item['id'] == $stock_opname_branch_detail['item_id'] ? 'selected' : ''}}>{{$item['kode_item']}} - {{$item['jenis_item']}}</option>
                     @endforeach
                 </select>
             </div>
