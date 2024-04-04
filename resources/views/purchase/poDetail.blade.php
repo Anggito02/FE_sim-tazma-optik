@@ -35,13 +35,13 @@
                 </div>
 
                 <div class="d-flex flex-column align-items-end">
-                    @if ($po['status_penerimaan'] == '0')
+                    @if ($po['status_penerimaan'] == '1')
                     <button type="button" class="btn-sm btn-info mb-3">
                         <a href="/receive-order/{{ $po['id'] }}" class="text-white">
                             Check Receive Order
                         </a>
                     </button>
-                    @elseif ($po['status_penerimaan'] == '1')
+                    @elseif ($po['status_penerimaan'] == '0' || $pod==null)
                     <button type="button" class="btn-sm btn-secondary mb-3" disabled>
                         Check Receive Order
                     </button>
