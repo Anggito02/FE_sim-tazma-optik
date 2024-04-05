@@ -137,7 +137,7 @@ class BranchOutgoingController extends Controller
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/branch-outgoing/edit', $api_request);
         $result = $response->json();
 
-        if($result['message'] == 'success'){
+        if($result['status'] == 'success'){
             $row['message']="Data has been successfully updated";
         } else {
             $row['message']="Update data failed ";

@@ -6,9 +6,9 @@
 </style>
 <span id="tambah_info"></span> 
 <div class="modal-body">
-    <form method="post" action="/branch-outgoing/edit">
+    <form id="edit_info" class="form-horizontal">
         @csrf
-        @method("PUT")
+        <!-- @method("PUT") -->
         <div class="row">
             <div class="col">
                 <input type="hidden" name="id" value="{{$vals['id']}}">
