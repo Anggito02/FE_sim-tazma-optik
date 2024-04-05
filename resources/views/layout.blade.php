@@ -123,6 +123,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Inventory Sheet:</h6>
                         <a class="collapse-item" href="/item-outgoing">Item Outgoing</a>
+                        <a class="collapse-item" href="/branch-outgoing">Branch Outgoing</a>
                         <a class="collapse-item" href="/branch-item">Branch Item</a>
                         <a class="collapse-item" href="/stock-opname">Stock Opname</a>
                         <a class="collapse-item" href="/stock-opname-branch">Stock Opname Branch</a>

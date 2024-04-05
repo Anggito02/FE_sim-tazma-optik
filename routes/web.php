@@ -19,9 +19,11 @@ use App\Http\Controllers\PurchaseOrderDetailController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ReceiveOrderController;
 use App\Http\Controllers\BranchItemController;
+use App\Http\Controllers\BranchOutgoingDetailController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
+use App\Http\Controllers\BranchOutgoingController;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\StockOpnameMasterController;
@@ -152,6 +154,23 @@ Route::controller(ItemOutgoingController::class)->middleware('isTokenValid')->gr
     Route::post('/item-outgoing/add', 'addItemOutgoing');
     Route::put('/item-outgoing/edit', 'updateItemOutgoing');
     Route::delete('/item-outgoing/delete', 'deleteItemOutgoing');
+});
+
+Route::controller(BranchOutgoingController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch-outgoing','getAllBranchOutgoing');
+    Route::post('/branch-outgoing/add', 'addBranchOutgoing');
+    Route::post('/branch-outgoing/loadDataMaster', 'loadDataMaster');
+    Route::put('/branch-outgoing/edit', 'updateBranchOutgoing');
+    Route::delete('/branch-outgoing/delete', 'deleteBranchOutgoing');
+    Route::post('/branch-outgoing/loadDataDetailOnly', 'loadDataDetailOnly');
+});
+
+Route::controller(BranchOutgoingDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch-outgoing/detail/{id}','getAllBranchOutgoingDetail');
+    Route::post('/branch-outgoing/detail/add','addBranchOutgoingDetail');
+    Route::put('/branch-outgoing/detail/edit', 'updateBranchOutgoingDetail');
+    Route::put('/branch-outgoing/detail/verify', 'verifyBranchOutgoingDetail');
+    Route::delete('/branch-outgoing/detail/delete', 'deleteBranchOutgoingDetail');
 });
 
 Route::controller(ItemOutgoingDetailController::class)->middleware('isTokenValid')->group(function(){
