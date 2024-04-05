@@ -30,7 +30,8 @@ use App\Http\Controllers\StockOpnameMasterController;
 use App\Http\Controllers\StockOpnameDetailController;
 use App\Http\Controllers\StockOpnameBranchController;
 use App\Http\Controllers\StockOpnameBranchDetailController;
-
+use App\Http\Controllers\ReturController;
+use App\Http\Controllers\ReturDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -160,8 +161,8 @@ Route::controller(BranchOutgoingController::class)->middleware('isTokenValid')->
     Route::get('/branch-outgoing','getAllBranchOutgoing');
     Route::post('/branch-outgoing/add', 'addBranchOutgoing');
     Route::post('/branch-outgoing/loadDataMaster', 'loadDataMaster');
-    Route::put('/branch-outgoing/edit', 'updateBranchOutgoing');
-    Route::delete('/branch-outgoing/delete', 'deleteBranchOutgoing');
+    Route::post('/branch-outgoing/edit', 'updateBranchOutgoing');
+    Route::post('/branch-outgoing/delete', 'deleteBranchOutgoing');
     Route::post('/branch-outgoing/loadDataDetailOnly', 'loadDataDetailOnly');
 });
 
@@ -185,6 +186,24 @@ Route::controller(BranchItemController::class)->middleware('isTokenValid')->grou
     Route::get('/branch-item','getAllBranchItem');
     Route::post('/branch-item/add', 'addBranchItem');
 });
+
+Route::controller(ReturController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/retur','getAllRetur');
+    Route::post('/retur/add', 'addRetur');
+    Route::post('/retur/loadDataMaster', 'loadDataMaster');
+    Route::post('/retur/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/retur/edit', 'updateRetur');
+    Route::post('/retur/delete', 'deleteRetur');
+});
+
+Route::controller(ReturDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/retur/detail/{id}','getAllReturDetail');
+    Route::post('/retur/detail/add', 'addReturDetail');
+    Route::put('/retur/detail/edit', 'updateReturDetail');
+    Route::delete('/retur/detail/delete', 'deleteReturDetail');
+    Route::put('/retur/detail/verify', 'verifyReturDetail');
+});
+
 Route::controller(SalesController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/sales','index');
     Route::post('/sales/addCustomer', 'addCustomer');
