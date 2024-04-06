@@ -94,15 +94,22 @@ class EmployeeController extends Controller
 
         $api_request = [
             'id' => $request->employee_id,
+            'email' => $request->email,
             'username' => $request->username,
             'nik' => $request->nik,
+            'nip' => $request->nip,
             'employee_name' => $request->employee_name,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'phone' => $request->phone,
             'department' => $request->department,
             'section' => $request->section,
             'position' => $request->position,
             'role' => $request->role,
+            'status' => $request->status,
+            'group' => $request->group,
             'domicile' => $request->domicile,
-            'status' => $request->status
+            'branch_id' => $request->branch_id
         ];
         
 

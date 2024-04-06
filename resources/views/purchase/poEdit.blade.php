@@ -28,8 +28,8 @@
                     <label class="form-label">Status PO</label>
                     <select type="text" name="status_po" class="form-control">
                         <option value="{{$vals['status_po']}}" selected hidden disabled>@if($vals['status_po'] == true) OPEN @else CLOSED @endif</option>
-                        <option value=true>OPEN</option>
-                        <option value=false>CLOSED</option>
+                        <option value=1>OPEN</option>
+                        <option value=0>CLOSED</option>
                     </select>
                 </div>
 
@@ -100,8 +100,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Once you change Status PO to "CLOSED" it cannot be
-                                    undone.
+                                    Jika anda mengubah status pembayaran menjadi "Sudah Dibayar" maka status PO akan menjadi "CLOSED" dan anda tidak bisa kembali
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit"

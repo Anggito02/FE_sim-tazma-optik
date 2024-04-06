@@ -488,7 +488,7 @@
             <div class="modal-body">
                 <form id="add_info_item" class="form-horizontal">
                     @csrf
-                    <input type="text" name="kode_qr_po_detail" id="kode_qr_po_detail" autofocus=true class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" onchange="checkQrCode(event)"/>
+                    <input type="text" name="kode_qr_po_detail" id="kode_qr_po_detail" autofocus="true" class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" onchange="checkQrCode(event)"/>
                     <button type="button" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;"><i class="fas fa-search"></i></button>
                 </form>
                 <form id="add_info" method="post" class="form-horizontal" onsubmit="submitForm(event)">

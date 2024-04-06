@@ -45,9 +45,7 @@ class ItemOutgoingDetailController extends Controller
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
 
         $item_outgoing = $response_item_outgoing->json();
-        // dd($item_outgoing);
         $item_outgoing_detail = $response_item_outgoing_detail->json();
-        // dd($item_outgoing_detail);
         $item = $response_item->json();
         $branch = $response_branch->json();
         $employee = $response_employee->json();

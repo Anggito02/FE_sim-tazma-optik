@@ -281,7 +281,7 @@ class ItemController extends Controller
         }else{
             $row['message']="Delete data failed ";
         }
-        return response()->json("Berhasil");
+        return response()->json($result);
     }
 }
 

@@ -391,24 +391,15 @@
 
                             <div class="mb-3">
                                 <label for="InputMade" class="form-label">Made by</label>
-                                <select type="made-by" name="made_by" required class="form-control chosen-select" name="made_by" id="">
-                                    <option value="" disabled selected hidden>Choose...</option>
-                                    @foreach ($employee as $val)
-                                    <option value="{{$val['id']}}" name="made_by">{{$val['employee_name']}}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" value="{{$data['username']}}" readonly>
+                                <input type="hidden" name="made_by" value="{{$data['id']}}">
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="InputApprove" class="form-label">Approved by</label>
-                                <select type="approved-by" name="approved_by" required class="form-control chosen-select" id="">
-                                    <option value="" disabled selected hidden>Choose...</option>
-                                    @foreach ($employee as $val)
-                                    <option value="{{$val['id']}}" name="approved_by">{{$val['employee_name']}}
-                                    </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" value="{{$data['username']}}" readonly>
+                                <input type="hidden" name="approved_by" value="{{$data['id']}}">
                             </div>
 
 
@@ -422,30 +413,19 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label for="InputCheck" class="form-label">Check by</label>
-
-                                <select type="check-by" name="checked_by" required class="form-control chosen-select" id="">
-                                    <option value="" disabled selected hidden>Choose...</option>
-                                    @foreach ($employee as $val)
-                                    <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
-                                    @endforeach
-                                </select>
-
+                                <input type="text" class="form-control" value="{{$data['username']}}" readonly>
+                                <input type="hidden" name="checked_by" value="{{$data['id']}}">
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="InputStatus" class="form-label">Status Pembayaran</label>
-                                <select type="status-pembayaran" name="status_pembayaran" required class="form-control chosen-select"
-                                id="">
-                                    <option value="" disabled selected hidden>Choose...</option>
-                                    <option value="Sudah Dibayar">Sudah Dibayar</option>
-                                    <option value="Belum Dibayar">Belum Dibayar</option>
-                                </select>
+                                <input type="text" name="status_pembayaran" class="form-control" value="Belum Dibayar" readonly>
                             </div>
 
                             <div class="mb-3">
                                 <label for="InputStatus" class="form-label">StatusPO</label>
-                                <input type="text" name="status_po" class="form-control" value="OPEN" readonly="readonly">
+                                <input type="text" name="status_po" class="form-control" value="OPEN" readonly>
                             </div>
 
                             <div class="mt-5 float-right">
