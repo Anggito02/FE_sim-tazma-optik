@@ -23,6 +23,7 @@
                     <div>
                         <label for="InputGender" class="form-label">Gender</label>
                         <select type="gender" class="form-control" id="">
+                            <option value="" selected hidden disabled>Pilih Gender</option>
                             <option>Laki-laki</option>
                             <option>Perempuan</option>
                         </select>
@@ -31,17 +32,13 @@
                 <div class="col mb-2">
                     <div>
                         <label for="InputDepartment" class="form-label">Department</label>
-                        <select type="department" class="form-select form-control" id="InputDepartment">
-                            <option>Admin</option>
-                        </select>
+                        <input type="text" class="form-control" id="InputDepartment">
                     </div>
                 </div>
                 <div class="col mb-2">
                     <div>
                         <label for="InputSection" class="form-label">Section</label>
-                        <select type="section" class="form-select form-control" id="InputSection">
-                            <option>Admin</option>
-                        </select>
+                        <input type="text" class="form-control" id="InputSection">
                     </div>
                 </div>
             </div>
@@ -49,18 +46,13 @@
                 <div class="col">
                     <div>
                         <label for="InputPosition" class="form-label">Position</label>
-                        <select type="position" class="form-select form-control" id="InputPosition">
-                            <option>Sales Head</option>
-                            <option>Administrator</option>
-                        </select>
+                        <input type="text" class="form-control" id="InputPosition">
                     </div>
                 </div>
                 <div class="col">
                     <div>
                         <label for="InputGroup" class="form-label">User Group</label>
-                        <select type="group" class="form-select form-control" id="InputGroup">
-                            <option>Administrator</option>
-                        </select>
+                        <input type="text" class="form-control" id="InputGroup">
                     </div>
                 </div>
                 <div class="col">
@@ -257,14 +249,14 @@
                                                                     <div class="mb-3">
                                                                         <label for="InputRole" class="form-label">Role</label>
                                                                         <select type="role" class="form-select form-control js-example-basic-single" id="InputRole" name="role">
-                                                                            @if ($val['role'] == 'administrator')
+                                                                            @if ($val['role'] == 'administrator' || $val['role'] == 'Administrator')
                                                                             <option value="administrator" selected>
                                                                                 Administrator
                                                                             </option>
                                                                             <option value="user">
                                                                                 User
                                                                             </option>
-                                                                            @elseif ($val['role'] == 'user')
+                                                                            @elseif ($val['role'] == 'user' || $val['role'] == 'User')
                                                                             <option value="administrator">
                                                                                 Administrator
                                                                             </option>
@@ -278,7 +270,7 @@
                                                                     <div class="mb-3">
                                                                         <label for="" class="form-label">Cabang</label>
                                                                         <select name="branch_id" class="form-control chosen-select" id="">
-                                                                            <option value="{{$val['branch_id']}}" selected hidden disabled>{{$val['nama_branch']}}</option>
+                                                                            <option value="{{$val['branch_id']}}" selected hidden>{{$val['nama_branch']}}</option>
                                                                             @foreach ($branch as $cabang)
                                                                             <option value="{{ $cabang['id'] }}">{{ $cabang['nama_branch'] }}</option>
                                                                             @endforeach
@@ -402,8 +394,9 @@
                                 </div>
                                 <div class="col-md-4 black-text">
                                     <label for="InputPassword" class="form-label">Password</label>
-                                    <input type="text" name="password" class="form-control" minlength="8"
+                                    <input type="password" name="password" class="form-control" minlength="8"
                                     maxlength="20">
+                                    <span style="color: red">*harus memiliki huruf kecil, besar, angka dan simbol dengan panjang 8-20</span>
                                 </div>
                             </div>
                             <div class="row mb-5">

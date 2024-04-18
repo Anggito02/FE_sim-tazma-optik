@@ -52,7 +52,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->middleware('guest');
     Route::get('/dashboard', 'getUserInfo')->middleware('isTokenValid');
     Route::get('/logout', 'logout')->middleware('isTokenValid');
-    Route::post('/register/add', 'register')->middleware('isTokenValid');
+    Route::post('/employee/add', 'register')->middleware('isTokenValid');
 });
 
 Route::controller(ColorController::class)->middleware('isTokenValid')->group(function(){
