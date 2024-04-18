@@ -26,9 +26,14 @@ class CustomerController extends Controller
             "limit" => $limit
         ];
 
+        $api_request_kabupaten = [
+            "page" => $page,
+            "limit" => 10000
+        ];
+
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/customer/all', $api_request);
         $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request);
-        $response_kabkota = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kabkota/all', $api_request);
+        $response_kabkota = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/kabkota/all', $api_request_kabupaten);
         $customer = $response->json();
         $branch = $response_branch->json();
         $kabkota = $response_kabkota->json();
@@ -117,6 +122,34 @@ class CustomerController extends Controller
             $row['message']="Data has been successfully inserted";
         }else{
             $row['message']="Insert data failed ";
+        }
+        return response()->json($result);
+    }
+
+    public function updateCustomer(Request $request){
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        $api_request = [
+            'id' => $request->id,
+            'nama_depan' => $request->nama_depan,
+            'nama_belakang' => $request->nama_belakang,
+            'email' => $request->email,
+            'nomor_telepon' => $request->nomor_telepon,
+            'alamat' => $request->alamat
+        ];
+
+        $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/customer/edit', $api_request);
+        
+        $result = $response->json();
+
+        if($result['message'] == 'success'){
+            $row['message']="The data has been successfully updated";
+        }else{
+            $row['message']="Update data failed ";
         }
         return response()->json($result);
     }

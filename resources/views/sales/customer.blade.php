@@ -135,19 +135,13 @@
     $('#add-update-data').on('shown.bs.modal', function (e) {
         $(".select2").select2();
     });
-    function formatNumber(number) {
-		if(number!==null && number!=="null"){
-			return new Intl.NumberFormat('de-DE').format(parseFloat(number));
-		}else{
-			return '0';
-		}
-	}
-    function handleButtonClick(id) {
+    
+    function handleButtonClick(nomor_telepon) {
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
         $("#panelUpdateData").html(load_img);
         $.ajax({
 		    url   	: "{{ url('/customer/loadDataDetailOnly') }}",
-		    data 	:{'id':id},
+		    data 	:{'nomor_telepon':nomor_telepon},
 		    method	: "POST",
 		    success : function(data){
 		    	$('#panelUpdateData').html(data);
@@ -193,7 +187,7 @@
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
 						offsetN0++;
-                        button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
+                        button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.nomor_telepon + '\')"><i class="fa fa-edit"></i></button>';
                         rowData.push([
 							offsetN0,
                             currentItem.nama_depan,
@@ -317,6 +311,24 @@
 	  return false;
     }
 </script>
+
+<!-- Modal Update Data -->
+<div class="modal fade" id="add-update-data" tabindex="-1"  data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+	  <div class="modal-content">
+      <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Item</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+	    <div class="modal-body" id="panelUpdateData">
+
+
+	    </div>
+	  </div>
+	</div>
+</div>
 
 <!-- Modal Add Data -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"

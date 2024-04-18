@@ -257,13 +257,6 @@ Route::controller(StockOpnameBranchDetailController::class)->middleware('isToken
     Route::post('/stock-opname-branch/detail/loadMakeAdjustment', 'loadMakeAdjustment');
 });
 
-Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/customer','getAllCustomer');
-    Route::post('/customer/add', 'addCustomer');
-    Route::post('/customer/loadDataMaster', 'loadDataMaster');
-    Route::post('/customer/loadDataDetailOnly', 'loadDataDetailOnly');
-});
-
 Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/stock-opname','getAllStockOpnameMaster');
     Route::post('/stock-opname/add', 'addStockOpnameMaster');
@@ -306,6 +299,7 @@ Route::controller(CustomerController::class)->middleware('isTokenValid')->group(
     Route::post('/customer/add', 'addCustomer');
     Route::post('/customer/loadDataMaster', 'loadDataMaster');
     Route::post('/customer/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/customer/edit', 'updateCustomer');
 });
 
 Route::controller(KasController::class)->middleware('isTokenValid')->group(function(){
