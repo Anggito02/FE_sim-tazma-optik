@@ -41,7 +41,7 @@
                                 <input type="hidden" id="id" name="category_id" class="form-control"
                                     value="{{ $val['id'] }}">
                                 <div class="d-none">
-                                  {{ $id = $val['id'] }}
+                                    {{ $id = $val['id'] }}
                                 </div>
                             <td class="txt-center">{{ $iterator }}</td>
                             <td class="txt-center">{{ ucwords($val['nama_kategori']) }}</td>
