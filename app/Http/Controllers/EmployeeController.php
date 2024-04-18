@@ -54,22 +54,22 @@ class EmployeeController extends Controller
         ];
         $api_request = [
             'email' => $request->email,
-            'username' => $request->username,
             'password' => $request->password,
-            'employee_name' => $request->employee_name,
+            'username' => $request->username,
             'nik' => $request->nik,
             'nip' => $request->nip,
+            'employee_name' => $request->employee_name,
             'gender' => $request->gender,
             'address' => $request->address,
             'phone' => $request->phone,
-            'domicile' => $request->domicile,
             'department' => $request->department,
             'section' => $request->section,
             'position' => $request->position,
-            'group' => $request->group,
-            'branch_id' => $request->branch_id,
+            'role' => $request->role,
             'status' => $request->status,
-            'role' => $request->role
+            'group' => $request->group,
+            'domicile' => $request->domicile,
+            'branch_id' => $request->branch_id,
         ];
 
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
@@ -94,17 +94,23 @@ class EmployeeController extends Controller
 
         $api_request = [
             'id' => $request->employee_id,
+            'email' => $request->email,
             'username' => $request->username,
             'nik' => $request->nik,
+            'nip' => $request->nip,
             'employee_name' => $request->employee_name,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'phone' => $request->phone,
             'department' => $request->department,
             'section' => $request->section,
             'position' => $request->position,
             'role' => $request->role,
+            'status' => $request->status,
+            'group' => $request->group,
             'domicile' => $request->domicile,
-            'status' => $request->status
+            'branch_id' => $request->branch_id
         ];
-        dd($api_request);
         
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/employee/edit', $api_request);

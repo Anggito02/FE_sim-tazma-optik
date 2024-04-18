@@ -27,9 +27,9 @@
                 <div class="mb-3">
                     <label class="form-label">Status PO</label>
                     <select type="text" name="status_po" class="form-control">
-                        <option value="@if ($vals['status_po'] === true)true@elseif ($vals['status_po'] === false)false@endif" selected hidden >@if ($vals['status_po'] === true) OPEN @elseif ($vals['status_po'] === false) CLOSED @endif</option>
-                        <option value=true>OPEN</option>
-                        <option value=false>CLOSED</option>
+                        <option value="{{$vals['status_po']}}" selected hidden disabled>@if($vals['status_po'] == true) OPEN @else CLOSED @endif</option>
+                        <option value=1>OPEN</option>
+                        <option value=0>CLOSED</option>
                     </select>
                 </div>
 
@@ -49,7 +49,7 @@
                 <div class="mb-3">
                     <label class="form-label">Status Pembayaran</label>
                     <select name="status_pembayaran" class="form-control">
-                        <option value="@if ($vals['status_pembayaran'] === true) true @elseif ($vals['status_pembayaran'] === false) false @endif" selected hidden >@if ($vals['status_pembayaran'] === true) Sudah Dibayar @elseif ($vals['status_pembayaran'] === false) Belum Dibayar @endif</option>
+                        <option value="{{$vals['status_pembayaran']}}" selected hidden disabled>@if($vals['status_pembayaran'] == true) Sudah Dibayar @else Belum Dibayar @endif</option>
                         <option value=true>Sudah Dibayar</option>
                         <option value=false>Belum Dibayar</option>
                     </select>
@@ -100,8 +100,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Once you change Status PO to "CLOSED" it cannot be
-                                    undone.
+                                    Jika anda mengubah status pembayaran menjadi "Sudah Dibayar" maka status PO akan menjadi "CLOSED" dan anda tidak bisa kembali
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit"

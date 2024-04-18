@@ -19,38 +19,40 @@
                 <div class="form-group col-md-4">
                     <label for="bulan" class="form-label black-text">Bulan</label>
                     <select id="bulan" name="bulan" class="form-control chosen-select">
-                        <option value=""selected>--Pilih Bulan--</option>
-                        <option value="januari"  >Januari</option>
-                        <option value="februari"  >Februari</option>
-                        <option value="maret"  >Maret</option>
-                        <option value="april"  >April</option>
-                        <option value="mei" >Mei</option>
-                        <option value="juni"  >Juni</option>
-                        <option value="juli"  >Juli</option>
-                        <option value="agustus"  >Agustus</option>
-                        <option value="september" >September</option>
-                        <option value="oktober"  >Oktober</option>
-                        <option value="november"  >November</option>
-                        <option value="desember"  >Desember</option>
+                        <option value="" {{ $bulan == '' ? 'selected' : ''}}>--Pilih Bulan--</option>
+                        <option value="1" {{ $bulan == '1' ? 'selected' : ''}} >Januari</option>
+                        <option value="2" {{ $bulan == '2' ? 'selected' : ''}} >Februari</option>
+                        <option value="3" {{ $bulan == '3' ? 'selected' : ''}} >Maret</option>
+                        <option value="4" {{ $bulan == '4' ? 'selected' : ''}} >April</option>
+                        <option value="5" {{ $bulan == '5' ? 'selected' : ''}} >Mei</option>
+                        <option value="6" {{ $bulan == '6' ? 'selected' : ''}} >Juni</option>
+                        <option value="7" {{ $bulan == '7' ? 'selected' : ''}} >Juli</option>
+                        <option value="8" {{ $bulan == '8' ? 'selected' : ''}} >Agustus</option>
+                        <option value="9" {{ $bulan == '9' ? 'selected' : ''}} >September</option>
+                        <option value="10" {{ $bulan == '10' ? 'selected' : ''}} >Oktober</option>
+                        <option value="11" {{ $bulan == '11' ? 'selected' : ''}} >November</option>
+                        <option value="12" {{ $bulan == '12' ? 'selected' : ''}} >Desember</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="cabang" class="form-label black-text">Cabang</label>
                     <select name="branch_id" id="branch_id" class="form-control chosen-select">
-                        <option value=""selected>--Pilih Cabang--</option>
+                        <option value="" {{ $branch_id == '' ? 'selected' : ''}} >--Pilih Cabang--</option>
                         @foreach ($branch as $branches)
-                            <option value="{{ $branches['id'] }}">{{ $branches['nama_branch'] }}</option>
+                            <option value="{{ $branches['id'] }}" {{ $branch_id == $branches['id'] ? 'selected' : ''}}>{{ $branches['nama_branch'] }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="tahun" class="form-label black-text">Tahun</label>
-                    <input type="number" name="tahun" id="tahun" class="form-control" value="">
+                    <input type="number" name="tahun" id="tahun" class="form-control" value="{{ $tahun }}">
                 </div>
                 <div class="form-group col-md-12">
                     <br/>
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
+                    <a href="/stock-opname-branch">
+                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eraser"></i>Clear All</button>
+                    </a>
                     <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
                 </div>
             </div>
@@ -134,6 +136,31 @@
                         let currentItem = result.data[i];
 						offsetN0++;
                         button_draft = ' <button type="button" class="btn-sm btn-warning" onclick="handleButtonClick(\'' + currentItem.id + '\',\'' + currentItem.branch_id + '\')">Detail</button>';
+                        if(currentItem.bulan == 1) {
+                            currentItem.bulan = 'Januari';
+                        } else if(currentItem.bulan == 2) {
+                            currentItem.bulan = 'Februari';
+                        } else if(currentItem.bulan == 3) {
+                            currentItem.bulan = 'Maret';
+                        } else if(currentItem.bulan == 4) {
+                            currentItem.bulan = 'April';
+                        } else if(currentItem.bulan == 5) {
+                            currentItem.bulan = 'Mei';
+                        } else if(currentItem.bulan == 6) {
+                            currentItem.bulan = 'Juni';
+                        } else if(currentItem.bulan == 7) {
+                            currentItem.bulan = 'Juli';
+                        } else if(currentItem.bulan == 8) {
+                            currentItem.bulan = 'Agustus';
+                        } else if(currentItem.bulan == 9) {
+                            currentItem.bulan = 'September';
+                        } else if(currentItem.bulan == 10) {
+                            currentItem.bulan = 'Oktober';
+                        } else if(currentItem.bulan == 11) {
+                            currentItem.bulan = 'November';
+                        } else if(currentItem.bulan == 12) {
+                            currentItem.bulan = 'Desember';
+                        }
                         rowData.push([
 							offsetN0,
                             currentItem.tahun,
@@ -262,13 +289,9 @@
                     @csrf
                     <!-- @method("POST") -->
                     <div class="form-group">
-                        <label for="input_branch" class="form-label">Pilih Cabang</label>
-                        <select name="branch_id" class="form-control chosen-select">
-                            <option value="">Pilih Cabang</option>
-                            @foreach ($branch as $branches)
-                            <option value="{{ $branches['id'] }}">{{ $branches['nama_branch'] }}</option>
-                        @endforeach
-                        </select>
+                        <label for="input_branch" class="form-label">Cabang anda</label>
+                        <input type="text" class="form-control" value="{{$data['nama_branch']}}" readonly>
+                        <input type="hidden" class="form-control" name="branch_id" value="{{$data['branch_id']}}">
                     </div>
                         <p>Apakah anda yakin ingin menambahkan stock untuk hari ini?</p>
                         <button type="submit" class="btn btn-success float-right">Add new</button>

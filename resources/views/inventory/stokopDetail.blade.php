@@ -4,90 +4,88 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-
-    <!-- DataTales Example -->
+    <div class="mb-4">
+        <a href="/stock-opname"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+    <!-- Filter -->
     <div class="card shadow mb-4">
         <span id="tambah_info"></span>
         <form id="itemForm" action="/stock-opname/detail/{{$stock_opname_id}}" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
                 <div class="row align-items-end">
-                <!-- Add the form inside the row -->
-                @csrf
-                @method("GET")
-                <div class="form-group col-md-3">
-                    <label for="tanggal_so_from" class="form-label black-text">Tanggal SO From</label>
-                    <input type="date" name="tanggal_so_from" id="tanggal_so_from" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="tanggal_so_until" class="form-label black-text">Tanggal SO Until</label>
-                    <input type="date" name="tanggal_so_until" id="tanggal_so_until" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_type" class="form-label black-text">Adjustment Type</label>
-                    <select type="text" name="adjustment_type" id="adjustment_type" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="IN">IN</option>
-                        <option value="OUT">OUT</option>
-                        <option value="NONE">NONE</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_date_from" class="form-label black-text">Adjustment Date From</label>
-                    <input type="date" name="adjustment_date_from" id="adjustment_date_from" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_date_until" class="form-label black-text">Adjustment Date Until</label>
-                    <input type="date" name="adjustment_date_until" id="adjustment_date_until" class="form-control" value="">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_status" class="form-label black-text">Adjustment Status</label>
-                    <select type="text" name="adjustment_status" id="adjustment_status" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="OPEN">OPEN</option>
-                        <option value="CLOSE">CLOSE</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="jenis_item" class="form-label black-text">Jenis Item</label>
-                    <select name="jenis_item" id="jenis_item" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        <option value="frame">Frame</option>
-                        <option value="lensa">Lensa</option>
-                        <option value="aksesoris">Aksesoris</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="open_by" class="form-label black-text">Open By</label>
-                    <select name="open_by" id="open_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        @foreach($employee as $emp)
-                            <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="close_by" class="form-label black-text">Closed By</label>
-                    <select name="close_by" id="close_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        @foreach($employee as $emp)
-                            <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="adjustment_by" class="form-label black-text">Adjustment By</label>
-                    <select name="adjustment_by" id="adjustment_by" class="form-control chosen-select">
-                        <option value="" selected>Choose...</option>
-                        @foreach($employee as $emp)
-                        <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-12">
-                    <br/>
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
-                    <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
+                    <!-- Add the form inside the row -->
+                    @csrf
+                    @method("GET")
+                    <div class="form-group col-md-3">
+                        <label for="tanggal_so_from" class="form-label black-text">Tanggal SO From</label>
+                        <input type="date" name="tanggal_so_from" id="tanggal_so_from" class="form-control" value="{{$tanggal_so_from}}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="tanggal_so_until" class="form-label black-text">Tanggal SO Until</label>
+                        <input type="date" name="tanggal_so_until" id="tanggal_so_until" class="form-control" value="{{$tanggal_so_until}}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_date_from" class="form-label black-text">Adjustment Date From</label>
+                        <input type="date" name="adjustment_date_from" id="adjustment_date_from" class="form-control" value="{{$adjustment_date_from}}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_date_until" class="form-label black-text">Adjustment Date Until</label>
+                        <input type="date" name="adjustment_date_until" id="adjustment_date_until" class="form-control" value="{{$adjustment_date_until}}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_type" class="form-label black-text">Adjustment Type</label>
+                        <select type="text" name="adjustment_type" id="adjustment_type" class="form-control chosen-select">
+                            <option value="" {{ $adjustment_type == '' ? 'selected' : ''}}>Choose...</option>
+                            <option value="IN" {{ $adjustment_type == 'IN' ? 'selected' : ''}}>IN</option>
+                            <option value="OUT" {{ $adjustment_type == 'OUT' ? 'selected' : ''}}>OUT</option>
+                            <option value="NONE" {{ $adjustment_type == 'NONE' ? 'selected' : ''}}>NONE</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_status" class="form-label black-text">Adjustment Status</label>
+                        <select type="text" name="adjustment_status" id="adjustment_status" class="form-control chosen-select">
+                            <option value="" {{ $adjustment_status == '' ? 'selected' : ''}}>Choose...</option>
+                            <option value="OPEN" {{ $adjustment_status == 'OPEN' ? 'selected' : ''}}>OPEN</option>
+                            <option value="CLOSED" {{ $adjustment_status == 'CLOSED' ? 'selected' : ''}}>CLOSED</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="jenis_item" class="form-label black-text">Jenis Item</label>
+                        <select name="jenis_item" id="jenis_item" class="form-control chosen-select">
+                            <option value="" {{ $jenis_item == '' ? 'selected' : ''}}>Choose...</option>
+                            <option value="frame" {{ $jenis_item == 'frame' ? 'selected' : ''}}>Frame</option>
+                            <option value="lensa" {{ $jenis_item == 'lensa' ? 'selected' : ''}}>Lensa</option>
+                            <option value="aksesoris" {{ $jenis_item == 'aksesoris' ? 'selected' : ''}}>Aksesoris</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="open_by" class="form-label black-text">Open and Closed By</label>
+                        <select name="open_by" id="open_by" class="form-control chosen-select" >
+                            <option value="" {{ $open_by == null ? 'selected' : '' }}>Choose...</option>
+                            @foreach($employee as $emp)
+                                <option value="{{ $emp['id'] }}" {{ $open_by == $emp['id'] ? 'selected' : ''}}>{{ $emp['employee_name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="adjustment_by" class="form-label black-text">Adjustment By</label>
+                        <select name="adjustment_by" id="adjustment_by" class="form-control chosen-select">
+                            <option value="" {{ $adjustment_by == null ? 'selected' : '' }}>Choose...</option>
+                            @foreach($employee as $emp)
+                                <option value="{{ $emp['id'] }}" {{ $adjustment_by == $emp['id'] ? 'selected' : ''}}>{{ $emp['employee_name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input type="text" name="closed_by" id="close_by" class="form-control" value="" hidden>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+                        <a href="/stock-opname/detail/{{$stock_opname_id}}">
+                            <button type="button" class="btn btn-warning"><i class="fa-solid fa-eraser"></i>Clear All</button>
+                        </a>
+                        <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -108,7 +106,7 @@
                             <th class="thead-text"><span class="nowrap">SO End</span></th>
                             <th class="thead-text"><span class="nowrap">SO Duration</span></th>
                             <th class="thead-text"><span class="nowrap">Actual QTY</span></th>
-                            <th class="thead-text"><span class="nowrap">SYS QTY</span></th>
+                            <th class="thead-text"><span class="nowrap">Inventory</span></th>
                             <th class="thead-text"><span class="nowrap">Diff QTY</span></th>
                             <th class="thead-text"><span class="nowrap">Positif Diff QTY</span></th>
                             <th class="thead-text"><span class="nowrap">Neg Diff QTY</span></th>
@@ -139,7 +137,6 @@
     
     $(document).ready(function() {
         $(".chosen-select").chosen({width: "100%"}); // Contoh mengatur lebar
-        $('#datetime-local-adjustment').val(new Date().toISOString().slice(0, 16));
     });
     $('#add-update-data').on('shown.bs.modal', function (e) {
         $(".select2").select2();
@@ -151,29 +148,22 @@
 			return '0';
 		}
 	}
-    function handleButtonClickAdjustNote(id) {
-        var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust-note"]');
-        console.log(button);
-        button.setAttribute('data-toggle', 'modal');
-        button.setAttribute('data-target', '#modalAddAdjustment' + id );
-        $('#modalAddAdjustment' + id).modal('show');
-    }
-
+    
     function handleButtonClickAdjust(id) {
         var button = document.querySelector('button[class="btn-sm btn-primary btn-add-adjust"]');
-        console.log(button);
+        // console.log(button);
         button.setAttribute('data-toggle', 'modal');
         button.setAttribute('data-target', '#modalAdjust' + id );
         $('#modalAdjust' + id).modal('show');
     }
 
     function handleButtonClickEdit(detail_id) {
-        var stock_opname_id = "{{ $stock_opname_id }}";
+        // var stock_opname_id = "{{ $stock_opname_id }}";
         var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
         $("#panelUpdateData").html(load_img);
         $.ajax({
-		    url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataDetailOnly",
-		    data 	:{'id':detail_id},
+		    url   : "{{ url('/stock-opname/detail/') }}/" + detail_id + "/loadDataDetailOnly",
+		    data 	:{'so_id': <?php echo $stock_opname_id ?>,'so_detail_id':detail_id},
 		    method	: "POST",
 		    success : function(data){
 		    	$('#panelUpdateData').html(data);
@@ -204,6 +194,7 @@
                     'limit':settings.limit,
                     'page':(settings.limit*settings.start_page),
                     '_token':csrfToken,
+                    'stock_opname_id':settings.stock_opname_id,
                     'tanggal_so_from':settings.tanggal_so_from,
                     'tanggal_so_until':settings.tanggal_so_until,
                     'adjustment_type':settings.adjustment_type,
@@ -212,7 +203,8 @@
                     'jenis_item':settings.jenis_item,
                     'open_by':settings.open_by,
                     'close_by':settings.close_by,
-                    'adjustment_by':settings.adjustment_by
+                    'adjustment_by':settings.adjustment_by,
+                    'adjustment_status':settings.adjustment_status
                 },
                 async : true,
                 dataType : 'json',
@@ -220,25 +212,30 @@
 	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
 			    },
                 success : function(result){
-                    console.log(result.data);
+                    // console.log(result.data);
 					var table = $('#data_stockopDetail_table_1').DataTable();
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
 						offsetN0++;
                         
-                        if(currentItem.adjustment_by != null) {
+                        if(currentItem.adjustment_followup_note != null) {
                             button_draft_1 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust-note disabled">Add Adjustment Note</button>';
-                        } else {
-                            button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonClickAdjustNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
+                        } else if(currentItem.adjustment_followup_note == null){
+                            button_draft_1 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust-note" onclick="handleButtonAdjustmentNote(\'' + currentItem.id + '\')">Add Adjustment Note</button>';
                         }
 
-                        if(currentItem.adjustment_by === null) {
+                        if(currentItem.adjustment_followup_note == null || currentItem.adjustment_status === 'CLOSED') {
                             button_draft_2 = ' <button type="button" class="btn-sm btn-secondary btn-add-adjust disabled" >Adjust</button>';
-                        } else if(currentItem.adjustment_by) {
-                            button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonClickAdjust(\'' + currentItem.id + '\')">Adjust</button>';
+                        } else if (currentItem.adjustment_followup_note != null ) {
+                            button_draft_2 = ' <button type="button" class="btn-sm btn-primary btn-add-adjust" onclick="handleButtonMakeAdjustment(\'' + currentItem.id + '\')">Adjust</button>';
                         }
-                        button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
+
+                        if(currentItem.adjustment_status === 'CLOSED') {
+                            button_draft_3 = ' <button type="button" class="btn-sm btn-secondary btn-edit disabled">Edit</button>';
+                        } else if(currentItem.adjustment_status === 'OPEN') {
+                            button_draft_3 = ' <button type="button" class="btn-sm btn-primary btn-edit" onclick="handleButtonClickEdit(\'' + currentItem.id + '\')">Edit</button>';
+                        }
 
                         rowData.push([
 							offsetN0,
@@ -290,12 +287,12 @@
 		var settings = $.extend({
             loading_gif_url: "{{ asset('img/ajax-loader.gif') }}",
             data_url: "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/loadDataMaster",
-            // data_url: "{{ url('/stock-opname/detail/loadDataMaster') }}",
             end_record_text : 'No more records found!', //no more records to load
             start_page      : 0, //initial page
             limit		    : 50, //initial page
             htmldata        : '', //initial page
             lastScroll      : 0, //initial page
+            stock_opname_id      : stock_opname_id, //initial page
             tanggal_so_from      : document.getElementById('tanggal_so_from').value, //initial page
             tanggal_so_until      : document.getElementById('tanggal_so_until').value, //initial page
             adjustment_type      : document.getElementById('adjustment_type').value, //initial page
@@ -304,13 +301,14 @@
             adjustment_status      : document.getElementById('adjustment_status').value, //initial page
             jenis_item      : document.getElementById('jenis_item').value, //initial page
             open_by      : document.getElementById('open_by').value, //initial page
-            close_by      : document.getElementById('close_by').value, //initial page
+            close_by      : document.getElementById('open_by').value, //initial page
             adjustment_by      : document.getElementById('adjustment_by').value, //initial page
-
+            kode_qr_po_detail      : document.getElementById('kode_qr_po_detail').value, //initial page
         });
         loading  = false;
 	    end_record = false;
 	    addContent(settings);
+        checkQrCode(settings);
 	}
     $.ajaxSetup({
         headers: {
@@ -342,41 +340,36 @@
         masterContent();
     });
 
-    function submitFormAdjustmentNote(event){
-		$('#btn_submit').hide();
-		$('#tambah_info').html('<i class="fa fa-spinner fa-spin"></i>').show();
-	    event.preventDefault();
-        var stock_opname_id = "{{ $stock_opname_id }}";
-        var form = document.getElementById('add_info_adjustnote');
-        var formData = new FormData(form);
-	    $.ajax({
-            url   : "{{ url('/stock-opname/detail/') }}/" + stock_opname_id + "/init-adjustment",
-            type: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-            if(result.message=="The data has been successfully updated"){
-				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				  	setTimeout(function(){
-					 $('#tambah_info').hide();
-                     location.reload();
-					},3500);
-			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				setTimeout(function(){
-					$('#tambah_info').hide();
-                    location.reload();
-				},3000)
-			}
-            $('#btn_submit').show();
-		}
-	  });
-	  return false;
+    function handleButtonAdjustmentNote(id) {
+        var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
+        $("#panelAdjustmentNote").html(load_img);
+        $.ajax({
+            url: "{{ url('/stock-opname/detail/loadAdjustmentNote') }}",
+            data: {'sod_id':id, 'so_id': <?php echo $stock_opname_id; ?> },
+            method: "POST",
+            success: function(data){
+                $("#panelAdjustmentNote").html(data);
+                $('#add-adjustment-note').modal('show');
+            }
+        });
+        $('#spin_update').hide();
+		$('#spin_update_table').show();
+    }
+
+    function handleButtonMakeAdjustment(id) {
+        var load_img = $('<img/>').attr('src','{{ asset("img/ajax-loader.gif") }}').addClass('loading-image');
+        $("#panelMakeAdjustment").html(load_img);
+        $.ajax({
+            url: "{{ url('/stock-opname/detail/loadMakeAdjustment') }}",
+            data: {'sod_id':id, 'so_id': <?php echo $stock_opname_id; ?>},
+            method: "POST",
+            success: function(data){
+                $("#panelMakeAdjustment").html(data);
+                $('#make-adjustment').modal('show');
+            }
+        });
+        $('#spin_update').hide();
+		$('#spin_update_table').show();
     }
 
     function submitFormMakeAdjustment(event){
@@ -397,23 +390,23 @@
             dataType: 'json',
             success: function (result) {
                 console.log(result);
-            if(result.message=="The data has been successfully updated"){
+                if(result.message=="The data has been successfully updated"){
 				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				  	setTimeout(function(){
 					 $('#tambah_info').hide();
                      location.reload();
-					},3500);
-			}else{
-				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-				setTimeout(function(){
+					},1000);
+			    }else{
+				    $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+				    setTimeout(function(){
 					$('#tambah_info').hide();
                     location.reload();
-				},3000)
-			}
-            $('#btn_submit').show();
-		}
-	  });
-	  return false;
+				    },1000)
+			    }
+                $('#btn_submit').show();
+		    }
+	    });
+	return false;
     }
 
     function submitForm(event){
@@ -433,7 +426,7 @@
             processData: false,
             dataType: 'json',
             success: function (result) {
-                console.log(result);
+                // console.log(result);
             if(result.message=="The data has been successfully updated"){
 				  	$('#tambah_info').html(' <div class="alert alert-success alert-dismissible fade show" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				  	setTimeout(function(){
@@ -452,6 +445,52 @@
 	  });
 	  return false;
     }
+
+    function checkQrCode(settings) {
+        var csrftoken = $('meta[name="csrf-token"]').attr('content');
+        //if event.target is undefined, then it will be null
+        // var inputValue = '';
+        if(event && event.target){
+            var inputValue = event.target.value;
+            // console.log(inputValue);
+        }
+        $.ajax({
+            method: 'POST',
+            type: 'ajax',
+            url: "{{ url('/stock-opname/detail/check-qr-code') }}",
+            data: {
+                'limit' :settings.limit,
+                'page' : (settings.limit*settings.start_page),
+                '_token' : csrftoken,
+                'kode_qr_po_detail' : inputValue
+
+            },
+            async: true,
+            dataType: 'json',
+            error: function (request, error) {
+	      		alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
+			},
+            success: function (result) {
+                if(result.status != 'error'){
+                    // console.log(result.data);
+                    document.getElementById('item_id_onchange').value=result.data.id;
+                    document.getElementById('kode_item_onchange').value=result.data.kode_item;
+                    document.getElementById('jenis_item_onchange').value=result.data.jenis_item;
+                    document.getElementById('stok_item_onchange').value=result.data.stok;
+                }
+            }
+        })
+    }
+
+    //prevent form submit on pressing enter in keyboard 
+    $(document).ready(function() {
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+            }
+        });
+    });
 
     $(document).ready(function() {
     function insertCurrentDate() {
@@ -477,9 +516,10 @@
                 <span id="tambah_info"></span>
             </div>
             <div class="modal-body">
-                <form id="add_info_item" class="form-horizontal" onsubmit="submitFormItem(event)">
-                    <input type="text"  name="qrcode" autofocus=true class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" />
-                    <button type="submit" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;"><i class="fas fa-search"></i></button>
+                <form id="add_info_item" class="form-horizontal">
+                    @csrf
+                    <input type="text" name="kode_qr_po_detail" id="kode_qr_po_detail" autofocus=true class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" onchange="checkQrCode(event)"/>
+                    <button type="button" class="btn btn-primary shadow-0" style="border-radius: 0% 20% 20% 0%;"><i class="fas fa-search"></i></button>
                 </form>
                 <form id="add_info" class="form-horizontal" onsubmit="submitForm(event)">
                     @csrf
@@ -490,25 +530,34 @@
 
                             <div class="mb-3">
                                 <label for="InputSoStart" class="form-label">SO Start</label>
-                                <input type="datetime-local" name="so_start" class="form-control">
+                                <input type="datetime-local" value="{{Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->toDateTimeString()}}" name="so_start" class="form-control" readonly>
+                            </div>
+
+                            <!-- <div class="mb-3">
+                                <label for="InputSoEnd" class="form-label">SO End</label>
+                                <input type="datetime-local" name="so_end" class="form-control">
+                            </div> -->
+                            
+                            <div class="mb-3">
+                                <input type="hidden" id="item_id_onchange" name="item_id">
+
+                                <label for="InputItem" class="form-label">Item</label>
+                                <input type="text" id="kode_item_onchange" class="form-control" readonly>
                             </div>
 
                             <div class="mb-3">
-                                <label for="InputSoEnd" class="form-label">SO End</label>
-                                <input type="datetime-local" name="so_end" class="form-control">
+                                <label for="InputJenis" class="form-label">Jenis Item</label>
+                                <input type="text" id="jenis_item_onchange" class="form-control" readonly>
                             </div>
-                            
-                            <div class="mb-3">
-                                <label for="InputGender" class="form-label">Item</label>
-                                <select name="item_id" class="form-control chosen-select">
-                                    <option value="" selected disabled>Choose...</option>
-                                    @foreach ($item as $items)
-                                    <option value="{{ $items['id'] }}">{{ $items['kode_item'] }} - {{ $items['jenis_item'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+
                         </div>
                         <div class="col">
+
+                            <div class="mb-3">
+                                <label for="InputStok" class="form-label">Stok</label>
+                                <input type="text" id="stok_item_onchange" class="form-control" readonly>
+                            </div>
+
                             <div class="mb-3">
                                 <label for="InputActualQty" class="form-label">Actual Quantity</label>
                                 <input type="number" name="actual_qty" class="form-control">
@@ -516,26 +565,14 @@
 
 
                             <div class="mb-3">
-                                <label for="InputOpenBy" class="form-label">Open By</label>
-                                <select name="open_by" class="form-control chosen-select">
-                                    <option value="" selected disabled>Choose...</option>
-                                    @foreach ($employee as $emp)
-                                    <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="hidden" name="open_by" value="{{$data['id']}}">
                             </div>
 
                             <div class="mb-3">
-                                <label for="InputCloseBy" class="form-label">Close By</label>
-                                <select name="close_by" class="form-control chosen-select"><
-                                    <option value="" selected disabled>Choose...</option>
-                                    @foreach ($employee as $emp)
-                                    <option value="{{ $emp['id'] }}">{{ $emp['employee_name'] }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="hidden" name="close_by" value="{{$data['id']}}">
                             </div>
 
-                            <div class="mb-3 float-right">
+                            <div class="mt-5 float-right">
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
 
@@ -553,8 +590,7 @@
 </div>
 
 <!-- Modal Adjust-->
-@foreach ($stock_opname_detail as $sod)
-<div class="modal fade" id="modalAdjust{{ $sod['id'] }}" tabindex="-1" role="dialog"
+<div class="modal fade" id="make-adjustment" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -565,47 +601,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="add_info_make_adjustment" method="post" onsubmit="submitFormMakeAdjustment(event)">
-                    @csrf
-                    <!-- @method("POST") -->
-                    <div class="d-flex flex-row">
-                        <p>Adjust Type : </p>
-                        <p style="margin-left:1%;" id="set_adjust_type">{{ $sod['adjustment_type'] }}</p>
-                        <input type="hidden" value="{{$sod['adjustment_type']}}" name="adjustment_type">
-                    </div>
-                    <div class="d-flex flex-row">
-                        <p>Adjustment by : </p>
-                        <p style="margin-left:1%;" id="set_adjust_by">{{ $data['username'] }}</p>
-                        <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
-                    </div>
-                    <div class="d-flex flex-row">
-                        <p>Kode Item - jenis Item : </p>
-                        <p style="margin-left:1%;" id="set_item">{{ $sod['kode_item'] }} - {{ $sod['jenis_item'] }}</p>
-                        <input type="hidden" value="{{$sod['item_id']}}" name="item_id">
-                    </div>
-                    <div class="d-flex flex-row">
-                        <p>Adjustment QTY : </p>
-                        <p style="margin-left:1%;" id="set_adjust_qty">{{ $sod['diff_qty'] }}</p>
-                        <input type="hidden" value="{{$sod['diff_qty']}}" name="in_out_qty">
-                    </div>
-                    <div class="float-right">
-                        <button type="button right" class="btn btn-primary px-4" data-dismiss="">Add</button>
-                    </div>
-                </form>
+            <div class="modal-body" id="panelMakeAdjustment">
+                
             </div>
             <div class="modal-footer justify-content-center alert alert-danger rounded-0" role="alert">
-                <p>Can't be undone</p>
+                <p>Anda tidak bisa kembali setelah melakukan Adjust</p>
             </div>
         </div>
     </div>
 </div>
-@endforeach
 
 <!-- Modal Adjustment Note -->
-@foreach($stock_opname_detail as $sod)
-<div class="modal fade" id="modalAddAdjustment{{ $sod['id'] }}" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="add-adjustment-note" tabindex="-1" data-backdrop="static" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -615,32 +622,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="add_info_adjustnote" class="form-horizontal" onsubmit="submitFormAdjustmentNote(event)">
-                    @csrf
-                    <!-- @method("POST") -->
-                    <div class="d-flex flex-column">
-                        <div class="mb-3">
-                            <p>Employee name : {{$data['username']}}</p>
-                            <input type="hidden" value="{{$data['id']}}" name="adjustment_by">
-                        </div>
-                        <div class="mb-3">
-                            <label for="adjustment_date" class="form-label">Adjustment Date : </label>
-                            <input type="datetime-local" id="datetime-local-adjustment" name="adjustment_date" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="m-0">Adjusment note :</label>
-                            <input type="textarea" class="form-control" name="adjustment_followup_note">
-                        </div>
-                    </div>
-                    <div class="mt-3 float-right">
-                        <button type="submit" class="btn btn-primary px-4" data-dismiss="">Add</button>
-                    </div>
-                </form>
+            <div class="modal-body" id="panelAdjustmentNote">
+                
             </div>
         </div>
     </div>
 </div>
-@endforeach
+
+<!-- Modal Update -->
+<div class="modal fade" id="add-update-data" tabindex="-1" data-backdrop="static" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Edit Data</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="panelUpdateData">
+                
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection

@@ -127,7 +127,7 @@ class ReceiveOrderController extends Controller
         // dd($api_request);
 
         $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/update-stok', $api_request);
-        dd($response);
+        // dd($response);
 
         $result = $response->json();
         // dd($result);

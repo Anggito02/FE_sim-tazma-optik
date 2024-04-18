@@ -41,7 +41,7 @@
                             Check Receive Order
                         </a>
                     </button>
-                    @elseif ($po['status_penerimaan'] == '0')
+                    @elseif ($po['status_penerimaan'] == '0' || $pod==null)
                     <button type="button" class="btn-sm btn-secondary mb-3" disabled>
                         Check Receive Order
                     </button>
@@ -94,8 +94,9 @@
                             <th class="thead-text"><span class="nowrap">Harga Beli Satuan</span></th>
                             <th class="thead-text"><span class="nowrap">Harga Jual Satuan</span></th>
                             <th class="thead-text"><span class="nowrap">Diskon</span></th>
-                            <th class="thead-text @if ($po['status_penerimaan'] == '1') d-none @endif"><span class="nowrap">Edit</span></th>
-                            <th class="thead-text @if ($po['status_penerimaan'] == '1') d-none @endif"><span class="nowrap">Delete</span></th>
+                            <th class="thead-text"><span class="nowrap">Edit</span></th>
+                            <th class="thead-text"><span class="nowrap">Delete</span></th>
+                            <th class="thead-text"><span class="nowrap">Generate QR</span></th>
 
                         </tr>
                     </thead>
@@ -123,7 +124,15 @@
                             <td class="nowrap text-right">{{ $valPod['harga_beli_satuan'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['harga_jual_satuan'] }}</td>
                             <td class="nowrap text-right">{{ $valPod['diskon'] }}</td>
-                            <td class="@if ($po['status_penerimaan'] == '1') d-none @endif">
+
+                            @if ($po['status_penerimaan'] == '1')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </td>
+                            @elseif ($po['status_penerimaan'] == '0')
+                            <td class="">
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$valPod['id']}}">
                                     <i class="fa fa-edit"></i>
@@ -213,7 +222,16 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="@if ($po['status_penerimaan'] == '1') d-none @endif">
+                            @endif
+
+                            @if ($po['status_penerimaan'] == '1')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                            @elseif ($po['status_penerimaan'] == '0')
+                            <td class="">
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$valPod['id']}}">
                                     <i class="fa fa-trash"></i>
@@ -253,6 +271,22 @@
                                     </div>
                                 </div>
                             </td>
+                            @endif
+
+                            @if ($po['status_po'] == '1')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-secondary" disabled>
+                                    Generate
+                                </button>
+                            </td>
+                            @elseif ($po['status_po'] == '0')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-success" onclick="handleButtonGenerate({{ $valPod['id'] }})">
+                                    Generate
+                                </button>
+                            </td>
+                            @endif
+
                         </tr>
                         <div class="d-none">
                             {{ $iterator = $iterator + 1 }}
@@ -411,14 +445,6 @@
                                     </select>
                                 </div>
 
-                                <!-- <div class="mb-3">
-                                    {{-- <label for="InputTanggal" class="form-label">Tanggal Diterima</label>
-                                    <input type="text" id="id" name="tanggal_penerimaan" class="form-control" placeholder="YYYY-MM-DD"> --}}
-                                    <label for="InputLastDateSupply" class="form-label">Tanggal Diterima</label>
-                                    <div><input type="date" id="id" name="tanggal_penerimaan" class="form-control" value="">
-                                    </div>
-                                </div> -->
-
                                 <div class="mt-5 float-right">
                                     <button type="submit" class="btn btn-success">Create Receive Order</button>
                                 </div>
@@ -432,10 +458,13 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 </div>
+
+<script type="text/javascript">
+    function handleButtonGenerate(id) {
+        var url = "{{ url('/PO/detail/generate-qr') }}/" + id;
+        window.open(url, '_blank');
+    }
+
+</script>
 @endsection

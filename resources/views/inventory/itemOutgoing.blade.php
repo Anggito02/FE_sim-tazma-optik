@@ -114,8 +114,9 @@
                                                         <div class="col">
                                                             <input type="hidden" name="id" value="{{$vals['id']}}">
                                                             <div class="mb-3">
-                                                                <label class="form-label">Tanggal Pengiriman</label>          
-                                                                <input type="datetime-local" name="tanggal_pengiriman" class="form-control" value="{{ $vals['tanggal_pengiriman']}}">
+                                                                <label class="form-label">Tanggal Pengiriman</label>
+                                                                <input type="datetime-local" value="{{Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->toDateTimeString()}}" name="tanggal_pengiriman" class="form-control" readonly>
+                                                                {{-- <input type="datetime-local" name="tanggal_pengiriman" class="form-control" value="{{ $vals['tanggal_pengiriman']}}"> --}}
                                                                 
                                                             </div>
                                                             
@@ -284,8 +285,8 @@
                                     {{-- <label for="InputTanggal" class="form-label">Tanggal Pengiriman</label>
                                     <input type="text" id="id" name="tanggal_pengiriman" class="form-control" placeholder="YYYY-MM-DD"> --}}
                                     <label for="InputLastDateSupply" class="form-label">Tanggal Pengiriman</label>
-                                    <div><input type="datetime-local" id="id" name="tanggal_pengiriman" class="form-control" value="">
-                                    </div>
+                                    {{-- <input type="datetime-local" id="id" name="tanggal_pengiriman" class="form-control" value=""> --}}
+                                    <input type="datetime-local" value="{{Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->toDateTimeString()}}" name="tanggal_pengiriman" class="form-control" readonly>
                                 </div>
 
                                 <div class="mb-3">
