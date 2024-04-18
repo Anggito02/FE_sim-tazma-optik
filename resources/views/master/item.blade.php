@@ -115,6 +115,7 @@
 <!-- Your script using jQuery -->
 <script type="text/javascript">
     function confirmDelete(itemId) {
+        console.log(itemId);
         var confirmation = confirm("Are you sure you want to delete this item?");
         if (confirmation) {
             deleteItem(itemId);
@@ -131,18 +132,14 @@
         },
         success: function(result) {
             // console.log(result);
-            if(result.message=="The data has been successfully deleted"){
+            if(result.status=="success"){
                     $('#tambah_info').html(' <div class="alert alert-success alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
                     setTimeout(function(){
                     $('#tambah_info').hide();
                     location.reload();
                     },1000);
             }else{
-                $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-                setTimeout(function(){
-                    $('#tambah_info').hide();
-                    location.reload();
-                },1000)
+                $('#tambah_info').html(' <div class="alert alert-danger alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.data+'</b></div>').show();
                 }
             },
         });
