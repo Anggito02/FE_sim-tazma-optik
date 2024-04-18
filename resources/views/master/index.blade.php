@@ -10,7 +10,7 @@
             href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
     <!-- DataTales Example -->
-    <div class="card shadow mb-4"><i class="fa-solid fa-pencil"></i>
+    <div class="card shadow mb-4">
         <div class="card-body">
             <button type="button" class="btn-sm btn-success float-right bold-text" data-toggle="modal"
                 data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
@@ -48,7 +48,7 @@
                                 </div>
                             <td class="txt-center">{{ $iterator }}</td>
                             <td class="txt-right">{{ $val['value'] }}</td>
-                            <td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModalCenterEdit{{$id}}">
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="txt-center">
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$id}}">

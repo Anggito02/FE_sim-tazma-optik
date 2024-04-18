@@ -29,6 +29,10 @@ class PurchaseOrderController extends Controller
             "limit" => $limit
         ];
 
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $checked_by = $request->checked_by;
+
         $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
         $response_vendor = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
         $employee = $response_employee->json();
@@ -39,11 +43,33 @@ class PurchaseOrderController extends Controller
                 'data' => $user['data'],
                 'employee' => $employee['data'],
                 'vendor' => $vendor['data'],
-                'user_info' => $user['data']
+                'checked_by' => $checked_by,
+                'bulan' => $bulan,
+                'tahun' => $tahun
             ]);
         // }else{
         //     return redirect('/dashboard');
         // }
+    }
+
+    public function generateQRCode(Request $request) {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all();
+        $api_request = [
+            "page" => 1,
+            "limit" => 10000
+        ];
+        
+        $user = GetUserInfo::getUserInfo();
+        return view('purchase.poGenerate', [
+            'data' => $user['data']
+        ]);
+
+        
     }
 
     public function loadDataDetailOnly(Request $request)

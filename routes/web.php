@@ -10,7 +10,7 @@ use App\Http\Controllers\CoaController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ErrorPageController;
-use App\Http\Controllers\FrameController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensController;
 use App\Http\Controllers\VendorsController;
@@ -19,16 +19,19 @@ use App\Http\Controllers\PurchaseOrderDetailController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ReceiveOrderController;
 use App\Http\Controllers\BranchItemController;
+use App\Http\Controllers\BranchOutgoingDetailController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
+use App\Http\Controllers\BranchOutgoingController;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\StockOpnameMasterController;
 use App\Http\Controllers\StockOpnameDetailController;
 use App\Http\Controllers\StockOpnameBranchController;
 use App\Http\Controllers\StockOpnameBranchDetailController;
-
+use App\Http\Controllers\ReturController;
+use App\Http\Controllers\ReturDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +52,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->middleware('guest');
     Route::get('/dashboard', 'getUserInfo')->middleware('isTokenValid');
     Route::get('/logout', 'logout')->middleware('isTokenValid');
-    Route::post('/register/add', 'register')->middleware('isTokenValid');
+    Route::post('/employee/add', 'register')->middleware('isTokenValid');
 });
 
 Route::controller(ColorController::class)->middleware('isTokenValid')->group(function(){
@@ -81,18 +84,11 @@ Route::controller(EmployeeController::class)->middleware('isTokenValid')->group(
     Route::delete('/employee/delete', 'deleteEmployee');
 });
 
-Route::controller(FrameController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/frame-category','getAllFrameCategory');
-    Route::post('/frame-category/add', 'addFrameCategory');
-    Route::put('/frame-category/edit', 'updateFrameCategory');
-    Route::delete('/frame-category/delete', 'deleteFrameCategory');
-});
-
-Route::controller(LensController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/lens-category','getAllLensCategory');
-    Route::post('/lens-category/add', 'addLensCategory');
-    Route::put('/lens-category/edit', 'updateLensCategory');
-    Route::delete('/lens-category/delete', 'deleteLensCategory');
+Route::controller(CategoryController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/category','getAllCategory');
+    Route::post('/category/add', 'addCategory');
+    Route::put('/category/edit', 'updateCategory');
+    Route::delete('/category/delete', 'deleteCategory');
 });
 
 Route::controller(IndexController::class)->middleware('isTokenValid')->group(function(){
@@ -123,6 +119,7 @@ Route::controller(PurchaseOrderDetailController::class)->middleware('isTokenVali
     Route::post('/PO/detail','getAllPODetail');
     Route::post('/PO/detail/add', 'addPODetail');
     Route::put('/PO/detail/edit', 'updatePODetail');
+    Route::get('/PO/detail/generate-qr/{id}', 'generateQRCodePage');
     Route::delete('/PO/detail/delete', 'deletePODetail');
 });
 
@@ -150,6 +147,7 @@ Route::controller(ReceiveOrderController::class)->middleware('isTokenValid')->gr
 
 Route::controller(BranchItemController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/branch-item','getAllBranchItem');
+    Route::post('/branch-item/loadDataMaster', 'loadDataMaster');
 });
 
 Route::controller(ItemOutgoingController::class)->middleware('isTokenValid')->group(function(){
@@ -157,6 +155,23 @@ Route::controller(ItemOutgoingController::class)->middleware('isTokenValid')->gr
     Route::post('/item-outgoing/add', 'addItemOutgoing');
     Route::put('/item-outgoing/edit', 'updateItemOutgoing');
     Route::delete('/item-outgoing/delete', 'deleteItemOutgoing');
+});
+
+Route::controller(BranchOutgoingController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch-outgoing','getAllBranchOutgoing');
+    Route::post('/branch-outgoing/add', 'addBranchOutgoing');
+    Route::post('/branch-outgoing/loadDataMaster', 'loadDataMaster');
+    Route::post('/branch-outgoing/edit', 'updateBranchOutgoing');
+    Route::post('/branch-outgoing/delete', 'deleteBranchOutgoing');
+    Route::post('/branch-outgoing/loadDataDetailOnly', 'loadDataDetailOnly');
+});
+
+Route::controller(BranchOutgoingDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/branch-outgoing/detail/{id}','getAllBranchOutgoingDetail');
+    Route::post('/branch-outgoing/detail/add','addBranchOutgoingDetail');
+    Route::put('/branch-outgoing/detail/edit', 'updateBranchOutgoingDetail');
+    Route::put('/branch-outgoing/detail/verify', 'verifyBranchOutgoingDetail');
+    Route::delete('/branch-outgoing/detail/delete', 'deleteBranchOutgoingDetail');
 });
 
 Route::controller(ItemOutgoingDetailController::class)->middleware('isTokenValid')->group(function(){
@@ -171,6 +186,24 @@ Route::controller(BranchItemController::class)->middleware('isTokenValid')->grou
     Route::get('/branch-item','getAllBranchItem');
     Route::post('/branch-item/add', 'addBranchItem');
 });
+
+Route::controller(ReturController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/retur','getAllRetur');
+    Route::post('/retur/add', 'addRetur');
+    Route::post('/retur/loadDataMaster', 'loadDataMaster');
+    Route::post('/retur/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/retur/edit', 'updateRetur');
+    Route::post('/retur/delete', 'deleteRetur');
+});
+
+Route::controller(ReturDetailController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/retur/detail/{id}','getAllReturDetail');
+    Route::post('/retur/detail/add', 'addReturDetail');
+    Route::put('/retur/detail/edit', 'updateReturDetail');
+    Route::delete('/retur/detail/delete', 'deleteReturDetail');
+    Route::put('/retur/detail/verify', 'verifyReturDetail');
+});
+
 Route::controller(SalesController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/sales','index');
     Route::post('/sales/addCustomer', 'addCustomer');
@@ -180,6 +213,10 @@ Route::controller(SalesController::class)->middleware('isTokenValid')->group(fun
     Route::post('/sales/findSalesMaster', 'findSalesMaster');
     Route::post('/sales/detail', 'detail');
     Route::post('/sales/addScanItem', 'addScanItem');
+    Route::post('/sales/addPayment', 'addPayment');
+    Route::post('/sales/verifyMaster', 'verifyMaster');
+    Route::post('/sales/print_invoice', 'print_invoice');
+    Route::post('/sales/delete_detail', 'delete_detail');
 });
 
 Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid')->group(function(){
@@ -197,6 +234,8 @@ Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid'
     Route::post('/stock-opname/detail/{id}/loadDataMaster', 'loadDataMaster');
     Route::post('/stock-opname/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname/detail/edit', 'updateStockOpnameDetail');
+    Route::post('/stock-opname/detail/loadAdjustmentNote', 'loadAdjustmentNote');
+    Route::post('/stock-opname/detail/loadMakeAdjustment', 'loadMakeAdjustment');
 });
 
 Route::controller(StockOpnameBranchController::class)->middleware('isTokenValid')->group(function(){
@@ -214,13 +253,8 @@ Route::controller(StockOpnameBranchDetailController::class)->middleware('isToken
     Route::post('/stock-opname-branch/detail/{id}/loadDataMaster', 'loadDataMaster');
     Route::post('/stock-opname-branch/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname-branch/detail/edit', 'updateStockOpnameBranchDetail');
-});
-
-Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){
-    Route::get('/customer','getAllCustomer');
-    Route::post('/customer/add', 'addCustomer');
-    Route::post('/customer/loadDataMaster', 'loadDataMaster');
-    Route::post('/customer/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/stock-opname-branch/detail/loadAdjustmentNote', 'loadAdjustmentNote');
+    Route::post('/stock-opname-branch/detail/loadMakeAdjustment', 'loadMakeAdjustment');
 });
 
 Route::controller(StockOpnameMasterController::class)->middleware('isTokenValid')->group(function(){
@@ -238,6 +272,7 @@ Route::controller(StockOpnameDetailController::class)->middleware('isTokenValid'
     Route::post('/stock-opname/detail/{id}/loadDataMaster', 'loadDataMaster');
     Route::post('/stock-opname/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname/detail/edit', 'updateStockOpnameDetail');
+    Route::post('/stock-opname/detail/check-qr-code', 'checkQRCode');
 });
 
 Route::controller(StockOpnameBranchController::class)->middleware('isTokenValid')->group(function(){
@@ -255,6 +290,8 @@ Route::controller(StockOpnameBranchDetailController::class)->middleware('isToken
     Route::post('/stock-opname-branch/detail/{id}/loadDataMaster', 'loadDataMaster');
     Route::post('/stock-opname-branch/detail/{id}/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/stock-opname-branch/detail/edit', 'updateStockOpnameBranchDetail');
+    Route::post('/stock-opname-branch/detail/check-qr-code', 'checkQRCode');
+    Route::post('/stock-opname-branch/detail/check-qr-code-branch', 'checkQRCodeBranch');
 });
 
 Route::controller(CustomerController::class)->middleware('isTokenValid')->group(function(){
@@ -262,19 +299,20 @@ Route::controller(CustomerController::class)->middleware('isTokenValid')->group(
     Route::post('/customer/add', 'addCustomer');
     Route::post('/customer/loadDataMaster', 'loadDataMaster');
     Route::post('/customer/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/customer/edit', 'updateCustomer');
 });
 
 Route::controller(KasController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/kas','prosesKasBranch');
     Route::get('/kas/all','getAllKas');
-    Route::post('/kas/add', 'addKas');
+    Route::post('/kas/addCashOut', 'addKasOut');
+    Route::post('/kas/addCashIn', 'addKasIn');
+    Route::post('/kas/newDaily', 'addNewDailyKas');
+    Route::post('/kas/exist', 'checkKasIfExist');
     Route::post('/kas/loadDataMaster', 'loadDataMaster');
-    Route::post('/kas/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/kas/loadDataMasterCashOut', 'loadDataMasterCashOut');
+    Route::post('/kas/loadDataMasterCashIn', 'loadDataMasterCashIn');
 });
-
-// Route::controller(ErrorPageController::class)->middleware('isTokenValid')->group(function(){
-//     Route::get('/404','PageError404');
-// });
 
 Route::group([], function(){
     Route::get('/login', function () {
@@ -292,10 +330,6 @@ Route::group([], function(){
     Route::get('/dito', function () {
         return view('dito');
     });
-
-    // Route::get('/sales/kasir', function () {
-    //     return view('addcart');
-    // });
 });
 
 

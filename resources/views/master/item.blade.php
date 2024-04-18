@@ -19,7 +19,7 @@
                 <div class="form-group col-md-2">
                     <label for="jenis_item" class="form-label black-text">Jenis Item</label>
                     <select id="jenis_item" width="100%" name="jenis_item" class="form-control chosen-select">
-                        <option value="0" {{ $jenis_item == '0' ? 'selected' : '' }}>-- Pilih Jenis Item --</option>
+                        <option value="" {{ $jenis_item == '' ? 'selected' : '' }}>-- Pilih Jenis Item --</option>
                         <option value="frame" {{ $jenis_item == 'frame' ? 'selected' : '' }}>Frame</option>
                         <option value="lensa" {{ $jenis_item == 'lensa' ? 'selected' : '' }}>Lensa</option>
                         <option value="aksesoris" {{ $jenis_item == 'aksesoris' ? 'selected' : '' }}>Aksesoris</option>
@@ -27,10 +27,10 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="jenis_item" class="form-label black-text">Vendor</label>
-                    <select name="vendor_id" class="form-control chosen-select">
-                        <option value="0"selected>Choose...</option>
+                    <select name="vendor_id" id="vendor_id" class="form-control chosen-select">
+                        <option value="" {{ $vendor_id == '' ? 'selected' : ''}}>Choose...</option>
                         @foreach ($vendor as $val)
-                            <option value="{{$val['id']}}">{{$val['nama_vendor']}}</option>
+                            <option value="{{$val['id']}}" {{ $vendor_id == $val['id'] ? 'selected' : ''}}>{{$val['nama_vendor']}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -115,6 +115,7 @@
 <!-- Your script using jQuery -->
 <script type="text/javascript">
     function confirmDelete(itemId) {
+        console.log(itemId);
         var confirmation = confirm("Are you sure you want to delete this item?");
         if (confirmation) {
             deleteItem(itemId);
@@ -131,18 +132,14 @@
         },
         success: function(result) {
             // console.log(result);
-            if(result.message=="The data has been successfully deleted"){
+            if(result.status=="success"){
                     $('#tambah_info').html(' <div class="alert alert-success alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
                     setTimeout(function(){
                     $('#tambah_info').hide();
                     location.reload();
-                    },3500);
+                    },1000);
             }else{
-                $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-                setTimeout(function(){
-                    $('#tambah_info').hide();
-                    location.reload();
-                },3000)
+                $('#tambah_info').html(' <div class="alert alert-danger alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.data+'</b></div>').show();
                 }
             },
         });
@@ -219,7 +216,7 @@
                 method: "POST",
                 type  : 'ajax',
                 url   : settings.data_url,
-                data  : { 
+                data  : {
                     'limit':settings.limit,
                     'page':(settings.limit*settings.start_page),
                     '_token':csrfToken,
@@ -227,7 +224,8 @@
                     'kode_item':settings.kode_item,
                     'aksesoris_nama_item':settings.aksesoris_nama_item,
                     'harga_jual_from':settings.harga_jual_from,
-                    'harga_jual_until':settings.harga_jual_until
+                    'harga_jual_until':settings.harga_jual_until,
+                    'vendor_id':settings.vendor_id,
                 },
                 async : true,
                 dataType : 'json',
@@ -303,6 +301,7 @@
             harga_beli_until      : document.getElementById('harga_beli_until').value, //initial page
             diskon_from      : document.getElementById('diskon_from').value, //initial page
             diskon_until      : document.getElementById('diskon_until').value, //initial page
+            vendor_id      : document.getElementById('vendor_id').value, //initial page
         });
         loading  = false;
 	    end_record = false;
@@ -383,13 +382,13 @@
 				  	setTimeout(function(){
 					 $('#tambah_info').hide();
                      location.reload();
-					},3500);
+					},1000);
 			}else{
 				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				setTimeout(function(){
 					$('#tambah_info').hide();
                     location.reload();
-				},3000)
+				},1000)
 			}
             $('#btn_submit').show();
 		}
@@ -403,7 +402,7 @@
 	  <div class="modal-content">
       <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Item</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -481,12 +480,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-add-item " id="frameSubKategori">
-                                <div class="mb-3">
-                                    <label for="frame_sku_vendor" class="form-label">SKU Vendor</label>
-                                    <input type="text" name="frame_sku_vendor" class="form-control">
-                                </div>
-                            </div>
+                            
                             <div class="form-add-item " id="colorItem">
                                 <div class="mb-3">
                                     <label for="InputColor" class="form-label">Warna</label>
@@ -501,6 +495,12 @@
                             </div>
                         </div>
                         <div class="col">
+                            <div class="frameKategori" style="display: none;"  id="frameSubKategori">
+                                <div class="mb-3">
+                                    <label for="InputFrameSku" class="form-label">Frame SKU Kategori</label>
+                                    <input type="text" name="frame_sku_vendor" id="frame_sku_vendor"  class="form-control"  >
+                                </div>
+                            </div>
                             <div class="frameKategori" style="display: none;"  id="frameSubKategori">
                                 <div class="mb-3">
                                     <label for="InputFrameSub" class="form-label">Frame SUB Kategori</label>

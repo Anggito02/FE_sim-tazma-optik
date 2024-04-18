@@ -11,7 +11,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="row">
+            <div class="row black-text">
                 <div class="col-4 mb-2">
                     <div>
                         <label for="InputName" class="form-label">Name</label>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row black-text">
                 <div class="col">
                     <div>
                         <label for="InputKode" class="form-label">Kode</label>
@@ -354,7 +354,6 @@
                                     <div class="mb-3">
                                         <label for="InputPIC" class="form-label">PIC</label>
                                         <input type="text" id="pic_vendor" name="pic_vendor" class="form-control">
-
                                     </div>
 
 

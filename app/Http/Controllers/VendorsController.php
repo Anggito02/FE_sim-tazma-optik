@@ -29,15 +29,16 @@ class VendorsController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/vendor/all', $api_request);
+        $response_employee = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/employee/all', $api_request);
 
 
         $vendor = $response->json();
-        // dd($vendor);
+        $employee = $response_employee->json();
 
         $user = GetUserInfo::getUserInfo();
 
         if ($vendor['status'] == 'success'){
-            return view('master.vendor', ['vendor' => $vendor['data'], 'data' => $user['data']]);
+            return view('master.vendor', ['vendor' => $vendor['data'], 'data' => $user['data'], 'employee' => $employee['data']]);
 
         }else{
             // return view('/dashboard');

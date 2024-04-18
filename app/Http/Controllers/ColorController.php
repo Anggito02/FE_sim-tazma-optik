@@ -29,9 +29,15 @@ class ColorController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/color/all', $api_request);
-        
 
         $color = $response->json();
+        foreach ($color['data'] as $key => $value) {
+            $colorName = $value['color_name'];
+            $colorName = ucfirst(str_replace('_', ' ', $colorName));
+            $colorName = ucwords($colorName);
+            $color['data'][$key]['color_name'] = $colorName;
+        };
+
 
         $user = GetUserInfo::getUserInfo();
 

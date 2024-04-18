@@ -45,33 +45,27 @@ class BranchItemController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
+        $jenis_item = $request->jenis_item;
+        $branch_id = $request->branch_id;
 
         $api_request_getBranchItem = [
             "page" => $page,
             "limit" => $limit
         ];
 
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch-item/all', $api_request_getBranchItem);
         $response_branch = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch/all', $api_request_getBranchItem);
-        $response_item = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/all', $api_request_getBranchItem);
-        $branch_item = $response->json();
         $branch = $response_branch->json();
-        // dd($branch);
-        $item = $response_item->json();
-        // dd($item);
-        // dd($branch_item);
 
         $user = GetUserInfo::getUserInfo();
-        if ($branch_item['status'] == 'success'){
-            return view('inventory.branchItem', [
-                'branch_item' => $branch_item['data'],
-                'branch' => $branch['data'],
-                'item' => $item['data'],
-                'data' => $user['data']
-            ]);
-        }else{
-            return redirect('/dashboard');
-        }
+        return view('inventory.branchItem', [
+            'branch' => $branch['data'],
+            'data' => $user['data'],
+            'jenis_item' => $jenis_item,
+            'branch_id' => $branch_id
+        ]);
+        // }else{
+        //     return redirect('/dashboard');
+        // }
     }
 
     /**
@@ -114,6 +108,18 @@ class BranchItemController extends Controller
             toastr()->error('Failed to add branch item!', 'Branch Item', ["timeOut" => 3000]);
             return redirect('/branch-item');
         }
+    }
+
+    public function loadDataMaster(Request $request) {
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = $request->all(); // Retrieve all input data from the request
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/branch-item/all', $data);
+        $branch_item = $response->json();
+        return response()->json($branch_item);
     }
 }
 

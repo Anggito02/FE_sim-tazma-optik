@@ -84,8 +84,7 @@
                         <h6 class="collapse-header">Master Sheet:</h6>
                         <a class="collapse-item" href="/brand">Brands Information</a>
                         <a class="collapse-item" href="/color">Colors Information</a>
-                        <a class="collapse-item" href="/lens-category">Lens Information</a>
-                        <a class="collapse-item" href="/frame-category">Frame Information</a>
+                        <a class="collapse-item" href="/category">Category Information</a>
                         <a class="collapse-item" href="/index">Index Information</a>
                         <a class="collapse-item" href="/item">Item Information</a>
                     </div>
@@ -124,9 +123,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Inventory Sheet:</h6>
                         <a class="collapse-item" href="/item-outgoing">Item Outgoing</a>
+                        <a class="collapse-item" href="/branch-outgoing">Branch Outgoing</a>
                         <a class="collapse-item" href="/branch-item">Branch Item</a>
                         <a class="collapse-item" href="/stock-opname">Stock Opname</a>
                         <a class="collapse-item" href="/stock-opname-branch">Stock Opname Branch</a>
+                        <a class="collapse-item" href="/retur">Retur</a>
                     </div>
                 </div>
             </li>
@@ -143,6 +144,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Sales Sheet:</h6>
                         <a class="collapse-item" href="/customer">Customer</a>
+                        <a class="collapse-item" href="/kas">Kas</a>
                         <a class="collapse-item" href="/sales">Kasir</a>
                     </div>
                 </div>
@@ -210,9 +212,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline black-text small">damas</span>
+                                <span class="mr-2 d-none d-lg-inline black-text small">{{ $data['username'] }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="{{ asset('img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

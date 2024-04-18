@@ -11,88 +11,51 @@
         <span id="tambah_info"></span>
         <form id="POForm" action="/PO" method="POST" class="col-md-12 form-horizontal">
             <div class="card-body">
-                <div class="row">
+                <div class="row black-text">
                 <!-- Add the form inside the row -->
                 @csrf
                 @method("GET")
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="bulan" class="form-label">Bulan</label>
                     <select id="bulan" width="100%" name="bulan" class="form-control chosen-select">
-                        <option value="" selected disabled hidden>-- Pilih Bulan --</option>
-                        <option value="1">Januari</option>
-                        <option value="2">Februari</option>
-                        <option value="3">Maret</option>
-                        <option value="4">April</option>
-                        <option value="5">Mei</option>
-                        <option value="6">Juni</option>
-                        <option value="7">Juli</option>
-                        <option value="8">Agustus</option>
-                        <option value="9">September</option>
-                        <option value="10">Oktober</option>
-                        <option value="11">November</option>
-                        <option value="12">Desember</option>
+                        <option value="" {{ $bulan == '' ? 'selected' : '' }}>-- Pilih Bulan --</option>
+                        <option value="1"{{ $bulan == '1' ? 'selected' : ''}}>Januari</option>
+                        <option value="2"{{ $bulan == '2' ? 'selected' : ''}}>Februari</option>
+                        <option value="3"{{ $bulan == '3' ? 'selected' : ''}}>Maret</option>
+                        <option value="4"{{ $bulan == '4' ? 'selected' : ''}}>April</option>
+                        <option value="5"{{ $bulan == '5' ? 'selected' : ''}}>Mei</option>
+                        <option value="6"{{ $bulan == '6' ? 'selected' : ''}}>Juni</option>
+                        <option value="7"{{ $bulan == '7' ? 'selected' : ''}}>Juli</option>
+                        <option value="8"{{ $bulan == '8' ? 'selected' : ''}}>Agustus</option>
+                        <option value="9"{{ $bulan == '9' ? 'selected' : ''}}>September</option>
+                        <option value="10"{{ $bulan == '10' ? 'selected' : ''}}>Oktober</option>
+                        <option value="11"{{ $bulan == '11' ? 'selected' : ''}}>November</option>
+                        <option value="12"{{ $bulan == '12' ? 'selected' : ''}}>Desember</option>
                     </select>
 
 
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="tahun" class="form-label">Tahun</label>
-                    <input type="number" name="tahun" id="tahun" class="form-control">
+                    <input type="number" name="tahun" id="tahun" class="form-control" value="{{ $tahun }}">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="stauts_po" class="form-label">Status PO</label>
-                    <select name="status_po" id="status_po" class="form-control chosen-select">
-                        <option value="" selected disabled hidden>-- Pilih Status PO --</option>
-                        <option value="1">OPEN</option>
-                        <option value="0">CLOSED</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="status_penerimaan" class="form-label">Status Penerimaan</label>
-                    <select name="status_penerimaan" id="status_penerimaan" class="form-control chosen-select">
-                        <option value="" selected disabled hidden>-- Pilih Status Penerimaan --</option>
-                        <option value="0">Belum Diterima</option>
-                        <option value="1">Sudah Diterima</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="status_pembayaran" class="form-label">Status Pembayaran</label>
-                    <select name="status_pembayaran" id="status_pembayaran" class="form-control chosen-select">
-                        <option value="" selected disabled hidden>-- Pilih Status Pembayaran --</option>
-                        <option value="0">Belum Dibayar</option>
-                        <option value="1">Sudah Dibayar</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="made_by" class="form-label">Dibuat oleh</label>
-                    <select name="made_by" id="made_by" class="form-control chosen-select">
-                        <option value="" selected disabled hidden>-- Pilih Dibuat oleh --</option>
-                        @foreach ($employee as $val)
-                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
+                
+                <div class="form-group col-md-4">
                     <label for="checked_by" class="form-label">Diperiksa oleh</label>
                     <select name="checked_by" id="checked_by" class="form-control chosen-select">
-                        <option value="" selected disabled hidden>-- Pilih Diperiksa oleh --</option>
+                        <option value="" {{ $checked_by == '' ? 'selected' : ''}}>-- Pilih Diperiksa oleh --</option>
                         @foreach ($employee as $val)
-                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
+                            <option value="{{$val['id']}}" {{ $checked_by == $val['id'] ? 'selected' : ''}}>{{$val['employee_name']}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="approved_by" class="form-label">Disetujui oleh</label>
-                    <select name="approved_by" id="approved_by" class="form-control chosen-select">
-                        <option value="" selected disabled hidden>-- Pilih Disetujui oleh --</option>
-                        @foreach ($employee as $val)
-                            <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
+                
+                <div class="form-group col-md-12">
                     <br/>
                     <button type="submit" class="btn btn-primary">Search</button>
+                    <a href="/PO">
+                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eraser"></i>Clear All</button>
+                    </a>
                     <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Item</button>
                 </div>
             </div>
@@ -102,21 +65,22 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="data_PO_table_1" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" style="table-layout: fixed; width: 100%; border-collapse: collapse;" id="data_PO_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr style="white-space: nowrap;">
-                            <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Nomor PO</span></th>
-                            <th class="thead-text"><span class="nowrap">Tanggal Dibuat</span></th>
-                            <th class="thead-text"><span class="nowrap">Status PO</span></th>
-                            <th class="thead-text"><span class="nowrap">Status Pembayaran</span></th>
-                            <th class="thead-text"><span class="nowrap">Status Penerimaan</span></th>
-                            <th class="thead-text"><span class="nowrap">Detail</span></th>
-                            <th class="thead-text"><span class="nowrap">Edit</span></th>
-                            <th class="thead-text"><span class="nowrap">Delete</span></th>
+                            <th class="thead-text" style="width: 5%"><span class="nowrap">No</span></th>
+                            <th class="thead-text" style="width: 30%"><span class="nowrap">Nomor PO</span></th>
+                            <th class="thead-text" style="width: 30%"><span class="nowrap">Tanggal Dibuat</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Status PO</span></th>
+                            <th class="thead-text" style="width: 25%"><span class="nowrap">Status Pembayaran</span></th>
+                            <th class="thead-text" style="width: 25%"><span class="nowrap">Status Penerimaan</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Checked By</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Detail</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Edit</span></th>
+                            <th class="thead-text" style="width: 15%"><span class="nowrap">Delete</span></th>
                         </tr>
                     </thead>
-                    <tbody style="white-space: nowrap;">
+                    <tbody class="text-center" style="white-space: nowrap;">
 
                     </tbody>
                 </table>
@@ -197,6 +161,7 @@
         $('#spin_update').hide();
 		$('#spin_update_table').show();
     }
+    
     function addContent(settings) {
         var load_img = $('<img/>').attr('src',settings.loading_gif_url).addClass('loading-image');
         var record_end_txt = $('<div/>').text(settings.end_record_text).addClass('end-record-info');
@@ -215,12 +180,7 @@
                     '_token':csrfToken,
                     'bulan':settings.bulan,
                     'tahun':settings.tahun,
-                    'status_po':settings.status_po,
-                    'status_penerimaan':settings.status_penerimaan,
-                    'status_pembayaran':settings.status_pembayaran,
-                    'made_by':settings.made_by,
                     'checked_by':settings.checked_by,
-                    'approved_by':settings.approved_by,
                 },
                 async : true,
                 dataType : 'json',
@@ -233,39 +193,49 @@
                     let rowData = [];
                     for(let i=0; i<result.data.length; i++){
                         let currentItem = result.data[i];
+                        let status_po = '';
+                        let status_penerimaan = '';
+                        let status_pembayaran = '';
 
                         if(currentItem.status_po === true) {
-                            currentItem.status_po = '<span class="badge badge-success">Open</span>';
+                            status_po = '<span class="badge badge-success">Open</span>';
                         } else {
-                            currentItem.status_po = '<span class="badge badge-danger">Close</span>';
+                            status_po = '<span class="badge badge-danger">Close</span>';
                         }
 
                         if(currentItem.status_pembayaran === true) {
-                           currentItem.status_pembayaran = '<span class="badge badge-success">Sudah Dibayar</span>';
+                           status_pembayaran = '<span class="badge badge-success">Sudah Dibayar</span>';
                         } else {
-                           currentItem.status_pembayaran = '<span class="badge badge-danger">Belum Dibayar</span>';
+                           status_pembayaran = '<span class="badge badge-danger">Belum Dibayar</span>';
                         }
 
                         if(currentItem.status_penerimaan === true) {
-                           currentItem.status_penerimaan = '<span class="badge badge-success">Sudah Diterima</span>';
+                           status_penerimaan = '<span class="badge badge-success">Sudah Diterima</span>';
                         } else {
-                           currentItem.status_penerimaan = '<span class="badge badge-danger">Belum Diterima</span>';
+                           status_penerimaan = '<span class="badge badge-danger">Belum Diterima</span>';
                         }
 
 						offsetN0++;
-                        button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
-                        button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
+                        if(currentItem.status_po === false) {
+                            button_draft_1 = ' <button type="button" class="btn-sm btn-secondary" disabled onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
+                            button_draft_2 = ' <button type="button" class="btn-sm btn-secondary" disabled onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
+                        } else if (currentItem.status_po === true) {
+                            button_draft_1 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonClick(\'' + currentItem.id + '\')"><i class="fa fa-edit"></i></button>';
+                            button_draft_2 = ' <button type="button" class="btn-sm btn-danger" onclick="confirmDelete(\'' + currentItem.id + '\')"><i class="fa fa-trash"></i></button>';
+                        }
                         button_draft_3 = ' <button type="button" class="btn-sm btn-primary" onclick="handleButtonDetailClick(\'' + currentItem.id + '\')">Detail</button>';
+
                         rowData.push([
 							offsetN0,
                             currentItem.nomor_po,
                             currentItem.tanggal_dibuat,
-                            currentItem.status_po,
-                            currentItem.status_pembayaran,
-                            currentItem.status_penerimaan,
+                            status_po,
+                            status_pembayaran,
+                            status_penerimaan,
+                            currentItem.checked_by_name,
                             button_draft_3,
                             button_draft_1,
-                            button_draft_2,
+                            button_draft_2
                         ]);
                     }
                     table.rows.add(rowData).draw();
@@ -300,12 +270,7 @@
             lastScroll      : 0, //initial page
             bulan           : document.getElementById('bulan').value,
             tahun           : document.getElementById('tahun').value,
-            status_po       : document.getElementById('status_po').value,
-            status_penerimaan : document.getElementById('status_penerimaan').value,
-            status_pembayaran : document.getElementById('status_pembayaran').value,
-            made_by         : document.getElementById('made_by').value,
             checked_by      : document.getElementById('checked_by').value,
-            approved_by     : document.getElementById('approved_by').value,
         });
         loading  = false;
 	    end_record = false;
@@ -426,24 +391,15 @@
 
                             <div class="mb-3">
                                 <label for="InputMade" class="form-label">Made by</label>
-                                <select type="made-by" name="made_by" required class="form-control chosen-select" name="made_by" id="">
-                                    <option value="" disabled selected hidden>Choose...</option>
-                                    @foreach ($employee as $val)
-                                    <option value="{{$val['id']}}" name="made_by">{{$val['employee_name']}}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" value="{{$data['username']}}" readonly>
+                                <input type="hidden" name="made_by" value="{{$data['id']}}">
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="InputApprove" class="form-label">Approved by</label>
-                                <select type="approved-by" name="approved_by" required class="form-control chosen-select" id="">
-                                    <option value="" disabled selected hidden>Choose...</option>
-                                    @foreach ($employee as $val)
-                                    <option value="{{$val['id']}}" name="approved_by">{{$val['employee_name']}}
-                                    </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" value="{{$data['username']}}" readonly>
+                                <input type="hidden" name="approved_by" value="{{$data['id']}}">
                             </div>
 
 
@@ -457,30 +413,19 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label for="InputCheck" class="form-label">Check by</label>
-
-                                <select type="check-by" name="checked_by" required class="form-control chosen-select" id="">
-                                    <option value="" disabled selected hidden>Choose...</option>
-                                    @foreach ($employee as $val)
-                                    <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
-                                    @endforeach
-                                </select>
-
+                                <input type="text" class="form-control" value="{{$data['username']}}" readonly>
+                                <input type="hidden" name="checked_by" value="{{$data['id']}}">
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="InputStatus" class="form-label">Status Pembayaran</label>
-                                <select type="status-pembayaran" name="status_pembayaran" required class="form-control chosen-select"
-                                id="">
-                                    <option value="" disabled selected hidden>Choose...</option>
-                                    <option value="Sudah Dibayar">Sudah Dibayar</option>
-                                    <option value="Belum Dibayar">Belum Dibayar</option>
-                                </select>
+                                <input type="text" name="status_pembayaran" class="form-control" value="Belum Dibayar" readonly>
                             </div>
 
                             <div class="mb-3">
                                 <label for="InputStatus" class="form-label">StatusPO</label>
-                                <input type="text" name="status_po" class="form-control" value="OPEN" readonly="readonly">
+                                <input type="text" name="status_po" class="form-control" value="OPEN" readonly>
                             </div>
 
                             <div class="mt-5 float-right">

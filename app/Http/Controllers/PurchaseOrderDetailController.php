@@ -134,6 +134,23 @@ class PurchaseOrderDetailController extends Controller
         }
     }
 
+    public function generateQRCodePage($id){
+        $token = $_COOKIE['token'];
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+        $data = ['id' => $id];
+        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/purchase-order-detail/one', $data);
+        $result = $response->json();
+
+        $user = GetUserInfo::getUserInfo();
+    
+        return view('purchase.qrCodePage', [
+            'qr_pod' => $result['data'],
+        ]);
+    }
+
     public function deletePODetail(Request $request){
         $token = $_COOKIE['token'];
 
@@ -153,6 +170,7 @@ class PurchaseOrderDetailController extends Controller
 
         if($result['status'] == 'success'){
             toastr()->info('Purchase Order Detail deleted successfully!', 'Purchase Order Detail', ['timeOut' => 3000]);
+            // dd($request->purchase_order_id);
             return redirect('/PO/detail/'.$request->purchase_order_id);
         }else{
             toastr()->error($result['data'], 'Purchase Order Detail', ['timeOut' => 3000]);

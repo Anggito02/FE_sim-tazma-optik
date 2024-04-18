@@ -23,15 +23,10 @@ class ItemController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
-        $jenis_item = null;
         $jenis_item = $request->jenis_item;
-
-        if ($request->jenis_item == null){
-            $jenis_item = '0';
-        };
+        $vendor_id = $request->vendor_id;
 
         $api_request = [
-            "jenis_item" => $jenis_item,
             "page" => $page,
             "limit" => $limit
         ];
@@ -44,6 +39,12 @@ class ItemController extends Controller
         $brand = $response_brand->json();
         $vendor = $response_vendor->json();
         $color = $response_color->json();
+        foreach ($color['data'] as $key => $value) {
+            $colorName = $value['color_name'];
+            $colorName = ucfirst(str_replace('_', ' ', $colorName));
+            $colorName = ucwords($colorName);
+            $color['data'][$key]['color_name'] = $colorName;
+        };
         $category = $response_Category->json();
 
         $user = GetUserInfo::getUserInfo();
@@ -64,6 +65,7 @@ class ItemController extends Controller
                 'harga_beli_until' => $request->harga_beli_until,
                 'diskon_from' => $request->diskon_from,
                 'diskon_until' => $request->diskon_until,
+                'vendor_id' => $vendor_id
             ]);
         // } else {
             // return redirect('/dashboard');
@@ -109,6 +111,12 @@ class ItemController extends Controller
         $data = $request->all(); // Retrieve all input data from the request
         $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/item/filtered', $data);
         $item = $response->json();
+        foreach ($item['data'] as $key => $value) {
+            $colorName = $value['frame_nama_warna'];
+            $colorName = ucfirst(str_replace('_', ' ', $colorName));
+            $colorName = ucwords($colorName);
+            $item['data'][$key]['frame_nama_warna'] = $colorName;
+        };
         return response()->json($item);
     }
     public function addItem(Request $request)
@@ -273,7 +281,7 @@ class ItemController extends Controller
         }else{
             $row['message']="Delete data failed ";
         }
-        return response()->json("Berhasil");
+        return response()->json($result);
     }
 }
 

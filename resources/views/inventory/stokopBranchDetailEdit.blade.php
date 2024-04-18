@@ -9,35 +9,36 @@
     <form id="edit_info" class="form-horizontal"> 
         @csrf
         <!-- @method("PUT") -->
-        <input type="hidden" value="{{$stock_opname_detail['id']}}" name="so_detail_id">
-        <input type="hidden" value="{{$stock_opname_detail['so_start']}}" name="so_start">
-        <input type="hidden" value="{{$stock_opname_detail['so_end']}}" name="so_end">
+        <input type="hidden" value="{{$sob_detail_id}}" name="sob_detail_id">
+        <input type="hidden" value="{{$branch_id}}" name="branch_id">
+        <input type="hidden" value="{{$stock_opname_branch_detail['so_start']}}" name="so_start">
+        <input type="hidden" value="{{$stock_opname_branch_detail['so_end']}}" name="so_end">
         <div class="d-flex flex-column">
             <div class="mb-3">
                 <label for="inputItem" class="form-label">Item</label>
-                <select name="item_id" id="inputItem" class="form-control chosen-select">
+                <select name="item_id" id="inputItem" class="form-control">
                     <option value="" disabled>Choose</option>
                     @foreach ($items as $item)
-                        <option value="{{$item['id']}}" {{$item['id'] == $stock_opname_detail['item_id'] ? 'selected' : ''}} selected>{{$item['kode_item']}} - {{$item['jenis_item']}}</option>
+                        <option value="{{$item['id']}}" {{$item['id'] == $stock_opname_branch_detail['item_id'] ? 'selected' : ''}}>{{$item['kode_item']}} - {{$item['jenis_item']}}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="inputQuantity" class="form-label">Actual Quantity</label>
-                <input type="text" name="actual_qty" value="{{$stock_opname_detail['actual_qty']}}" class="form-control">
+                <input type="text" name="actual_qty" value="{{$stock_opname_branch_detail['actual_qty']}}" class="form-control">
             </div>
 
             <div class="mb-3">
                 <label for="inputOpenBy" class="form-label">Open By</label>
-                <input type="hidden" name="open_by" value="{{$stock_opname_detail['open_by']}}">
-                <input type="text" value="{{$stock_opname_detail['open_by_name']}}" class="form-control" readonly>
+                <input type="hidden" name="open_by" value="{{$stock_opname_branch_detail['open_by']}}">
+                <input type="text" value="{{$stock_opname_branch_detail['open_by_name']}}" class="form-control" readonly>
             </div>
 
             <div class="mb-3">
                 <label for="inputCloseBy" class="form-label">Close By</label>
-                <input type="hidden" name="close_by" value="{{$stock_opname_detail['close_by']}}">
-                <input type="text" value="{{$stock_opname_detail['close_by_name']}}" class="form-control" readonly>
+                <input type="hidden" name="close_by" value="{{$stock_opname_branch_detail['close_by']}}">
+                <input type="text" value="{{$stock_opname_branch_detail['close_by_name']}}" class="form-control" readonly>
             </div>
         </div>
         <div class="mt-3 float-right">
@@ -55,7 +56,7 @@
         var formData = new FormData($(this)[0]);
 	    console.log(formData);
         $.ajax({ 
-            url   	: "{{ url('/stock-opname/detail/edit') }}",
+            url   	: "{{ url('/stock-opname-branch/detail/edit') }}",
             type: 'POST',
             data: formData,
             async: false,

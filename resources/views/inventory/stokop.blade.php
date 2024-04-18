@@ -19,29 +19,31 @@
                 <div class="form-group col-md-6">
                     <label for="bulan" class="form-label black-text">Bulan</label>
                     <select id="bulan" name="bulan" class="form-control chosen-select">
-                        <option value=""selected>--Pilih Bulan--</option>
-                        <option value="januari"  >Januari</option>
-                        <option value="februari"  >Februari</option>
-                        <option value="maret"  >Maret</option>
-                        <option value="april"  >April</option>
-                        <option value="mei" >Mei</option>
-                        <option value="juni"  >Juni</option>
-                        <option value="juli"  >Juli</option>
-                        <option value="agustus"  >Agustus</option>
-                        <option value="september" >September</option>
-                        <option value="oktober"  >Oktober</option>
-                        <option value="november"  >November</option>
-                        <option value="desember"  >Desember</option>
+                        <option value="" {{ $bulan == '' ? 'selected' : '' }}>--Pilih Bulan--</option>
+                        <option value="1" {{ $bulan == '1' ? 'selected' : '' }}  >Januari</option>
+                        <option value="2" {{ $bulan == '2' ? 'selected' : '' }}>Februari</option>
+                        <option value="3" {{ $bulan == '3' ? 'selected' : '' }}>Maret</option>
+                        <option value="4" {{ $bulan == '4' ? 'selected' : '' }}>April</option>
+                        <option value="5" {{ $bulan == '5' ? 'selected' : '' }}>Mei</option>
+                        <option value="6" {{ $bulan == '6' ? 'selected' : '' }}>Juni</option>
+                        <option value="7" {{ $bulan == '7' ? 'selected' : '' }}>Juli</option>
+                        <option value="8" {{ $bulan == '8' ? 'selected' : '' }}>Agustus</option>
+                        <option value="9" {{ $bulan == '9' ? 'selected' : '' }}>September</option>
+                        <option value="10" {{ $bulan == '10' ? 'selected' : '' }}>Oktober</option>
+                        <option value="11" {{ $bulan == '11' ? 'selected' : '' }}>November</option>
+                        <option value="12" {{ $bulan == '12' ? 'selected' : '' }}>Desember</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="tahun" class="form-label black-text">Tahun</label>
-                    <input type="number" name="tahun" id="tahun" class="form-control" value="">
+                    <input type="number" name="tahun" id="tahun" class="form-control" value="{{$tahun}}">
                 </div>
                 <div class="form-group col-md-12">
                     <br/>
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-eye"></i>Show All</button>
+                    <a href="/stock-opname">
+                        <button type="button" class="btn btn-warning"><i class="fa-solid fa-eraser"></i>Clear All</button>
+                    </a>
                     <button type="button" class="btn btn-success btn-new-item" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i> New Stock</button>
                 </div>
             </div>
@@ -50,16 +52,16 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="data_opname_table_1" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" style="table-layout:fixed; width:100%; border-collapse:collapse;" id="data_opname_table_1" width="100%" cellspacing="0">
                     <thead class="thead-color txt-center">
                         <tr style="white-space: nowrap;">
-                            <th class="thead-text"><span class="nowrap">No</span></th>
-                            <th class="thead-text"><span class="nowrap">Tahun</span></th>
-                            <th class="thead-text"><span class="nowrap">Bulan</span></th>
-                            <th class="thead-text"><span class="nowrap">Detail</span></th>
+                            <th class="thead-text" style="width: 10%;"><span class="nowrap">No</span></th>
+                            <th class="thead-text" style="width: auto;"><span class="nowrap">Tahun</span></th>
+                            <th class="thead-text" style="width: auto;"><span class="nowrap">Bulan</span></th>
+                            <th class="thead-text" style="width: auto;"><span class="nowrap">Detail</span></th>
                         </tr>
                     </thead>
-                    <tbody style="white-space: nowrap;">
+                    <tbody class="txt-center" style="white-space: nowrap;">
 
                     </tbody>
                 </table>
@@ -122,6 +124,32 @@
                         let currentItem = result.data[i];
 						offsetN0++;
                         button_draft = ' <button type="button" class="btn-sm btn-warning" onclick="handleButtonClick(\'' + currentItem.id + '\')">Detail</button>';
+                        if(currentItem.bulan == 1) {
+                            currentItem.bulan = 'Januari';
+                        } else if(currentItem.bulan == 2) {
+                            currentItem.bulan = 'Februari';
+                        } else if(currentItem.bulan == 3) {
+                            currentItem.bulan = 'Maret';
+                        } else if(currentItem.bulan == 4) {
+                            currentItem.bulan = 'April';
+                        } else if(currentItem.bulan == 5) {
+                            currentItem.bulan = 'Mei';
+                        } else if(currentItem.bulan == 6) {
+                            currentItem.bulan = 'Juni';
+                        } else if(currentItem.bulan == 7) {
+                            currentItem.bulan = 'Juli';
+                        } else if(currentItem.bulan == 8) {
+                            currentItem.bulan = 'Agustus';
+                        } else if(currentItem.bulan == 9) {
+                            currentItem.bulan = 'September';
+                        } else if(currentItem.bulan == 10) {
+                            currentItem.bulan = 'Oktober';
+                        } else if(currentItem.bulan == 11) {
+                            currentItem.bulan = 'November';
+                        } else if(currentItem.bulan == 12) {
+                            currentItem.bulan = 'Desember';
+                        }
+                        
                         rowData.push([
 							offsetN0,
                             currentItem.tahun,
