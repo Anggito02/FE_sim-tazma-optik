@@ -1,0 +1,485 @@
+@extends('layout')
+@section('content')
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="mb-4">
+        <a href="/PO"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div> 
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form>
+                <div class="row"> <!-- Memastikan ada row untuk wrap kolom -->
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Supplier Name</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['nama_vendor']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>PO Number</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['nomor_po']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>PO Date</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="<?php echo date('d-m-Y H:i:s', strtotime($po['tanggal_dibuat'])); ?>">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>PO Number</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['nomor_po']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Made By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['made_by_name']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Checked By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['checked_by_name']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Approved By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['approved_by_name']}}">
+                    </div>
+                    <div class="col-md-1">
+                        <label for="InputBeli1" class="form-label"><b>Status PO</b></label>
+                        <br/>
+                        @if ($po['status_po'] == '1')
+                           <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">OPEN</span>
+                        @elseif ($po['status_po'] == '0')
+                            <span class="badge badge-danger" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">CLOSED</span>
+                        @endif
+                    </div>
+                    <div class="col-md-1">
+                        <label for="InputBeli1" class="form-label"><b>Penerimaan</b></label>
+                        <br/>
+                        @if ($po['status_penerimaan'] == '1')
+                           <span class="badge badge-danger" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">CLOSED</span>
+                        @elseif ($po['status_penerimaan'] == '0')
+                            <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">OPEN</span>
+                        @endif
+                    </div>
+                    <div class="col-md-1">
+                        <label for="InputBeli1" class="form-label"><b>Pembayaran</b></label>
+                        <br/>
+                        @if ($po['status_pembayaran'] == '1')
+                           <span class="badge badge-danger" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">CLOSED</span>
+                        @elseif ($po['status_pembayaran'] == '0')
+                            <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">OPEN</span>
+                        @endif
+                    </div>
+                    <div class="col-md-2">
+                        <br/>
+                        @if ($po['status_penerimaan'] == '1')
+                            <a href="/receive-order/{{ $po['id'] }}" class="btn btn-info btn-sm mb-3 text-white" style="padding: 10px 15px; font-weight: bold;">
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> Receive Order
+                            </a>
+                        @elseif ($po['status_penerimaan'] == '0' || $pod == null)
+                            <a class="btn btn-secondary btn-sm mb-3" style="padding: 10px 15px; font-weight: bold; pointer-events: none; opacity: 0.65;">
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> Receive Order
+                            </a>
+                        @endif
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    
+                </div> -->
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <!-- <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
+        </div> -->
+
+        <div class="card-body">
+            <button type="button" class="btn-sm btn-success float-right bold-text mb-3 @if ($po['status_penerimaan'] == '1') d-none @endif" data-toggle="modal"
+                data-target="#exampleModalCenter"><i class="fa-solid fa-pencil"></i>
+                Add Item
+            </button>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="thead-color txt-center">
+                        <tr>
+                            <th class="thead-text"><span class="nowrap">No</span></th>
+                            <th class="thead-text"><span class="nowrap">Kode Item</span></th>
+                            <th class="thead-text"><span class="nowrap">PO Quantity</span></th>
+                            <th class="thead-text"><span class="nowrap">Received Quantity</span></th>
+                            <th class="thead-text"><span class="nowrap">Not Good Quantity</span></th>
+                            <th class="thead-text"><span class="nowrap">Unit</span></th>
+                            <th class="thead-text"><span class="nowrap">Harga Beli Satuan</span></th>
+                            <th class="thead-text"><span class="nowrap">Harga Jual Satuan</span></th>
+                            <th class="thead-text"><span class="nowrap">Diskon</span></th>
+                            <th class="thead-text"><span class="nowrap">Edit</span></th>
+                            <th class="thead-text"><span class="nowrap">Delete</span></th>
+                            <th class="thead-text"><span class="nowrap">Generate QR</span></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <div class="d-none">
+                            {{ $iterator = 1 }}
+                        </div>
+                        @foreach ($pod as $valPod)
+                        <tr>
+                            <td class="txt-center">{{ $iterator }}</td>
+                            <td class="nowrap">{{ $valPod['kode_item'] }}</td>
+                            <td class="nowrap text-right">{{ $valPod['pre_order_qty'] }}</td>
+                            <td class="nowrap">@if ($valPod['received_qty'] == null)
+                                <div class="text-danger">Item Not Received</div>
+                                @else
+                                <div class="text-right">{{ $valPod['received_qty'] }}</div>
+                                @endif</td>
+                            <td class="nowrap">@if ($valPod['not_good_qty'] == null)
+                                <div class="text-danger">Item Not Received</div>
+                                @else
+                                <div class="text-right">{{ $valPod['not_good_qty'] }}</div>
+                                @endif</td>
+                            <td class="nowrap text-right">{{ $valPod['unit'] }}</td>
+                            <td class="nowrap text-right">{{ $valPod['harga_beli_satuan'] }}</td>
+                            <td class="nowrap text-right">{{ $valPod['harga_jual_satuan'] }}</td>
+                            <td class="nowrap text-right">{{ $valPod['diskon'] }}</td>
+
+                            @if ($po['status_penerimaan'] == '1')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </td>
+                            @elseif ($po['status_penerimaan'] == '0')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalCenterEdit{{$valPod['id']}}">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+
+                                <!-- Modal Update Data -->
+                                <div class="modal fade" id="exampleModalCenterEdit{{$valPod['id']}}" tabindex="-1"
+                                    role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title black-text" id="exampleModalLongTitle">Edit Data
+                                                    PO</h5>
+
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body black-text">
+                                                <form method="post" action="/PO/detail/edit">
+                                                    @csrf
+                                                    @method("PUT")
+                                                    <div class="row">
+                                                        <input type="hidden" name="id" value="{{$valPod['id']}}">
+                                                        <input type="hidden" name="purchase_order_id" value="{{$valPod['purchase_order_id']}}">
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Item</label>
+                                                                <select type="text" name="item_id" class="form-control">
+                                                                    <option value="{{ $valPod['item_id']}}" selected hidden>
+                                                                        {{$valPod['kode_item']}}</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Unit</label>
+                                                                <input type="text" name="unit" class="form-control"
+                                                                    value="{{$valPod['unit']}}" >
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputJual" class="form-label">Harga Jual
+                                                                    Satuan</label>
+                                                                <input type="number" id="id" name="harga_jual_satuan" class="form-control"
+                                                                    value="{{$valPod['harga_jual_satuan']}}">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <div class="mb-3">
+                                                                <label for="InputMerk" class="form-label">PO
+                                                                    Quantity</label>
+                                                                <input type="number" name="pre_order_qty" class="form-control"
+                                                                    value="{{$valPod['pre_order_qty']}}">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputBeli" class="form-label">Harga Beli
+                                                                    Satuan</label>
+                                                                <input type="number" name="harga_beli_satuan" class="form-control"
+                                                                    value="{{$valPod['harga_beli_satuan']}}">
+                                                            </div>
+
+                                                            <div class="mb-3">
+                                                                <label for="InputDisc" class="form-label">Diskon</label>
+                                                                <input type="number" name="diskon" class="form-control"
+                                                                    value="{{$valPod['diskon']}}">
+                                                            </div>
+
+                                                            <div class="mt-3 float-right">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Update</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            @endif
+
+                            @if ($po['status_penerimaan'] == '1')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-secondary" disabled>
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                            @elseif ($po['status_penerimaan'] == '0')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-danger" data-toggle="modal"
+                                    data-target="#exampleModalCenterDelete{{$valPod['id']}}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+
+                                <!-- Modal Delete Data -->
+                                <div class="modal fade" id="exampleModalCenterDelete{{$valPod['id']}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title black-text" id="exampleModalLongTitle">Delete
+                                                    Data PO</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body black-text">
+                                                <p>Are you sure you want to delete?</p>
+                                            </div>
+                                            <div class="modal-footer black-text">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">No</button>
+
+                                                <form method="post" action="/PO/detail/delete">
+                                                    @csrf
+                                                    @method("DELETE")
+
+                                                    <input type="hidden" name="purchase_order_id" value="{{$valPod['purchase_order_id']}}">
+                                                    <input type="hidden" name="po_detail_id" class="form-control"
+                                                        value="{{ $valPod['id'] }}">
+                                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            @endif
+
+                            @if ($po['status_penerimaan'] == '0')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-secondary" disabled>
+                                    Generate
+                                </button>
+                            </td>
+                            @elseif ($po['status_penerimaan'] == '1')
+                            <td class="">
+                                <button type="button" class="btn-sm btn-success" onclick="handleButtonGenerate({{ $valPod['id'] }})">
+                                    Generate
+                                </button>
+                            </td>
+                            @endif
+
+                        </tr>
+                        <div class="d-none">
+                            {{ $iterator = $iterator + 1 }}
+                        </div>
+                        @endforeach
+
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn-sm btn-success bold-text mb-3 @if (count($pod) == 0) d-none @endif @if ($po['status_penerimaan'] == '1') d-none @endif"
+                        data-toggle="modal" data-target="#exampleModalCenterRO">
+                        Create Receive Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add Data -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">New Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body black-text">
+                    <form method="post" action="/PO/detail/add">
+                        @csrf
+                        @method("POST")
+                        <div class="row">
+                            <div class="col">
+                                
+                                <div>
+                                    <input type="hidden" id="POId" name="purchase_order_id" class="form-control"
+                                    value="{{ $po['id'] }}">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="Item" class="form-label">Item</label>
+                                    <select type="text" name="item_id" class="form-control" id="">
+                                        @foreach ($items as $items)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{ $items['id'] }}">{{ $items['kode_item'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="POQty" class="form-label">PO Quantity</label>
+                                    <input type="number" id="POQty" name="pre_order_qty" class="form-control">
+
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label for="HargaBeliSatuan" class="form-label">Harga Beli Satuan</label>
+                                    <input type="number" id="HargaBeliSatuan" name="harga_beli_satuan"
+                                        class="form-control">
+
+                                </div>
+
+
+                                
+                            </div>
+                            
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="Unit" class="form-label">Unit</label>
+                                    <input type="text" id="Unit" name="unit" class="form-control">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="HargaJualSatuan" class="form-label">Harga Jual Satuan</label>
+                                    <input type="number" id="HargaJualSatuan" name="harga_jual_satuan"
+                                    class="form-control">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="Diskon" class="form-label">Diskon</label>
+                                    <input type="number" id="Diskon" name="diskon" class="form-control">
+                                </div>
+
+                                <div class="mt-5 float-right">
+                                    <button type="submit" class="btn btn-success">Add new</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal RO Data -->
+    <div class="modal fade" id="exampleModalCenterRO" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title black-text" id="exampleModalLongTitle">New Received Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body black-text">
+                    <form method="post" action="/receive-order/add">
+                        @csrf
+                        @method("POST")
+                        <div class="row">
+                            <div class="col">
+
+                                <div>
+                                    <input type="hidden" id="POId" name="purchase_order_id" class="form-control"
+                                        value="{{ $po['id'] }}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="InputReceived" class="form-label">Received by</label>
+                                    <select type="received-by" name="received_by" class="form-control" id="">
+                                        @foreach ($employee as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}" name="received_by">{{$val['employee_name']}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="InputApprove" class="form-label">Approved by</label>
+                                    <select type="approved-by" name="approved_by" class="form-control" id="">
+                                        @foreach ($employee as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}" name="approved_by">{{$val['employee_name']}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="InputCheck" class="form-label">Check by</label>
+
+                                    <select type="check-by" name="checked_by" class="form-control" id="">
+                                        @foreach ($employee as $val)
+                                        <option value="" disabled selected hidden>Choose...</option>
+                                        <option value="{{$val['id']}}">{{$val['employee_name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mt-5 float-right">
+                                    <button type="submit" class="btn btn-success">Create Receive Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function handleButtonGenerate(id) {
+        var url = "{{ url('/PO/detail/generate-qr') }}/" + id;
+        window.open(url, '_blank');
+    }
+
+</script>
+@endsection
