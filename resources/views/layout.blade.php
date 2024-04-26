@@ -81,6 +81,7 @@
                         <a class="collapse-item" href="/employee">Employees Information</a>
                         <a class="collapse-item" href="/branch">Branches Information</a>
                         <a class="collapse-item" href="/vendors">Vendors Information</a>
+                        <a class="collapse-item" href="/customer-diagnose">Customers Diagnose</a> 
                         <h6 class="collapse-header">Master Sheet:</h6>
                         <a class="collapse-item" href="/brand">Brands Information</a>
                         <a class="collapse-item" href="/color">Colors Information</a>

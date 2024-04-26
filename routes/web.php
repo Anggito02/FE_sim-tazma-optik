@@ -21,6 +21,7 @@ use App\Http\Controllers\ReceiveOrderController;
 use App\Http\Controllers\BranchItemController;
 use App\Http\Controllers\BranchOutgoingDetailController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerDiagnoseController;
 use App\Http\Controllers\ItemOutgoingController;
 use App\Http\Controllers\ItemOutgoingDetailController;
 use App\Http\Controllers\BranchOutgoingController;
@@ -300,6 +301,14 @@ Route::controller(CustomerController::class)->middleware('isTokenValid')->group(
     Route::post('/customer/loadDataMaster', 'loadDataMaster');
     Route::post('/customer/loadDataDetailOnly', 'loadDataDetailOnly');
     Route::post('/customer/edit', 'updateCustomer');
+});
+
+Route::controller(CustomerDiagnoseController::class)->middleware('isTokenValid')->group(function(){
+    Route::get('/customer-diagnose','getAllCustomerDiagnose');
+    Route::post('/customer-diagnose/add', 'addCustomerDiagnose');
+    Route::post('/customer-diagnose/loadDataMaster', 'loadDataMaster');
+    Route::post('/customer-diagnose/loadDataDetailOnly', 'loadDataDetailOnly');
+    Route::post('/customer-diagnose/edit', 'updateCustomerDiagnose');
 });
 
 Route::controller(KasController::class)->middleware('isTokenValid')->group(function(){
