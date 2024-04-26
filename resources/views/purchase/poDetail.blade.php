@@ -2,71 +2,86 @@
 @section('content')
 <div class="container-fluid">
     <!-- Page Heading -->
-    {{-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-            href="https://datatables.net">official DataTables documentation</a>.</p> --}}
-
     <!-- DataTales Example -->
     <div class="mb-4">
         <a href="/PO"><i class="fa-solid fa-arrow-left"></i> Back</a>
-    </div>
+    </div> 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="d-flex justify-content-between p-5 black-text">
-                <div class="d-flex flex-column">
-                    <h3>Nomor PO:</h3>
-                    <h3>{{$po['nomor_po']}}</h3>
-                    <h3><br></h3>
-                    <h3>Tanggal Dibuat:</h3>
-                    <h3>{{$po['tanggal_dibuat']}}</h3>
+            <form>
+                <div class="row"> <!-- Memastikan ada row untuk wrap kolom -->
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Supplier Name</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['nama_vendor']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>PO Number</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['nomor_po']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>PO Date</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="<?php echo date('d-m-Y H:i:s', strtotime($po['tanggal_dibuat'])); ?>">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>PO Number</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['nomor_po']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Made By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['made_by_name']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Checked By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['checked_by_name']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Approved By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['approved_by_name']}}">
+                    </div>
+                    <div class="col-md-1">
+                        <label for="InputBeli1" class="form-label"><b>Status PO</b></label>
+                        <br/>
+                        @if ($po['status_po'] == '1')
+                           <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">OPEN</span>
+                        @elseif ($po['status_po'] == '0')
+                            <span class="badge badge-danger" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">CLOSED</span>
+                        @endif
+                    </div>
+                    <div class="col-md-1">
+                        <label for="InputBeli1" class="form-label"><b>Penerimaan</b></label>
+                        <br/>
+                        @if ($po['status_penerimaan'] == '1')
+                           <span class="badge badge-danger" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">CLOSED</span>
+                        @elseif ($po['status_penerimaan'] == '0')
+                            <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">OPEN</span>
+                        @endif
+                    </div>
+                    <div class="col-md-1">
+                        <label for="InputBeli1" class="form-label"><b>Pembayaran</b></label>
+                        <br/>
+                        @if ($po['status_pembayaran'] == '1')
+                           <span class="badge badge-danger" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">CLOSED</span>
+                        @elseif ($po['status_pembayaran'] == '0')
+                            <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">OPEN</span>
+                        @endif
+                    </div>
+                    <div class="col-md-2">
+                        <br/>
+                        @if ($po['status_penerimaan'] == '1')
+                            <a href="/receive-order/{{ $po['id'] }}" class="btn btn-info btn-sm mb-3 text-white" style="padding: 10px 15px; font-weight: bold;">
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> Receive Order
+                            </a>
+                        @elseif ($po['status_penerimaan'] == '0' || $pod == null)
+                            <a class="btn btn-secondary btn-sm mb-3" style="padding: 10px 15px; font-weight: bold; pointer-events: none; opacity: 0.65;">
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i> Receive Order
+                            </a>
+                        @endif
+                    </div>
                 </div>
-                <div class="d-flex flex-column align-items-end">
-                    <p>Made By: {{$po['made_by_name']}}</p>
-                    <p>Checked By: {{$po['checked_by_name']}}</p>
-                    <p>Approved By: {{$po['approved_by_name']}}</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-between p-5 black-text">
-                <div class="d-flex flex-column">
-                    <h3>Nama Vendor:</h3>
-                    <h3>{{$po['nama_vendor']}}</h3>
-                </div>
-
-                <div class="d-flex flex-column align-items-end">
-                    @if ($po['status_penerimaan'] == '1')
-                    <button type="button" class="btn-sm btn-info mb-3">
-                        <a href="/receive-order/{{ $po['id'] }}" class="text-white">
-                            Check Receive Order
-                        </a>
-                    </button>
-                    @elseif ($po['status_penerimaan'] == '0' || $pod==null)
-                    <button type="button" class="btn-sm btn-secondary mb-3" disabled>
-                        Check Receive Order
-                    </button>
-                    @endif
-
-                    @if ($po['status_po'] == '1')
-                    <p>Status PO: <span class="badge badge-success">OPEN</span></p>
-                    @elseif ($po['status_po'] == '0')
-                    <p>Status PO: <span class="badge badge-danger">CLOSED</span></p>
-                    @endif
-
-                    @if ($po['status_penerimaan'] == '1')
-                    <p>Status Penerimaan: <span class="badge badge-success">Sudah Diterima</span></p>
-                    @elseif ($po['status_penerimaan'] == '0')
-                    <p>Status Penerimaan: <span class="badge badge-danger">Belum Diterima</span></p>
-                    @endif
-
-                    @if ($po['status_pembayaran'] == '1')
-                    <p>Status Pembayaran: <span class="badge badge-success">Sudah Dibayar</span></p>
-                    @elseif ($po['status_pembayaran'] == '0')
-                    <p>Status Pembayaran: <span class="badge badge-danger">Belum Dibayar</span></p>
-                    @endif
-
-                </div>
-            </div>
+                <!-- <div class="row">
+                    
+                </div> -->
+            </form>
         </div>
     </div>
 
@@ -273,13 +288,13 @@
                             </td>
                             @endif
 
-                            @if ($po['status_po'] == '1')
+                            @if ($po['status_penerimaan'] == '0')
                             <td class="">
                                 <button type="button" class="btn-sm btn-secondary" disabled>
                                     Generate
                                 </button>
                             </td>
-                            @elseif ($po['status_po'] == '0')
+                            @elseif ($po['status_penerimaan'] == '1')
                             <td class="">
                                 <button type="button" class="btn-sm btn-success" onclick="handleButtonGenerate({{ $valPod['id'] }})">
                                     Generate

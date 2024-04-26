@@ -1,35 +1,40 @@
 @extends('layout')
 @section('content')
 <div class="container-fluid">
-    <!-- Page Heading -->
-    {{-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-            href="https://datatables.net">official DataTables documentation</a>.</p> --}}
-
     <!-- DataTales Example -->
     <div class="mb-4">
         <a href="/PO/detail/{{ $po['id'] }}"><i class="fa-solid fa-arrow-left"></i> Back</a>
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
-            <div class="d-flex justify-content-between p-5 black-text">
-                <div class="d-flex flex-column">
-                    <h1>{{$ro['nomor_receive_order']}}</h1>
-                    <h2>{{$ro['tanggal_penerimaan']}}</h2>
+            <form>
+                <div class="row"> <!-- Memastikan ada row untuk wrap kolom -->
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Receive Order Number</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$ro['nomor_receive_order']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Receive Order Date</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="<?php echo date('d-m-Y H:i:s',strtotime($ro['tanggal_penerimaan']));?>">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Supplier Name</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$po['nama_vendor']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Checked By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$ro['checked_by_name']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Approved By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$ro['approved_by_name']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="InputBeli1" class="form-label"><b>Received By</b></label>
+                        <input type="text" id="InputBeli1" name="harga_beli_satuan" class="form-control" value="{{$ro['received_by_name']}}">
+                    </div>
                 </div>
-            </div>
-
-            <div class="d-flex justify-content-between p-5 black-text">
-                <div class="d-flex flex-column">
-                    <h3>Nama Vendor: {{$po['nama_vendor']}}</h3>
-                </div>
-                <div class="d-flex flex-column align-items-end">
-                    <p>Checked By: {{$ro['checked_by_name']}}</p>
-                    <p>Approved By: {{$ro['approved_by_name']}}</p>
-                    <p>Receive By: {{$ro['received_by_name']}}</p>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 
