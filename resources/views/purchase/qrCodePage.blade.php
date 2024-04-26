@@ -34,12 +34,66 @@
 
     <!-- Menambahkan JavaScript Chosen -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+    <style>
+    @media print {
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: none;
+            color: #000; /* Warna teks untuk mencetak */
+        }
+
+        @page {
+            size: 10.5cm 2cm; /* Atur ukuran kertas */
+            margin: 1mm 1.5mm;
+        }
+
+        .container, .page-content {
+            page-break-inside: avoid;
+            margin: 0;
+            width: auto;
+            overflow: visible !important;
+        }
+
+        #qrcode {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 1mm; /* Menambahkan padding di sekitar QR code */
+            display: block; /* Memastikan QR code ditampilkan sebagai block untuk menambahkan padding */
+        }
+        
+        
+    }
+   
+
+</style>
 
 
 </head>
 <body>
-    <div class="container mt-5">
-        <div id="qrcode">
+    <div class="container" >
+        <div class="row" id="qrcode"> <!-- Memastikan ada row untuk wrap kolom -->
+                &nbsp;
+                {{ QrCode::size(100)->generate($qr_pod['kode_qr_po_detail']) }}
+                <span style="font-size: 24px; font-weight: bold; color: black;">|</span>
+                <span style="font-size: 9px; font-weight: bold; color: black; width: 1.6cm; flex; align-items: center; justify-content: center; display: inline-block; white-space: normal; word-wrap: word-wrap: break-word; text-align: center; margin: 1mm;">{{$qr_pod['kode_qr_po_detail']}} {{$qr_pod['kode_item']}} <?php echo "Rp.".number_format($qr_pod['harga_jual_satuan'],0,",","."); ?></span>
+                {{ QrCode::size(100)->generate($qr_pod['kode_qr_po_detail']) }}
+                <span style="font-size: 24px; font-weight: bold; color: black;">|</span>
+                <span style="font-size: 9px; font-weight: bold; color: black; width: 1.6cm; flex; align-items: center; justify-content: center; display: inline-block; white-space: normal; word-wrap: word-wrap: break-word; text-align: center; margin: 1mm;">{{$qr_pod['kode_qr_po_detail']}} {{$qr_pod['kode_item']}} <?php echo "Rp.".number_format($qr_pod['harga_jual_satuan'],0,",","."); ?></span>
+                {{ QrCode::size(100)->generate($qr_pod['kode_qr_po_detail']) }}
+                <span style="font-size: 24px; font-weight: bold; color: black;">|</span>
+                <span style="font-size: 9px; font-weight: bold; color: black; width: 1.6cm; flex; align-items: center; justify-content: center; display: inline-block; white-space: normal; word-wrap: word-wrap: break-word; text-align: center; margin: 1mm;">{{$qr_pod['kode_qr_po_detail']}} {{$qr_pod['kode_item']}} <?php echo "Rp.".number_format($qr_pod['harga_jual_satuan'],0,",","."); ?></span>
+
+        </div>
+    </div>
+    <!-- <div class="container mt-5" style="position: relative; height: 100vh;">
+        <div id="qrcode" style="max-width: 100%; height: auto;">
             <div class="d-flex flex-column align-items-center">
                 <div class="mb-4">
                     {{ QrCode::size(250)->generate($qr_pod['kode_qr_po_detail']) }}
@@ -52,7 +106,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
         <!-- <script src="{{ asset('vendor\jquery\jquery.min.js')}}"></script> -->
 
