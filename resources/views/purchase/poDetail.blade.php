@@ -56,13 +56,13 @@
                             <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">OPEN</span>
                         @endif
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <label for="InputBeli1" class="form-label"><b>Pembayaran</b></label>
                         <br/>
                         @if ($po['status_pembayaran'] == '1')
-                           <span class="badge badge-danger" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">CLOSED</span>
+                           <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">Sudah Dibayar</span>
                         @elseif ($po['status_pembayaran'] == '0')
-                            <span class="badge badge-success" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">OPEN</span>
+                            <span class="badge badge-danger" style="padding: 10px 15px; font-size: 16px; border-radius: 5px;">Belum Dibayar</span>
                         @endif
                     </div>
                     <div class="col-md-2">

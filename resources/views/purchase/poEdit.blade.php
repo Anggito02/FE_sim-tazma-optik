@@ -26,11 +26,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Status PO</label>
-                    <select type="text" name="status_po" class="form-control">
-                        <option value="{{$vals['status_po']}}" selected hidden disabled>@if($vals['status_po'] == true) OPEN @else CLOSED @endif</option>
-                        <option value=1>OPEN</option>
-                        <option value=0>CLOSED</option>
-                    </select>
+                    <input type="text" readonly name="status_po" class="form-control" value="@if($vals['status_po'] == 1) OPEN @else CLOSED @endif">
                 </div>
 
                 <div class="mb-3">

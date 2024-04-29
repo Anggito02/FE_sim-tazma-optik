@@ -111,19 +111,15 @@
                 alert("Bad Connection, Cannot Reload the data!!, Please Refresh your browser");
         },
         success: function(result) {
-            // console.log(result);
-            if(result.message=="The data has been successfully deleted"){
-                    $('#tambah_info').html(' <div class="alert alert-success alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
+            console.log(result);
+            if(result=="Berhasil"){
+                    $('#tambah_info').html(' <div class="alert alert-success alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>Data berhasil di hapus</b></div>').show();
                     setTimeout(function(){
                     $('#tambah_info').hide();
                     location.reload();
-                    },3500);
+                    },1000);
             }else{
-                $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
-                setTimeout(function(){
-                    $('#tambah_info').hide();
-                    location.reload();
-                },3000)
+                $('#tambah_info').html(' <div class="alert alert-warning alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result+'</b></div>').show();
                 }
             },
         });
@@ -327,7 +323,7 @@
 				  	setTimeout(function(){
 					 $('#tambah_info').hide();
                      location.reload();
-					},3500);
+					},1000);
 			}else{
 				$('#tambah_info').html(' <div class="alert alert-warning alert-dismissible fade show" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><b>'+result.message+'</b></div>').show();
 				setTimeout(function(){

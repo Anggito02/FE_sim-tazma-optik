@@ -92,7 +92,7 @@
 
         </div>
     </div>
-    <!-- <div class="container mt-5" style="position: relative; height: 100vh;">
+    {{-- <!-- <div class="container mt-5" style="position: relative; height: 100vh;">
         <div id="qrcode" style="max-width: 100%; height: auto;">
             <div class="d-flex flex-column align-items-center">
                 <div class="mb-4">
@@ -108,7 +108,7 @@
         </div>
     </div> -->
 
-        <!-- <script src="{{ asset('vendor\jquery\jquery.min.js')}}"></script> -->
+        <!-- <script src="{{ asset('vendor\jquery\jquery.min.js')}}"></script> --> --}}
 
         <script src="{{ asset('vendor\bootstrap\js\bootstrap.bundle.min.js')}}"></script>
 
