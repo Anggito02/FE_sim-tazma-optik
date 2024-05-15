@@ -17,6 +17,7 @@ class SalesController extends Controller
     public function __construct(){
         if(isset($_COOKIE['token'])){
             $token = $_COOKIE['token'];
+            print_r($token);
             $headers_ = [
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$token
@@ -88,38 +89,38 @@ class SalesController extends Controller
         $customer = $response->json();
         return response()->json($customer);
     }
-    public function detail(Request $request){
-        $token = $_COOKIE['token'];
-        $headers = [
-            'Accept' => 'application\json',
-            'Authorization' => 'Bearer '.$token
-        ];
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-detail/all', $request);
-        // print_r($request);
-        return response()->json($response->json());
-    }
-    public function findSalesMaster(Request $request)
-    {
-        $token = $_COOKIE['token'];
-        $headers = [
-            'Accept' => 'application\json',
-            'Authorization' => 'Bearer '.$token
-        ];
-        if($request->nomor_transaksi!=0){
-            $data_fillter=[
-                "page"=> 1,
-                "limit"=> 10,
-                "nomor_transaksi"=> $request->nomor_transaksi
-            ];
-        }else{
-            $data_fillter=[
-                "page"=> 1,
-                "limit"=> 10,
-            ];
-        }
-        $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/all', $data_fillter);
-        return response()->json($response->json());
-    }
+    // public function detail(Request $request){
+    //     $token = $_COOKIE['token'];
+    //     $headers = [
+    //         'Accept' => 'application\json',
+    //         'Authorization' => 'Bearer '.$token
+    //     ];
+    //     $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-detail/all', $request);
+    //     // print_r($request);
+    //     return response()->json($response->json());
+    // }
+    // public function findSalesMaster(Request $request)
+    // {
+    //     $token = $_COOKIE['token'];
+    //     $headers = [
+    //         'Accept' => 'application\json',
+    //         'Authorization' => 'Bearer '.$token
+    //     ];
+    //     if($request->nomor_transaksi!=0){
+    //         $data_fillter=[
+    //             "page"=> 1,
+    //             "limit"=> 10,
+    //             "nomor_transaksi"=> $request->nomor_transaksi
+    //         ];
+    //     }else{
+    //         $data_fillter=[
+    //             "page"=> 1,
+    //             "limit"=> 10,
+    //         ];
+    //     }
+    //     $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/sales-master/all', $data_fillter);
+    //     return response()->json($response->json());
+    // }
     function addScanItem(Request $request)
     {
         $token = $_COOKIE['token'];
@@ -134,10 +135,11 @@ class SalesController extends Controller
         ];
         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/sales-detail/add', $api_request);
         $result = $response->json();
+        // print_r($result);
         if($result['status'] == 'success'){
             $row['message']="Data has been successfully inserted";
         }else{
-            $row['message']="Insert data failed ".$result['message'];
+            $row['message']="Insert data failed".$result['message'];
         }
         return response()->json($row);
     }

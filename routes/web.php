@@ -32,6 +32,7 @@ use App\Http\Controllers\StockOpnameBranchController;
 use App\Http\Controllers\StockOpnameBranchDetailController;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\ReturDetailController;
+use App\Http\Controllers\SalesController_lazy;
 
 /*
 |--------------------------------------------------------------------------
@@ -204,14 +205,19 @@ Route::controller(ReturDetailController::class)->middleware('isTokenValid')->gro
     Route::put('/retur/detail/verify', 'verifyReturDetail');
 });
 
+Route::controller(SalesController_lazy::class)->middleware('isTokenValid')->group(function(){
+    Route::post('/sales_Lazy/findSalesMaster', 'findSalesMaster');
+    Route::post('/sales_Lazy/detail', 'detail');
+});
+
 Route::controller(SalesController::class)->middleware('isTokenValid')->group(function(){
     Route::get('/sales','index');
     Route::post('/sales/addCustomer', 'addCustomer');
     Route::post('/sales/findCustomer', 'findCustomer');
     Route::post('/sales/addSalesMaster', 'addSalesMaster');
     Route::post('/sales/addSalesDetail', 'addSalesDetail');
-    Route::post('/sales/findSalesMaster', 'findSalesMaster');
-    Route::post('/sales/detail', 'detail');
+    // Route::post('/sales/findSalesMaster', 'findSalesMaster');
+    // Route::post('/sales/detail', 'detail');
     Route::post('/sales/addScanItem', 'addScanItem');
     Route::post('/sales/addPayment', 'addPayment');
     Route::post('/sales/verifyMaster', 'verifyMaster');
