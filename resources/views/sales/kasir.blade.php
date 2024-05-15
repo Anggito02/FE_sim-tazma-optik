@@ -183,10 +183,15 @@
                     <!-- <a href="{{ url('/sales/print_invoice') }}" target="_blank" class="btn btn-secondary btn-lg w-50 rounded-0 <?php // if($response_sales['data']['verified']=='true'){ echo ''; }else{ echo 'disabled'; } ?>" role="button" style="margin:3px" aria-pressed="true"> -->
                         <!-- Print Bill -->
                     <!-- </a> -->
+                    <?php //print_r($response_sales['data']); ?>
                 </div>
-                <a href="javascript:void(0);" onclick="submitVeirfy($response_sales['data']['id'],$response_sales['data']['branch_id'])" class="btn btn-primary btn-lg w-95 rounded-0  <?php if($response_sales['data']['verified']=='true'){ echo 'disabled'; } ?>" style="margin-right:3px; margin-left:3px;" type="button" id="subtotal_item_button" role="button" aria-pressed="true" >
+                <!-- <a href="javascript:void(0);" onclick="submitVeirfy($response_sales['data']['id'],$response_sales['data']['branch_id'])" class="btn btn-primary btn-lg w-95 rounded-0  <?php // if($response_sales['data']['verified']=='true'){ echo 'disabled'; } ?>" style="margin-right:3px; margin-left:3px;" type="button" id="subtotal_item_button" role="button" aria-pressed="true" >
                     Charge Rp Loading ...
+                </a> --> 
+                <a href="javascript:void(0);" onclick="submitVeirfy('<?php echo $response_sales['data']['id']; ?>', '<?php echo $response_sales['data']['branch_id']; ?>')" class="btn btn-primary btn-lg w-95 rounded-0 <?php if ($response_sales['data']['verified'] == 'true') { echo 'disabled'; } ?>" style="margin-right:3px; margin-left:3px;" type="button" id="subtotal_item_button" role="button" aria-pressed="true">
+                    Charge Rp Loading...
                 </a>
+
             @endif
         </div>
     </div>

@@ -212,6 +212,7 @@ class SalesController extends Controller
     }
     public function verifyMaster(Request $request)
     {
+        print_r("masuk");
         $row['message']="-";
         $token = $_COOKIE['token'];
         $headers = [
