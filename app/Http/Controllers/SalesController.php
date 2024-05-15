@@ -17,7 +17,7 @@ class SalesController extends Controller
     public function __construct(){
         if(isset($_COOKIE['token'])){
             $token = $_COOKIE['token'];
-            print_r($token);
+            // print_r($token);
             $headers_ = [
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$token
@@ -212,6 +212,7 @@ class SalesController extends Controller
     }
     public function verifyMaster(Request $request)
     {
+        print_r("masuk");
         $row['message']="-";
         $token = $_COOKIE['token'];
         $headers = [

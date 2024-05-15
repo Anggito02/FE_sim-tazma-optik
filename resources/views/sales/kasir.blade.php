@@ -183,10 +183,15 @@
                     <!-- <a href="{{ url('/sales/print_invoice') }}" target="_blank" class="btn btn-secondary btn-lg w-50 rounded-0 <?php // if($response_sales['data']['verified']=='true'){ echo ''; }else{ echo 'disabled'; } ?>" role="button" style="margin:3px" aria-pressed="true"> -->
                         <!-- Print Bill -->
                     <!-- </a> -->
+                    <?php //print_r($response_sales['data']); ?>
                 </div>
-                <a href="javascript:void(0);" onclick="submitVeirfy($response_sales['data']['id'],$response_sales['data']['branch_id'])" class="btn btn-primary btn-lg w-95 rounded-0  <?php if($response_sales['data']['verified']=='true'){ echo 'disabled'; } ?>" style="margin-right:3px; margin-left:3px;" type="button" id="subtotal_item_button" role="button" aria-pressed="true" >
+                <!-- <a href="javascript:void(0);" onclick="submitVeirfy($response_sales['data']['id'],$response_sales['data']['branch_id'])" class="btn btn-primary btn-lg w-95 rounded-0  <?php // if($response_sales['data']['verified']=='true'){ echo 'disabled'; } ?>" style="margin-right:3px; margin-left:3px;" type="button" id="subtotal_item_button" role="button" aria-pressed="true" >
                     Charge Rp Loading ...
+                </a> --> 
+                <a href="javascript:void(0);" onclick="submitVeirfy('<?php echo $response_sales['data']['id']; ?>', '<?php echo $response_sales['data']['branch_id']; ?>')" class="btn btn-primary btn-lg w-95 rounded-0 <?php if ($response_sales['data']['verified'] == 'true') { echo 'disabled'; } ?>" style="margin-right:3px; margin-left:3px;" type="button" id="subtotal_item_button" role="button" aria-pressed="true">
+                    Charge Rp Loading...
                 </a>
+
             @endif
         </div>
     </div>
@@ -205,10 +210,14 @@
     function getSalesDetail(setting){
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
-            method: "POST",
+            method: "GET",
             type  : 'ajax',
-            url   : "{{ url('/sales_Lazy/detail') }}",
+            url   : '<?php echo $_ENV['BACKEND_API_ENDPOINT'].'/sales-detail/all'; ?>',
             data  : { 'limit':setting.limit,'page':(setting.limit*setting.start_page),'_token':csrfToken,'sales_master_id':setting.sales_master_id},
+            headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + '<?php  echo $_COOKIE['token']; ?>'
+                },
             async : true,
             dataType : 'json',
             error: function (request, error) {
@@ -245,13 +254,22 @@
     }
     function getSalesMasterAll(settings){
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        if(settings.nomor_transaksi!=0){
+            data ={ 'limit':settings.limit,'page':(settings.limit*settings.start_page),'nomor_transaksi':settings.nomor_transaksi}
+        }else{
+            data ={ 'limit':settings.limit,'page':(settings.limit*settings.start_page)}
+        }
         $.ajax({
-                method: "POST",
+                method: "GET",
                 type  : 'ajax',
-                url   : "{{ url('/sales_Lazy/findSalesMaster') }}",
-                data  : { 'limit':settings.limit,'page':(settings.limit*settings.start_page),'_token':csrfToken,'nomor_transaksi':settings.nomor_transaksi},
+                url   : '<?php echo $_ENV['BACKEND_API_ENDPOINT'].'/sales-master/all'; ?>',
                 async : true,
                 dataType : 'json',
+                data  : data,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + '<?php  echo $_COOKIE['token']; ?>'
+                },
                 error: function (request, error) {
 	      		  alert("Bad Connection, Cannot Reload the data!!, Please Refersh your browser");
 			    },
@@ -546,7 +564,9 @@
         });
         loading  = false;
 	    end_record = false;
-	    getSalesDetail(setting);
+        if(sales_master_id!=0){
+	        getSalesDetail(setting);
+        }
 	}
     $(document).ready(function(){
         var table = $('#data_sales_master').DataTable( {
