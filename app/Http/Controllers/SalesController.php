@@ -17,7 +17,7 @@ class SalesController extends Controller
     public function __construct(){
         if(isset($_COOKIE['token'])){
             $token = $_COOKIE['token'];
-            print_r($token);
+            // print_r($token);
             $headers_ = [
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$token
